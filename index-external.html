@@ -85,7 +85,7 @@ a { color: inherit; text-decoration: none; }
   position: absolute; inset: 0;
   transform-origin: left center;
   transform-style: preserve-3d;
-  transition: transform 2.8s cubic-bezier(0.55, 0.05, 0.35, 1);
+  transition: transform 3.4s cubic-bezier(0.4, 0.0, 0.2, 1);
   cursor: pointer;
 }
 .cover-front, .cover-back {
@@ -316,13 +316,14 @@ a { color: inherit; text-decoration: none; }
   .js .hero-polaroid.p3 { transform: rotate(4deg) !important; }
   .js .hero-polaroid.p4 { transform: rotate(-4deg) !important; }
 
-  /* Disable only decorative infinite loops */
-  .marquee-row, .mote, .butterfly, .hero-bloom, .hero-bg, .mompox-hero-bg,
+  /* Disable only decorative infinite loops — marquee EXEMPT (it's primary content) */
+  .mote, .butterfly, .hero-bloom, .hero-bg, .mompox-hero-bg,
   .cover-emblem, .cover-prompt, .lily-pad, .cafe-steam span, .river-pin.active {
     animation: none !important;
   }
-  /* Marquee: show static row instead of scrolling */
-  .marquee-row { transform: none !important; }
+  /* Marquee: slow it down under reduced motion, but keep it scrolling */
+  .marquee-row.left { animation-duration: 180s !important; }
+  .marquee-row.right { animation-duration: 220s !important; }
   /* Keep river map visible */
   .river-map .map-path { stroke-dashoffset: 0 !important; }
   .river-map .map-pin, .river-map .map-label, .river-map .map-compass,
@@ -332,16 +333,14 @@ a { color: inherit; text-decoration: none; }
   .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8deg) !important; }
 }
 
-/* FALLBACK REVEAL — after 2.5s, force everything visible (safety net) */
-.fallback-reveal .reveal { opacity: 1 !important; transform: none !important; }
-.fallback-reveal .gabo-quote .word,
-.fallback-reveal .interstitial-quote .word { opacity: 1 !important; filter: none !important; transform: none !important; }
-.fallback-reveal .gabo-attrib,
-.fallback-reveal .interstitial-attrib { opacity: 0.9 !important; }
-.fallback-reveal .map-pin, .fallback-reveal .map-label, .fallback-reveal .map-compass,
-.fallback-reveal .map-scale, .fallback-reveal .map-boat { opacity: 1 !important; }
-.fallback-reveal .map-path { stroke-dashoffset: 0 !important; }
-.fallback-reveal .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8deg) !important; }
+/* FALLBACK — only force-shows elements IO never saw.
+   .in-view wins because .force-shown is added only to unseen elements. */
+.force-shown { opacity: 1 !important; transform: none !important; }
+.force-shown .word, .force-shown .map-pin, .force-shown .map-label,
+.force-shown .map-compass, .force-shown .map-scale, .force-shown .map-boat { opacity: 1 !important; filter: none !important; transform: none !important; }
+.force-shown .map-path { stroke-dashoffset: 0 !important; }
+.force-shown .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8deg) !important; }
+.force-shown .gabo-attrib, .force-shown .interstitial-attrib { opacity: 0.9 !important; }
 
 /* ============================================================
    HERO — cinematic full-bleed image behind book cover
@@ -792,11 +791,11 @@ a { color: inherit; text-decoration: none; }
   <div class="folio-inner">
     <div class="reveal"><div class="eyebrow" style="color: var(--brass-light);">Capítulo Tercero</div><h2 class="chapter-title on-dark">Cinco capítulos <em>para elegir</em></h2><p class="rooms-intro">Cada habitación tiene su propio carácter, sus libros, su luz. Todas con aire acondicionado, baño privado, TV, cafetera y el silencio que solo se encuentra lejos del centro.</p><div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div></div>
     <div class="rooms-row reveal delay-1">
-      <article class="room-card featured"><img class="room-card-img" src="assets/room-suite-1.webp" alt="Suite con jardín y bañera"><div class="room-card-body"><div class="room-card-num">HABITACIÓN V</div><h4>Suite con Jardín y Bañera</h4><div class="room-card-specs"><span>1 king + sofá cama</span><span>428 sq ft</span><span>Jardín</span></div></div></article>
-      <article class="room-card"><img class="room-card-img" src="assets/room-deluxe-10.webp" alt="Deluxe Suite"><div class="room-card-body"><div class="room-card-num">HABITACIÓN IV</div><h4>Deluxe Suite</h4><div class="room-card-specs"><span>1 king + sofá cama</span><span>410 sq ft</span><span>Jardín</span></div></div></article>
-      <article class="room-card"><img class="room-card-img" src="assets/room-king-5.webp" alt="King Room"><div class="room-card-body"><div class="room-card-num">HABITACIÓN I</div><h4>King Room</h4><div class="room-card-specs"><span>1 king</span><span>290 sq ft</span><span>Ciudad</span></div></div></article>
-      <article class="room-card"><img class="room-card-img" src="assets/room-standard-9.webp" alt="Standard Double"><div class="room-card-body"><div class="room-card-num">HABITACIÓN II</div><h4>Standard Doble</h4><div class="room-card-specs"><span>1 queen</span><span>225 sq ft</span><span>Jardín</span></div></div></article>
-      <article class="room-card"><img class="room-card-img" src="assets/room-garden-7.webp" alt="Standard Garden"><div class="room-card-body"><div class="room-card-num">HABITACIÓN III</div><h4>Standard Doble · Jardín</h4><div class="room-card-specs"><span>1 queen</span><span>225 sq ft</span><span>Jardín</span></div></div></article>
+      <article class="room-card featured"><img class="room-card-img" src="assets/room-suite-8.webp" alt="Suite con jardín y bañera"><div class="room-card-body"><div class="room-card-num">HABITACIÓN V</div><h4>Suite con Jardín y Bañera</h4><div class="room-card-specs"><span>1 king + sofá cama</span><span>428 sq ft</span><span>Jardín</span></div></div></article>
+      <article class="room-card"><img class="room-card-img" src="assets/room-deluxe-3.webp" alt="Deluxe Suite"><div class="room-card-body"><div class="room-card-num">HABITACIÓN IV</div><h4>Deluxe Suite</h4><div class="room-card-specs"><span>1 king + sofá cama</span><span>410 sq ft</span><span>Jardín</span></div></div></article>
+      <article class="room-card"><img class="room-card-img" src="assets/room-king-3.webp" alt="King Room"><div class="room-card-body"><div class="room-card-num">HABITACIÓN I</div><h4>King Room</h4><div class="room-card-specs"><span>1 king</span><span>290 sq ft</span><span>Ciudad</span></div></div></article>
+      <article class="room-card"><img class="room-card-img" src="assets/room-standard-1.webp" alt="Standard Double"><div class="room-card-body"><div class="room-card-num">HABITACIÓN II</div><h4>Standard Doble</h4><div class="room-card-specs"><span>1 queen</span><span>225 sq ft</span><span>Jardín</span></div></div></article>
+      <article class="room-card"><img class="room-card-img" src="assets/room-garden-1.webp" alt="Standard Garden"><div class="room-card-body"><div class="room-card-num">HABITACIÓN III</div><h4>Standard Doble · Jardín</h4><div class="room-card-specs"><span>1 queen</span><span>225 sq ft</span><span>Jardín</span></div></div></article>
     </div>
     <div class="reveal delay-2" style="margin-top:50px; text-align:center;">
       <p style="font-family: var(--font-body); font-style: italic; color: var(--parchment); opacity:0.8; max-width:620px; margin:0 auto;">Todas con aire acondicionado, baño privado, TV con streaming, minibar, cafetera, WiFi, batas y artículos de aseo, y desayuno momposino incluido. Jacuzzi del jardín disponible para todos los huéspedes.</p>
@@ -814,48 +813,48 @@ a { color: inherit; text-decoration: none; }
 <section id="gallery-marquee">
   <div class="gallery-marquee-header reveal"><div class="eyebrow" style="color: var(--brass-light); justify-content:center;">Galería · Imágenes del río y la casa</div><h2 class="chapter-title on-dark" style="text-align:center;">Literatium <em>en imágenes</em></h2><p style="font-family: var(--font-body); color: var(--parchment); opacity:0.7; max-width:560px; margin:18px auto 0; font-style:italic;">Un río de postales que deriva lentamente. Pasa el cursor para detener el tiempo.</p></div>
   <div class="marquee-row left">
-    <div class="polaroid"><img src="assets/real-lobby-arches.webp" alt="Arcos del lobby"><div class="polaroid-cap">Los arcos del lobby</div></div>
-    <div class="polaroid"><img src="assets/space-fachada-noche.webp" alt="Fachada al anochecer"><div class="polaroid-cap">La fachada al anochecer</div></div>
-    <div class="polaroid"><img src="assets/jacuzzi-blue-lit.webp" alt="Jacuzzi azul"><div class="polaroid-cap">Jacuzzi · luz azul</div></div>
     <div class="polaroid"><img src="assets/mompox-river-sunset-real.jpg" alt="Magdalena al ocaso"><div class="polaroid-cap">El Magdalena al ocaso</div></div>
-    <div class="polaroid"><img src="assets/coffee-farm-huila.jpg" alt="Finca en Huila"><div class="polaroid-cap">La finca en Huila</div></div>
-    <div class="polaroid"><img src="assets/room-suite-12.webp" alt="Suite bañera"><div class="polaroid-cap">Suite · bañera</div></div>
-    <div class="polaroid"><img src="assets/mompox-street-colonial.jpg" alt="Calle colonial"><div class="polaroid-cap">Calle colonial</div></div>
-    <div class="polaroid"><img src="assets/breakfast-1.webp" alt="Desayuno"><div class="polaroid-cap">El desayuno</div></div>
-    <div class="polaroid"><img src="assets/hotel-patio-evening.jpg" alt="Patio de noche"><div class="polaroid-cap">El patio de noche</div></div>
-    <div class="polaroid"><img src="assets/mural-art.jpg" alt="Murales"><div class="polaroid-cap">Murales de la casa</div></div>
-    <div class="polaroid"><img src="assets/real-lobby-arches.webp" alt="Arcos del lobby"><div class="polaroid-cap">Los arcos del lobby</div></div>
-    <div class="polaroid"><img src="assets/space-fachada-noche.webp" alt="Fachada al anochecer"><div class="polaroid-cap">La fachada al anochecer</div></div>
+    <div class="polaroid"><img src="assets/mompox-santa-barbara-night.jpg" alt="Santa Bárbara de noche"><div class="polaroid-cap">Santa Bárbara de noche</div></div>
     <div class="polaroid"><img src="assets/jacuzzi-blue-lit.webp" alt="Jacuzzi azul"><div class="polaroid-cap">Jacuzzi · luz azul</div></div>
-    <div class="polaroid"><img src="assets/mompox-river-sunset-real.jpg" alt="Magdalena al ocaso"><div class="polaroid-cap">El Magdalena al ocaso</div></div>
     <div class="polaroid"><img src="assets/coffee-farm-huila.jpg" alt="Finca en Huila"><div class="polaroid-cap">La finca en Huila</div></div>
-    <div class="polaroid"><img src="assets/room-suite-12.webp" alt="Suite bañera"><div class="polaroid-cap">Suite · bañera</div></div>
-    <div class="polaroid"><img src="assets/mompox-street-colonial.jpg" alt="Calle colonial"><div class="polaroid-cap">Calle colonial</div></div>
-    <div class="polaroid"><img src="assets/breakfast-1.webp" alt="Desayuno"><div class="polaroid-cap">El desayuno</div></div>
-    <div class="polaroid"><img src="assets/hotel-patio-evening.jpg" alt="Patio de noche"><div class="polaroid-cap">El patio de noche</div></div>
+    <div class="polaroid"><img src="assets/mompox-colonial-street.jpg" alt="Calle colonial"><div class="polaroid-cap">Calle colonial</div></div>
+    <div class="polaroid"><img src="assets/breakfast-coffee.webp" alt="Café de la mañana"><div class="polaroid-cap">El café de la mañana</div></div>
+    <div class="polaroid"><img src="assets/mompox-drone.jpg" alt="Mompox desde el cielo"><div class="polaroid-cap">Mompox desde el cielo</div></div>
+    <div class="polaroid"><img src="assets/hotel-patio-evening.jpg" alt="Patio al anochecer"><div class="polaroid-cap">El patio al anochecer</div></div>
     <div class="polaroid"><img src="assets/mural-art.jpg" alt="Murales"><div class="polaroid-cap">Murales de la casa</div></div>
+    <div class="polaroid"><img src="assets/mompox-plaza-real.jpg" alt="Plaza de Mompox"><div class="polaroid-cap">La plaza de Mompox</div></div>
+    <div class="polaroid"><img src="assets/mompox-river-sunset-real.jpg" alt="Magdalena al ocaso"><div class="polaroid-cap">El Magdalena al ocaso</div></div>
+    <div class="polaroid"><img src="assets/mompox-santa-barbara-night.jpg" alt="Santa Bárbara de noche"><div class="polaroid-cap">Santa Bárbara de noche</div></div>
+    <div class="polaroid"><img src="assets/jacuzzi-blue-lit.webp" alt="Jacuzzi azul"><div class="polaroid-cap">Jacuzzi · luz azul</div></div>
+    <div class="polaroid"><img src="assets/coffee-farm-huila.jpg" alt="Finca en Huila"><div class="polaroid-cap">La finca en Huila</div></div>
+    <div class="polaroid"><img src="assets/mompox-colonial-street.jpg" alt="Calle colonial"><div class="polaroid-cap">Calle colonial</div></div>
+    <div class="polaroid"><img src="assets/breakfast-coffee.webp" alt="Café de la mañana"><div class="polaroid-cap">El café de la mañana</div></div>
+    <div class="polaroid"><img src="assets/mompox-drone.jpg" alt="Mompox desde el cielo"><div class="polaroid-cap">Mompox desde el cielo</div></div>
+    <div class="polaroid"><img src="assets/hotel-patio-evening.jpg" alt="Patio al anochecer"><div class="polaroid-cap">El patio al anochecer</div></div>
+    <div class="polaroid"><img src="assets/mural-art.jpg" alt="Murales"><div class="polaroid-cap">Murales de la casa</div></div>
+    <div class="polaroid"><img src="assets/mompox-plaza-real.jpg" alt="Plaza de Mompox"><div class="polaroid-cap">La plaza de Mompox</div></div>
   </div>
   <div class="marquee-row right">
     <div class="polaroid"><img src="assets/jacuzzi-pink-lit.webp" alt="Jacuzzi rosa"><div class="polaroid-cap">Jacuzzi · luz rosa</div></div>
     <div class="polaroid"><img src="assets/facade-with-guests.webp" alt="La entrada"><div class="polaroid-cap">La entrada</div></div>
     <div class="polaroid"><img src="assets/mompox-church-night.jpg" alt="Iglesia nocturna"><div class="polaroid-cap">Iglesia nocturna</div></div>
     <div class="polaroid"><img src="assets/real-reading-nook.jpg" alt="Rincón de lectura"><div class="polaroid-cap">El rincón de lectura</div></div>
-    <div class="polaroid"><img src="assets/mompox-drone.jpg" alt="Mompox desde el cielo"><div class="polaroid-cap">Mompox desde el cielo</div></div>
+    <div class="polaroid"><img src="assets/champan-boat.png" alt="Champán en el Magdalena"><div class="polaroid-cap">El champán en el río</div></div>
     <div class="polaroid"><img src="assets/jacuzzi-green-lit.webp" alt="Jacuzzi verde"><div class="polaroid-cap">Jacuzzi · luz verde</div></div>
-    <div class="polaroid"><img src="assets/room-deluxe-10.webp" alt="Deluxe Suite"><div class="polaroid-cap">Deluxe Suite</div></div>
     <div class="polaroid"><img src="assets/guest-with-books.webp" alt="Huésped entre libros"><div class="polaroid-cap">Huésped entre libros</div></div>
     <div class="polaroid"><img src="assets/filigree-1.webp" alt="Filigrana"><div class="polaroid-cap">Filigrana momposina</div></div>
     <div class="polaroid"><img src="assets/magdalena-sunset.png" alt="El Magdalena"><div class="polaroid-cap">El Magdalena</div></div>
+    <div class="polaroid"><img src="assets/rocking-chair-porch.png" alt="Mecedora"><div class="polaroid-cap">La mecedora del portal</div></div>
     <div class="polaroid"><img src="assets/jacuzzi-pink-lit.webp" alt="Jacuzzi rosa"><div class="polaroid-cap">Jacuzzi · luz rosa</div></div>
     <div class="polaroid"><img src="assets/facade-with-guests.webp" alt="La entrada"><div class="polaroid-cap">La entrada</div></div>
     <div class="polaroid"><img src="assets/mompox-church-night.jpg" alt="Iglesia nocturna"><div class="polaroid-cap">Iglesia nocturna</div></div>
     <div class="polaroid"><img src="assets/real-reading-nook.jpg" alt="Rincón de lectura"><div class="polaroid-cap">El rincón de lectura</div></div>
-    <div class="polaroid"><img src="assets/mompox-drone.jpg" alt="Mompox desde el cielo"><div class="polaroid-cap">Mompox desde el cielo</div></div>
+    <div class="polaroid"><img src="assets/champan-boat.png" alt="Champán en el Magdalena"><div class="polaroid-cap">El champán en el río</div></div>
     <div class="polaroid"><img src="assets/jacuzzi-green-lit.webp" alt="Jacuzzi verde"><div class="polaroid-cap">Jacuzzi · luz verde</div></div>
-    <div class="polaroid"><img src="assets/room-deluxe-10.webp" alt="Deluxe Suite"><div class="polaroid-cap">Deluxe Suite</div></div>
     <div class="polaroid"><img src="assets/guest-with-books.webp" alt="Huésped entre libros"><div class="polaroid-cap">Huésped entre libros</div></div>
     <div class="polaroid"><img src="assets/filigree-1.webp" alt="Filigrana"><div class="polaroid-cap">Filigrana momposina</div></div>
     <div class="polaroid"><img src="assets/magdalena-sunset.png" alt="El Magdalena"><div class="polaroid-cap">El Magdalena</div></div>
+    <div class="polaroid"><img src="assets/rocking-chair-porch.png" alt="Mecedora"><div class="polaroid-cap">La mecedora del portal</div></div>
   </div>
 </section>
 
@@ -1086,16 +1085,19 @@ a { color: inherit; text-decoration: none; }
     }
   }
 
-  /* 2. BOOK COVER — opens on click OR auto after 3.5s */
+  /* 2. BOOK COVER — opens on click OR auto after 3.5s.
+     Smoother: 3.4s rotation with ease-in-out, vellum back face visible mid-turn. */
   const cover = document.getElementById('cover');
   const coverFace = document.getElementById('cover-face');
   let coverOpened = false;
+  let fallbackTimer;
   function openCover() {
     if (coverOpened) return;
     coverOpened = true;
     coverFace.style.animation = '';
     cover.classList.add('is-open');
-    setTimeout(() => { cover.style.display = 'none'; }, 3400);
+    setTimeout(() => { cover.style.display = 'none'; }, 3800);
+    armFallback();
   }
   cover.addEventListener('click', openCover);
   coverFace.addEventListener('click', (e) => { e.stopPropagation(); openCover(); });
@@ -1103,18 +1105,33 @@ a { color: inherit; text-decoration: none; }
   // Auto-open after 3.5s if no click (ensures hero is seen even in non-interactive iframes)
   setTimeout(() => { if (!coverOpened) openCover(); }, 3500);
 
-  /* 3. SECTION REVEAL via IntersectionObserver + FALLBACK */
+  /* 3. SECTION REVEAL via IntersectionObserver + CONDITIONAL FALLBACK */
   const revealEls = document.querySelectorAll('.reveal, .river-map, .interstitial-quote, .gabo-quote, .wax-seal');
+  const seen = new WeakSet();
   if ('IntersectionObserver' in window) {
     try {
       const io = new IntersectionObserver((entries) => {
-        entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('in-view'); });
+        entries.forEach(en => {
+          if (en.isIntersecting) {
+            en.target.classList.add('in-view');
+            seen.add(en.target);
+            io.unobserve(en.target);
+          }
+        });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
       revealEls.forEach(el => io.observe(el));
-    } catch(e) { document.body.classList.add('fallback-reveal'); }
+    } catch(e) { fireFallback(); }
   }
-  // FALLBACK: Reveal everything after 2.5s (safety net)
-  setTimeout(() => { document.body.classList.add('fallback-reveal'); }, 2500);
+  // CONDITIONAL FALLBACK: only force-show elements IO never saw.
+  // Re-armed inside openCover() so it doesn't fire before the user can scroll.
+  function fireFallback() {
+    revealEls.forEach(el => { if (!seen.has(el)) el.classList.add('force-shown'); });
+  }
+  function armFallback() {
+    clearTimeout(fallbackTimer);
+    // Give the user 10s after the cover opens before force-showing anything.
+    fallbackTimer = setTimeout(fireFallback, 10000);
+  }
 
   /* 4. GABO QUOTES — word-by-word mist reveal */
   function setupGaboQuote(el) {
