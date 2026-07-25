@@ -8,7 +8,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IM+Fell+English+SC&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IM+Fell+English+SC&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&family=Cinzel:wght@500;600;700&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -35,6 +35,7 @@
   --font-mono:    'IBM Plex Mono', ui-monospace, monospace;
   --font-hand:    'Caveat', 'EB Garamond', cursive;
   --font-cinzel:  'Cinzel', 'Cormorant Garamond', serif;
+  --font-script:  'Tangerine', 'Cormorant Garamond', cursive;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -67,120 +68,7 @@ a { color: inherit; text-decoration: none; }
   opacity: 0.6; pointer-events: none; mix-blend-mode: multiply;
 }
 
-/* BOOK COVER */
-#cover {
-  position: fixed; inset: 0; z-index: 100;
-  perspective: 2400px;
-  pointer-events: auto;
-  transition: opacity 0.6s ease 2.8s;
-}
-#cover.is-open { opacity: 0; pointer-events: none; }
-.cover-face {
-  position: absolute; inset: 0;
-  transform-origin: left center;
-  transform-style: preserve-3d;
-  transition: transform 3.2s cubic-bezier(0.55, 0.05, 0.35, 1);
-  cursor: pointer;
-}
-.cover-front, .cover-back {
-  position: absolute; inset: 0;
-  backface-visibility: hidden;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-}
-.cover-front {
-  background:
-    radial-gradient(ellipse 70% 60% at 50% 45%, rgba(221,185,94,0.10), transparent 70%),
-    linear-gradient(135deg, #0F2419 0%, #1A3A2E 50%, #0F2419 100%);
-  box-shadow: inset 0 0 200px rgba(0,0,0,0.7);
-}
-.cover-front::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='l'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.04  0 0 0 0 0.10  0 0 0 0 0.07  0 0 0 0.6 0'/></filter><rect width='300' height='300' filter='url(%23l)'/></svg>");
-  mix-blend-mode: overlay; opacity: 0.7; pointer-events: none;
-}
-.cover-front::after {
-  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 60px;
-  background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
-  pointer-events: none;
-}
-.cover-back {
-  background:
-    radial-gradient(ellipse 70% 60% at 50% 45%, rgba(184,134,47,0.18), transparent 70%),
-    linear-gradient(135deg, var(--parchment-warm) 0%, var(--parchment-dark) 100%);
-  transform: rotateY(180deg);
-}
-.cover-back::after {
-  content: 'Literatium';
-  font-family: var(--font-display); font-style: italic; font-size: 4rem;
-  color: var(--brass-dark); opacity: 0.25; transform: scaleX(-1);
-}
-#cover.is-open .cover-face { transform: rotateY(-160deg); }
-.cover-frame {
-  position: absolute; inset: 28px;
-  border: 1.5px solid var(--brass);
-  outline: 1px solid var(--brass-dark); outline-offset: 8px;
-  pointer-events: none;
-}
-.cover-corner-tl, .cover-corner-tr, .cover-corner-bl, .cover-corner-br {
-  position: absolute; width: 26px; height: 26px;
-  border: 1px solid var(--brass-light);
-  background: radial-gradient(circle, var(--brass-light) 0%, transparent 35%),
-    linear-gradient(135deg, transparent 45%, var(--brass) 47%, var(--brass-dark) 50%, transparent 52%);
-}
-.cover-corner-tl { top: -2px; left: -2px; }
-.cover-corner-tr { top: -2px; right: -2px; transform: scaleX(-1); }
-.cover-corner-bl { bottom: -2px; left: -2px; transform: scaleY(-1); }
-.cover-corner-br { bottom: -2px; right: -2px; transform: scale(-1,-1); }
-.cover-emblem {
-  width: 140px; height: 140px;
-  margin-bottom: 38px;
-  filter: drop-shadow(0 0 24px rgba(221,185,94,0.5));
-  animation: breathe 4s ease-in-out infinite;
-  border-radius: 50%; object-fit: cover;
-  border: 2px solid var(--brass);
-  outline: 1px solid var(--brass-dark); outline-offset: 4px;
-  position: relative; z-index: 2;
-}
-@keyframes breathe { 0%,100% { opacity: 0.85; transform: scale(1);} 50% { opacity: 1; transform: scale(1.05);} }
-.cover-title {
-  font-family: var(--font-cinzel); font-weight: 600;
-  font-size: clamp(2.8rem, 7vw, 5.8rem);
-  letter-spacing: 0.08em;
-  background: linear-gradient(135deg, #DDB95E 0%, #F5E1A4 30%, #C9A04E 55%, #8B6520 80%, #DDB95E 100%);
-  -webkit-background-clip: text; background-clip: text;
-  color: transparent;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.4);
-  line-height: 1;
-  position: relative; z-index: 2;
-}
-.cover-sub {
-  font-family: var(--font-caps); font-size: 0.78rem; letter-spacing: 0.42em;
-  color: var(--brass-light); margin-top: 22px; text-align: center; padding: 0 1rem;
-  position: relative; z-index: 2;
-}
-.cover-fleuron {
-  margin: 30px 0; color: var(--brass);
-  font-family: var(--font-display); font-size: 1.3rem; letter-spacing: 0.6em;
-  position: relative; z-index: 2;
-}
-.cover-prompt {
-  position: absolute; bottom: 56px; left: 50%; transform: translateX(-50%);
-  font-family: var(--font-caps); font-size: 0.72rem; letter-spacing: 0.42em;
-  color: var(--brass-light); opacity: 0.7;
-  animation: pulse-prompt 2.4s ease-in-out infinite;
-  text-align: center; white-space: nowrap;
-  padding: 12px 24px;
-  border: 1px solid rgba(221,185,94,0.35);
-  background: rgba(15,36,25,0.5);
-  backdrop-filter: blur(4px);
-  z-index: 2;
-}
-@keyframes pulse-prompt {
-  0%,100% { opacity: 0.55; transform: translateX(-50%) translateY(0); border-color: rgba(221,185,94,0.35);}
-  50%     { opacity: 1;    transform: translateX(-50%) translateY(4px); border-color: rgba(221,185,94,0.7);}
-}
-
-/* RIVER SPINE */
+/* RIVER SPINE (left edge) */
 #river-spine {
   position: fixed; top: 0; left: 0; width: 80px; height: 100vh;
   z-index: 30; pointer-events: none;
@@ -215,21 +103,29 @@ a { color: inherit; text-decoration: none; }
 }
 .river-pin-label.show { opacity: 1; }
 
-/* BOOKMARK RIBBON */
-#bookmark {
-  position: fixed; top: 0; right: 32px; width: 22px;
+/* PROGRESS LINE (right edge — elegant, modern, replaces bookmark) */
+#progress-line {
+  position: fixed; top: 0; right: 0; width: 2px; height: 100vh;
+  background: rgba(221,185,94,0.15);
   z-index: 33; pointer-events: none;
-  height: 120px;
-  overflow: visible;
 }
-#bookmark svg { width: 100%; height: 120px; display: block; }
-.bookmark-tassel {
-  position: fixed; top: 0; right: 26px;
-  width: 34px; height: 56px;
+#progress-fill {
+  position: fixed; top: 0; right: 0; width: 2px;
+  background: linear-gradient(180deg, var(--brass-light), var(--brass));
   z-index: 34; pointer-events: none;
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.5));
+  box-shadow: 0 0 8px rgba(221,185,94,0.6);
+  transition: height 0.1s linear;
 }
-@media (max-width: 880px) { #bookmark, .bookmark-tassel { display: none; } }
+#progress-dot {
+  position: fixed; right: -4px; width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--brass-light);
+  box-shadow: 0 0 12px rgba(221,185,94,0.8);
+  z-index: 35; pointer-events: none;
+  transform: translate(0, -50%);
+  transition: top 0.1s linear;
+}
+@media (max-width: 880px) { #progress-line, #progress-fill, #progress-dot { display: none; } }
 
 /* MOTES + VIGNETTE */
 #motes { position: fixed; inset: 0; z-index: 25; pointer-events: none; overflow: hidden; }
@@ -257,10 +153,10 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(180deg, rgba(15,36,25,0.92) 0%, rgba(15,36,25,0.6) 70%, transparent 100%);
   backdrop-filter: blur(6px);
   opacity: 0; transform: translateY(-20px);
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+  animation: nav-in 1s ease 1s forwards;
   color: var(--parchment);
 }
-#nav.show { opacity: 1; transform: translateY(0); }
+@keyframes nav-in { to { opacity: 1; transform: translateY(0); } }
 .nav-mark {
   font-family: var(--font-display); font-size: 1.4rem; font-style: italic;
   color: var(--brass-light); letter-spacing: 0.04em;
@@ -295,16 +191,16 @@ a { color: inherit; text-decoration: none; }
   .nav-links a:not(.nav-cta) { display: none; }
 }
 
-/* FOLIOS */
+/* FOLIOS — no more twee border, just elegant corner ornaments */
 .folio {
   position: relative;
-  padding: 6rem 2rem 6rem 110px;
+  padding: 6rem 3rem 6rem 110px;
   min-height: 100vh;
   display: flex; flex-direction: column; justify-content: center;
   scroll-margin-top: 80px;
 }
 @media (max-width: 880px) { .folio { padding: 4rem 1.4rem 4rem 70px; } }
-.folio-inner { max-width: 1180px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+.folio-inner { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
 .folio-number {
   position: absolute; top: 50%; left: 22px;
   transform: translateY(-50%) rotate(-90deg); transform-origin: center;
@@ -312,28 +208,21 @@ a { color: inherit; text-decoration: none; }
   color: var(--brass-dark); opacity: 0.7; white-space: nowrap;
 }
 @media (max-width: 880px) { .folio-number { left: 14px; font-size: 0.6rem; letter-spacing: 0.35em; } }
-.folio-frame::before {
-  content: ''; position: absolute;
-  top: 32px; bottom: 32px; left: 96px; right: 32px;
-  border: 1px solid var(--brass);
-  outline: 1px solid var(--brass-dark); outline-offset: 6px;
-  pointer-events: none; opacity: 0.55; z-index: 1;
-}
-@media (max-width: 880px) { .folio-frame::before { left: 60px; right: 14px; top: 22px; bottom: 22px; } }
+/* Corner ornaments only — no full border */
 .folio-corner {
-  position: absolute; width: 14px; height: 14px;
-  border: 1px solid var(--brass-light);
-  pointer-events: none; opacity: 0.7; z-index: 1;
+  position: absolute; width: 28px; height: 28px;
+  pointer-events: none; z-index: 1; opacity: 0.6;
 }
-.folio-corner.tl { top: 28px; left: 92px; }
-.folio-corner.tr { top: 28px; right: 28px; }
-.folio-corner.bl { bottom: 28px; left: 92px; }
-.folio-corner.br { bottom: 28px; right: 28px; }
+.folio-corner svg { width: 100%; height: 100%; }
+.folio-corner.tl { top: 32px; left: 96px; }
+.folio-corner.tr { top: 32px; right: 32px; }
+.folio-corner.bl { bottom: 32px; left: 96px; }
+.folio-corner.br { bottom: 32px; right: 32px; }
 @media (max-width: 880px) {
   .folio-corner.tl { top: 18px; left: 56px; }
-  .folio-corner.tr { top: 18px; right: 10px; }
+  .folio-corner.tr { top: 18px; right: 14px; }
   .folio-corner.bl { bottom: 18px; left: 56px; }
-  .folio-corner.br { bottom: 18px; right: 10px; }
+  .folio-corner.br { bottom: 18px; right: 14px; }
 }
 
 .eyebrow {
@@ -364,59 +253,37 @@ a { color: inherit; text-decoration: none; }
 }
 .body-text { font-family: var(--font-body); font-size: 1.08rem; line-height: 1.85; color: var(--espresso); }
 .body-text p + p { margin-top: 1.1rem; }
-.body-text p { opacity: 0; transform: translateY(14px); transition: opacity 0.9s ease, transform 0.9s ease; }
-.body-text.in-view p { opacity: 1; transform: translateY(0); }
-.body-text.in-view p:nth-child(1) { transition-delay: 0.05s; }
-.body-text.in-view p:nth-child(2) { transition-delay: 0.20s; }
-.body-text.in-view p:nth-child(3) { transition-delay: 0.35s; }
-.body-text.in-view p:nth-child(4) { transition-delay: 0.50s; }
-.body-text > *:not(p) { opacity: 0; transform: translateY(14px); transition: opacity 0.9s ease 0.8s, transform 0.9s ease 0.8s; }
-.body-text.in-view > *:not(p) { opacity: 1; transform: translateY(0); }
 .drop-cap::first-letter {
   font-family: var(--font-display); font-size: 4.6em; font-weight: 600; font-style: italic;
   float: left; line-height: 0.78; margin: 0.06em 0.10em 0 -0.04em;
   color: var(--burgundy); text-shadow: 0 1px 0 rgba(0,0,0,0.1);
 }
 
-/* PAGE CORNER CURL — SVG based, visible */
+/* PAGE CORNER CURL */
 .page-curl {
   position: absolute; bottom: 0; right: 0;
   width: 90px; height: 90px; z-index: 5;
   cursor: pointer; pointer-events: auto;
   transition: width 0.5s ease, height 0.5s ease;
 }
-.page-curl svg {
-  width: 100%; height: 100%; display: block;
-  filter: drop-shadow(-3px -3px 6px rgba(0,0,0,0.3));
-  transition: transform 0.5s ease;
-}
+.page-curl svg { width: 100%; height: 100%; display: block; filter: drop-shadow(-3px -3px 6px rgba(0,0,0,0.3)); transition: transform 0.5s ease; }
 .page-curl:hover { width: 130px; height: 130px; }
 .page-curl:hover svg { transform: scale(1.1); }
-.page-curl-label {
-  position: absolute; bottom: 14px; right: 14px;
-  font-family: var(--font-caps); font-size: 0.55rem; letter-spacing: 0.2em;
-  color: var(--brass-dark);
-  transform: rotate(-45deg); transform-origin: bottom right;
-  z-index: 2; pointer-events: none; white-space: nowrap;
-}
+.page-curl-label { position: absolute; bottom: 14px; right: 14px; font-family: var(--font-caps); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--brass-dark); transform: rotate(-45deg); transform-origin: bottom right; z-index: 2; pointer-events: none; white-space: nowrap; }
 .folio.on-dark .page-curl-label { color: var(--brass-light); }
 
 /* MARGINALIA */
 .marginalia {
-  position: relative;
-  font-family: var(--font-hand); font-style: italic; font-size: 1.15rem;
-  color: var(--burgundy);
-  background: rgba(247,240,220,0.7); padding: 8px 14px;
+  position: relative; font-family: var(--font-hand); font-style: italic; font-size: 1.15rem;
+  color: var(--burgundy); background: rgba(247,240,220,0.7); padding: 8px 14px;
   border-left: 2px solid var(--brass); margin: 18px 0; max-width: 360px;
-  transform: rotate(-0.5deg) !important;
-  box-shadow: 2px 4px 10px rgba(44,36,22,0.1);
+  transform: rotate(-0.5deg) !important; box-shadow: 2px 4px 10px rgba(44,36,22,0.1);
 }
-.marginalia.right {
-  margin-left: auto; transform: rotate(0.7deg) !important;
-  border-left: none; border-right: 2px solid var(--brass);
-}
+.marginalia.right { margin-left: auto; transform: rotate(0.7deg) !important; border-left: none; border-right: 2px solid var(--brass); }
 
-/* HERO */
+/* ============================================================
+   HERO — cinematic full-bleed image, no book cover
+   ============================================================ */
 #frontispiece {
   min-height: 100vh; position: relative; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
@@ -424,7 +291,7 @@ a { color: inherit; text-decoration: none; }
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background: url('assets/lit-4a815c348827.webp') center/cover no-repeat;
+  background: url('assets/real-lobby-books.webp') center/cover no-repeat;
   z-index: 0; animation: ken-burns 28s ease-in-out infinite alternate;
 }
 @keyframes ken-burns {
@@ -434,7 +301,7 @@ a { color: inherit; text-decoration: none; }
 .hero-overlay {
   position: absolute; inset: 0; z-index: 1;
   background:
-    linear-gradient(180deg, rgba(15,36,25,0.65) 0%, rgba(15,36,25,0.45) 50%, rgba(15,36,25,0.88) 100%),
+    linear-gradient(180deg, rgba(15,36,25,0.7) 0%, rgba(15,36,25,0.5) 50%, rgba(15,36,25,0.9) 100%),
     radial-gradient(ellipse 60% 50% at 50% 45%, transparent 0%, rgba(15,36,25,0.4) 100%);
 }
 .hero-polaroid {
@@ -442,23 +309,20 @@ a { color: inherit; text-decoration: none; }
   padding: 8px 8px 24px;
   box-shadow: 0 18px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(184,134,47,0.4);
   z-index: 2; opacity: 0;
-  transition: opacity 1.4s ease 0.8s, transform 1.4s ease 0.8s;
+  transition: opacity 1.4s ease, transform 1.4s ease;
   pointer-events: none;
 }
 .hero-polaroid img { width: 100%; height: auto; filter: sepia(0.18) contrast(1.05) brightness(0.96); }
-.hero-polaroid .cap {
-  font-family: var(--font-hand); font-size: 0.95rem;
-  color: var(--espresso); text-align: center; margin-top: 4px; font-style: italic;
-}
-.hero-polaroid.p1 { top: 16%; left: 6%; width: 200px; transform: translateY(40px) rotate(-6deg); }
-.hero-polaroid.p2 { top: 22%; right: 7%; width: 220px; transform: translateY(40px) rotate(5deg); }
-.hero-polaroid.p3 { bottom: 14%; left: 12%; width: 180px; transform: translateY(40px) rotate(4deg); }
-.hero-polaroid.p4 { bottom: 18%; right: 11%; width: 200px; transform: translateY(40px) rotate(-4deg); }
-.hero-polaroid.show { opacity: 0.92; transform: translateY(0) rotate(var(--rot, 0deg)); }
-.hero-polaroid.p1.show { --rot: -6deg; }
-.hero-polaroid.p2.show { --rot: 5deg; }
-.hero-polaroid.p3.show { --rot: 4deg; }
-.hero-polaroid.p4.show { --rot: -4deg; }
+.hero-polaroid .cap { font-family: var(--font-hand); font-size: 0.95rem; color: var(--espresso); text-align: center; margin-top: 4px; font-style: italic; }
+.hero-polaroid.p1 { top: 16%; left: 6%; width: 200px; transform: translateY(40px) rotate(-6deg); animation: pol-in 1.4s ease 1.8s forwards; }
+.hero-polaroid.p2 { top: 22%; right: 7%; width: 220px; transform: translateY(40px) rotate(5deg); animation: pol-in 1.4s ease 2.1s forwards; }
+.hero-polaroid.p3 { bottom: 14%; left: 12%; width: 180px; transform: translateY(40px) rotate(4deg); animation: pol-in 1.4s ease 2.4s forwards; }
+.hero-polaroid.p4 { bottom: 18%; right: 11%; width: 200px; transform: translateY(40px) rotate(-4deg); animation: pol-in 1.4s ease 2.7s forwards; }
+@keyframes pol-in { to { opacity: 0.92; transform: translateY(0) rotate(var(--rot, 0deg)); } }
+.hero-polaroid.p1 { --rot: -6deg; }
+.hero-polaroid.p2 { --rot: 5deg; }
+.hero-polaroid.p3 { --rot: 4deg; }
+.hero-polaroid.p4 { --rot: -4deg; }
 @media (max-width: 880px) { .hero-polaroid { display: none; } }
 
 .hero-bloom {
@@ -483,43 +347,72 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero-content { position: relative; z-index: 4; max-width: 880px; }
+.hero-logo {
+  width: 90px; height: 90px; margin: 0 auto 28px;
+  border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--brass);
+  filter: sepia(0.15) saturate(0.85) brightness(1.05) hue-rotate(-5deg);
+  box-shadow: 0 0 30px rgba(221,185,94,0.4);
+  opacity: 0; animation: fade-in 1s ease 0.3s forwards;
+}
 .hero-eyebrow {
   font-family: var(--font-caps); font-size: 0.72rem; letter-spacing: 0.42em;
-  color: var(--brass-light); margin-bottom: 36px;
+  color: var(--brass-light); margin-bottom: 24px;
   display: flex; align-items: center; justify-content: center; gap: 14px;
-  opacity: 0; animation: fade-in 1s ease 2s forwards;
+  opacity: 0; animation: fade-in 1s ease 0.6s forwards;
 }
 .hero-eyebrow::before, .hero-eyebrow::after { content: ''; height: 1px; width: 40px; background: var(--brass); }
-.hero-title {
-  font-family: var(--font-display); font-weight: 300;
-  font-size: clamp(2.8rem, 8vw, 6.5rem); line-height: 0.95; letter-spacing: -0.01em;
+
+/* "La Casa" — Tangerine script, materializes word-by-word */
+.hero-script-title {
+  font-family: var(--font-script);
+  font-size: clamp(5rem, 14vw, 11rem);
+  line-height: 0.85;
+  font-weight: 700;
+  background: linear-gradient(135deg, #F5E1A4 0%, #DDB95E 30%, #C9A04E 60%, #F5E1A4 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  text-shadow: 0 4px 30px rgba(221,185,94,0.3);
+  margin-bottom: 8px;
 }
-.hero-title .word {
-  display: inline-block; opacity: 0; filter: blur(12px); transform: translateY(10px);
-  transition: opacity 1s ease, filter 1s ease, transform 1s ease;
+.hero-script-title .word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(20px);
+  transform: translateY(20px) scale(0.9);
+  animation: script-materialize 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
-.hero-title.in-view .word { opacity: 1; filter: blur(0); transform: translateY(0); }
-.hero-title em {
-  font-style: italic; font-weight: 500;
-  background: linear-gradient(135deg, #DDB95E 0%, #F5E1A4 40%, #C9A04E 70%, #8B6520 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  display: block; margin-top: 6px; text-shadow: 0 2px 24px rgba(221,185,94,0.4);
+.hero-script-title .word:nth-child(1) { animation-delay: 0.9s; }
+.hero-script-title .word:nth-child(2) { animation-delay: 1.3s; }
+@keyframes script-materialize {
+  to { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
 }
-@keyframes fade-in { to { opacity: 1; } }
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+  color: var(--parchment);
+  line-height: 1.1;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fade-in 1.2s ease 1.8s forwards;
+}
 .hero-hand {
   font-family: var(--font-hand); font-size: 1.55rem; font-style: italic;
-  color: var(--brass-light); margin: 26px 0 8px;
-  opacity: 0; animation: fade-in 1s ease 2.8s forwards;
+  color: var(--brass-light); margin: 20px 0 8px;
+  opacity: 0; animation: fade-in 1s ease 2.2s forwards;
 }
-.hero-sub {
+.hero-body {
   font-family: var(--font-body); font-size: 1.05rem; line-height: 1.8;
-  max-width: 640px; margin: 30px auto 0; color: var(--parchment);
-  opacity: 0; animation: fade-in 1.2s ease 3.1s forwards;
+  max-width: 640px; margin: 26px auto 0; color: var(--parchment);
+  opacity: 0; animation: fade-in 1.2s ease 2.5s forwards;
 }
-.hero-sub.drop-cap::first-letter { color: var(--brass-light); font-size: 3.4em; }
+.hero-body.drop-cap::first-letter { color: var(--brass-light); font-size: 3.4em; }
 .hero-cta {
-  margin-top: 42px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-  opacity: 0; animation: fade-in 1s ease 3.4s forwards;
+  margin-top: 38px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fade-in 1s ease 2.8s forwards;
 }
 .btn-primary {
   display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px;
@@ -543,32 +436,23 @@ a { color: inherit; text-decoration: none; }
 .hero-rating {
   margin-top: 36px; display: inline-flex; align-items: center; gap: 18px;
   font-family: var(--font-caps); font-size: 0.7rem; letter-spacing: 0.28em;
-  color: var(--parchment); opacity: 0; animation: fade-in 1s ease 3.7s forwards;
+  color: var(--parchment); opacity: 0; animation: fade-in 1s ease 3.1s forwards;
 }
 .hero-rating .score { color: var(--brass-light); font-size: 1rem; }
 .hero-rating .sep { width: 1px; height: 16px; background: rgba(247,240,220,0.3); }
 
+@keyframes fade-in { to { opacity: 1; } }
+
 .hero-curl {
   position: absolute; bottom: 0; right: 0; width: 120px; height: 120px;
   z-index: 5; cursor: pointer;
-  opacity: 0; animation: fade-in 1s ease 4s forwards, curl-wiggle 3s ease-in-out 5s infinite;
+  opacity: 0; animation: fade-in 1s ease 3.5s forwards, curl-wiggle 3s ease-in-out 4.5s infinite;
   transition: width 0.5s ease, height 0.5s ease;
 }
 .hero-curl:hover { width: 160px; height: 160px; }
-.hero-curl svg {
-  width: 100%; height: 100%;
-  filter: drop-shadow(-4px -4px 10px rgba(0,0,0,0.5));
-  transition: transform 0.5s ease;
-}
+.hero-curl svg { width: 100%; height: 100%; filter: drop-shadow(-4px -4px 10px rgba(0,0,0,0.5)); transition: transform 0.5s ease; }
 .hero-curl:hover svg { transform: scale(1.1); }
-.hero-curl-label {
-  position: absolute; bottom: 22px; right: 22px;
-  font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.28em;
-  color: var(--brass-light);
-  transform: rotate(-45deg); transform-origin: bottom right;
-  z-index: 2; pointer-events: none; white-space: nowrap;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-}
+.hero-curl-label { position: absolute; bottom: 22px; right: 22px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.28em; color: var(--brass-light); transform: rotate(-45deg); transform-origin: bottom right; z-index: 2; pointer-events: none; white-space: nowrap; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
 @keyframes curl-wiggle { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(2deg); } }
 
 /* LA CASA */
@@ -584,7 +468,6 @@ a { color: inherit; text-decoration: none; }
 }
 .stat-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(44,36,22,0.14); }
 .stat-card .value { font-family: var(--font-display); font-size: 2.6rem; font-weight: 500; color: var(--forest); line-height: 1; }
-.stat-card .value em { color: var(--brass-dark); font-style: italic; }
 .stat-card .label { font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.3em; color: var(--espresso-light); margin-top: 12px; line-height: 1.4; }
 .stat-card::before { content: '✦'; position: absolute; top: 10px; right: 12px; color: var(--brass); font-size: 0.7rem; opacity: 0.5; }
 
@@ -604,11 +487,7 @@ a { color: inherit; text-decoration: none; }
 .space-caption { position: absolute; left: 16px; right: 16px; bottom: 14px; color: var(--parchment); z-index: 2; }
 .space-caption h4 { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; font-weight: 500; margin-bottom: 3px; }
 .space-caption p { font-family: var(--font-body); font-size: 0.82rem; opacity: 0.85; line-height: 1.4; }
-.space-plate-num {
-  position: absolute; top: 12px; left: 14px;
-  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em;
-  color: var(--brass-light); background: rgba(15,36,25,0.55); padding: 3px 8px; z-index: 2;
-}
+.space-plate-num { position: absolute; top: 12px; left: 14px; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; color: var(--brass-light); background: rgba(15,36,25,0.55); padding: 3px 8px; z-index: 2; }
 
 .martica-card {
   margin-top: 80px; display: grid; grid-template-columns: 0.9fr 1.1fr;
@@ -617,11 +496,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 18px 40px rgba(44,36,22,0.18); overflow: hidden; position: relative;
 }
 @media (max-width: 880px) { .martica-card { grid-template-columns: 1fr; } }
-.martica-card-img {
-  position: relative; min-height: 380px;
-  background: url('assets/lit-0306b6466d2c.jpg') center/cover no-repeat;
-  filter: sepia(0.12) contrast(1.05);
-}
+.martica-card-img { position: relative; min-height: 380px; background: url('assets/owner-martha.jpg') center/cover no-repeat; filter: sepia(0.12) contrast(1.05); }
 .martica-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(114,47,55,0.35) 100%); }
 .martica-card-body { padding: 44px 44px 48px; position: relative; }
 .martica-card-body .quote-mark { font-family: var(--font-display); font-size: 4.5rem; color: var(--brass); opacity: 0.3; line-height: 0.5; margin-bottom: 8px; }
@@ -634,10 +509,7 @@ a { color: inherit; text-decoration: none; }
 #cafe { background: linear-gradient(180deg, var(--parchment-warm) 0%, var(--parchment-dark) 100%); position: relative; }
 .cafe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 50px; }
 @media (max-width: 880px) { .cafe-grid { grid-template-columns: 1fr; gap: 36px; } }
-.cafe-image-wrap {
-  position: relative; border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px;
-  box-shadow: 0 18px 40px rgba(44,36,22,0.2); overflow: hidden;
-}
+.cafe-image-wrap { position: relative; border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px; box-shadow: 0 18px 40px rgba(44,36,22,0.2); overflow: hidden; }
 .cafe-image-wrap img { width: 100%; aspect-ratio: 4/5; object-fit: cover; filter: sepia(0.15) contrast(1.05) brightness(0.96); transition: transform 1.4s ease; }
 .cafe-image-wrap:hover img { transform: scale(1.05); }
 .cafe-image-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,240,200,0.18), transparent 35%); pointer-events: none; }
@@ -645,21 +517,13 @@ a { color: inherit; text-decoration: none; }
 .cafe-steam span { position: absolute; bottom: 0; left: 50%; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.6); animation: steam 6s ease-in infinite; }
 .cafe-steam span:nth-child(2) { animation-delay: 1.5s; left: 35%; }
 .cafe-steam span:nth-child(3) { animation-delay: 3s; left: 60%; }
-@keyframes steam {
-  0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
-  30% { opacity: 0.8; }
-  100% { transform: translate(20px, -160px) scale(2.2); opacity: 0; }
-}
+@keyframes steam { 0% { transform: translate(0, 0) scale(0.6); opacity: 0; } 30% { opacity: 0.8; } 100% { transform: translate(20px, -160px) scale(2.2); opacity: 0; } }
 .cafe-tagline { font-family: var(--font-display); font-style: italic; font-size: 1.6rem; color: var(--burgundy); margin: 16px 0 24px; line-height: 1.4; }
 .cafe-tag { display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; padding: 10px 18px; border: 1px solid var(--brass); background: var(--parchment-warm); font-family: var(--font-caps); font-size: 0.7rem; letter-spacing: 0.28em; color: var(--espresso); }
 .cafe-tag::before { content: '☕'; font-size: 0.9rem; }
 .breakfast-row { margin-top: 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 @media (max-width: 880px) { .breakfast-row { grid-template-columns: 1fr; } }
-.breakfast-plate {
-  position: relative; border: 1px solid var(--brass-dark); outline: 1px solid var(--brass); outline-offset: 4px;
-  background: var(--parchment-warm); padding: 18px;
-  box-shadow: 0 10px 24px rgba(44,36,22,0.12);
-}
+.breakfast-plate { position: relative; border: 1px solid var(--brass-dark); outline: 1px solid var(--brass); outline-offset: 4px; background: var(--parchment-warm); padding: 18px; box-shadow: 0 10px 24px rgba(44,36,22,0.12); }
 .breakfast-plate img { width: 100%; aspect-ratio: 4/3; object-fit: cover; filter: sepia(0.15) contrast(1.04); margin-bottom: 14px; }
 .breakfast-plate h5 { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--forest); margin-bottom: 6px; }
 .breakfast-plate p { font-family: var(--font-body); font-size: 0.88rem; color: var(--espresso-light); line-height: 1.55; }
@@ -671,13 +535,7 @@ a { color: inherit; text-decoration: none; }
 .rooms-row { margin-top: 60px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; perspective: 1400px; }
 @media (max-width: 1100px) { .rooms-row { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 540px)  { .rooms-row { grid-template-columns: 1fr; } }
-.room-card {
-  position: relative; background: var(--parchment-warm); color: var(--espresso);
-  border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 5px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.4); overflow: hidden; cursor: pointer;
-  transition: transform 0.7s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.6s ease;
-  transform: rotate(var(--tilt, 0deg)) translateZ(0); transform-style: preserve-3d;
-}
+.room-card { position: relative; background: var(--parchment-warm); color: var(--espresso); border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 5px; box-shadow: 0 18px 40px rgba(0,0,0,0.4); overflow: hidden; cursor: pointer; transition: transform 0.7s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.6s ease; transform: rotate(var(--tilt, 0deg)) translateZ(0); transform-style: preserve-3d; }
 .room-card:nth-child(1) { --tilt: -2deg; }
 .room-card:nth-child(2) { --tilt: 1.5deg; }
 .room-card:nth-child(3) { --tilt: -1deg; }
@@ -697,25 +555,16 @@ a { color: inherit; text-decoration: none; }
 .room-card.featured::before { content: '★ Flagship'; position: absolute; top: 12px; right: 12px; font-family: var(--font-caps); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--forest-dark); background: var(--brass-light); padding: 4px 8px; z-index: 2; }
 
 /* INTERSTITIAL */
-.interstitial {
-  position: relative; height: 70vh; min-height: 480px;
-  background-size: cover; background-position: center; background-attachment: fixed;
-  display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;
-}
+.interstitial { position: relative; height: 70vh; min-height: 480px; background-size: cover; background-position: center; background-attachment: fixed; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
 @media (max-width: 880px) { .interstitial { background-attachment: scroll; height: 50vh; min-height: 360px; } }
 .interstitial::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,36,25,0.5) 0%, rgba(15,36,25,0.7) 100%); }
-.interstitial-quote {
-  position: relative; z-index: 2; max-width: 720px; padding: 0 2rem;
-  font-family: var(--font-display); font-style: italic;
-  font-size: clamp(1.4rem, 3vw, 2.4rem); line-height: 1.45; color: var(--parchment);
-  text-shadow: 0 2px 20px rgba(0,0,0,0.6);
-}
+.interstitial-quote { position: relative; z-index: 2; max-width: 720px; padding: 0 2rem; font-family: var(--font-display); font-style: italic; font-size: clamp(1.4rem, 3vw, 2.4rem); line-height: 1.45; color: var(--parchment); text-shadow: 0 2px 20px rgba(0,0,0,0.6); }
 .interstitial-quote .word { display: inline-block; opacity: 0; filter: blur(10px); transform: translateY(8px); transition: opacity 0.9s ease, filter 0.9s ease, transform 0.9s ease; }
 .interstitial-quote.in-view .word { opacity: 1; filter: blur(0); transform: translateY(0); }
 .interstitial-attrib { position: relative; z-index: 2; margin-top: 24px; font-family: var(--font-caps); font-size: 0.7rem; letter-spacing: 0.3em; color: var(--brass-light); opacity: 0; transition: opacity 1s ease 1.5s; }
 .interstitial-quote.in-view + .interstitial-attrib { opacity: 0.9; }
 
-/* GALLERY MARQUEE */
+/* GALLERY MARQUEE — polaroids pre-built in HTML, pure CSS animation */
 #gallery-marquee { background: var(--forest-dark); padding: 70px 0; overflow: hidden; position: relative; }
 .gallery-marquee-header { text-align: center; padding: 0 2rem 36px; }
 .gallery-marquee-header .chapter-title { color: var(--parchment); font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
@@ -725,13 +574,7 @@ a { color: inherit; text-decoration: none; }
 #gallery-marquee:hover .marquee-row { animation-play-state: paused; }
 @keyframes marquee-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 @keyframes marquee-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
-.polaroid {
-  flex: 0 0 auto; width: 240px; background: var(--parchment-warm);
-  padding: 10px 10px 30px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.4), 0 0 0 1px rgba(184,134,47,0.4);
-  position: relative; transform: rotate(var(--rot, 0deg));
-  transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.5s ease; cursor: pointer;
-}
+.polaroid { flex: 0 0 auto; width: 240px; background: var(--parchment-warm); padding: 10px 10px 30px; box-shadow: 0 12px 28px rgba(0,0,0,0.4), 0 0 0 1px rgba(184,134,47,0.4); position: relative; transform: rotate(var(--rot, 0deg)); transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.5s ease; cursor: pointer; }
 .polaroid:hover { transform: rotate(0deg) scale(1.06) translateY(-8px); box-shadow: 0 22px 50px rgba(0,0,0,0.6), 0 0 0 1px var(--brass-light); z-index: 2; }
 .polaroid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; filter: sepia(0.2) contrast(1.05); }
 .polaroid-cap { position: absolute; bottom: 8px; left: 10px; right: 10px; font-family: var(--font-hand); font-size: 0.95rem; color: var(--espresso); text-align: center; font-style: italic; }
@@ -742,51 +585,27 @@ a { color: inherit; text-decoration: none; }
 
 /* MOMPOX */
 #mompox { position: relative; background: var(--forest-dark); color: var(--parchment); padding: 0; overflow: hidden; }
-.mompox-hero {
-  position: relative; min-height: 90vh;
-  display: flex; align-items: center; justify-content: center; text-align: center;
-  padding: 6rem 2rem; overflow: hidden;
-}
-.mompox-hero-bg {
-  position: absolute; inset: 0;
-  background: url('assets/lit-c5c00ba24179.jpg') center/cover no-repeat;
-  filter: brightness(0.6) saturate(1.15); z-index: 0;
-  animation: ken-burns 32s ease-in-out infinite alternate;
-}
+.mompox-hero { position: relative; min-height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 2rem; overflow: hidden; }
+.mompox-hero-bg { position: absolute; inset: 0; background: url('assets/mompox-river-sunset-real.jpg') center/cover no-repeat; filter: brightness(0.6) saturate(1.15); z-index: 0; animation: ken-burns 32s ease-in-out infinite alternate; }
 .mompox-hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,36,25,0.55) 0%, rgba(15,36,25,0.3) 50%, rgba(15,36,25,0.9) 100%); }
 .mompox-hero-inner { position: relative; z-index: 2; max-width: 880px; }
 .mompox-eyebrow { font-family: var(--font-caps); font-size: 0.72rem; letter-spacing: 0.42em; color: var(--brass-light); margin-bottom: 32px; display: flex; align-items: center; justify-content: center; gap: 14px; }
 .mompox-eyebrow::before, .mompox-eyebrow::after { content: ''; height: 1px; width: 36px; background: var(--brass); }
 .mompox-title { font-family: var(--font-display); font-weight: 300; font-size: clamp(2.4rem, 6.5vw, 5.2rem); line-height: 1.05; color: var(--parchment); }
 .mompox-title em { font-style: italic; background: linear-gradient(135deg, #DDB95E 0%, #F5E1A4 40%, #C9A04E 70%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.gabo-quote {
-  margin: 50px auto 0; max-width: 720px;
-  font-family: var(--font-display); font-style: italic;
-  font-size: clamp(1.3rem, 2.6vw, 1.9rem); line-height: 1.5; color: var(--parchment);
-  text-shadow: 0 0 14px rgba(247,240,220,0.4); min-height: 110px;
-}
+.gabo-quote { margin: 50px auto 0; max-width: 720px; font-family: var(--font-display); font-style: italic; font-size: clamp(1.3rem, 2.6vw, 1.9rem); line-height: 1.5; color: var(--parchment); text-shadow: 0 0 14px rgba(247,240,220,0.4); min-height: 110px; }
 .gabo-quote .word { display: inline-block; opacity: 0; filter: blur(12px); transform: translateY(8px); transition: opacity 1s ease, filter 1s ease, transform 1s ease; }
 .gabo-quote.in-view .word { opacity: 1; filter: blur(0); transform: translateY(0); }
 .gabo-attrib { margin-top: 20px; font-family: var(--font-caps); font-size: 0.7rem; letter-spacing: 0.3em; color: var(--brass-light); opacity: 0; transition: opacity 1.2s ease 1.6s; }
 .gabo-quote.in-view + .gabo-attrib { opacity: 0.9; }
 
-.mompox-map-section { padding: 7rem 2rem 7rem 110px; position: relative; }
+.mompox-map-section { padding: 7rem 3rem 7rem 110px; position: relative; }
 @media (max-width: 880px) { .mompox-map-section { padding: 5rem 1.4rem 5rem 70px; } }
 .mompox-map-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; margin-top: 50px; align-items: center; }
 @media (max-width: 880px) { .mompox-map-grid { grid-template-columns: 1fr; gap: 36px; } }
-.river-map {
-  background: var(--parchment-warm); padding: 28px;
-  border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px;
-  box-shadow: 0 18px 50px rgba(0,0,0,0.5); position: relative;
-}
+.river-map { background: var(--parchment-warm); padding: 28px; border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px; box-shadow: 0 18px 50px rgba(0,0,0,0.5); position: relative; }
 .river-map svg { width: 100%; height: auto; display: block; }
-.river-map .map-path {
-  fill: none; stroke: var(--brass-dark); stroke-width: 2.5;
-  stroke-linecap: round; stroke-linejoin: round;
-  stroke-dasharray: 2400; stroke-dashoffset: 2400;
-  transition: stroke-dashoffset 3.6s ease;
-  filter: drop-shadow(0 0 6px rgba(184,134,47,0.3));
-}
+.river-map .map-path { fill: none; stroke: var(--brass-dark); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 2400; stroke-dashoffset: 2400; transition: stroke-dashoffset 3.6s ease; filter: drop-shadow(0 0 6px rgba(184,134,47,0.3)); }
 .river-map.in-view .map-path { stroke-dashoffset: 0; }
 .river-map .map-pin { fill: var(--burgundy); stroke: var(--brass-light); stroke-width: 1.5; opacity: 0; transition: opacity 0.5s ease; }
 .river-map.in-view .map-pin { opacity: 1; }
@@ -809,12 +628,7 @@ a { color: inherit; text-decoration: none; }
 .river-map-caption { margin-top: 16px; font-family: var(--font-hand); font-style: italic; font-size: 1.1rem; color: var(--brass-dark); text-align: center; }
 
 .mompox-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.lily-pad {
-  background: linear-gradient(135deg, var(--parchment-warm) 0%, var(--parchment-dark) 100%);
-  border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 5px;
-  padding: 24px 18px; text-align: center; position: relative;
-  box-shadow: 0 14px 30px rgba(0,0,0,0.4); animation: bob 4s ease-in-out infinite;
-}
+.lily-pad { background: linear-gradient(135deg, var(--parchment-warm) 0%, var(--parchment-dark) 100%); border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 5px; padding: 24px 18px; text-align: center; position: relative; box-shadow: 0 14px 30px rgba(0,0,0,0.4); animation: bob 4s ease-in-out infinite; }
 .lily-pad:nth-child(2) { animation-delay: 0.6s; }
 .lily-pad:nth-child(3) { animation-delay: 1.2s; }
 .lily-pad:nth-child(4) { animation-delay: 1.8s; }
@@ -860,11 +674,7 @@ a { color: inherit; text-decoration: none; }
 .cartas-grid { margin-top: 50px; columns: 3; column-gap: 22px; }
 @media (max-width: 880px) { .cartas-grid { columns: 2; column-gap: 14px; } }
 @media (max-width: 540px) { .cartas-grid { columns: 1; } }
-.carta {
-  break-inside: avoid; margin-bottom: 22px; background: var(--parchment-warm);
-  padding: 28px 26px 30px; border: 1px solid var(--brass-dark); outline: 1px solid var(--brass); outline-offset: 5px;
-  box-shadow: 0 12px 28px rgba(44,36,22,0.14); position: relative; transform: rotate(var(--rot, 0deg));
-}
+.carta { break-inside: avoid; margin-bottom: 22px; background: var(--parchment-warm); padding: 28px 26px 30px; border: 1px solid var(--brass-dark); outline: 1px solid var(--brass); outline-offset: 5px; box-shadow: 0 12px 28px rgba(44,36,22,0.14); position: relative; transform: rotate(var(--rot, 0deg)); }
 .carta:nth-child(odd)  { --rot: -1deg; }
 .carta:nth-child(even) { --rot: 0.8deg; }
 .carta:nth-child(3n)   { --rot: -0.5deg; }
@@ -914,10 +724,33 @@ a { color: inherit; text-decoration: none; }
   .mote, .butterfly, .hero-polaroid { display: none; }
 }
 
+/* REVEAL — with fallback that reveals all after 2.5s */
 .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s ease; }
 .reveal.in-view { opacity: 1; transform: translateY(0); }
 .reveal.delay-1 { transition-delay: 0.15s; }
 .reveal.delay-2 { transition-delay: 0.3s; }
+
+/* FALLBACK: After 2.5s, force-reveal everything (in case IntersectionObserver fails) */
+.fallback-reveal .reveal,
+.fallback-reveal .body-text,
+.fallback-reveal .river-map,
+.fallback-reveal .interstitial-quote,
+.fallback-reveal .gabo-quote,
+.fallback-reveal .wax-seal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+.fallback-reveal .body-text p { opacity: 1 !important; transform: none !important; }
+.fallback-reveal .gabo-quote .word,
+.fallback-reveal .interstitial-quote .word { opacity: 1 !important; filter: none !important; transform: none !important; }
+.fallback-reveal .map-pin,
+.fallback-reveal .map-label,
+.fallback-reveal .map-compass,
+.fallback-reveal .map-scale,
+.fallback-reveal .map-boat { opacity: 1 !important; }
+.fallback-reveal .map-path { stroke-dashoffset: 0 !important; }
+.fallback-reveal .gabo-attrib,
+.fallback-reveal .interstitial-attrib { opacity: 0.9 !important; }
 </style>
 </head>
 <body>
@@ -929,33 +762,18 @@ a { color: inherit; text-decoration: none; }
   <svg viewBox="0 0 80 1200" preserveAspectRatio="none">
     <defs>
       <filter id="river-turb"><feTurbulence type="fractalNoise" baseFrequency="0.018 0.04" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="6"/></filter>
-      <linearGradient id="river-grad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#7A8B6F" stop-opacity="0.5"/>
-        <stop offset="50%" stop-color="#DDB95E" stop-opacity="0.8"/>
-        <stop offset="100%" stop-color="#7A8B6F" stop-opacity="0.5"/>
-      </linearGradient>
+      <linearGradient id="river-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7A8B6F" stop-opacity="0.5"/><stop offset="50%" stop-color="#DDB95E" stop-opacity="0.8"/><stop offset="100%" stop-color="#7A8B6F" stop-opacity="0.5"/></linearGradient>
     </defs>
-    <path d="M 40 0 Q 60 100, 30 200 T 50 400 Q 70 500, 35 600 T 55 800 Q 75 900, 40 1000 T 50 1200" stroke="url(#river-grad)" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#river-turb)" stroke-dasharray="8 6">
-      <animate attributeName="stroke-dashoffset" from="0" to="-28" dur="3s" repeatCount="indefinite"/>
-    </path>
+    <path d="M 40 0 Q 60 100, 30 200 T 50 400 Q 70 500, 35 600 T 55 800 Q 75 900, 40 1000 T 50 1200" stroke="url(#river-grad)" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#river-turb)" stroke-dasharray="8 6"><animate attributeName="stroke-dashoffset" from="0" to="-28" dur="3s" repeatCount="indefinite"/></path>
   </svg>
 </div>
 <div class="river-pin-trail" id="river-pin-trail"></div>
 <div class="river-pin" id="river-pin" aria-hidden="true"></div>
 
-<div id="bookmark" aria-hidden="true">
-  <svg viewBox="0 0 22 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="bookmark-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#722F37"/><stop offset="80%" stop-color="#9B444C"/><stop offset="100%" stop-color="#722F37"/></linearGradient></defs>
-    <path d="M 0 0 L 22 0 L 22 105 L 11 120 L 0 105 Z" fill="url(#bookmark-grad)"/>
-    <line x1="3" y1="0" x2="3" y2="105" stroke="#DDB95E" stroke-width="0.5" opacity="0.4"/>
-    <line x1="19" y1="0" x2="19" y2="105" stroke="#DDB95E" stroke-width="0.5" opacity="0.4"/>
-  </svg>
-</div>
-<svg class="bookmark-tassel" id="bookmark-tassel" viewBox="0 0 34 56" aria-hidden="true">
-  <rect x="14" y="0" width="6" height="14" fill="#8B6520"/>
-  <circle cx="17" cy="14" r="5" fill="#C9A04E"/>
-  <path d="M 12 19 L 10 56 M 17 19 L 17 56 M 22 19 L 24 56 M 14 19 L 12 56 M 20 19 L 22 56" stroke="#DDB95E" stroke-width="1.2" fill="none"/>
-</svg>
+<!-- Progress line (right edge — elegant, replaces bookmark) -->
+<div id="progress-line"></div>
+<div id="progress-fill"></div>
+<div id="progress-dot"></div>
 
 <nav id="nav">
   <div class="nav-mark">Literatium <span>· La Casa de las Historias</span></div>
@@ -971,44 +789,26 @@ a { color: inherit; text-decoration: none; }
   </div>
 </nav>
 
-<!-- BOOK COVER -->
-<div id="cover" role="button" tabindex="0" aria-label="Open the book">
-  <div class="cover-face" id="cover-face">
-    <div class="cover-front">
-      <div class="cover-frame">
-        <span class="cover-corner-tl"></span><span class="cover-corner-tr"></span>
-        <span class="cover-corner-bl"></span><span class="cover-corner-br"></span>
-      </div>
-      <img class="cover-emblem" src="assets/lit-364183fc751c.jpg" alt="Literatium emblem">
-      <h1 class="cover-title">Literatium</h1>
-      <div class="cover-fleuron">✦ ❦ ✦</div>
-      <p class="cover-sub">La Casa de las Historias</p>
-      <p class="cover-sub" style="margin-top:6px; opacity:0.7; font-size:0.65rem;">Mompox · Bolívar · Colombia</p>
-      <div class="cover-prompt">━ Toca para abrir el libro ━</div>
-    </div>
-    <div class="cover-back" aria-hidden="true"></div>
-  </div>
-</div>
-
-<!-- FOLIO I — FRONTISPIECE -->
+<!-- HERO — cinematic full-bleed image, no book cover -->
 <section id="frontispiece">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-bloom" aria-hidden="true"></div>
 
-  <div class="hero-polaroid p1"><img src="assets/lit-4a815c348827.webp" alt="Fachada al anochecer"><div class="cap">la fachada de noche</div></div>
-  <div class="hero-polaroid p2"><img src="assets/lit-c5c00ba24179.jpg" alt="Atardecer sobre el Magdalena"><div class="cap">el Magdalena al ocaso</div></div>
-  <div class="hero-polaroid p3"><img src="assets/lit-644b59e68d49.jpg" alt="Patio de noche"><div class="cap">el patio, al caer la tarde</div></div>
-  <div class="hero-polaroid p4"><img src="assets/lit-5d4892717dad.jpg" alt="Rincón de lectura"><div class="cap">el rincón de lectura</div></div>
+  <div class="hero-polaroid p1"><img src="assets/space-fachada-noche.webp" alt="Fachada al anochecer"><div class="cap">la fachada de noche</div></div>
+  <div class="hero-polaroid p2"><img src="assets/mompox-river-sunset-real.jpg" alt="Atardecer sobre el Magdalena"><div class="cap">el Magdalena al ocaso</div></div>
+  <div class="hero-polaroid p3"><img src="assets/hotel-patio-evening.jpg" alt="Patio de noche"><div class="cap">el patio, al caer la tarde</div></div>
+  <div class="hero-polaroid p4"><img src="assets/real-reading-nook.jpg" alt="Rincón de lectura"><div class="cap">el rincón de lectura</div></div>
 
   <div class="hero-content">
+    <img class="hero-logo" src="assets/literatium-logo-icon.jpeg" alt="Literatium">
     <div class="hero-eyebrow">Hotel Boutique · Libros &amp; Café · Mompox · UNESCO 1995</div>
-    <h1 class="hero-title" id="hero-title">
+    <h1 class="hero-script-title">
       <span class="word">La</span> <span class="word">Casa</span>
-      <em><span class="word">de</span> <span class="word">las</span> <span class="word">Historias</span></em>
     </h1>
+    <div class="hero-subtitle">de las Historias</div>
     <p class="hero-hand">— donde el tiempo se detiene entre las páginas</p>
-    <p class="hero-sub drop-cap">Literatium es un refugio boutique en Mompox, donde la literatura, el café y la elegancia colonial se encuentran. Cada rincón cuenta una historia. Cada mañana, un café único de nuestra finca en Huila. Cada atardecer, el Magdalena.</p>
+    <p class="hero-body drop-cap">Literatium es un refugio boutique en Mompox, donde la literatura, el café y la elegancia colonial se encuentran. Cada rincón cuenta una historia. Cada mañana, un café único de nuestra finca en Huila. Cada atardecer, el Magdalena.</p>
     <div class="hero-cta">
       <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary">Reservar por WhatsApp</a>
       <a href="#casa" class="btn-ghost">Descubre la casa ↓</a>
@@ -1031,18 +831,13 @@ a { color: inherit; text-decoration: none; }
 </section>
 
 <!-- FOLIO II — LA CASA -->
-<section id="casa" class="folio bg-parchment folio-frame">
-  <div class="folio-corner tl"></div><div class="folio-corner tr"></div>
-  <div class="folio-corner bl"></div><div class="folio-corner br"></div>
+<section id="casa" class="folio bg-parchment">
+  <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-number">Folio II · La Casa</div>
-  <div class="page-curl" data-next="cafe" role="button" tabindex="0" aria-label="Turn to next page">
-    <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/>
-      <path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/>
-      <path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/>
-    </svg>
-    <span class="page-curl-label">turn →</span>
-  </div>
+  <div class="page-curl" data-next="cafe" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
 
   <div class="folio-inner">
     <div class="reveal">
@@ -1051,7 +846,6 @@ a { color: inherit; text-decoration: none; }
       <p class="chapter-hand">La Casa de las Historias</p>
       <div class="fleuron">✦ ❦ ✦</div>
     </div>
-
     <div class="casa-grid">
       <div class="body-text reveal">
         <p class="drop-cap">Literatium nació del amor por los libros, el café y Mompox. Felipe Cadena, fundador y hombre de mar — oficial de la Armada Colombiana — soñaba con un espacio donde la calma del río Magdalena se encontrara con el mundo de las letras. Así nació La Casa de las Historias.</p>
@@ -1059,7 +853,6 @@ a { color: inherit; text-decoration: none; }
         <p><em>Estamos un poco apartados del centro histórico — y eso es exactamente lo que nos hace especiales. Aquí no llega el ruido del pueblo. Llega el canto de los pájaros, el aroma del café, y el susurro de las páginas.</em></p>
         <div class="marginalia">— aquí, el tiempo se mide en tazas de café, no en horas —</div>
       </div>
-
       <div class="casa-stats reveal delay-1">
         <div class="stat-card"><div class="value">9.5</div><div class="label">Puntuación · 151+ reseñas</div></div>
         <div class="stat-card"><div class="value">★</div><div class="label">Café único · Finca en Huila</div></div>
@@ -1067,16 +860,14 @@ a { color: inherit; text-decoration: none; }
         <div class="stat-card"><div class="value">5′</div><div class="label">Minutos del centro histórico</div></div>
       </div>
     </div>
-
     <div class="spaces-mosaic reveal">
-      <figure class="space-plate"><div class="space-plate-num">PLATE I</div><img src="assets/lit-490b88b842c9.webp" alt="Arcos coloniales"><figcaption class="space-caption"><h4>Arcos que susurran</h4><p>El primer paso — donde la calma te recibe entre hierro y madera.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num">PLATE II</div><img src="assets/lit-e9782d44b82c.webp" alt="Lámpara colgante"><figcaption class="space-caption"><h4>Luz suspendida</h4><p>La lámpara cuelga como una constelación sobre el silencio.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num">PLATE III</div><img src="assets/lit-a47c49125bf2.webp" alt="Butacas de mimbre"><figcaption class="space-caption"><h4>Mimbre y libros</h4><p>Butacas que invitan a quedarse — toda una pared de historias.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num">PLATE IV</div><img src="assets/lit-6fddd61eb11d.webp" alt="Corredor con helechos"><figcaption class="space-caption"><h4>Helechos y ladrillo</h4><p>Plantas que cuelgan como páginas verdes del techo.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num">PLATE V</div><img src="assets/lit-0c21bc3b0c8b.webp" alt="Huésped leyendo"><figcaption class="space-caption"><h4>El rincón del descanso</h4><p>Donde el tiempo se inclina sobre una página abierta.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num">PLATE VI</div><img src="assets/lit-496a2f7d5bc0.webp" alt="Jardín tropical"><figcaption class="space-caption"><h4>El jardín secreto</h4><p>Tropical y callado — donde los grillos escriben el final del día.</p></figcaption></figure>
+      <figure class="space-plate"><div class="space-plate-num">PLATE I</div><img src="assets/real-lobby-arches.webp" alt="Arcos coloniales"><figcaption class="space-caption"><h4>Arcos que susurran</h4><p>El primer paso — donde la calma te recibe entre hierro y madera.</p></figcaption></figure>
+      <figure class="space-plate"><div class="space-plate-num">PLATE II</div><img src="assets/space-moody-entrance.webp" alt="Lámpara colgante"><figcaption class="space-caption"><h4>Luz suspendida</h4><p>La lámpara cuelga como una constelación sobre el silencio.</p></figcaption></figure>
+      <figure class="space-plate"><div class="space-plate-num">PLATE III</div><img src="assets/space-recepcion.webp" alt="Butacas de mimbre"><figcaption class="space-caption"><h4>Mimbre y libros</h4><p>Butacas que invitan a quedarse — toda una pared de historias.</p></figcaption></figure>
+      <figure class="space-plate"><div class="space-plate-num">PLATE IV</div><img src="assets/space-corredor.webp" alt="Corredor con helechos"><figcaption class="space-caption"><h4>Helechos y ladrillo</h4><p>Plantas que cuelgan como páginas verdes del techo.</p></figcaption></figure>
+      <figure class="space-plate"><div class="space-plate-num">PLATE V</div><img src="assets/guest-chillin.webp" alt="Huésped leyendo"><figcaption class="space-caption"><h4>El rincón del descanso</h4><p>Donde el tiempo se inclina sobre una página abierta.</p></figcaption></figure>
+      <figure class="space-plate"><div class="space-plate-num">PLATE VI</div><img src="assets/space-zona-verde.webp" alt="Jardín tropical"><figcaption class="space-caption"><h4>El jardín secreto</h4><p>Tropical y callado — donde los grillos escriben el final del día.</p></figcaption></figure>
     </div>
-
     <article class="martica-card reveal">
       <div class="martica-card-img" role="img" aria-label="Retrato de Martica"></div>
       <div class="martica-card-body">
@@ -1091,30 +882,23 @@ a { color: inherit; text-decoration: none; }
 </section>
 
 <!-- FOLIO III — CAFÉ -->
-<section id="cafe" class="folio bg-parchment folio-frame">
-  <div class="folio-corner tl"></div><div class="folio-corner tr"></div>
-  <div class="folio-corner bl"></div><div class="folio-corner br"></div>
+<section id="cafe" class="folio bg-parchment">
+  <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-number">Folio III · Café</div>
-  <div class="page-curl" data-next="rooms" role="button" tabindex="0" aria-label="Turn to next page">
-    <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/>
-      <path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/>
-      <path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/>
-    </svg>
-    <span class="page-curl-label">turn →</span>
-  </div>
-
+  <div class="page-curl" data-next="rooms" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
   <div class="folio-inner">
     <div class="reveal">
       <div class="eyebrow">Capítulo Segundo · Café de Huila</div>
       <h2 class="chapter-title">Literatium Café — <em>de la finca al libro</em></h2>
       <div class="fleuron">✦ ❦ ✦</div>
     </div>
-
     <div class="cafe-grid">
       <div class="cafe-image-wrap reveal">
         <div class="cafe-steam" aria-hidden="true"><span></span><span></span><span></span></div>
-        <img src="assets/lit-50755d93cb68.jpg" alt="Café de Huila — la finca familiar">
+        <img src="assets/coffee-farm-huila.jpg" alt="Café de Huila — la finca familiar">
       </div>
       <div class="body-text reveal delay-1">
         <p class="drop-cap">En las montañas de Huila, donde el aire huele a café y a tierra húmeda, la familia Cadena cultiva café desde hace generaciones. No es una finca grande — es una finca familiar, donde cada grano se cosecha a mano y se tuesta en lotes pequeños.</p>
@@ -1124,34 +908,26 @@ a { color: inherit; text-decoration: none; }
         <div class="marginalia right">— del monte al río, de la finca al libro —</div>
       </div>
     </div>
-
     <div class="reveal" style="margin-top:70px;">
       <div class="eyebrow center">El desayuno · El primer capítulo del día</div>
       <h3 class="chapter-title" style="text-align:center; font-size: clamp(1.6rem, 3vw, 2.4rem);">Servido en el comedor colonial o en el jardín, <em>junto a los murales</em></h3>
     </div>
-
     <div class="breakfast-row reveal delay-1">
-      <div class="breakfast-plate"><div class="breakfast-plate-num">PLATE I</div><img src="assets/lit-10ff08ae2f97.webp" alt="Café de Huila"><h5>El café de la mañana</h5><p>"Una buena historia sabe a café" — la taza de Cerámica Verde que te recibe.</p></div>
-      <div class="breakfast-plate"><div class="breakfast-plate-num">PLATE II</div><img src="assets/lit-0eceedab954f.webp" alt="Desayuno momposino"><h5>El plato caribeño</h5><p>Huevos revueltos, plátano frito, crema y frutas — el desayuno caribeño en su forma más honesta.</p></div>
-      <div class="breakfast-plate"><div class="breakfast-plate-num">PLATE III</div><img src="assets/lit-d6e5a0562f2d.webp" alt="Mesa puesta"><h5>La mesa puesta</h5><p>Huevos, fruta del trópico, café de Huila y jugo de naranja — la mesa cada mañana en Literatium.</p></div>
+      <div class="breakfast-plate"><div class="breakfast-plate-num">PLATE I</div><img src="assets/breakfast-coffee.webp" alt="Café de Huila"><h5>El café de la mañana</h5><p>"Una buena historia sabe a café" — la taza de Cerámica Verde que te recibe.</p></div>
+      <div class="breakfast-plate"><div class="breakfast-plate-num">PLATE II</div><img src="assets/breakfast-1.webp" alt="Desayuno momposino"><h5>El plato caribeño</h5><p>Huevos revueltos, plátano frito, crema y frutas — el desayuno caribeño en su forma más honesta.</p></div>
+      <div class="breakfast-plate"><div class="breakfast-plate-num">PLATE III</div><img src="assets/breakfast-3.webp" alt="Mesa puesta"><h5>La mesa puesta</h5><p>Huevos, fruta del trópico, café de Huila y jugo de naranja — la mesa cada mañana en Literatium.</p></div>
     </div>
   </div>
 </section>
 
 <!-- FOLIO IV — HABITACIONES -->
-<section id="rooms" class="folio folio-frame on-dark">
-  <div class="folio-corner tl"></div><div class="folio-corner tr"></div>
-  <div class="folio-corner bl"></div><div class="folio-corner br"></div>
+<section id="rooms" class="folio on-dark">
+  <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-number" style="color: var(--brass-light);">Folio IV · Habitaciones</div>
-  <div class="page-curl" data-next="gallery-marquee" role="button" tabindex="0" aria-label="Turn to next page">
-    <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 90 0 L 90 90 L 0 90 Z" fill="#DDB95E" opacity="0.85"/>
-      <path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#0F2419"/>
-      <path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#DDB95E" stroke-width="1" fill="none" opacity="0.7"/>
-    </svg>
-    <span class="page-curl-label">turn →</span>
-  </div>
-
+  <div class="page-curl" data-next="gallery-marquee" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#DDB95E" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#0F2419"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#DDB95E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
   <div class="folio-inner">
     <div class="reveal">
       <div class="eyebrow" style="color: var(--brass-light);">Capítulo Tercero</div>
@@ -1159,15 +935,13 @@ a { color: inherit; text-decoration: none; }
       <p class="rooms-intro">Cada habitación tiene su propio carácter, sus libros, su luz. Todas con aire acondicionado, baño privado, TV, cafetera y el silencio que solo se encuentra lejos del centro.</p>
       <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
     </div>
-
     <div class="rooms-row reveal delay-1">
-      <article class="room-card featured"><img class="room-card-img" src="assets/lit-57157bba53c0.webp" alt="Suite con jardín y bañera"><div class="room-card-body"><div class="room-card-num">HABITACIÓN V</div><h4>Suite con Jardín y Bañera</h4><div class="room-card-specs"><span>1 king + sofá cama</span><span>428 sq ft</span><span>Jardín</span></div></div></article>
-      <article class="room-card"><img class="room-card-img" src="assets/lit-705e95994a9b.webp" alt="Deluxe Suite"><div class="room-card-body"><div class="room-card-num">HABITACIÓN IV</div><h4>Deluxe Suite</h4><div class="room-card-specs"><span>1 king + sofá cama</span><span>410 sq ft</span><span>Jardín</span></div></div></article>
-      <article class="room-card"><img class="room-card-img" src="assets/lit-4f56205ee066.webp" alt="King Room"><div class="room-card-body"><div class="room-card-num">HABITACIÓN I</div><h4>King Room</h4><div class="room-card-specs"><span>1 king</span><span>290 sq ft</span><span>Ciudad</span></div></div></article>
-      <article class="room-card"><img class="room-card-img" src="assets/lit-0c2eb84742b2.webp" alt="Standard Double"><div class="room-card-body"><div class="room-card-num">HABITACIÓN II</div><h4>Standard Doble</h4><div class="room-card-specs"><span>1 queen</span><span>225 sq ft</span><span>Jardín</span></div></div></article>
-      <article class="room-card"><img class="room-card-img" src="assets/lit-6f9418768b5d.webp" alt="Standard Garden"><div class="room-card-body"><div class="room-card-num">HABITACIÓN III</div><h4>Standard Doble · Jardín</h4><div class="room-card-specs"><span>1 queen</span><span>225 sq ft</span><span>Jardín</span></div></div></article>
+      <article class="room-card featured"><img class="room-card-img" src="assets/room-suite-1.webp" alt="Suite con jardín y bañera"><div class="room-card-body"><div class="room-card-num">HABITACIÓN V</div><h4>Suite con Jardín y Bañera</h4><div class="room-card-specs"><span>1 king + sofá cama</span><span>428 sq ft</span><span>Jardín</span></div></div></article>
+      <article class="room-card"><img class="room-card-img" src="assets/room-deluxe-10.webp" alt="Deluxe Suite"><div class="room-card-body"><div class="room-card-num">HABITACIÓN IV</div><h4>Deluxe Suite</h4><div class="room-card-specs"><span>1 king + sofá cama</span><span>410 sq ft</span><span>Jardín</span></div></div></article>
+      <article class="room-card"><img class="room-card-img" src="assets/room-king-5.webp" alt="King Room"><div class="room-card-body"><div class="room-card-num">HABITACIÓN I</div><h4>King Room</h4><div class="room-card-specs"><span>1 king</span><span>290 sq ft</span><span>Ciudad</span></div></div></article>
+      <article class="room-card"><img class="room-card-img" src="assets/room-standard-9.webp" alt="Standard Double"><div class="room-card-body"><div class="room-card-num">HABITACIÓN II</div><h4>Standard Doble</h4><div class="room-card-specs"><span>1 queen</span><span>225 sq ft</span><span>Jardín</span></div></div></article>
+      <article class="room-card"><img class="room-card-img" src="assets/room-garden-7.webp" alt="Standard Garden"><div class="room-card-body"><div class="room-card-num">HABITACIÓN III</div><h4>Standard Doble · Jardín</h4><div class="room-card-specs"><span>1 queen</span><span>225 sq ft</span><span>Jardín</span></div></div></article>
     </div>
-
     <div class="reveal delay-2" style="margin-top:50px; text-align:center;">
       <p style="font-family: var(--font-body); font-style: italic; color: var(--parchment); opacity:0.8; max-width:620px; margin:0 auto;">Todas con aire acondicionado, baño privado, TV con streaming, minibar, cafetera, WiFi, batas y artículos de aseo, y desayuno momposino incluido. Jacuzzi del jardín disponible para todos los huéspedes.</p>
       <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary" style="margin-top:26px;">Consultar disponibilidad</a>
@@ -1176,22 +950,66 @@ a { color: inherit; text-decoration: none; }
 </section>
 
 <!-- INTERSTITIAL 1 -->
-<section class="interstitial" style="background-image: url('assets/lit-b2d901778001.jpg');">
+<section class="interstitial" style="background-image: url('assets/mompox-santa-barbara-night.jpg');">
   <div>
     <p class="interstitial-quote" id="quote-1">Es más fácil atrapar el tiempo en Mompox que en cualquier otro lugar del mundo.</p>
     <p class="interstitial-attrib">— Dicho momposino</p>
   </div>
 </section>
 
-<!-- GALLERY MARQUEE -->
+<!-- GALLERY MARQUEE — polaroids pre-built in HTML -->
 <section id="gallery-marquee">
   <div class="gallery-marquee-header reveal">
     <div class="eyebrow" style="color: var(--brass-light); justify-content:center;">Galería · Imágenes del río y la casa</div>
     <h2 class="chapter-title on-dark" style="text-align:center;">Literatium <em>en imágenes</em></h2>
     <p style="font-family: var(--font-body); color: var(--parchment); opacity:0.7; max-width:560px; margin:18px auto 0; font-style:italic;">Un río de postales que deriva lentamente. Pasa el cursor para detener el tiempo.</p>
   </div>
-  <div class="marquee-row left" id="marquee-top"></div>
-  <div class="marquee-row right" id="marquee-bottom"></div>
+  <div class="marquee-row left">
+    <div class="polaroid"><img src="assets/real-lobby-arches.webp" alt="Arcos del lobby"><div class="polaroid-cap">Los arcos del lobby</div></div>
+    <div class="polaroid"><img src="assets/space-fachada-noche.webp" alt="Fachada al anochecer"><div class="polaroid-cap">La fachada al anochecer</div></div>
+    <div class="polaroid"><img src="assets/jacuzzi-blue-lit.webp" alt="Jacuzzi azul"><div class="polaroid-cap">Jacuzzi · luz azul</div></div>
+    <div class="polaroid"><img src="assets/mompox-river-sunset-real.jpg" alt="Magdalena al ocaso"><div class="polaroid-cap">El Magdalena al ocaso</div></div>
+    <div class="polaroid"><img src="assets/coffee-farm-huila.jpg" alt="Finca en Huila"><div class="polaroid-cap">La finca en Huila</div></div>
+    <div class="polaroid"><img src="assets/room-suite-12.webp" alt="Suite bañera"><div class="polaroid-cap">Suite · bañera</div></div>
+    <div class="polaroid"><img src="assets/mompox-street-colonial.jpg" alt="Calle colonial"><div class="polaroid-cap">Calle colonial</div></div>
+    <div class="polaroid"><img src="assets/breakfast-1.webp" alt="Desayuno"><div class="polaroid-cap">El desayuno</div></div>
+    <div class="polaroid"><img src="assets/hotel-patio-evening.jpg" alt="Patio de noche"><div class="polaroid-cap">El patio de noche</div></div>
+    <div class="polaroid"><img src="assets/mural-art.jpg" alt="Murales"><div class="polaroid-cap">Murales de la casa</div></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="polaroid"><img src="assets/real-lobby-arches.webp" alt="Arcos del lobby"><div class="polaroid-cap">Los arcos del lobby</div></div>
+    <div class="polaroid"><img src="assets/space-fachada-noche.webp" alt="Fachada al anochecer"><div class="polaroid-cap">La fachada al anochecer</div></div>
+    <div class="polaroid"><img src="assets/jacuzzi-blue-lit.webp" alt="Jacuzzi azul"><div class="polaroid-cap">Jacuzzi · luz azul</div></div>
+    <div class="polaroid"><img src="assets/mompox-river-sunset-real.jpg" alt="Magdalena al ocaso"><div class="polaroid-cap">El Magdalena al ocaso</div></div>
+    <div class="polaroid"><img src="assets/coffee-farm-huila.jpg" alt="Finca en Huila"><div class="polaroid-cap">La finca en Huila</div></div>
+    <div class="polaroid"><img src="assets/room-suite-12.webp" alt="Suite bañera"><div class="polaroid-cap">Suite · bañera</div></div>
+    <div class="polaroid"><img src="assets/mompox-street-colonial.jpg" alt="Calle colonial"><div class="polaroid-cap">Calle colonial</div></div>
+    <div class="polaroid"><img src="assets/breakfast-1.webp" alt="Desayuno"><div class="polaroid-cap">El desayuno</div></div>
+    <div class="polaroid"><img src="assets/hotel-patio-evening.jpg" alt="Patio de noche"><div class="polaroid-cap">El patio de noche</div></div>
+    <div class="polaroid"><img src="assets/mural-art.jpg" alt="Murales"><div class="polaroid-cap">Murales de la casa</div></div>
+  </div>
+  <div class="marquee-row right">
+    <div class="polaroid"><img src="assets/jacuzzi-pink-lit.webp" alt="Jacuzzi rosa"><div class="polaroid-cap">Jacuzzi · luz rosa</div></div>
+    <div class="polaroid"><img src="assets/facade-with-guests.webp" alt="La entrada"><div class="polaroid-cap">La entrada</div></div>
+    <div class="polaroid"><img src="assets/mompox-church-night.jpg" alt="Iglesia nocturna"><div class="polaroid-cap">Iglesia nocturna</div></div>
+    <div class="polaroid"><img src="assets/real-reading-nook.jpg" alt="Rincón de lectura"><div class="polaroid-cap">El rincón de lectura</div></div>
+    <div class="polaroid"><img src="assets/mompox-drone.jpg" alt="Mompox desde el cielo"><div class="polaroid-cap">Mompox desde el cielo</div></div>
+    <div class="polaroid"><img src="assets/jacuzzi-green-lit.webp" alt="Jacuzzi verde"><div class="polaroid-cap">Jacuzzi · luz verde</div></div>
+    <div class="polaroid"><img src="assets/room-deluxe-10.webp" alt="Deluxe Suite"><div class="polaroid-cap">Deluxe Suite</div></div>
+    <div class="polaroid"><img src="assets/guest-with-books.webp" alt="Huésped entre libros"><div class="polaroid-cap">Huésped entre libros</div></div>
+    <div class="polaroid"><img src="assets/filigree-1.webp" alt="Filigrana"><div class="polaroid-cap">Filigrana momposina</div></div>
+    <div class="polaroid"><img src="assets/magdalena-sunset.png" alt="El Magdalena"><div class="polaroid-cap">El Magdalena</div></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="polaroid"><img src="assets/jacuzzi-pink-lit.webp" alt="Jacuzzi rosa"><div class="polaroid-cap">Jacuzzi · luz rosa</div></div>
+    <div class="polaroid"><img src="assets/facade-with-guests.webp" alt="La entrada"><div class="polaroid-cap">La entrada</div></div>
+    <div class="polaroid"><img src="assets/mompox-church-night.jpg" alt="Iglesia nocturna"><div class="polaroid-cap">Iglesia nocturna</div></div>
+    <div class="polaroid"><img src="assets/real-reading-nook.jpg" alt="Rincón de lectura"><div class="polaroid-cap">El rincón de lectura</div></div>
+    <div class="polaroid"><img src="assets/mompox-drone.jpg" alt="Mompox desde el cielo"><div class="polaroid-cap">Mompox desde el cielo</div></div>
+    <div class="polaroid"><img src="assets/jacuzzi-green-lit.webp" alt="Jacuzzi verde"><div class="polaroid-cap">Jacuzzi · luz verde</div></div>
+    <div class="polaroid"><img src="assets/room-deluxe-10.webp" alt="Deluxe Suite"><div class="polaroid-cap">Deluxe Suite</div></div>
+    <div class="polaroid"><img src="assets/guest-with-books.webp" alt="Huésped entre libros"><div class="polaroid-cap">Huésped entre libros</div></div>
+    <div class="polaroid"><img src="assets/filigree-1.webp" alt="Filigrana"><div class="polaroid-cap">Filigrana momposina</div></div>
+    <div class="polaroid"><img src="assets/magdalena-sunset.png" alt="El Magdalena"><div class="polaroid-cap">El Magdalena</div></div>
+  </div>
 </section>
 
 <!-- FOLIO V — MOMPOX -->
@@ -1205,27 +1023,19 @@ a { color: inherit; text-decoration: none; }
       <p class="gabo-attrib">— Gabriel García Márquez</p>
     </div>
   </div>
-
-  <div class="mompox-map-section folio-frame on-dark">
-    <div class="folio-corner tl"></div><div class="folio-corner tr"></div>
-    <div class="folio-corner bl"></div><div class="folio-corner br"></div>
+  <div class="mompox-map-section folio on-dark">
+    <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
+    <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
+    <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
+    <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
     <div class="folio-number" style="color: var(--brass-light);">Folio V · Mompox</div>
-    <div class="page-curl" data-next="sabores" role="button" tabindex="0" aria-label="Turn to next page">
-      <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-        <path d="M 90 0 L 90 90 L 0 90 Z" fill="#DDB95E" opacity="0.85"/>
-        <path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#0F2419"/>
-        <path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#DDB95E" stroke-width="1" fill="none" opacity="0.7"/>
-      </svg>
-      <span class="page-curl-label">turn →</span>
-    </div>
-
+    <div class="page-curl" data-next="sabores" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#DDB95E" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#0F2419"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#DDB95E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
     <div class="folio-inner">
       <div class="reveal">
         <div class="eyebrow" style="color: var(--brass-light);">El mapa del río</div>
         <h3 class="chapter-title on-dark">Santa Cruz de Mompox — <em>fundada 1537</em></h3>
         <p style="font-family: var(--font-body); color: var(--parchment); opacity:0.85; max-width:640px; margin-top:18px; font-size:1.05rem; line-height:1.8;">Patrimonio de la Humanidad por la UNESCO desde 1995, es el pueblo que inspiró a García Márquez el realismo mágico de Macondo. Aquí, las calles empedradas, las iglesias coloniales y el río lento crean una atmósfera que no se encuentra en ningún otro lugar.</p>
       </div>
-
       <div class="mompox-map-grid">
         <div class="river-map reveal" id="river-map">
           <svg viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
@@ -1244,11 +1054,7 @@ a { color: inherit; text-decoration: none; }
             <circle class="map-pin" cx="100" cy="290" r="4"/>
             <circle class="map-pin" cx="200" cy="280" r="4"/>
             <circle class="map-pin" cx="80" cy="160" r="4"/>
-            <g class="map-boat" id="map-boat" transform="translate(30,40)">
-              <path d="M -6 0 L 6 0 L 4 4 L -4 4 Z" fill="#722F37" stroke="#DDB95E" stroke-width="0.5"/>
-              <line x1="0" y1="0" x2="0" y2="-8" stroke="#8B6520" stroke-width="0.8"/>
-              <path d="M 0 -8 L 4 -5 L 0 -3 Z" fill="#F5E1A4" opacity="0.8"/>
-            </g>
+            <g class="map-boat" id="map-boat" transform="translate(30,40)"><path d="M -6 0 L 6 0 L 4 4 L -4 4 Z" fill="#722F37" stroke="#DDB95E" stroke-width="0.5"/><line x1="0" y1="0" x2="0" y2="-8" stroke="#8B6520" stroke-width="0.8"/><path d="M 0 -8 L 4 -5 L 0 -3 Z" fill="#F5E1A4" opacity="0.8"/></g>
             <text class="map-label" x="40" y="34">Magangué</text>
             <text class="map-label" x="80" y="155">Cementerio</text>
             <text class="map-label" x="135" y="200">La Bodega (ferry)</text>
@@ -1257,32 +1063,12 @@ a { color: inherit; text-decoration: none; }
             <text class="map-label" x="280" y="94">Ciénaga de Pijiño</text>
             <text class="map-label" x="65" y="305">Ciénaga</text>
             <text class="map-label" x="170" y="295">Ciénaga Menor</text>
-            <g class="map-compass" transform="translate(355, 320)">
-              <circle r="22" fill="none" stroke="#8B6520" stroke-width="0.8"/>
-              <circle r="16" fill="none" stroke="#8B6520" stroke-width="0.4" opacity="0.5"/>
-              <path d="M 0 -20 L 5 0 L 0 20 L -5 0 Z" fill="#722F37"/>
-              <path d="M -20 0 L 0 5 L 20 0 L 0 -5 Z" fill="#8B6520" opacity="0.5"/>
-              <text x="0" y="-25" text-anchor="middle" font-size="10" font-weight="600">N</text>
-              <text x="25" y="3" text-anchor="middle" font-size="8" opacity="0.6">E</text>
-              <text x="0" y="32" text-anchor="middle" font-size="8" opacity="0.6">S</text>
-              <text x="-25" y="3" text-anchor="middle" font-size="8" opacity="0.6">W</text>
-            </g>
-            <g class="map-scale" transform="translate(20, 330)">
-              <line x1="0" y1="0" x2="60" y2="0" stroke="#8B6520" stroke-width="1"/>
-              <line x1="0" y1="-3" x2="0" y2="3" stroke="#8B6520" stroke-width="1"/>
-              <line x1="30" y1="-3" x2="30" y2="3" stroke="#8B6520" stroke-width="1"/>
-              <line x1="60" y1="-3" x2="60" y2="3" stroke="#8B6520" stroke-width="1"/>
-              <text x="30" y="-7" text-anchor="middle" font-family="IBM Plex Mono" font-size="7" fill="#8B6520">~ 20 km</text>
-            </g>
-            <g class="map-compass" transform="translate(200, 40)">
-              <rect x="-60" y="-12" width="120" height="24" fill="rgba(247,240,220,0.6)" stroke="#8B6520" stroke-width="0.5"/>
-              <text x="0" y="0" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="11" fill="#2C2416" font-weight="600">Río Magdalena</text>
-              <text x="0" y="9" text-anchor="middle" font-family="IBM Plex Mono" font-size="6" fill="#8B6520">— el mapa se dibuja al leer —</text>
-            </g>
+            <g class="map-compass" transform="translate(355, 320)"><circle r="22" fill="none" stroke="#8B6520" stroke-width="0.8"/><circle r="16" fill="none" stroke="#8B6520" stroke-width="0.4" opacity="0.5"/><path d="M 0 -20 L 5 0 L 0 20 L -5 0 Z" fill="#722F37"/><path d="M -20 0 L 0 5 L 20 0 L 0 -5 Z" fill="#8B6520" opacity="0.5"/><text x="0" y="-25" text-anchor="middle" font-size="10" font-weight="600">N</text><text x="25" y="3" text-anchor="middle" font-size="8" opacity="0.6">E</text><text x="0" y="32" text-anchor="middle" font-size="8" opacity="0.6">S</text><text x="-25" y="3" text-anchor="middle" font-size="8" opacity="0.6">W</text></g>
+            <g class="map-scale" transform="translate(20, 330)"><line x1="0" y1="0" x2="60" y2="0" stroke="#8B6520" stroke-width="1"/><line x1="0" y1="-3" x2="0" y2="3" stroke="#8B6520" stroke-width="1"/><line x1="30" y1="-3" x2="30" y2="3" stroke="#8B6520" stroke-width="1"/><line x1="60" y1="-3" x2="60" y2="3" stroke="#8B6520" stroke-width="1"/><text x="30" y="-7" text-anchor="middle" font-family="IBM Plex Mono" font-size="7" fill="#8B6520">~ 20 km</text></g>
+            <g class="map-compass" transform="translate(200, 40)"><rect x="-60" y="-12" width="120" height="24" fill="rgba(247,240,220,0.6)" stroke="#8B6520" stroke-width="0.5"/><text x="0" y="0" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="11" fill="#2C2416" font-weight="600">Río Magdalena</text><text x="0" y="9" text-anchor="middle" font-family="IBM Plex Mono" font-size="6" fill="#8B6520">— el mapa se dibuja al leer —</text></g>
           </svg>
           <p class="river-map-caption">— el río es el mapa, y el mapa es el río —</p>
         </div>
-
         <div class="mompox-stats reveal delay-1">
           <div class="lily-pad"><div class="value">1995</div><div class="label">Patrimonio UNESCO</div></div>
           <div class="lily-pad"><div class="value">1537</div><div class="label">Año de fundación</div></div>
@@ -1290,7 +1076,6 @@ a { color: inherit; text-decoration: none; }
           <div class="lily-pad"><div class="value">Macondo</div><div class="label">La inspiración de Gabo</div></div>
         </div>
       </div>
-
       <div class="festivals-row reveal">
         <div class="eyebrow" style="color: var(--brass-light);">Fiestas y festivales</div>
         <h3 class="chapter-title on-dark" style="font-size: clamp(1.7rem, 3.5vw, 2.6rem); margin-bottom: 32px;">El calendario <em>momposino</em></h3>
@@ -1308,7 +1093,7 @@ a { color: inherit; text-decoration: none; }
 </section>
 
 <!-- INTERSTITIAL 2 -->
-<section class="interstitial" style="background-image: url('assets/lit-8e21dffc1d16.jpg');">
+<section class="interstitial" style="background-image: url('assets/mompox-colonial-street.jpg');">
   <div>
     <p class="interstitial-quote" id="quote-2">Por Mompox no se pasa, a Mompox se llega.</p>
     <p class="interstitial-attrib">— Dicho momposino</p>
@@ -1316,19 +1101,13 @@ a { color: inherit; text-decoration: none; }
 </section>
 
 <!-- FOLIO VI — SABORES -->
-<section id="sabores" class="folio bg-parchment folio-frame">
-  <div class="folio-corner tl"></div><div class="folio-corner tr"></div>
-  <div class="folio-corner bl"></div><div class="folio-corner br"></div>
+<section id="sabores" class="folio bg-parchment">
+  <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-number">Folio VI · Sabores y Senderos</div>
-  <div class="page-curl" data-next="cartas" role="button" tabindex="0" aria-label="Turn to next page">
-    <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/>
-      <path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/>
-      <path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/>
-    </svg>
-    <span class="page-curl-label">turn →</span>
-  </div>
-
+  <div class="page-curl" data-next="cartas" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
   <div class="folio-inner">
     <div class="reveal">
       <div class="eyebrow">Capítulo Quinto</div>
@@ -1336,7 +1115,6 @@ a { color: inherit; text-decoration: none; }
       <p class="chapter-hand">Bocachico del Magdalena, casabito, queso de capa y vino de corozo</p>
       <div class="fleuron">✦ ❦ ✦</div>
     </div>
-
     <div class="sabores-grid">
       <div class="sabores-list reveal">
         <div class="sabor-item"><h5>Bocachico</h5><p>Pescado del Magdalena, base de la cocina momposina. En guiso, asado o frito.</p></div>
@@ -1348,15 +1126,13 @@ a { color: inherit; text-decoration: none; }
         <div class="sabor-item"><h5>Cayeye</h5><p>Plátano verde machacado con queso costeño y mantequilla. El desayuno del trabajador.</p></div>
         <div class="sabor-item"><h5>Carimañola</h5><p>Rollo frito de yuca relleno de queso o carne. Crujiente por fuera, cremoso por dentro.</p></div>
       </div>
-      <div class="sabores-img reveal delay-1"><img src="assets/lit-b26e2ed6ebfd.png" alt="Comida momposina"></div>
+      <div class="sabores-img reveal delay-1"><img src="assets/momposina-food.png" alt="Comida momposina"></div>
     </div>
-
     <div class="reveal" style="margin-top:80px;">
       <div class="eyebrow center">Senderos · Qué hacer desde Literatium</div>
       <h3 class="chapter-title" style="text-align:center; font-size: clamp(1.7rem, 3.5vw, 2.6rem);">Paseos, río, filigrana <em>y atardeceres</em></h3>
       <p style="font-family: var(--font-body); color: var(--espresso-light); max-width:620px; margin: 18px auto 0; text-align:center;">Desde Literatium te ayudamos a organizar cada experiencia. Martica o alguien de su equipo pueden coordinar cualquiera de estos paseos — solo pregunta en recepción.</p>
     </div>
-
     <div class="senderos-list reveal delay-1">
       <div class="sendero"><div class="num">SENDEROS · I</div><h5>Ciénaga de Pijiño</h5><p>Medio día en lancha por el brazo del Magdalena hasta la ciénaga. Más de 300 especies de aves — garzas, martín pescador, ibis, babillas y, con suerte, el mono aullador al amanecer.</p></div>
       <div class="sendero"><div class="num">SENDEROS · II</div><h5>Paseo en champán por el Magdalena</h5><p>El atardecer desde el río es la imagen que se queda de Mompox. Lanchas tradicionales con techo de palma y bancos de madera. Sale una hora antes del ocaso.</p></div>
@@ -1369,19 +1145,13 @@ a { color: inherit; text-decoration: none; }
 </section>
 
 <!-- FOLIO VII — CARTAS -->
-<section id="cartas" class="folio bg-parchment folio-frame">
-  <div class="folio-corner tl"></div><div class="folio-corner tr"></div>
-  <div class="folio-corner bl"></div><div class="folio-corner br"></div>
+<section id="cartas" class="folio bg-parchment">
+  <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-number">Folio VII · Cartas</div>
-  <div class="page-curl" data-next="colofon" role="button" tabindex="0" aria-label="Turn to next page">
-    <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/>
-      <path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/>
-      <path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/>
-    </svg>
-    <span class="page-curl-label">turn →</span>
-  </div>
-
+  <div class="page-curl" data-next="colofon" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
   <div class="folio-inner">
     <div class="reveal">
       <div class="eyebrow">Capítulo Sexto · Cartas de Mompox</div>
@@ -1389,7 +1159,6 @@ a { color: inherit; text-decoration: none; }
       <p class="chapter-hand">El muro crece con cada visita</p>
       <div class="fleuron">✦ ❦ ✦</div>
     </div>
-
     <div class="cartas-grid reveal delay-1">
       <article class="carta"><div class="quote-mark">"</div><p>Llegamos por una noche y nos quedamos cuatro. Es el tipo de lugar donde el reloj pierde sentido. La biblioteca, el jardín, el café… todo te pide quedarte un capítulo más.</p><div class="sign">— María y Andrés</div><div class="meta">Madrid · España</div></article>
       <article class="carta"><div class="quote-mark">"</div><p>Martica nos organizó el paseo en champán al atardecer. Cuando el sol cayó sobre el Magdalena, entendí lo que Gabo quiso decir con Macondo. Aquí el realismo mágico es geografía.</p><div class="sign">— Thomas</div><div class="meta">Berlín · Alemania</div></article>
@@ -1402,18 +1171,18 @@ a { color: inherit; text-decoration: none; }
 </section>
 
 <!-- FOLIO VIII — COLOFÓN -->
-<section id="colofon" class="folio folio-frame on-dark">
-  <div class="folio-corner tl"></div><div class="folio-corner tr"></div>
-  <div class="folio-corner bl"></div><div class="folio-corner br"></div>
+<section id="colofon" class="folio on-dark">
+  <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-number" style="color: var(--brass-light);">Folio VIII · Colofón</div>
-
   <div class="folio-inner">
     <div class="reveal">
       <div class="eyebrow" style="color: var(--brass-light);">Capítulo Final · El colofón</div>
       <h2 class="chapter-title on-dark">Tu próximo capítulo <em>empieza aquí</em></h2>
       <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
     </div>
-
     <div class="colofon-grid">
       <div class="colofon-text reveal">
         <p class="drop-cap" style="color: var(--parchment);">Escríbenos por WhatsApp para consultar disponibilidad, tarifas y fechas. Martica o alguien de su equipo te responderá personalmente — sin formularios, sin call centers, sin prisa.</p>
@@ -1424,7 +1193,6 @@ a { color: inherit; text-decoration: none; }
           <a href="https://www.instagram.com/literatium/" target="_blank" rel="noopener" class="btn-ghost">@literatium</a>
         </div>
       </div>
-
       <div class="booking-card reveal delay-1">
         <h4>Datos del libro</h4>
         <div class="booking-row"><div class="icon">⌖</div><div><div class="label">Dirección</div><div class="value">Calle 21 #2-47, Santa Cruz de Mompox, Bolívar, Colombia</div></div></div>
@@ -1434,17 +1202,13 @@ a { color: inherit; text-decoration: none; }
         <div class="booking-row"><div class="icon">☕</div><div><div class="label">Café</div><div class="value">De la finca familiar en Huila</div></div></div>
       </div>
     </div>
-
     <div class="wax-seal" id="wax-seal" aria-hidden="true">
       <svg class="wax-seal-svg" viewBox="0 0 130 130">
         <defs><radialGradient id="wax-grad" cx="40%" cy="40%"><stop offset="0%" stop-color="#9B444C"/><stop offset="60%" stop-color="#722F37"/><stop offset="100%" stop-color="#4A1F25"/></radialGradient></defs>
         <path d="M 65 4 Q 80 8, 92 4 Q 105 12, 118 12 Q 124 25, 126 38 Q 130 50, 126 62 Q 130 75, 124 88 Q 122 100, 112 108 Q 105 118, 92 122 Q 80 128, 65 124 Q 50 128, 38 122 Q 25 118, 18 108 Q 8 100, 6 88 Q 0 75, 4 62 Q 0 50, 4 38 Q 6 25, 12 12 Q 25 12, 38 4 Q 50 8, 65 4 Z" fill="url(#wax-grad)" stroke="#4A1F25" stroke-width="0.5"/>
         <circle cx="65" cy="65" r="46" fill="none" stroke="#DDB95E" stroke-width="0.8" opacity="0.6"/>
         <circle cx="65" cy="65" r="42" fill="none" stroke="#DDB95E" stroke-width="0.4" opacity="0.4"/>
-        <g transform="translate(65, 65) scale(0.8)">
-          <path d="M -16 -8 L -12 -14 C -10 -16, -6 -16, -4 -14 L 0 -8 L 0 14 L -4 8 C -6 6, -10 6, -12 8 L -16 14 Z" fill="#DDB95E" opacity="0.85"/>
-          <path d="M 16 -8 L 12 -14 C 10 -16, 6 -16, 4 -14 L 0 -8 L 0 14 L 4 8 C 6 6, 10 6, 12 8 L 16 14 Z" fill="#DDB95E" opacity="0.85"/>
-        </g>
+        <g transform="translate(65, 65) scale(0.8)"><path d="M -16 -8 L -12 -14 C -10 -16, -6 -16, -4 -14 L 0 -8 L 0 14 L -4 8 C -6 6, -10 6, -12 8 L -16 14 Z" fill="#DDB95E" opacity="0.85"/><path d="M 16 -8 L 12 -14 C 10 -16, 6 -16, 4 -14 L 0 -8 L 0 14 L 4 8 C 6 6, 10 6, 12 8 L 16 14 Z" fill="#DDB95E" opacity="0.85"/></g>
       </svg>
       <div class="wax-seal-text"><div class="lit">LITERATIUM</div><div style="margin-top:4px;">MOMPX · MMXXVI</div><div style="margin-top:2px; opacity:0.7;">Casa de Historias</div></div>
     </div>
@@ -1459,11 +1223,7 @@ a { color: inherit; text-decoration: none; }
 </footer>
 
 <div class="butterfly" id="butterfly" aria-hidden="true">
-  <svg viewBox="0 0 50 42">
-    <g class="wing-l"><path d="M 25 21 Q 7 3 1 13 Q -1 23 7 25 Q 18 26 25 21 Z" fill="#F5D547" opacity="0.85"/></g>
-    <g class="wing-r"><path d="M 25 21 Q 43 3 49 13 Q 51 23 43 25 Q 32 26 25 21 Z" fill="#F5D547" opacity="0.85"/></g>
-    <ellipse cx="25" cy="21" rx="1.5" ry="9" fill="#3D2817"/>
-  </svg>
+  <svg viewBox="0 0 50 42"><g class="wing-l"><path d="M 25 21 Q 7 3 1 13 Q -1 23 7 25 Q 18 26 25 21 Z" fill="#F5D547" opacity="0.85"/></g><g class="wing-r"><path d="M 25 21 Q 43 3 49 13 Q 51 23 43 25 Q 32 26 25 21 Z" fill="#F5D547" opacity="0.85"/></g><ellipse cx="25" cy="21" rx="1.5" ry="9" fill="#3D2817"/></svg>
 </div>
 
 <script>
@@ -1485,62 +1245,18 @@ a { color: inherit; text-decoration: none; }
     }
   }
 
-  /* 2. BOOK COVER OPEN */
-  const cover = document.getElementById('cover');
-  const coverFace = document.getElementById('cover-face');
-  const nav = document.getElementById('nav');
-  const heroPolaroids = document.querySelectorAll('.hero-polaroid');
-  const heroTitle = document.getElementById('hero-title');
-  let coverOpened = false;
-
-  function openCover() {
-    if (coverOpened) return;
-    coverOpened = true;
-    coverFace.style.animation = '';
-    cover.classList.add('is-open');
-    setTimeout(() => {
-      heroPolaroids.forEach(p => p.classList.add('show'));
-      const words = heroTitle.querySelectorAll('.word');
-      words.forEach((w, i) => { w.style.transitionDelay = (i * 0.12) + 's'; });
-      heroTitle.classList.add('in-view');
-    }, 1600);
-    setTimeout(() => {
-      cover.style.display = 'none';
-      nav.classList.add('show');
-    }, 3600);
-  }
-  cover.addEventListener('click', openCover);
-  coverFace.addEventListener('click', (e) => { e.stopPropagation(); openCover(); });
-  cover.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCover(); }
-  });
-
-  /* FALLBACK: Auto-open the cover after 4.5s if user hasn't interacted
-     (ensures the book opens even in preview iframes with no user input) */
-  setTimeout(() => { if (!coverOpened) openCover(); }, 4500);
-
-  /* 3. SECTION REVEAL */
+  /* 2. SECTION REVEAL via IntersectionObserver + FALLBACK */
   const revealEls = document.querySelectorAll('.reveal, .body-text, .river-map, .interstitial-quote, .gabo-quote, .wax-seal');
-  let io;
   if ('IntersectionObserver' in window) {
-    io = new IntersectionObserver((entries) => {
-      entries.forEach(en => {
-        if (en.isIntersecting) en.target.classList.add('in-view');
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('in-view'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(el => io.observe(el));
-  } else {
-    // Fallback: just reveal everything immediately
-    revealEls.forEach(el => el.classList.add('in-view'));
   }
+  // FALLBACK: Reveal everything after 2.5s (in case IO doesn't fire)
+  setTimeout(() => { document.body.classList.add('fallback-reveal'); }, 2500);
 
-  /* FALLBACK: Reveal all elements after 6s as a safety net
-     (in case IntersectionObserver doesn't fire in some preview iframes) */
-  setTimeout(() => {
-    revealEls.forEach(el => el.classList.add('in-view'));
-  }, 6000);
-
-  /* 4. GABO QUOTES — word-by-word mist reveal */
+  /* 3. GABO QUOTES — word-by-word mist reveal */
   function setupGaboQuote(el) {
     const text = el.textContent.trim();
     const words = text.split(/\s+/);
@@ -1550,55 +1266,13 @@ a { color: inherit; text-decoration: none; }
   }
   document.querySelectorAll('.gabo-quote, .interstitial-quote').forEach(setupGaboQuote);
 
-  /* 5. GALLERY MARQUEE */
-  const galleryImages = [
-    { src: 'assets/lit-490b88b842c9.webp', cap: 'Los arcos del lobby' },
-    { src: 'assets/lit-4a815c348827.webp', cap: 'La fachada al anochecer' },
-    { src: 'assets/lit-019bd4777933.webp', cap: 'Jacuzzi · luz azul' },
-    { src: 'assets/lit-c5c00ba24179.jpg', cap: 'El Magdalena al ocaso' },
-    { src: 'assets/lit-50755d93cb68.jpg', cap: 'La finca en Huila' },
-    { src: 'assets/lit-253d7f4b563c.webp', cap: 'Suite · bañera' },
-    { src: 'assets/lit-8e21dffc1d16.jpg', cap: 'Calle colonial' },
-    { src: 'assets/lit-0eceedab954f.webp', cap: 'El desayuno' },
-    { src: 'assets/lit-644b59e68d49.jpg', cap: 'El patio de noche' },
-    { src: 'assets/lit-dc97370091ea.jpg', cap: 'Murales de la casa' },
-    { src: 'assets/lit-504a59d8600c.webp', cap: 'Jacuzzi · luz rosa' },
-    { src: 'assets/lit-10a0f2dbb703.webp', cap: 'La entrada' },
-    { src: 'assets/lit-b2d901778001.jpg', cap: 'Iglesia nocturna' },
-    { src: 'assets/lit-5d4892717dad.jpg', cap: 'El rincón de lectura' },
-    { src: 'assets/lit-3e4bc501452d.jpg', cap: 'Mompox desde el cielo' },
-    { src: 'assets/lit-9e7c079c5f70.webp', cap: 'Jacuzzi · luz verde' },
-    { src: 'assets/lit-705e95994a9b.webp', cap: 'Deluxe Suite' },
-    { src: 'assets/lit-9c17769e4f6c.webp', cap: 'Huésped entre libros' },
-    { src: 'assets/lit-20f8dba72e89.webp', cap: 'Filigrana momposina' },
-    { src: 'assets/lit-165abb99f247.png', cap: 'El Magdalena' },
-    { src: 'assets/lit-b2d901778001.jpg', cap: 'Santa Bárbara de noche' },
-    { src: 'assets/lit-6fddd61eb11d.webp', cap: 'El corredor' },
-    { src: 'assets/lit-d2dcd70ca00a.jpg', cap: 'El salón' },
-    { src: 'assets/lit-644b59e68d49.jpg', cap: 'El patio' },
-  ];
-  const topRow = document.getElementById('marquee-top');
-  const botRow = document.getElementById('marquee-bottom');
-  const half = Math.ceil(galleryImages.length / 2);
-  function buildPolaroids(set, container) {
-    [...set, ...set].forEach((g) => {
-      const p = document.createElement('div');
-      p.className = 'polaroid';
-      p.innerHTML = '<img src="' + g.src + '" alt="' + g.cap + '" loading="lazy"><div class="polaroid-cap">' + g.cap + '</div>';
-      container.appendChild(p);
-    });
-  }
-  buildPolaroids(galleryImages.slice(0, half), topRow);
-  buildPolaroids(galleryImages.slice(half), botRow);
-
-  /* 6. RIVER SPINE */
+  /* 4. RIVER SPINE — pin + trail + label */
   const riverPin = document.getElementById('river-pin');
   const riverTrail = document.getElementById('river-pin-trail');
   const riverLabel = document.createElement('div');
   riverLabel.className = 'river-pin-label';
   riverLabel.textContent = 'Folio I';
   document.body.appendChild(riverLabel);
-
   const sectionMap = [
     { id: 'frontispiece', label: 'Folio I · Frontispiece' },
     { id: 'casa',         label: 'Folio II · La Casa' },
@@ -1620,10 +1294,7 @@ a { color: inherit; text-decoration: none; }
     const mid = window.innerHeight / 2;
     sectionMap.forEach((s, i) => {
       const el = document.getElementById(s.id);
-      if (el) {
-        const r = el.getBoundingClientRect();
-        if (r.top <= mid && r.bottom >= mid) activeIdx = i;
-      }
+      if (el) { const r = el.getBoundingClientRect(); if (r.top <= mid && r.bottom >= mid) activeIdx = i; }
     });
     riverLabel.textContent = sectionMap[activeIdx].label;
     riverPin.classList.add('active');
@@ -1633,85 +1304,47 @@ a { color: inherit; text-decoration: none; }
   window.addEventListener('resize', updateRiverPin);
   updateRiverPin();
 
-  /* 7. RIVER SPINE click ripple */
-  document.addEventListener('click', (e) => {
-    if (e.clientX < 90) {
-      const r = document.createElement('div');
-      r.style.cssText = 'position:fixed;width:8px;height:8px;border-radius:50%;border:1.5px solid #DDB95E;pointer-events:none;z-index:32;transform:translate(-50%,-50%);left:' + e.clientX + 'px;top:' + e.clientY + 'px;animation:ripple 1s ease-out forwards;';
-      document.body.appendChild(r);
-      setTimeout(() => r.remove(), 1000);
-    }
-  });
-  if (!document.getElementById('ripple-style')) {
-    const rs = document.createElement('style');
-    rs.id = 'ripple-style';
-    rs.textContent = '@keyframes ripple { 0% { width:8px; height:8px; opacity:1; border-width:1.5px; } 100% { width:100px; height:100px; opacity:0; border-width:0.5px; } }';
-    document.head.appendChild(rs);
-  }
-
-  /* 8. BOOKMARK RIBBON */
-  const bookmark = document.getElementById('bookmark');
-  const tassel = document.getElementById('bookmark-tassel');
-  const RIBBON_HEIGHT = 120;
-  function updateBookmark() {
+  /* 5. PROGRESS LINE (right edge) */
+  const progressFill = document.getElementById('progress-fill');
+  const progressDot = document.getElementById('progress-dot');
+  function updateProgress() {
     const scrollPct = window.scrollY / Math.max(1, (document.documentElement.scrollHeight - window.innerHeight));
-    const tasselY = scrollPct * window.innerHeight;
-    const ribbonTop = tasselY - RIBBON_HEIGHT;
-    if (bookmark) {
-      bookmark.style.top = ribbonTop + 'px';
-    }
-    if (tassel) {
-      tassel.style.top = tasselY + 'px';
-    }
+    const h = scrollPct * 100;
+    if (progressFill) progressFill.style.height = h + 'vh';
+    if (progressDot) progressDot.style.top = (scrollPct * window.innerHeight) + 'px';
   }
-  window.addEventListener('scroll', updateBookmark, { passive: true });
-  window.addEventListener('resize', updateBookmark);
-  updateBookmark();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
 
-  /* 9. PAGE CORNER CURL — click to scroll to next folio */
+  /* 6. PAGE CORNER CURL — click to scroll next */
   document.querySelectorAll('.page-curl, .hero-curl').forEach(curl => {
     curl.addEventListener('click', (e) => {
       e.stopPropagation();
       const nextId = curl.getAttribute('data-next');
-      if (nextId) {
-        const target = document.getElementById(nextId);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        const about = document.getElementById('casa');
-        if (about) about.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (nextId) { const target = document.getElementById(nextId); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      else { const about = document.getElementById('casa'); if (about) about.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
-    curl.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); curl.click(); }
-    });
+    curl.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); curl.click(); } });
   });
 
-  /* 10. BUTTERFLY cursor follower */
+  /* 7. BUTTERFLY cursor follower */
   const butterfly = document.getElementById('butterfly');
   const butterflySections = ['mompox', 'cartas'];
   let mouse = { x: -100, y: -100 };
   let butter = { x: -100, y: -100 };
   let butterflyActive = false;
-
   window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-
   function checkButterflyVisibility() {
     let inZone = false;
     butterflySections.forEach(id => {
       const el = document.getElementById(id);
-      if (el) {
-        const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) inZone = true;
-      }
+      if (el) { const r = el.getBoundingClientRect(); if (r.top < window.innerHeight && r.bottom > 0) inZone = true; }
     });
-    if (inZone !== butterflyActive) {
-      butterflyActive = inZone;
-      butterfly.classList.toggle('active', butterflyActive);
-    }
+    if (inZone !== butterflyActive) { butterflyActive = inZone; butterfly.classList.toggle('active', butterflyActive); }
   }
   window.addEventListener('scroll', checkButterflyVisibility, { passive: true });
   checkButterflyVisibility();
-
   function animateButterfly() {
     if (butterflyActive && !reduced) {
       butter.x += (mouse.x + 26 - butter.x) * 0.08;
@@ -1722,32 +1355,26 @@ a { color: inherit; text-decoration: none; }
   }
   animateButterfly();
 
-  /* 11. RIVER MAP — boat travels along path on scroll */
+  /* 8. RIVER MAP — boat travels on scroll */
   const riverMap = document.getElementById('river-map');
   const mapBoat = document.getElementById('map-boat');
   const mapPath = riverMap ? riverMap.querySelector('.map-path') : null;
-
   if (riverMap && mapBoat && mapPath) {
     const pathLength = mapPath.getTotalLength();
     function updateBoatPosition() {
       const rect = riverMap.getBoundingClientRect();
       const viewportH = window.innerHeight;
       let progress = 0;
-      if (rect.top < viewportH && rect.bottom > 0) {
-        progress = Math.max(0, Math.min(1, (viewportH - rect.top) / (viewportH + rect.height)));
-      } else if (rect.top >= viewportH) {
-        progress = 0;
-      } else {
-        progress = 1;
-      }
-      if (riverMap.classList.contains('in-view')) {
-        const boatProgress = Math.max(0, Math.min(1, (progress - 0.3) / 0.7));
+      if (rect.top < viewportH && rect.bottom > 0) progress = Math.max(0, Math.min(1, (viewportH - rect.top) / (viewportH + rect.height)));
+      else if (rect.top >= viewportH) progress = 0;
+      else progress = 1;
+      if (riverMap.classList.contains('in-view') || document.body.classList.contains('fallback-reveal')) {
+        const boatProgress = Math.max(0, Math.min(1, (progress - 0.2) / 0.8));
         const point = mapPath.getPointAtLength(boatProgress * pathLength);
         const ahead = mapPath.getPointAtLength(Math.min(pathLength, boatProgress * pathLength + 1));
         const behind = mapPath.getPointAtLength(Math.max(0, boatProgress * pathLength - 1));
         const angle = Math.atan2(ahead.y - behind.y, ahead.x - behind.x);
-        const deg = angle * 180 / Math.PI;
-        mapBoat.setAttribute('transform', 'translate(' + point.x + ',' + point.y + ') rotate(' + (deg + 90) + ')');
+        mapBoat.setAttribute('transform', 'translate(' + point.x + ',' + point.y + ') rotate(' + (angle * 180 / Math.PI + 90) + ')');
       }
     }
     window.addEventListener('scroll', updateBoatPosition, { passive: true });
@@ -1755,7 +1382,7 @@ a { color: inherit; text-decoration: none; }
     updateBoatPosition();
   }
 
-  /* 12. POLAROID + SPACE PLATE click → zoom overlay */
+  /* 9. POLAROID + SPACE PLATE click → zoom */
   function createZoom(src, alt) {
     const overlay = document.createElement('div');
     overlay.className = 'zoom-overlay';
@@ -1769,49 +1396,42 @@ a { color: inherit; text-decoration: none; }
   }
   document.addEventListener('click', (e) => {
     const pol = e.target.closest('.polaroid, .space-plate');
-    if (pol) {
-      const img = pol.querySelector('img');
-      if (img) createZoom(img.src, img.alt);
-    }
+    if (pol) { const img = pol.querySelector('img'); if (img) createZoom(img.src, img.alt); }
   });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      const zoom = document.querySelector('.zoom-overlay');
-      if (zoom) zoom.remove();
-    }
-  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const z = document.querySelector('.zoom-overlay'); if (z) z.remove(); } });
 
-  /* 13. HERO PARALLAX (mouse + scroll) */
+  /* 10. HERO PARALLAX (mouse + scroll) */
   const heroSection = document.getElementById('frontispiece');
   if (heroSection && !reduced) {
     const polaroidData = [
-      { el: document.querySelector('.hero-polaroid.p1'), depth: 0.15, baseRot: -6 },
-      { el: document.querySelector('.hero-polaroid.p2'), depth: 0.25, baseRot: 5 },
-      { el: document.querySelector('.hero-polaroid.p3'), depth: 0.20, baseRot: 4 },
-      { el: document.querySelector('.hero-polaroid.p4'), depth: 0.18, baseRot: -4 },
+      { sel: '.hero-polaroid.p1', depth: 0.15, baseRot: -6 },
+      { sel: '.hero-polaroid.p2', depth: 0.25, baseRot: 5 },
+      { sel: '.hero-polaroid.p3', depth: 0.20, baseRot: 4 },
+      { sel: '.hero-polaroid.p4', depth: 0.18, baseRot: -4 },
     ];
     heroSection.addEventListener('mousemove', (e) => {
       const rect = heroSection.getBoundingClientRect();
       const cx = (e.clientX - rect.left) / rect.width - 0.5;
       const cy = (e.clientY - rect.top) / rect.height - 0.5;
       polaroidData.forEach(p => {
-        if (!p.el || !p.el.classList.contains('show')) return;
+        const el = document.querySelector(p.sel);
+        if (!el) return;
         const tx = -cx * 30 * p.depth * 10;
         const ty = -cy * 20 * p.depth * 10;
-        p.el.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) rotate(' + p.baseRot + 'deg)';
+        el.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) rotate(' + p.baseRot + 'deg)';
       });
     });
     window.addEventListener('scroll', () => {
       const sc = window.scrollY;
       if (sc < window.innerHeight) {
         polaroidData.forEach(p => {
-          if (!p.el || !p.el.classList.contains('show')) return;
-          p.el.style.transform = 'translateY(' + (sc * p.depth * 1.5) + 'px) rotate(' + p.baseRot + 'deg)';
+          const el = document.querySelector(p.sel);
+          if (!el) return;
+          el.style.transform = 'translateY(' + (sc * p.depth * 1.5) + 'px) rotate(' + p.baseRot + 'deg)';
         });
       }
     }, { passive: true });
   }
-
 })();
 </script>
 </body>
