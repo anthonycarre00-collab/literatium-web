@@ -1,0 +1,19 @@
+# Treat binary assets efficiently
+*.webp binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.svg binary
+*.pdf binary
+*.mp4 binary
+
+# Don't show diffs for binary files
+*.webp -diff
+*.jpg -diff
+*.jpeg -diff
+*.png -diff
+*.gif -diff
+*.svg -diff
+*.pdf -diff
+*.mp4 -diff
