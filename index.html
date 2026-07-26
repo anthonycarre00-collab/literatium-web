@@ -280,23 +280,31 @@ a { color: inherit; text-decoration: none; }
 /* Default: everything visible (safety net — if JS fails or animation doesn't fire, content shows) */
 .hero-logo, .hero-eyebrow, .hero-script-title .word, .hero-subtitle, .hero-hand, .hero-body, .hero-cta, .hero-rating, .hero-curl, .hero-polaroid {
   opacity: 1;
+  transition: opacity 1s ease, filter 1s ease, transform 1s ease;
 }
-/* ONLY hide + animate when JS is active AND cover has been opened */
-.js.hero-revealed .hero-logo { opacity: 0; animation: fade-in 1s ease 0.3s forwards; }
-.js.hero-revealed .hero-eyebrow { opacity: 0; animation: fade-in 1s ease 0.6s forwards; }
-.js.hero-revealed .hero-script-title .word { opacity: 0; filter: blur(20px); transform: translateY(20px) scale(0.9); animation: script-materialize 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-.js.hero-revealed .hero-script-title .word:nth-child(1) { animation-delay: 0.3s; }
-.js.hero-revealed .hero-script-title .word:nth-child(2) { animation-delay: 0.7s; }
-.js.hero-revealed .hero-subtitle { opacity: 0; animation: fade-in 1.2s ease 1.2s forwards; }
-.js.hero-revealed .hero-hand { opacity: 0; animation: fade-in 1s ease 1.6s forwards; }
-.js.hero-revealed .hero-body { opacity: 0; animation: fade-in 1.2s ease 1.9s forwards; }
-.js.hero-revealed .hero-cta { opacity: 0; animation: fade-in 1s ease 2.2s forwards; }
-.js.hero-revealed .hero-rating { opacity: 0; animation: fade-in 1s ease 2.5s forwards; }
-.js.hero-revealed .hero-curl { opacity: 0; animation: fade-in 1s ease 2.9s forwards, curl-wiggle 3s ease-in-out 3.9s infinite; }
-.js.hero-revealed .hero-polaroid.p1 { opacity: 0; animation: pol-in 1.4s ease 1.2s forwards; }
-.js.hero-revealed .hero-polaroid.p2 { opacity: 0; animation: pol-in 1.4s ease 1.5s forwards; }
-.js.hero-revealed .hero-polaroid.p3 { opacity: 0; animation: pol-in 1.4s ease 1.8s forwards; }
-.js.hero-revealed .hero-polaroid.p4 { opacity: 0; animation: pol-in 1.4s ease 2.1s forwards; }
+/* When JS is active, hide hero elements BEFORE cover opens (they're behind the cover anyway) */
+.js .hero-logo, .js .hero-eyebrow, .js .hero-script-title .word, .js .hero-subtitle,
+.js .hero-hand, .js .hero-body, .js .hero-cta, .js .hero-rating, .js .hero-curl {
+  opacity: 0;
+}
+.js .hero-polaroid { opacity: 0; }
+/* When cover opens (hero-revealed class added), transition elements back to visible */
+.js.hero-revealed .hero-logo { opacity: 1; transition-delay: 0.3s; }
+.js.hero-revealed .hero-eyebrow { opacity: 1; transition-delay: 0.6s; }
+.js.hero-revealed .hero-script-title .word { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); transition-delay: 0.3s; transition-duration: 1.6s; }
+.js.hero-revealed .hero-script-title .word:nth-child(2) { transition-delay: 0.7s; }
+.js.hero-revealed .hero-subtitle { opacity: 1; transition-delay: 1.2s; }
+.js.hero-revealed .hero-hand { opacity: 1; transition-delay: 1.6s; }
+.js.hero-revealed .hero-body { opacity: 1; transition-delay: 1.9s; }
+.js.hero-revealed .hero-cta { opacity: 1; transition-delay: 2.2s; }
+.js.hero-revealed .hero-rating { opacity: 1; transition-delay: 2.5s; }
+.js.hero-revealed .hero-curl { opacity: 1; transition-delay: 2.9s; }
+.js.hero-revealed .hero-polaroid.p1 { opacity: 0.92; transition-delay: 1.2s; }
+.js.hero-revealed .hero-polaroid.p2 { opacity: 0.92; transition-delay: 1.5s; }
+.js.hero-revealed .hero-polaroid.p3 { opacity: 0.92; transition-delay: 1.8s; }
+.js.hero-revealed .hero-polaroid.p4 { opacity: 0.92; transition-delay: 2.1s; }
+/* The script title words start blurred and offset, then transition to clear */
+.js .hero-script-title .word { filter: blur(20px); transform: translateY(20px) scale(0.9); }
 
 @keyframes fade-in { to { opacity: 1; } }
 @keyframes script-materialize { to { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); } }
@@ -676,7 +684,7 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
 <div id="progress-dot"></div>
 
 <nav id="nav">
-  <div class="nav-mark"><svg width="28" height="28" viewBox="0 0 30 30" style="vertical-align:middle;margin-right:10px;filter:drop-shadow(0 0 4px rgba(221,185,94,0.4));"><rect x="5.49" y="1.49" width="19.02" height="27.02" rx="2" fill="none" stroke="#C9A04E" stroke-width="0.8"/><path d="M15.47 7.1l-1.3 1.85c-0.2 0.29-0.54 0.47-0.9 0.47h-7.1V7.09H15.47z" fill="#DDB95E"/><polygon points="24.3,7.1 13.14,22.91 5.7,22.91 16.86,7.1" fill="#DDB95E"/><path d="M14.53 22.91l1.31-1.86c0.2-0.29 0.54-0.47 0.9-0.47h7.09v2.33H14.53z" fill="#DDB95E"/></svg><span style="font-family:var(--font-display);font-size:1.3rem;font-style:italic;color:var(--brass-light);">Literatium</span> <span style="color:var(--parchment);font-family:var(--font-caps);font-size:0.65rem;letter-spacing:0.06em;">· La Casa de las Historias</span></div>
+  <div class="nav-mark"><img src="assets/favicon-180.png" alt="Literatium" style="width:36px;height:36px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:10px;border:1px solid var(--brass);"><span style="font-family:var(--font-display);font-size:1.3rem;font-style:italic;color:var(--brass-light);">Literatium</span> <span style="color:var(--parchment);font-family:var(--font-caps);font-size:0.65rem;letter-spacing:0.06em;">· La Casa de las Historias</span></div>
   <div class="nav-links">
     <a href="#frontispiece" data-en="Home">Inicio</a><a href="#casa" data-en="The House">La Casa</a><a href="#rooms" data-en="Rooms">Habitaciones</a><a href="#cafe" data-en="Coffee">Café</a><a href="#mompox" data-en="Mompox">Mompox</a><a href="#sabores" data-en="Flavours">Sabores</a><a href="#cartas" data-en="Letters">Cartas</a>
     <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="nav-cta" data-en="Book Now">Reservar</a>
@@ -1146,7 +1154,7 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
 </section>
 
 <footer id="footer">
-  <svg width="44" height="44" viewBox="0 0 30 30" style="margin:0 auto 12px;display:block;filter:drop-shadow(0 0 6px rgba(221,185,94,0.3));"><rect x="5.49" y="1.49" width="19.02" height="27.02" rx="2" fill="none" stroke="#C9A04E" stroke-width="0.8"/><path d="M15.47 7.1l-1.3 1.85c-0.2 0.29-0.54 0.47-0.9 0.47h-7.1V7.09H15.47z" fill="#DDB95E"/><polygon points="24.3,7.1 13.14,22.91 5.7,22.91 16.86,7.1" fill="#DDB95E"/><path d="M14.53 22.91l1.31-1.86c0.2-0.29 0.54-0.47 0.9-0.47h7.09v2.33H14.53z" fill="#DDB95E"/></svg>
+  <img src="assets/favicon-180.png" alt="Literatium" style="width:50px;height:50px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:1px solid var(--brass);">
   <div class="footer-mark">Literatium</div>
   <div class="footer-fleuron">✦ ❦ ✦</div>
   <div>La Casa de las Historias · Mompox · Bolívar · Colombia</div>
