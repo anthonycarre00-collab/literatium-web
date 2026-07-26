@@ -276,25 +276,28 @@ a { color: inherit; text-decoration: none; }
 .js .reveal.delay-1 { transition-delay: 0.15s; }
 .js .reveal.delay-2 { transition-delay: 0.3s; }
 
-/* Hero animations — pure CSS, fire on load. Content visible by default, JS adds the fade-in. */
+/* Hero animations fire when cover opens (html.hero-revealed), not on page load */
 .hero-logo, .hero-eyebrow, .hero-script-title .word, .hero-subtitle, .hero-hand, .hero-body, .hero-cta, .hero-rating, .hero-curl, .hero-polaroid {
   opacity: 1;
 }
 .js .hero-logo { opacity: 0; animation: fade-in 1s ease 0.3s forwards; }
 .js .hero-eyebrow { opacity: 0; animation: fade-in 1s ease 0.6s forwards; }
-.js .hero-script-title .word { opacity: 0; filter: blur(20px); transform: translateY(20px) scale(0.9); animation: script-materialize 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-.js .hero-script-title .word:nth-child(1) { animation-delay: 0.9s; }
-.js .hero-script-title .word:nth-child(2) { animation-delay: 1.3s; }
-.js .hero-subtitle { opacity: 0; animation: fade-in 1.2s ease 1.8s forwards; }
-.js .hero-hand { opacity: 0; animation: fade-in 1s ease 2.2s forwards; }
-.js .hero-body { opacity: 0; animation: fade-in 1.2s ease 2.5s forwards; }
-.js .hero-cta { opacity: 0; animation: fade-in 1s ease 2.8s forwards; }
-.js .hero-rating { opacity: 0; animation: fade-in 1s ease 3.1s forwards; }
-.js .hero-curl { opacity: 0; animation: fade-in 1s ease 3.5s forwards, curl-wiggle 3s ease-in-out 4.5s infinite; }
-.js .hero-polaroid.p1 { opacity: 0; animation: pol-in 1.4s ease 1.8s forwards; }
-.js .hero-polaroid.p2 { opacity: 0; animation: pol-in 1.4s ease 2.1s forwards; }
-.js .hero-polaroid.p3 { opacity: 0; animation: pol-in 1.4s ease 2.4s forwards; }
-.js .hero-polaroid.p4 { opacity: 0; animation: pol-in 1.4s ease 2.7s forwards; }
+.js .hero-script-title .word { opacity: 0; filter: blur(20px); transform: translateY(20px) scale(0.9); }
+.js.hero-revealed .hero-logo { opacity: 0; animation: fade-in 1s ease 0.3s forwards; }
+.js.hero-revealed .hero-eyebrow { opacity: 0; animation: fade-in 1s ease 0.6s forwards; }
+.js.hero-revealed .hero-script-title .word { opacity: 0; filter: blur(20px); transform: translateY(20px) scale(0.9); animation: script-materialize 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.js.hero-revealed .hero-script-title .word:nth-child(1) { animation-delay: 0.3s; }
+.js.hero-revealed .hero-script-title .word:nth-child(2) { animation-delay: 0.7s; }
+.js.hero-revealed .hero-subtitle { opacity: 0; animation: fade-in 1.2s ease 1.2s forwards; }
+.js.hero-revealed .hero-hand { opacity: 0; animation: fade-in 1s ease 1.6s forwards; }
+.js.hero-revealed .hero-body { opacity: 0; animation: fade-in 1.2s ease 1.9s forwards; }
+.js.hero-revealed .hero-cta { opacity: 0; animation: fade-in 1s ease 2.2s forwards; }
+.js.hero-revealed .hero-rating { opacity: 0; animation: fade-in 1s ease 2.5s forwards; }
+.js.hero-revealed .hero-curl { opacity: 0; animation: fade-in 1s ease 2.9s forwards, curl-wiggle 3s ease-in-out 3.9s infinite; }
+.js.hero-revealed .hero-polaroid.p1 { opacity: 0; animation: pol-in 1.4s ease 1.2s forwards; }
+.js.hero-revealed .hero-polaroid.p2 { opacity: 0; animation: pol-in 1.4s ease 1.5s forwards; }
+.js.hero-revealed .hero-polaroid.p3 { opacity: 0; animation: pol-in 1.4s ease 1.8s forwards; }
+.js.hero-revealed .hero-polaroid.p4 { opacity: 0; animation: pol-in 1.4s ease 2.1s forwards; }
 
 @keyframes fade-in { to { opacity: 1; } }
 @keyframes script-materialize { to { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); } }
@@ -361,7 +364,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 .hero-logo { width: 90px; height: 90px; margin: 0 auto 28px; border-radius: 50%; object-fit: cover; border: 2px solid var(--brass); filter: sepia(0.15) saturate(0.85) brightness(1.05) hue-rotate(-5deg); box-shadow: 0 0 30px rgba(221,185,94,0.4); }
 .hero-eyebrow { font-family: var(--font-caps); font-size: 0.72rem; letter-spacing: 0.42em; color: var(--brass-light); margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 14px; }
 .hero-eyebrow::before, .hero-eyebrow::after { content: ''; height: 1px; width: 40px; background: var(--brass); }
-.hero-script-title { font-family: var(--font-script); font-size: clamp(5rem, 14vw, 11rem); line-height: 0.85; font-weight: 700; background: linear-gradient(135deg, #F5E1A4 0%, #DDB95E 30%, #C9A04E 60%, #F5E1A4 100%); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 4px 30px rgba(221,185,94,0.3); margin-bottom: 8px; }
+.hero-script-title { font-family: var(--font-script); font-size: clamp(7rem, 17vw, 14rem); line-height: 0.85; font-weight: 700; background: linear-gradient(135deg, #F5E1A4 0%, #DDB95E 30%, #C9A04E 60%, #F5E1A4 100%); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 4px 30px rgba(15,36,25,0.6); margin-bottom: 8px; }
 .hero-script-title .word { display: inline-block; }
 .hero-subtitle { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(1.5rem, 3.5vw, 2.6rem); color: var(--parchment); line-height: 1.1; margin-bottom: 8px; }
 .hero-hand { font-family: var(--font-hand); font-size: 1.55rem; font-style: italic; color: var(--brass-light); margin: 20px 0 8px; }
@@ -479,7 +482,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 .marquee-row { display: flex; gap: 18px; width: max-content; margin-bottom: 18px; }
 .marquee-row.left { animation: marquee-left 70s linear infinite; }
 .marquee-row.right { animation: marquee-right 90s linear infinite; }
-#gallery-marquee:hover .marquee-row { animation-play-state: paused; }
+/* Marquee pauses only when hovering a polaroid (JS-controlled), not the whole section */
 @keyframes marquee-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 @keyframes marquee-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 .polaroid { flex: 0 0 auto; width: 240px; background: var(--parchment-warm); padding: 10px 10px 30px; box-shadow: 0 12px 28px rgba(0,0,0,0.4), 0 0 0 1px rgba(184,134,47,0.4); position: relative; transform: rotate(var(--rot, 0deg)); transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.5s ease; cursor: pointer; }
@@ -541,8 +544,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 .river-map.in-view .map-compass { opacity: 0.75; }
 .river-map .map-scale { opacity: 0; transition: opacity 0.6s ease 3s; }
 .river-map.in-view .map-scale { opacity: 0.7; }
-.river-map .map-boat { opacity: 0; transition: opacity 0.5s ease 1.5s; }
-.river-map.in-view .map-boat { opacity: 1; }
+.river-map .map-boat { opacity: 1; transition: opacity 0.5s ease 1.5s; }
 .river-map-caption { margin-top: 16px; font-family: var(--font-hand); font-style: italic; font-size: 1.1rem; color: var(--brass-dark); text-align: center; }
 
 .mompox-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -656,10 +658,11 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 <div id="progress-dot"></div>
 
 <nav id="nav">
-  <div class="nav-mark">Literatium <span>· La Casa de las Historias</span></div>
+  <div class="nav-mark"><img src="assets/literatium-logo-icon.jpeg" alt="Literatium" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1px solid var(--brass);vertical-align:middle;margin-right:10px;filter:sepia(0.15) saturate(0.85) hue-rotate(-5deg);">Literatium <span>· La Casa de las Historias</span></div>
   <div class="nav-links">
-    <a href="#frontispiece">Inicio</a><a href="#casa">La Casa</a><a href="#rooms">Habitaciones</a><a href="#cafe">Café</a><a href="#mompox">Mompox</a><a href="#sabores">Sabores</a><a href="#cartas">Cartas</a>
-    <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="nav-cta">Reservar</a>
+    <a href="#frontispiece" data-en="Home">Inicio</a><a href="#casa" data-en="The House">La Casa</a><a href="#rooms" data-en="Rooms">Habitaciones</a><a href="#cafe" data-en="Coffee">Café</a><a href="#mompox" data-en="Mompox">Mompox</a><a href="#sabores" data-en="Flavours">Sabores</a><a href="#cartas" data-en="Letters">Cartas</a>
+    <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="nav-cta" data-en="Book Now">Reservar</a>
+    <button id="lang-toggle" onclick="toggleLang()" style="background:rgba(221,185,94,0.15);border:1px solid rgba(221,185,94,0.4);color:var(--brass-light);padding:6px 12px;font-family:var(--font-caps);font-size:0.6rem;letter-spacing:0.15em;cursor:pointer;border-radius:2px;margin-left:8px;">EN</button>
   </div>
 </nav>
 
@@ -671,9 +674,9 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
       <img class="cover-emblem" src="assets/literatium-logo-icon.jpeg" alt="Literatium emblem">
       <h1 class="cover-title">Literatium</h1>
       <div class="cover-fleuron">✦ ❦ ✦</div>
-      <p class="cover-sub">La Casa de las Historias</p>
+      <p class="cover-sub" data-en="The House of Stories">La Casa de las Historias</p>
       <p class="cover-sub" style="margin-top:6px; opacity:0.7; font-size:0.65rem;">Mompox · Bolívar · Colombia</p>
-      <div class="cover-prompt">━ Toca para abrir el libro ━</div>
+      <div class="cover-prompt" data-en="━ Touch to open the book ━">━ Toca para abrir el libro ━</div>
     </div>
     <div class="cover-back" aria-hidden="true"></div>
   </div>
@@ -689,17 +692,16 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
   <div class="hero-polaroid p3"><img src="assets/hotel-patio-evening.jpg" alt="Patio de noche"><div class="cap">el patio, al caer la tarde</div></div>
   <div class="hero-polaroid p4"><img src="assets/real-reading-nook.jpg" alt="Rincón de lectura"><div class="cap">el rincón de lectura</div></div>
   <div class="hero-content">
-    <img class="hero-logo" src="assets/literatium-logo-icon.jpeg" alt="Literatium">
-    <div class="hero-eyebrow">Hotel Boutique · Libros &amp; Café · Mompox · UNESCO 1995</div>
+    <div class="hero-eyebrow" data-en="Boutique Hotel · Books &amp; Coffee · Mompox · UNESCO 1995">Hotel Boutique · Libros &amp; Café · Mompox · UNESCO 1995</div>
     <h1 class="hero-script-title"><span class="word">La</span> <span class="word">Casa</span></h1>
-    <div class="hero-subtitle">de las Historias</div>
-    <p class="hero-hand">— donde el tiempo se detiene entre las páginas</p>
+    <div class="hero-subtitle" data-en="of Stories">de las Historias</div>
+    <p class="hero-hand" data-en="— where time stops between the pages">— donde el tiempo se detiene entre las páginas</p>
     <p class="hero-body drop-cap">Muchos años después, frente al murmullo del Magdalena, el viajero habría de recordar aquella remota tarde en que llegó a Literatium y descubrió que aquí, entre libros y café, el tiempo no pasa — sino que se queda, como el calor sobre las piedras del río. Cada rincón cuenta una historia. Cada mañana, un café único de nuestra finca en Huila. Cada atardecer, el Magdalena derramándose como tinta dorada sobre el mundo.</p>
     <div class="hero-cta">
-      <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary">Reservar por WhatsApp</a>
-      <a href="#casa" class="btn-ghost">Descubre la casa ↓</a>
+      <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary" data-en="Book on WhatsApp">Reservar por WhatsApp</a>
+      <a href="#casa" class="btn-ghost" data-en="Discover the house ↓">Descubre la casa ↓</a>
     </div>
-    <div class="hero-rating"><span class="score">9.5</span><span>/ 10</span><span class="sep"></span><span>151+ reseñas</span><span class="sep"></span><span class="score">★★★★★</span></div>
+    <div class="hero-rating"><span class="score">9.5</span><span>/ 10</span><span class="sep"></span><span data-en="151+ reviews">151+ reseñas</span><span class="sep"></span><span class="score">★★★★★</span></div>
   </div>
   <div class="hero-curl" id="hero-curl" role="button" tabindex="0" aria-label="Turn the page">
     <svg viewBox="0 0 120 120"><path d="M 120 0 L 120 120 L 0 120 Z" fill="#8B6520" opacity="0.85"/><path d="M 120 0 L 120 120 L 22 120 Q 45 100 65 80 Q 85 60 102 35 Q 112 18 120 0 Z" fill="#0F2419" opacity="0.92"/><path d="M 22 120 Q 45 100 65 80 Q 85 60 102 35 Q 112 18 120 0" stroke="#DDB95E" stroke-width="1.2" fill="none" opacity="0.8"/></svg>
@@ -709,18 +711,17 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 
 <!-- FOLIO II — LA CASA -->
 <section id="casa" class="folio bg-parchment">
-  <!-- Decorative atmospheric overlay to warm up the section -->
-  <div style="position:absolute; inset:0; background: url('assets/real-lobby-arches.webp') center/cover no-repeat; opacity: 0.06; mix-blend-mode: multiply; pointer-events: none; z-index: 0;"></div>
-  <div style="position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(184,134,47,0.08), transparent 70%); pointer-events: none; z-index: 0;"></div>
+  <!-- Warm atmospheric overlay — sits above bg-parchment texture, below content -->
+  <div style="position:absolute; inset:0; background: radial-gradient(ellipse 90% 70% at 50% 20%, rgba(184,134,47,0.15), transparent 60%), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(114,47,55,0.08), transparent 60%); pointer-events: none; z-index: 1;"></div>
   <div class="folio-border"></div>
   <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
-  <div class="folio-number">Folio II · La Casa</div>
+  <div class="folio-number" data-en="Folio II · The House">Folio II · La Casa</div>
   <div class="page-curl" data-next="rooms" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
   <div class="folio-inner">
-    <div class="reveal"><div class="eyebrow">Capítulo Primero</div><h2 class="chapter-title">Un refugio donde cada página <em>es una mañana</em></h2><p class="chapter-hand">La Casa de las Historias</p><div class="fleuron">✦ ❦ ✦</div></div>
+    <div class="reveal"><div class="eyebrow" data-en="Chapter One">Capítulo Primero</div><h2 class="chapter-title">Un refugio donde cada página <em>es una mañana</em></h2><p class="chapter-hand">La Casa de las Historias</p><div class="fleuron">✦ ❦ ✦</div></div>
     <div class="casa-grid">
       <div class="body-text reveal">
         <p class="drop-cap">Literatium nació, como nacen todas las historias que merecen contarse, del amor por los libros, el café y un pueblo que a veces parece soñado. Felipe Cadena, fundador y hombre de mar — oficial de la Armada Colombiana — soñaba con un lugar donde la calma del río Magdalena se encontrara con el mundo de las letras. Y un día, sin que nadie supiera exactamente cómo, el sueño se hizo casa. Así nació La Casa de las Historias.</p>
@@ -757,15 +758,15 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
   <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
-  <div class="folio-number" style="color: var(--brass-light);">Folio III · Habitaciones</div>
+  <div class="folio-number" style="color: var(--brass-light);" data-en="Folio III · Rooms">Folio III · Habitaciones</div>
   <div class="page-curl" data-next="cafe" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#DDB95E" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#0F2419"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#DDB95E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
   <div class="folio-inner">
-    <div class="reveal"><div class="eyebrow" style="color: var(--brass-light);">Capítulo Tercero</div><h2 class="chapter-title on-dark">Cinco capítulos <em>para elegir</em></h2><p class="rooms-intro">Cada habitación tiene su propio carácter, sus libros, su luz. Todas con aire acondicionado, baño privado, TV, cafetera y el silencio que solo se encuentra lejos del centro.</p><div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div></div>
+    <div class="reveal"><div class="eyebrow" style="color: var(--brass-light);" data-en="Chapter Three">Capítulo Tercero</div><h2 class="chapter-title on-dark">Cinco capítulos <em>para elegir</em></h2><p class="rooms-intro">Cada habitación tiene su propio carácter, sus libros, su luz. Todas con aire acondicionado, baño privado, TV, cafetera y el silencio que solo se encuentra lejos del centro.</p><div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div></div>
     <div class="rooms-row reveal delay-1">
-      <article class="room-card featured"><img class="room-card-img" src="assets/room-suite-8.webp" alt="Suite con jardín y bañera"><div class="room-card-body"><div class="room-card-num">HABITACIÓN V</div><h4>Suite con Jardín y Bañera</h4><div class="room-card-specs"><span>1 king + sofá cama</span><span>428 sq ft</span><span>Jardín</span></div></div></article>
+      <article class="room-card featured"><img class="room-card-img" src="assets/room-suite-9.webp" alt="Suite con jardín y bañera"><div class="room-card-body"><div class="room-card-num">HABITACIÓN V</div><h4>Suite con Jardín y Bañera</h4><div class="room-card-specs"><span>1 king + sofá cama</span><span>428 sq ft</span><span>Jardín</span></div></div></article>
       <article class="room-card"><img class="room-card-img" src="assets/room-deluxe-3.webp" alt="Deluxe Suite"><div class="room-card-body"><div class="room-card-num">HABITACIÓN IV</div><h4>Deluxe Suite</h4><div class="room-card-specs"><span>1 king + sofá cama</span><span>410 sq ft</span><span>Jardín</span></div></div></article>
-      <article class="room-card"><img class="room-card-img" src="assets/room-king-3.webp" alt="King Room"><div class="room-card-body"><div class="room-card-num">HABITACIÓN I</div><h4>King Room</h4><div class="room-card-specs"><span>1 king</span><span>290 sq ft</span><span>Ciudad</span></div></div></article>
-      <article class="room-card"><img class="room-card-img" src="assets/room-standard-1.webp" alt="Standard Double"><div class="room-card-body"><div class="room-card-num">HABITACIÓN II</div><h4>Standard Doble</h4><div class="room-card-specs"><span>1 queen</span><span>225 sq ft</span><span>Jardín</span></div></div></article>
+      <article class="room-card"><img class="room-card-img" src="assets/room-king-7.webp" alt="King Room"><div class="room-card-body"><div class="room-card-num">HABITACIÓN I</div><h4>King Room</h4><div class="room-card-specs"><span>1 king</span><span>290 sq ft</span><span>Ciudad</span></div></div></article>
+      <article class="room-card"><img class="room-card-img" src="assets/room-standard-3.webp" alt="Standard Double"><div class="room-card-body"><div class="room-card-num">HABITACIÓN II</div><h4>Standard Doble</h4><div class="room-card-specs"><span>1 queen</span><span>225 sq ft</span><span>Jardín</span></div></div></article>
       <article class="room-card"><img class="room-card-img" src="assets/room-garden-1.webp" alt="Standard Garden"><div class="room-card-body"><div class="room-card-num">HABITACIÓN III</div><h4>Standard Doble · Jardín</h4><div class="room-card-specs"><span>1 queen</span><span>225 sq ft</span><span>Jardín</span></div></div></article>
     </div>
     <div class="reveal delay-2" style="margin-top:50px; text-align:center;">
@@ -777,12 +778,14 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 
 <!-- FOLIO IV — HABITACIONES -->
 <section id="cafe" class="folio bg-parchment">
+  <!-- Warm atmospheric overlay for consistency -->
+  <div style="position:absolute; inset:0; background: radial-gradient(ellipse 90% 70% at 50% 20%, rgba(184,134,47,0.15), transparent 60%), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(114,47,55,0.08), transparent 60%); pointer-events: none; z-index: 1;"></div>
   <div class="folio-border"></div>
   <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
-  <div class="folio-number">Folio IV · Café</div>
+  <div class="folio-number" data-en="Folio IV · Coffee">Folio IV · Café</div>
   <div class="page-curl" data-next="gallery-marquee" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
   <div class="folio-inner">
     <div class="reveal"><div class="eyebrow">Capítulo Segundo · Café de Huila</div><h2 class="chapter-title">Literatium Café — <em>de la finca al libro</em></h2><div class="fleuron">✦ ❦ ✦</div></div>
@@ -876,7 +879,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
     <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
     <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
     <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
-    <div class="folio-number" style="color: var(--brass-light);">Folio V · Mompox</div>
+    <div class="folio-number" style="color: var(--brass-light);" data-en="Folio V · Mompox">Folio V · Mompox</div>
     <div class="page-curl" data-next="sabores" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#DDB95E" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#0F2419"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#DDB95E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
     <div class="folio-inner">
       <div class="reveal"><div class="eyebrow" style="color: var(--brass-light);">El mapa del río</div><h3 class="chapter-title on-dark">Santa Cruz de Mompox — <em>fundada 1537</em></h3><p style="font-family: var(--font-body); color: var(--parchment); opacity:0.85; max-width:640px; margin-top:18px; font-size:1.05rem; line-height:1.8;">Patrimonio de la Humanidad por la UNESCO desde 1995, Mompox es el pueblo que inspiró a García Márquez el realismo mágico de Macondo. Aquí, las calles empedradas, las iglesias coloniales y el río lento crean una atmósfera que no se encuentra en ningún otro lugar — donde lo extraordinario se cuenta como cotidiano, y lo cotidiano esconde milagros.</p></div>
@@ -914,7 +917,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
               <circle cx="0" cy="0" r="3" fill="#722F37"/>
             </g>
             <!-- Traveling boat -->
-            <g class="map-boat" id="map-boat" transform="translate(20,30)"><path d="M -6 0 L 6 0 L 4 4 L -4 4 Z" fill="#722F37" stroke="#DDB95E" stroke-width="0.5"/><line x1="0" y1="0" x2="0" y2="-8" stroke="#8B6520" stroke-width="0.8"/><path d="M 0 -8 L 4 -5 L 0 -3 Z" fill="#F5E1A4" opacity="0.8"/></g>
+            <g class="map-boat" id="map-boat" transform="translate(20,30)"><path d="M -9 0 L 9 0 L 6 6 L -6 6 Z" fill="#722F37" stroke="#DDB95E" stroke-width="1"/><line x1="0" y1="0" x2="0" y2="-12" stroke="#8B6520" stroke-width="1.2"/><path d="M 0 -12 L 6 -7 L 0 -4 Z" fill="#F5E1A4" opacity="0.9"/><circle cx="0" cy="3" r="1.5" fill="#DDB95E"/></g>
             <!-- Labels -->
             <text class="map-label" x="28" y="24">Magangué</text>
             <text class="map-label" x="58" y="94">Pasaje (ferry)</text>
@@ -968,13 +971,15 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 </section>
 
 <!-- FOLIO VI — SABORES -->
+  <!-- Warm atmospheric overlay for consistency -->
+  <div style="position:absolute; inset:0; background: radial-gradient(ellipse 90% 70% at 50% 20%, rgba(184,134,47,0.15), transparent 60%), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(114,47,55,0.08), transparent 60%); pointer-events: none; z-index: 1;"></div>
 <section id="sabores" class="folio bg-parchment">
   <div class="folio-border"></div>
   <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
-  <div class="folio-number">Folio VI · Sabores y Senderos</div>
+  <div class="folio-number" data-en="Folio VI · Flavours &amp; Paths">Folio VI · Sabores y Senderos</div>
   <div class="page-curl" data-next="cartas" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
   <div class="folio-inner">
     <div class="reveal"><div class="eyebrow">Capítulo Quinto</div><h2 class="chapter-title">El sabor del <em>Caribe fluvial</em></h2><p class="chapter-hand">Bocachico del Magdalena, casabito, queso de capa y vino de corozo</p><div class="fleuron">✦ ❦ ✦</div></div>
@@ -1003,6 +1008,8 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
   </div>
 </section>
 
+  <!-- Warm atmospheric overlay for consistency -->
+  <div style="position:absolute; inset:0; background: radial-gradient(ellipse 90% 70% at 50% 20%, rgba(184,134,47,0.15), transparent 60%), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(114,47,55,0.08), transparent 60%); pointer-events: none; z-index: 1;"></div>
 <!-- FOLIO VII — CARTAS -->
 <section id="cartas" class="folio bg-parchment">
   <div class="folio-border"></div>
@@ -1010,8 +1017,8 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
   <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
-  <div class="folio-number">Folio VII · Cartas</div>
-  <div class="page-curl" data-next="colofon" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
+  <div class="folio-number" data-en="Folio VII · Letters">Folio VII · Cartas</div>
+  <div class="page-curl" data-next="owners" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
   <div class="folio-inner">
     <div class="reveal"><div class="eyebrow">Capítulo Sexto · Cartas de Mompox</div><h2 class="chapter-title">En Literatium, los huéspedes no firman un libro — <em>dejan un pedacito de su historia</em></h2><p class="chapter-hand">El muro crece con cada visita</p><div class="fleuron">✦ ❦ ✦</div></div>
     <div class="cartas-grid reveal delay-1">
@@ -1025,14 +1032,63 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
   </div>
 </section>
 
-<!-- FOLIO VIII — COLOFÓN -->
+<!-- FOLIO VIII — LOS ANFITRIONES (Owners) -->
+<section id="owners" class="folio on-dark" style="background: linear-gradient(180deg, #1A1611 0%, #2C2416 50%, #1A1611 100%);">
+  <div class="folio-border" style="border-color: var(--brass); outline-color: var(--brass-dark); opacity: 0.3;"></div>
+  <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
+  <div class="folio-number" style="color: var(--brass-light);" data-en="Folio VIII · The Hosts">Folio VIII · Los Anfitriones</div>
+  <div class="page-curl" data-next="colofon" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#DDB95E" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#1A1611"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#DDB95E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
+  <div class="folio-inner">
+    <div class="reveal">
+      <div class="eyebrow" style="color: var(--brass-light);">Las personas detrás de la casa</div>
+      <h2 class="chapter-title on-dark">Tres historias que se encuentran <em>en Literatium</em></h2>
+      <p class="chapter-hand" style="color: var(--brass-light);">Del mar al río, del café al libro, del uniforme al jardín</p>
+      <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+    </div>
+
+    <!-- Felipe — image left -->
+    <div class="reveal" style="display:grid; grid-template-columns: 0.9fr 1.1fr; gap:50px; align-items:center; margin-top:60px;">
+      <div style="position:relative; min-height:400px; background: url('assets/owner-fredy-real.jpg') center/cover no-repeat; filter: sepia(0.2) contrast(1.05); border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px; box-shadow: 0 18px 40px rgba(0,0,0,0.5);"></div>
+      <div>
+        <div style="font-family: var(--font-display); font-size: 4.5rem; color: var(--brass); opacity: 0.3; line-height: 0.5; margin-bottom: 8px;">"</div>
+        <p style="font-family: var(--font-hand); font-style: italic; font-size: 1.6rem; color: var(--brass-light); line-height: 1.3; margin-bottom: 18px;">Del mar al río, del uniforme al libro — mismo código de honor.</p>
+        <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--parchment); margin-bottom: 4px;">Sr Felipe Cadena</h3>
+        <div style="font-family: var(--font-caps); font-size: 0.65rem; letter-spacing: 0.32em; color: var(--brass-light); opacity: 0.7; margin-bottom: 20px;">Fundador · Oficial de la Armada Colombiana</div>
+        <p style="font-family: var(--font-body); font-size: 0.98rem; line-height: 1.75; color: var(--parchment); opacity: 0.9;">Felipe Cadena es un oficial de carrera de la Armada Colombiana — hombre de mar, de disciplina y de silencios largos. Nació en Huila, donde su familia cultiva café desde generaciones. Ese café, el "café único" de la finca familiar, es el que se sirve cada mañana en Literatium. Cuando conoció Mompox, supo que aquí estaba su refugio: un lugar donde la calma del río Magdalena se encuentra con el mundo de los libros. Del mar al río, del uniforme al libro — mismo sentido de orden, mismo amor por lo bien hecho.</p>
+      </div>
+    </div>
+
+    <!-- Nelcy — image right -->
+    <div class="reveal delay-1" style="display:grid; grid-template-columns: 1.1fr 0.9fr; gap:50px; align-items:center; margin-top:60px;">
+      <div>
+        <div style="font-family: var(--font-display); font-size: 4.5rem; color: var(--brass); opacity: 0.3; line-height: 0.5; margin-bottom: 8px;">"</div>
+        <p style="font-family: var(--font-hand); font-style: italic; font-size: 1.6rem; color: var(--brass-light); line-height: 1.3; margin-bottom: 18px;">La calma detrás de cada detalle — el alma silenciosa de la casa.</p>
+        <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--parchment); margin-bottom: 4px;">Sra Nelcy</h3>
+        <div style="font-family: var(--font-caps); font-size: 0.65rem; letter-spacing: 0.32em; color: var(--brass-light); opacity: 0.7; margin-bottom: 20px;">Esposa de Felipe · Apoyo de la casa</div>
+        <p style="font-family: var(--font-body); font-size: 0.98rem; line-height: 1.75; color: var(--parchment); opacity: 0.9;">Nelcy es la serenidad caribeña detrás de Literatium. Mexicana de nacimiento, esposa de Felipe, su apoyo ha sido parte de cada decisión de la casa, desde el nombre hasta el último libro de la biblioteca. Su gusto por los detalles — las flores, los colores, el equilibrio entre lo colonial y lo literario — se respira en cada rincón. Es la calma que rodea la historia.</p>
+      </div>
+      <div style="position:relative; min-height:400px; background: url('assets/owner-nelcy.jpg') center/cover no-repeat; filter: sepia(0.2) contrast(1.05); border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px; box-shadow: 0 18px 40px rgba(0,0,0,0.5);"></div>
+    </div>
+
+    <!-- Couple banner -->
+    <div class="reveal delay-2" style="margin-top:60px; position:relative; height:300px; background: url('assets/owners-romantic.jpg') center/cover no-repeat; filter: sepia(0.15); border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px; box-shadow: 0 18px 40px rgba(0,0,0,0.5); overflow:hidden; display:flex; align-items:center; justify-content:center;">
+      <div style="position:absolute; inset:0; background: linear-gradient(180deg, rgba(15,36,25,0.4) 0%, rgba(15,36,25,0.7) 100%);"></div>
+      <p style="position:relative; z-index:2; font-family: var(--font-display); font-style:italic; font-size: clamp(1.3rem, 3vw, 2rem); color: var(--parchment); text-align:center; padding:0 2rem; text-shadow: 0 2px 20px rgba(0,0,0,0.6);">"Dos historias que se encontraron en Mompox — del mar al río, del café al libro, del uniforme al jardín."</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOLIO IX — COLOFÓN -->
 <section id="colofon" class="folio on-dark">
   <div class="folio-border" style="border-color: var(--brass); outline-color: var(--brass-dark); opacity: 0.3;"></div>
   <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner bl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="0" cy="28" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner br"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 28, 14 28" fill="none" stroke="#DDB95E" stroke-width="1.5"/><circle cx="28" cy="28" r="2" fill="#DDB95E"/></svg></div>
-  <div class="folio-number" style="color: var(--brass-light);">Folio VIII · Colofón</div>
+  <div class="folio-number" style="color: var(--brass-light);" data-en="Folio IX · Colophon">Folio IX · Colofón</div>
   <div class="folio-inner">
     <div class="reveal"><div class="eyebrow" style="color: var(--brass-light);">Capítulo Final · El colofón</div><h2 class="chapter-title on-dark">Tu próximo capítulo <em>empieza aquí</em></h2><div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div></div>
     <div class="colofon-grid">
@@ -1059,11 +1115,12 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 </section>
 
 <footer id="footer">
+  <img src="assets/literatium-logo-icon.jpeg" alt="Literatium" style="width:50px;height:50px;border-radius:50%;object-fit:cover;border:1px solid var(--brass);margin:0 auto 16px;filter:sepia(0.15) saturate(0.85) hue-rotate(-5deg);">
   <div class="footer-mark">Literatium</div>
   <div class="footer-fleuron">✦ ❦ ✦</div>
   <div>La Casa de las Historias · Mompox · Bolívar · Colombia</div>
   <div class="footer-meta">Hotel Boutique · Libros &amp; Café · UNESCO 1995<br>Calle 21 #2-47, Santa Cruz de Mompox · WhatsApp +57 315 538 2112 · @literatium</div>
-  <button id="motion-toggle" onclick="toggleMotion()">Animación: ON</button>
+  <button id="motion-toggle" onclick="toggleMotion()" data-en="Motion: ON">Animación: ON</button>
 </footer>
 
 <div class="butterfly" id="butterfly" aria-hidden="true"><svg viewBox="0 0 50 42"><g class="wing-l"><path d="M 25 21 Q 7 3 1 13 Q -1 23 7 25 Q 18 26 25 21 Z" fill="#F5D547" opacity="0.85"/></g><g class="wing-r"><path d="M 25 21 Q 43 3 49 13 Q 51 23 43 25 Q 32 26 25 21 Z" fill="#F5D547" opacity="0.85"/></g><ellipse cx="25" cy="21" rx="1.5" ry="9" fill="#3D2817"/></svg></div>
@@ -1098,8 +1155,15 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
     coverOpened = true;
     coverFace.style.animation = '';
     cover.classList.add('is-open');
+    // Trigger hero animations when cover opens (not on page load)
+    document.documentElement.classList.add('hero-revealed');
     setTimeout(() => { cover.style.display = 'none'; }, 3800);
     armFallback();
+    // Safety net: force-show hero title after 5s in case animation fails
+    setTimeout(() => {
+      var words = document.querySelectorAll('.hero-script-title .word');
+      words.forEach(function(w) { w.style.opacity = '1'; w.style.filter = 'none'; w.style.transform = 'none'; });
+    }, 5000);
   }
   cover.addEventListener('click', openCover);
   coverFace.addEventListener('click', (e) => { e.stopPropagation(); openCover(); });
@@ -1159,7 +1223,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
     { id: 'mompox',       label: 'Folio V · Mompox' },
     { id: 'sabores',      label: 'Folio VI · Sabores' },
     { id: 'cartas',       label: 'Folio VII · Cartas' },
-    { id: 'colofon',      label: 'Folio VIII · Colofón' },
+    { id: 'colofon',      label: 'Folio IX · Colofón' },
   ];
   function updateRiverPin() {
     const scrollPct = window.scrollY / Math.max(1, (document.documentElement.scrollHeight - window.innerHeight));
@@ -1253,7 +1317,19 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
     updateBoatPosition();
   }
 
-  /* 10. POLAROID + SPACE PLATE click → zoom */
+  /* 10a. MARQUEE — pause only when hovering a polaroid, not the whole section */
+  document.querySelectorAll('.polaroid').forEach(function(pol) {
+    pol.addEventListener('mouseenter', function() {
+      var row = pol.closest('.marquee-row');
+      if (row) row.style.animationPlayState = 'paused';
+    });
+    pol.addEventListener('mouseleave', function() {
+      var row = pol.closest('.marquee-row');
+      if (row) row.style.animationPlayState = 'running';
+    });
+  });
+
+  /* 10b. POLAROID + SPACE PLATE click → zoom */
   function createZoom(src, alt) {
     const overlay = document.createElement('div');
     overlay.className = 'zoom-overlay';
@@ -1310,15 +1386,39 @@ function toggleMotion() {
   if (btn) btn.textContent = isOff ? 'Animación: OFF' : 'Animación: ON';
   try { localStorage.setItem('literatium-motion', isOff ? 'off' : 'on'); } catch(e) {}
 }
-// Restore preference on load
+
+/* LANGUAGE TOGGLE — EN/ES swap via data-en attributes */
+var currentLang = 'es';
+function toggleLang() {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  var btn = document.getElementById('lang-toggle');
+  if (btn) btn.textContent = currentLang === 'es' ? 'EN' : 'ES';
+  document.documentElement.lang = currentLang;
+  // Swap all elements with data-en attribute
+  document.querySelectorAll('[data-en]').forEach(function(el) {
+    if (currentLang === 'en') {
+      if (!el.dataset.origEs) el.dataset.origEs = el.textContent;
+      el.textContent = el.dataset.en;
+    } else {
+      if (el.dataset.origEs) el.textContent = el.dataset.origEs;
+    }
+  });
+  // Swap alt text on images with data-en-alt
+  document.querySelectorAll('[data-en-alt]').forEach(function(el) {
+    if (currentLang === 'en') {
+      if (!el.dataset.origAlt) el.dataset.origAlt = el.alt;
+      el.alt = el.dataset.enAlt;
+    } else {
+      if (el.dataset.origAlt) el.alt = el.dataset.origAlt;
+    }
+  });
+  try { localStorage.setItem('literatium-lang', currentLang); } catch(e) {}
+}
+// Restore language preference on load
 (function() {
   try {
-    var pref = localStorage.getItem('literatium-motion');
-    if (pref === 'off') {
-      document.documentElement.classList.add('motion-off');
-      var btn = document.getElementById('motion-toggle');
-      if (btn) btn.textContent = 'Animación: OFF';
-    }
+    var lang = localStorage.getItem('literatium-lang');
+    if (lang === 'en') toggleLang();
   } catch(e) {}
 })();
 </script>
