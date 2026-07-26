@@ -1008,10 +1008,10 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
   </div>
 </section>
 
-  <!-- Warm atmospheric overlay for consistency -->
-  <div style="position:absolute; inset:0; background: radial-gradient(ellipse 90% 70% at 50% 20%, rgba(184,134,47,0.15), transparent 60%), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(114,47,55,0.08), transparent 60%); pointer-events: none; z-index: 1;"></div>
 <!-- FOLIO VII — CARTAS -->
 <section id="cartas" class="folio bg-parchment">
+  <!-- Warm atmospheric overlay -->
+  <div style="position:absolute; inset:0; background: radial-gradient(ellipse 90% 70% at 50% 20%, rgba(184,134,47,0.15), transparent 60%), radial-gradient(ellipse 70% 50% at 80% 80%, rgba(114,47,55,0.08), transparent 60%); pointer-events: none; z-index: 1;"></div>
   <div class="folio-border"></div>
   <div class="folio-corner tl"><svg viewBox="0 0 28 28"><path d="M 0 14 Q 0 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="0" cy="0" r="2" fill="#DDB95E"/></svg></div>
   <div class="folio-corner tr"><svg viewBox="0 0 28 28"><path d="M 28 14 Q 28 0, 14 0" fill="none" stroke="#C9A04E" stroke-width="1.5"/><circle cx="28" cy="0" r="2" fill="#DDB95E"/></svg></div>
@@ -1020,14 +1020,27 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
   <div class="folio-number" data-en="Folio VII · Letters">Folio VII · Cartas</div>
   <div class="page-curl" data-next="owners" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#8B6520" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#FCF8EE"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#C9A04E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
   <div class="folio-inner">
-    <div class="reveal"><div class="eyebrow">Capítulo Sexto · Cartas de Mompox</div><h2 class="chapter-title">En Literatium, los huéspedes no firman un libro — <em>dejan un pedacito de su historia</em></h2><p class="chapter-hand">El muro crece con cada visita</p><div class="fleuron">✦ ❦ ✦</div></div>
+    <div class="reveal">
+      <div class="eyebrow" data-en="Chapter Six · Letters from Mompox">Capítulo Sexto · Cartas de Mompox</div>
+      <h2 class="chapter-title" data-en="At Literatium, guests don't sign a book — they leave a piece of their story">En Literatium, los huéspedes no firman un libro — <em>dejan un pedacito de su historia</em></h2>
+      <p class="chapter-hand" data-en="The wall grows with every visit">El muro crece con cada visita</p>
+      <div class="fleuron">✦ ❦ ✦</div>
+    </div>
+
+    <!-- Feature quote — full-width, dramatic -->
+    <div class="reveal delay-1" style="margin: 40px auto; max-width: 800px; text-align: center; position: relative; padding: 40px 20px;">
+      <div style="font-family: var(--font-display); font-size: 6rem; color: var(--brass); opacity: 0.15; line-height: 0.5; position: absolute; top: 0; left: 50%; transform: translateX(-50%);">"</div>
+      <p style="font-family: var(--font-display); font-style: italic; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.4; color: var(--burgundy); position: relative; z-index: 2;" data-en="Many years later, faced with the murmur of the Magdalena, the traveller was to remember that remote afternoon when he arrived at Literatium and discovered that here, between books and coffee, time does not pass — it stays.">Muchos años después, frente al murmullo del Magdalena, el viajero habría de recordar aquella remota tarde en que llegó a Literatium y descubrió que aquí, entre libros y café, el tiempo no pasa — sino que se queda.</p>
+      <div style="margin-top: 16px; font-family: var(--font-caps); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--brass-dark);" data-en="— The first line, written by a guest">— La primera línea, escrita por un huésped</div>
+    </div>
+
     <div class="cartas-grid reveal delay-1">
-      <article class="carta"><div class="quote-mark">"</div><p>Llegamos por una noche y nos quedamos cuatro. Es el tipo de lugar donde el reloj pierde sentido, como si el tiempo se hubiera quedado dormido entre las páginas. La biblioteca, el jardín, el café… todo te pide quedarte un capítulo más.</p><div class="sign">— María y Andrés</div><div class="meta">Madrid · España</div></article>
-      <article class="carta"><div class="quote-mark">"</div><p>Martica nos organizó el paseo en champán al atardecer. Cuando el sol cayó sobre el Magdalena, entendí lo que Gabo quiso decir con Macondo. Aquí el realismo mágico no es literatura — es geografía.</p><div class="sign">— Thomas</div><div class="meta">Berlín · Alemania</div></article>
-      <article class="carta"><div class="quote-mark">"</div><p>El café de Huila, servido en la cerámica verde, es la mejor bienvenida que he recibido en un hotel. Y los libros… libros en cada rincón, como si la casa misma los hubiera crecido como crece el musgo sobre las piedras del río.</p><div class="sign">— Camille</div><div class="meta">Lyon · Francia</div></article>
-      <article class="carta"><div class="quote-mark">"</div><p>La suite con bañera y jardín es un sueño. Pero lo que se queda contigo es el sonido: los grillos al anochecer, las campanas de Santa Bárbara, el río al fondo. El silencio de Mompox, dicho en otras palabras.</p><div class="sign">— Sebastián y Valeria</div><div class="meta">Bogotá · Colombia</div></article>
-      <article class="carta"><div class="quote-mark">"</div><p>Vine a escribir un libro. Terminé tres capítulos en cuatro días. La mesa del desayuno, el corredor con helechos, el jacuzzi iluminado de noche — cada rincón invita a pensar despacio, como si las ideas aquí tuvieran tiempo de madurar.</p><div class="sign">— Elena</div><div class="meta">Buenos Aires · Argentina</div></article>
-      <article class="carta"><div class="quote-mark">"</div><p>"Por Mompox no se pasa, a Mompox se llega", nos dijo Martica el primer día. Tenía razón. Este es un lugar al que se llega, no por el que se pasa. Y Literatium es su mejor puerta — la puerta de un libro que no quieres cerrar.</p><div class="sign">— Henry &amp; Sue</div><div class="meta">Vancouver · Canadá</div></article>
+      <article class="carta"><div class="quote-mark">"</div><p data-en="We came for one night and stayed four. It's the kind of place where the clock loses meaning, as if time had fallen asleep between the pages. The library, the garden, the coffee… everything asks you to stay one chapter more.">Llegamos por una noche y nos quedamos cuatro. Es el tipo de lugar donde el reloj pierde sentido, como si el tiempo se hubiera quedado dormido entre las páginas. La biblioteca, el jardín, el café… todo te pide quedarte un capítulo más.</p><div class="sign">— María y Andrés</div><div class="meta" data-en="Madrid · Spain">Madrid · España</div></article>
+      <article class="carta"><div class="quote-mark">"</div><p data-en="Martica arranged a champán boat ride at sunset. When the sun fell over the Magdalena, I understood what Gabo meant by Macondo. Here, magical realism is not literature — it's geography.">Martica nos organizó el paseo en champán al atardecer. Cuando el sol cayó sobre el Magdalena, entendí lo que Gabo quiso decir con Macondo. Aquí el realismo mágico no es literatura — es geografía.</p><div class="sign">— Thomas</div><div class="meta" data-en="Berlin · Germany">Berlín · Alemania</div></article>
+      <article class="carta"><div class="quote-mark">"</div><p data-en="The Huila coffee, served in the green ceramic, is the best welcome I've ever received at a hotel. And the books… books in every corner, as if the house itself had grown them like moss grows on river stones.">El café de Huila, servido en la cerámica verde, es la mejor bienvenida que he recibido en un hotel. Y los libros… libros en cada rincón, como si la casa misma los hubiera crecido como crece el musgo sobre las piedras del río.</p><div class="sign">— Camille</div><div class="meta" data-en="Lyon · France">Lyon · Francia</div></article>
+      <article class="carta"><div class="quote-mark">"</div><p data-en="The suite with tub and garden is a dream. But what stays with you is the sound: crickets at dusk, the bells of Santa Bárbara, the river in the background. The silence of Mompox, told in other words.">La suite con bañera y jardín es un sueño. Pero lo que se queda contigo es el sonido: los grillos al anochecer, las campanas de Santa Bárbara, el río al fondo. El silencio de Mompox, dicho en otras palabras.</p><div class="sign">— Sebastián y Valeria</div><div class="meta" data-en="Bogotá · Colombia">Bogotá · Colombia</div></article>
+      <article class="carta"><div class="quote-mark">"</div><p data-en="I came to write a book. I finished three chapters in four days. The breakfast table, the corridor with ferns, the jacuzzi lit at night — every corner invites you to think slowly, as if ideas here had time to ripen.">Vine a escribir un libro. Terminé tres capítulos en cuatro días. La mesa del desayuno, el corredor con helechos, el jacuzzi iluminado de noche — cada rincón invita a pensar despacio, como si las ideas aquí tuvieran tiempo de madurar.</p><div class="sign">— Elena</div><div class="meta" data-en="Buenos Aires · Argentina">Buenos Aires · Argentina</div></article>
+      <article class="carta"><div class="quote-mark">"</div><p data-en='"You don\'t pass through Mompox, you arrive at Mompox," Martica told us the first day. She was right. This is a place you arrive at, not one you pass through. And Literatium is its best door — the door of a book you don\'t want to close.'>"Por Mompox no se pasa, a Mompox se llega", nos dijo Martica el primer día. Tenía razón. Este es un lugar al que se llega, no por el que se pasa. Y Literatium es su mejor puerta — la puerta de un libro que no quieres cerrar.</p><div class="sign">— Henry &amp; Sue</div><div class="meta" data-en="Vancouver · Canada">Vancouver · Canadá</div></article>
     </div>
   </div>
 </section>
@@ -1051,7 +1064,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 
     <!-- Felipe — image left -->
     <div class="reveal" style="display:grid; grid-template-columns: 0.9fr 1.1fr; gap:50px; align-items:center; margin-top:60px;">
-      <div style="position:relative; min-height:400px; background: url('assets/owner-fredy-real.jpg') center/cover no-repeat; filter: sepia(0.2) contrast(1.05); border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px; box-shadow: 0 18px 40px rgba(0,0,0,0.5);"></div>
+      <div style="position:relative; min-height:400px; background: url('assets/owner-felipe.jpg') center/cover no-repeat; filter: sepia(0.2) contrast(1.05); border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px; box-shadow: 0 18px 40px rgba(0,0,0,0.5);"></div>
       <div>
         <div style="font-family: var(--font-display); font-size: 4.5rem; color: var(--brass); opacity: 0.3; line-height: 0.5; margin-bottom: 8px;">"</div>
         <p style="font-family: var(--font-hand); font-style: italic; font-size: 1.6rem; color: var(--brass-light); line-height: 1.3; margin-bottom: 18px;">Del mar al río, del uniforme al libro — mismo código de honor.</p>
