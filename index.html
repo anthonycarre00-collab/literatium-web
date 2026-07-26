@@ -209,6 +209,28 @@ a { color: inherit; text-decoration: none; }
 @keyframes drift-mote { 0% { transform: translate(0, 100vh) scale(0.4); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translate(40px, -10vh) scale(1); opacity: 0; } }
 #vignette { position: fixed; inset: 0; z-index: 24; pointer-events: none; background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 55%, rgba(15,36,25,0.45) 100%); }
 
+
+/* MOMPOX SUB-NAV — appears when scrolling through Mompox family sections */
+#mompox-subnav {
+  position: fixed; top: 60px; left: 50%; transform: translateX(-50%);
+  z-index: 39; display: flex; gap: 0; background: rgba(15,36,25,0.95);
+  backdrop-filter: blur(8px); border: 1px solid rgba(221,185,94,0.3);
+  border-radius: 2px; padding: 0; opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateX(-50%) translateY(-10px);
+}
+#mompox-subnav.show { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+#mompox-subnav a {
+  font-family: var(--font-caps); font-size: 0.58rem; letter-spacing: 0.2em;
+  color: var(--parchment); opacity: 0.6; padding: 8px 16px;
+  border-right: 1px solid rgba(221,185,94,0.15);
+  transition: opacity 0.3s ease, background 0.3s ease; white-space: nowrap;
+}
+#mompox-subnav a:last-child { border-right: none; }
+#mompox-subnav a:hover { opacity: 1; background: rgba(221,185,94,0.1); }
+#mompox-subnav a.active { opacity: 1; color: var(--brass-light); background: rgba(221,185,94,0.08); }
+@media (max-width: 880px) { #mompox-subnav { display: none; } }
+
 /* NAV */
 #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; padding: 18px 80px 18px 96px; background: linear-gradient(180deg, rgba(15,36,25,0.92) 0%, rgba(15,36,25,0.6) 70%, transparent 100%); backdrop-filter: blur(6px); opacity: 0; transform: translateY(-20px); animation: nav-in 1s ease 3.5s forwards; color: var(--parchment); }
 @keyframes nav-in { to { opacity: 1; transform: translateY(0); } }
@@ -686,10 +708,18 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
 <nav id="nav">
   <div class="nav-mark"><img src="assets/favicon-180.png" alt="Literatium" style="width:36px;height:36px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:10px;border:1px solid var(--brass);"><span style="font-family:var(--font-display);font-size:1.3rem;font-style:italic;color:var(--brass-light);">Literatium</span> <span style="color:var(--parchment);font-family:var(--font-caps);font-size:0.65rem;letter-spacing:0.06em;">· La Casa de las Historias</span></div>
   <div class="nav-links">
-    <a href="#frontispiece" data-en="Home">Inicio</a><a href="#casa" data-en="The House">La Casa</a><a href="#rooms" data-en="Rooms">Habitaciones</a><a href="#cafe" data-en="Coffee">Café</a><a href="#mompox" data-en="Mompox">Mompox</a><a href="#sabores" data-en="Flavours">Sabores</a><a href="#cartas" data-en="Letters">Cartas</a>
+    <a href="#frontispiece" data-en="Home">Inicio</a><a href="#casa" data-en="The House">La Casa</a><a href="#rooms" data-en="Rooms">Habitaciones</a><a href="#cafe" data-en="Coffee" data-en="Coffee">Café</a><a href="#mompox" data-en="Mompox">Mompox</a><a href="#sabores" data-en="Flavours">Sabores</a><a href="#cartas" data-en="Letters">Cartas</a>
     <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="nav-cta" data-en="Book Now">Reservar</a>
     <button id="lang-toggle" onclick="toggleLang()" style="background:rgba(221,185,94,0.15);border:1px solid rgba(221,185,94,0.4);color:var(--brass-light);padding:6px 12px;font-family:var(--font-caps);font-size:0.6rem;letter-spacing:0.15em;cursor:pointer;border-radius:2px;margin-left:8px;">EN</button>
   </div>
+</nav>
+
+<!-- Mompox sub-nav — appears when in Mompox family sections -->
+<nav id="mompox-subnav">
+  <a href="#mompox" data-en="Mompox">Mompox</a>
+  <a href="#viaje" data-en="Journey">El Viaje</a>
+  <a href="#sabores" data-en="Flavours">Sabores</a>
+  <a href="#diccionario" data-en="Words">Palabras</a>
 </nav>
 
 <!-- BOOK COVER — elegant, opens on click or auto after 3.5s -->
@@ -750,8 +780,8 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
     <div class="reveal"><div class="eyebrow" data-en="Chapter One">Capítulo Primero</div><h2 class="chapter-title">Un refugio donde cada página <em>es una mañana</em></h2><p class="chapter-hand">La Casa de las Historias</p><div class="fleuron">✦ ❦ ✦</div></div>
     <div class="casa-grid">
       <div class="body-text reveal">
-        <p class="drop-cap">Literatium nació del amor por tres cosas: los libros, el café y Mompox. Felipe Cadena, fundador y hombre de mar — oficial de la Armada Colombiana — soñaba con un lugar donde la calma del río Magdalena se encontrara con el mundo de las letras. Lo encontró en una casa colonial a orillas del río, y poco a poco esa casa se fue llenando de historias. Así nació La Casa de las Historias.</p>
-        <p>La casa colonial se transformó despacio. Cada habitación tiene libros; cada rincón invita a leer. El jardín se volvió refugio. La biblioteca, punto de encuentro. Y el café — un café único de la finca familiar en Huila — se convirtió en el alma de la casa, en la primera palabra de cada mañana.</p>
+        <p class="drop-cap" data-en="Literatium was born from a love of three things: books, coffee and Mompox. Felipe Cadena, founder and man of the sea — officer in the Colombian Navy — dreamed of a place where the calm of the Magdalena River met the world of letters. He found it in a colonial house on the riverbank, and little by little that house filled with stories. Thus was born The House of Stories.">Literatium nació del amor por tres cosas: los libros, el café y Mompox. Felipe Cadena, fundador y hombre de mar — oficial de la Armada Colombiana — soñaba con un lugar donde la calma del río Magdalena se encontrara con el mundo de las letras. Lo encontró en una casa colonial a orillas del río, y poco a poco esa casa se fue llenando de historias. Así nació La Casa de las Historias.</p>
+        <p data-en="The colonial house was transformed slowly. Every room has books; every corner invites you to read. The garden became a retreat. The library, a meeting point. And the coffee — a unique coffee from the family farm in Huila — became the soul of the house, the first word of every morning.">La casa colonial se transformó despacio. Cada habitación tiene libros; cada rincón invita a leer. El jardín se volvió refugio. La biblioteca, punto de encuentro. Y el café — un café único de la finca familiar en Huila — se convirtió en el alma de la casa, en la primera palabra de cada mañana.</p>
         <p><em>Estamos un poco apartados del centro histórico — y eso es exactamente lo que nos hace especiales. Aquí no llega el ruido del pueblo. Llega el canto de los pájaros, el aroma del café, y de vez en cuando, el rumor de una página que se vuelve en el jardín. Una pausa, a minutos de todo.</em></p>
         <div class="marginalia">— aquí, las mañanas se cuentan por tazas de café —</div>
       </div>
@@ -772,7 +802,7 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
     </div>
     <article class="martica-card reveal">
       <div class="martica-card-img" role="img" aria-label="Retrato de Martica"></div>
-      <div class="martica-card-body"><div class="quote-mark">"</div><p class="tagline" data-en="The momposina who makes everything happen — and makes everyone return.">La momposina que hace que todo pase — y que todos vuelvan.</p><h3>Marta — "Martica"</h3><div class="role" data-en="Manager · The star of Literatium">Gerente · La estrella de Literatium</div><p class="bio">Martica es el alma de Literatium, esa fuerza invisible que hace que las cosas sucedan sin que nadie las vea suceder. Momposina de nacimiento, conoce el pueblo como solo quien ha crecido entre sus calles puede conocerlo — cada iglesia, cada boga, cada receta que se transmite de boca en boca. Recibe a los huéspedes como se recibe a un amigo que llega de lejos: con café, con un mapa dibujado a mano, y con la certeza de que aquí, por unas noches, el mundo va a estar bien.</p></div>
+      <div class="martica-card-body"><div class="quote-mark">"</div><p class="tagline" data-en="The momposina who makes everything happen — and makes everyone return.">La momposina que hace que todo pase — y que todos vuelvan.</p><h3>Marta — "Martica"</h3><div class="role" data-en="Manager · The star of Literatium">Gerente · La estrella de Literatium</div><p class="bio" data-en="Martica is the soul of Literatium, that invisible force that makes things happen without anyone seeing them happen. Momposina by birth, she knows the town as only someone who grew up among its streets can know it — every church, every boatman, every recipe passed down by word of mouth. She welcomes guests as one welcomes a friend arriving from afar: with coffee, with a hand-drawn map, and with the certainty that here, for a few nights, the world will be all right.">Martica es el alma de Literatium, esa fuerza invisible que hace que las cosas sucedan sin que nadie las vea suceder. Momposina de nacimiento, conoce el pueblo como solo quien ha crecido entre sus calles puede conocerlo — cada iglesia, cada boga, cada receta que se transmite de boca en boca. Recibe a los huéspedes como se recibe a un amigo que llega de lejos: con café, con un mapa dibujado a mano, y con la certeza de que aquí, por unas noches, el mundo va a estar bien.</p></div>
     </article>
   </div>
 </section>
@@ -818,8 +848,8 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
     <div class="cafe-grid">
       <div class="cafe-image-wrap reveal"><div class="cafe-steam" aria-hidden="true"><span></span><span></span><span></span></div><img src="assets/coffee-farm-huila.jpg" alt="Café de Huila — la finca familiar"></div>
       <div class="body-text reveal delay-1">
-        <p class="drop-cap">En las montañas de Huila, donde los Andes se inclinan hacia el río y el aire huele a café y a tierra húmeda, la familia Cadena cultiva café desde hace generaciones. No es una finca grande — es una finca familiar, donde cada grano se cosecha a mano y se tuesta en lotes pequeños, con la paciencia de quien escribe un libro a pulso, página por página.</p>
-        <p>Felipe lo trae desde Huila hasta Mompox, cruzando Colombia de cordillera a río. Lo llama <em>"café único"</em> — no porque sea el único del mundo, sino porque cada taza cuenta la historia de la familia, de la finca, del viaje. Un café que sabe a monte, a lluvia, a mañana.</p>
+        <p class="drop-cap" data-en="In the mountains of Huila, where the Andes lean toward the river and the air smells of coffee and damp earth, the Cadena family has grown coffee for generations. It is not a large farm — it is a family farm, where every bean is harvested by hand and roasted in small batches, with the patience of someone writing a book by hand, page by page.">En las montañas de Huila, donde los Andes se inclinan hacia el río y el aire huele a café y a tierra húmeda, la familia Cadena cultiva café desde hace generaciones. No es una finca grande — es una finca familiar, donde cada grano se cosecha a mano y se tuesta en lotes pequeños, con la paciencia de quien escribe un libro a pulso, página por página.</p>
+        <p data-en="Felipe brings it from Huila to Mompox, crossing Colombia from mountain range to river. He calls it <em>\"café único\"</em> — not because it is the only one in the world, but because every cup tells the story of the family, the farm, the journey. A coffee that tastes of mountain, of rain, of morning.">Felipe lo trae desde Huila hasta Mompox, cruzando Colombia de cordillera a río. Lo llama <em>"café único"</em> — no porque sea el único del mundo, sino porque cada taza cuenta la historia de la familia, de la finca, del viaje. Un café que sabe a monte, a lluvia, a mañana.</p>
         <p class="cafe-tagline">"En Literatium, el café no es solo una bebida: es el ritual que abre cada mañana, la primera página del día."</p>
         <div class="cafe-tag" data-en="Unique coffee · From our farm to your cup">Café único · De la finca a tu taza</div>
         <div class="marginalia right">— del monte de Huila, al río de Mompox, a tu taza —</div>
@@ -836,7 +866,7 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
 
 <!-- INTERSTITIAL 1 -->
 <section class="interstitial" style="background-image: url('assets/mompox-santa-barbara-night.jpg');">
-  <div><p class="interstitial-quote" id="quote-1">Es más fácil atrapar el tiempo en Mompox que en cualquier otro lugar del mundo.</p><p class="interstitial-attrib">— Dicho momposino</p></div>
+  <div><p class="interstitial-quote" id="quote-1" data-en="It is easier to catch time in Mompox than anywhere else in the world.">Es más fácil atrapar el tiempo en Mompox que en cualquier otro lugar del mundo.</p><p class="interstitial-attrib" data-en="— Momposino saying">— Dicho momposino</p></div>
 </section>
 
 
@@ -876,7 +906,7 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
 
 <!-- GALLERY MARQUEE — pure CSS, pre-built polaroids -->
 <section id="gallery-marquee">
-  <div class="gallery-marquee-header reveal"><div class="eyebrow" style="color: var(--brass-light); justify-content:center;">Galería · Imágenes del río y la casa</div><h2 class="chapter-title on-dark" style="text-align:center;">Literatium <em>en imágenes</em></h2><p style="font-family: var(--font-body); color: var(--parchment); opacity:0.7; max-width:560px; margin:18px auto 0; font-style:italic;">Un río de postales que deriva lentamente. Pasa el cursor para detener el tiempo.</p></div>
+  <div class="gallery-marquee-header reveal"><div class="eyebrow" style="color: var(--brass-light); justify-content:center;" data-en="Gallery · Images of the river and the house">Galería · Imágenes del río y la casa</div><h2 class="chapter-title on-dark" style="text-align:center;">Literatium <em>en imágenes</em></h2><p style="font-family: var(--font-body); color: var(--parchment); opacity:0.7; max-width:560px; margin:18px auto 0; font-style:italic;" data-en="A river of postcards drifting slowly. Hover over an image to pause.">Un río de postales que deriva lentamente. Pasa el cursor para detener el tiempo.</p></div>
   <div class="marquee-row left">
     <div class="polaroid"><img src="assets/mompox-river-sunset-real.jpg" alt="Magdalena al ocaso"><div class="polaroid-cap">El Magdalena al ocaso</div></div>
     <div class="polaroid"><img src="assets/mompox-santa-barbara-night.jpg" alt="Santa Bárbara de noche"><div class="polaroid-cap">Santa Bárbara de noche</div></div>
@@ -930,7 +960,7 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
     <div class="mompox-hero-inner">
       <div class="mompox-eyebrow" data-en="Chapter Four · Mompox">Capítulo Cuarto · Mompox</div>
       <h2 class="mompox-title">El pueblo donde <em>el tiempo se detiene</em></h2>
-      <p class="gabo-quote" id="gabo-quote-1">Mompox no existe, a veces soñamos con ella pero no existe.</p>
+      <p class="gabo-quote" id="gabo-quote-1" data-en="Mompox doesn't exist; sometimes we dream of her, but she doesn't exist.">Mompox no existe, a veces soñamos con ella pero no existe.</p>
       <p class="gabo-attrib">— Gabriel García Márquez</p>
     </div>
   </div>
@@ -943,7 +973,7 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
     <div class="folio-number" style="color: var(--brass-light);" data-en="Folio V · Mompox">Folio V · Mompox</div>
     <div class="page-curl" data-next="viaje" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#DDB95E" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#0F2419"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#DDB95E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
     <div class="folio-inner">
-      <div class="reveal"><div class="eyebrow" style="color: var(--brass-light);" data-en="The river map">El mapa del río</div><h3 class="chapter-title on-dark">Santa Cruz de Mompox — <em>fundada 1537</em></h3><p style="font-family: var(--font-body); color: var(--parchment); opacity:0.85; max-width:640px; margin-top:18px; font-size:1.05rem; line-height:1.8;">Patrimonio de la Humanidad por la UNESCO desde 1995, Mompox es un pueblo que inspiró a García Márquez y que aún hoy parece detenido en otro siglo. Las calles empedradas, las iglesias coloniales y el río lento le dan una atmósfera que no se encuentra en ningún otro lugar del Caribe colombiano.</p></div>
+      <div class="reveal"><div class="eyebrow" style="color: var(--brass-light);" data-en="The river map">El mapa del río</div><h3 class="chapter-title on-dark">Santa Cruz de Mompox — <em>fundada 1537</em></h3><p style="font-family: var(--font-body); color: var(--parchment); opacity:0.85; max-width:640px; margin-top:18px; font-size:1.05rem; line-height:1.8;" data-en="A UNESCO World Heritage Site since 1995, Mompox is a town that inspired García Márquez and that still today seems stopped in another century. The cobblestone streets, colonial churches and the slow river give it an atmosphere found nowhere else in the Colombian Caribbean.">Patrimonio de la Humanidad por la UNESCO desde 1995, Mompox es un pueblo que inspiró a García Márquez y que aún hoy parece detenido en otro siglo. Las calles empedradas, las iglesias coloniales y el río lento le dan una atmósfera que no se encuentra en ningún otro lugar del Caribe colombiano.</p></div>
       <div class="mompox-map-grid">
         <div class="river-map reveal" id="river-map">
           <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
@@ -1012,14 +1042,14 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
       </div>
       <div class="festivals-row reveal">
         <div class="eyebrow" style="color: var(--brass-light);" data-en="Festivals &amp; celebrations">Fiestas y festivales</div>
-        <h3 class="chapter-title on-dark" style="font-size: clamp(1.7rem, 3.5vw, 2.6rem); margin-bottom: 32px;">El calendario <em>momposino</em></h3>
+        <h3 class="chapter-title on-dark" style="font-size: clamp(1.7rem, 3.5vw, 2.6rem); margin-bottom: 32px;" data-en="The <em>momposino</em> calendar">El calendario <em>momposino</em></h3>
         <div class="festivals-grid">
-          <div class="festival-card next"><div class="icon">🙏</div><h5>Semana Santa</h5><div class="date">29 mar – 6 abr 2026</div><p>La segunda más importante de Colombia. Procesiones de las siete iglesias, Paso Robado, Serenata a los Difuntos.</p></div>
-          <div class="festival-card"><div class="icon">🎵</div><h5>Festival Totó la Momposina</h5><div class="date">19–21 jul 2026</div><p>Homenaje a la legendaria cantante. Cumbia, bullerengue, porro y mapalé en las plazas.</p></div>
-          <div class="festival-card"><div class="icon">🎷</div><h5>Festijazz Mompox</h5><div class="date">3–5 sep 2026</div><p>Jazz en iglesias y plazas coloniales. Conciertos al aire libre junto al Magdalena.</p></div>
-          <div class="festival-card"><div class="icon">💃</div><h5>El Cumbión</h5><div class="date">Todo el año · especial dic</div><p>Desfile pueblo-entero al ritmo de cumbia. La música no para, todos bailan.</p></div>
-          <div class="festival-card"><div class="icon">✨</div><h5>Navidad momposina</h5><div class="date">Diciembre 2026</div><p>Luces, novenas, puestos de comida y música en la plaza cada noche.</p></div>
-          <div class="festival-card"><div class="icon">🇨🇴</div><h5>Independencia de Mompox</h5><div class="date">6 ago 2026</div><p>Primera ciudad en proclamar la independencia (1810) bajo "Ser libres o morir".</p></div>
+          <div class="festival-card next"><div class="icon">🙏</div><h5 data-en="Holy Week">Semana Santa</h5><div class="date" data-en="Mar 29 – Apr 6 2026">29 mar – 6 abr 2026</div><p data-en="Colombia's second most important Holy Week. Processions of the seven churches, Stolen Effigy, Serenade to the Departed.">La segunda más importante de Colombia. Procesiones de las siete iglesias, Paso Robado, Serenata a los Difuntos.</p></div>
+          <div class="festival-card"><div class="icon">🎵</div><h5 data-en="Totó la Momposina Festival">Festival Totó la Momposina</h5><div class="date" data-en="Jul 19–21 2026">19–21 jul 2026</div><p data-en="Tribute to the legendary singer. Cumbia, bullerengue, porro and mapalé in the plazas.">Homenaje a la legendaria cantante. Cumbia, bullerengue, porro y mapalé en las plazas.</p></div>
+          <div class="festival-card"><div class="icon">🎷</div><h5 data-en="Festijazz Mompox">Festijazz Mompox</h5><div class="date" data-en="Sep 3–5 2026">3–5 sep 2026</div><p data-en="Jazz in colonial churches and plazas. Open-air concerts beside the Magdalena.">Jazz en iglesias y plazas coloniales. Conciertos al aire libre junto al Magdalena.</p></div>
+          <div class="festival-card"><div class="icon">💃</div><h5 data-en="El Cumbión">El Cumbión</h5><div class="date" data-en="All year · especially Dec">Todo el año · especial dic</div><p data-en="Whole-town parade to the rhythm of cumbia. The music never stops, everyone dances.">Desfile pueblo-entero al ritmo de cumbia. La música no para, todos bailan.</p></div>
+          <div class="festival-card"><div class="icon">✨</div><h5 data-en="Momposino Christmas">Navidad momposina</h5><div class="date" data-en="December 2026">Diciembre 2026</div><p data-en="Lights, novenas, food stalls and music in the plaza every night.">Luces, novenas, puestos de comida y música en la plaza cada noche.</p></div>
+          <div class="festival-card"><div class="icon">🇨🇴</div><h5 data-en="Independence of Mompox">Independencia de Mompox</h5><div class="date" data-en="Aug 6 2026">6 ago 2026</div><p data-en="First city to proclaim independence (1810) under "To be free or to die".">Primera ciudad en proclamar la independencia (1810) bajo "Ser libres o morir".</p></div>
         </div>
       </div>
     </div>
@@ -1028,7 +1058,7 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
 
 <!-- INTERSTITIAL 2 -->
 <section class="interstitial" style="background-image: url('assets/mompox-colonial-street.jpg');">
-  <div><p class="interstitial-quote" id="quote-2">Por Mompox no se pasa, a Mompox se llega.</p><p class="interstitial-attrib">— Dicho momposino</p></div>
+  <div><p class="interstitial-quote" id="quote-2" data-en="You don't pass through Mompox — you arrive at Mompox.">Por Mompox no se pasa, a Mompox se llega.</p><p class="interstitial-attrib" data-en="— Momposino saying">— Dicho momposino</p></div>
 </section>
 
 
@@ -1086,25 +1116,25 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
     <div class="reveal"><div class="eyebrow">Capítulo Quinto</div><h2 class="chapter-title">El sabor del <em>Caribe fluvial</em></h2><p class="chapter-hand">Bocachico del Magdalena, casabito, queso de capa y vino de corozo</p><div class="fleuron">✦ ❦ ✦</div></div>
     <div class="sabores-grid">
       <div class="sabores-list reveal">
-        <div class="sabor-item"><h5>Bocachico</h5><p>Pescado del Magdalena, base de la cocina momposina. En guiso, asado o frito — sabe a río.</p></div>
-        <div class="sabor-item"><h5>Casabito</h5><p>Tortilla de yuca cruda, queso, coco y azúcar. El snack callejero por excelencia.</p></div>
-        <div class="sabor-item"><h5>Queso de capa</h5><p>Queso hilado, elástico, con más de 100 años de tradición artesanal.</p></div>
-        <div class="sabor-item"><h5>Corozo</h5><p>Fruto de palma caribeña. Vino, jugo y dulce. Color rubí intenso.</p></div>
-        <div class="sabor-item"><h5>Arepa 'e huevo</h5><p>Arepa frita rellena de huevo. Patrimonio caribe. Peligrosamente adictiva.</p></div>
-        <div class="sabor-item"><h5>Butifarra</h5><p>Salchicha seca y curada de origen español, adaptada al Caribe colombiano.</p></div>
-        <div class="sabor-item"><h5>Cayeye</h5><p>Plátano verde machacado con queso costeño y mantequilla. El desayuno del trabajador.</p></div>
-        <div class="sabor-item"><h5>Carimañola</h5><p>Rollo frito de yuca relleno de queso o carne. Crujiente por fuera, cremoso por dentro.</p></div>
+        <div class="sabor-item"><h5>Bocachico</h5><p data-en="River fish from the Magdalena, the base of momposino cooking. In stew, grilled or fried — it tastes of river.">Pescado del Magdalena, base de la cocina momposina. En guiso, asado o frito — sabe a río.</p></div>
+        <div class="sabor-item"><h5>Casabito</h5><p data-en="Flatbread of raw cassava, cheese, coconut and sugar. The quintessential street snack.">Tortilla de yuca cruda, queso, coco y azúcar. El snack callejero por excelencia.</p></div>
+        <div class="sabor-item"><h5>Queso de capa</h5><p data-en="Stretched, elastic cheese with over 100 years of artisanal tradition.">Queso hilado, elástico, con más de 100 años de tradición artesanal.</p></div>
+        <div class="sabor-item"><h5>Corozo</h5><p data-en="Caribbean palm fruit. Wine, juice and sweet. Intense ruby colour.">Fruto de palma caribeña. Vino, jugo y dulce. Color rubí intenso.</p></div>
+        <div class="sabor-item"><h5>Arepa 'e huevo</h5><p data-en="Fried arepa stuffed with egg. Caribbean heritage. Dangerously addictive.">Arepa frita rellena de huevo. Patrimonio caribe. Peligrosamente adictiva.</p></div>
+        <div class="sabor-item"><h5>Butifarra</h5><p data-en="Dry cured sausage of Spanish origin, adapted to the Colombian Caribbean.">Salchicha seca y curada de origen español, adaptada al Caribe colombiano.</p></div>
+        <div class="sabor-item"><h5>Cayeye</h5><p data-en="Mashed green plantain with coastal cheese and butter. The worker's breakfast.">Plátano verde machacado con queso costeño y mantequilla. El desayuno del trabajador.</p></div>
+        <div class="sabor-item"><h5>Carimañola</h5><p data-en="Fried cassava roll stuffed with cheese or meat. Crisp outside, creamy inside.">Rollo frito de yuca relleno de queso o carne. Crujiente por fuera, cremoso por dentro.</p></div>
       </div>
       <div class="sabores-img reveal delay-1"><img src="assets/momposina-food.png" alt="Comida momposina"></div>
     </div>
-    <div class="reveal" style="margin-top:80px;"><div class="eyebrow center">Senderos · Qué hacer desde Literatium</div><h3 class="chapter-title" style="text-align:center; font-size: clamp(1.7rem, 3.5vw, 2.6rem);">Paseos, río, filigrana <em>y atardeceres</em></h3><p style="font-family: var(--font-body); color: var(--espresso-light); max-width:620px; margin: 18px auto 0; text-align:center;">Desde Literatium te ayudamos a organizar cada experiencia. Martica o alguien de su equipo pueden coordinar cualquiera de estos paseos — solo pregunta en recepción.</p></div>
+    <div class="reveal" style="margin-top:80px;"><div class="eyebrow center" data-en="Paths · Things to do from Literatium">Senderos · Qué hacer desde Literatium</div><h3 class="chapter-title" style="text-align:center; font-size: clamp(1.7rem, 3.5vw, 2.6rem);" data-en="Tours, river, filigree <em>and sunsets</em>">Paseos, río, filigrana <em>y atardeceres</em></h3><p style="font-family: var(--font-body); color: var(--espresso-light); max-width:620px; margin: 18px auto 0; text-align:center;" data-en="From Literatium we help you arrange every experience. Martica or someone from her team can coordinate any of these excursions — just ask at reception.">Desde Literatium te ayudamos a organizar cada experiencia. Martica o alguien de su equipo pueden coordinar cualquiera de estos paseos — solo pregunta en recepción.</p></div>
     <div class="senderos-list reveal delay-1">
-      <div class="sendero"><div class="num">SENDEROS · I</div><h5>Ciénaga de Pijiño</h5><p>Medio día en lancha por el brazo del Magdalena hasta la ciénaga. Más de 300 especies de aves — garzas, martín pescador, ibis, babillas y, con suerte, el mono aullador al amanecer.</p></div>
-      <div class="sendero"><div class="num">SENDEROS · II</div><h5>Paseo en champán por el Magdalena</h5><p>El atardecer desde el río es la imagen que se queda de Mompox. Lanchas tradicionales con techo de palma y bancos de madera. Sale una hora antes del ocaso.</p></div>
-      <div class="sendero"><div class="num">SENDEROS · III</div><h5>Taller de filigrana momposina</h5><p>Tres horas con un maestro artesano tejiendo hilos de plata hasta formar tu propia pieza — un anillo, un dije, unos aretes. Tradición de más de 300 años. Te llevas la joya.</p></div>
-      <div class="sendero"><div class="num">SENDEROS · IV</div><h5>Recorrido por las seis iglesias</h5><p>Santa Bárbara con su torre barroca, la Inmaculada junto al río, San Francisco, San Agustín, San Juan de Dios y Santo Domingo. Cada una guarda una historia. A pie o en tuk-tuk.</p></div>
-      <div class="sendero"><div class="num">SENDEROS · V</div><h5>Caminata por la Albarrada</h5><p>El muro de piedra que contiene al río es también la calle más bella de Mompox. Casas-tienda del siglo XVII se alinean sobre la albarrada, y al atardecer todo se vuelve dorado.</p></div>
-      <div class="sendero"><div class="num">SENDEROS · VI</div><h5>Crucero a las comunidades campesinas</h5><p>Cruzar el río en lancha pública hasta las comunidades que cultivan las hortalizas de Mompox. Compartir pescado con arroz de coco con una familia local. Turismo comunitario auténtico.</p></div>
+      <div class="sendero"><div class="num">SENDEROS · I</div><h5 data-en="Ciénaga de Pijiño">Ciénaga de Pijiño</h5><p data-en="Half a day by boat down the arm of the Magdalena to the lagoon. Over 300 bird species — herons, kingfishers, ibis, caimans and, if you're lucky, the howler monkey at dawn.">Medio día en lancha por el brazo del Magdalena hasta la ciénaga. Más de 300 especies de aves — garzas, martín pescador, ibis, babillas y, con suerte, el mono aullador al amanecer.</p></div>
+      <div class="sendero"><div class="num">SENDEROS · II</div><h5 data-en="Champán boat ride on the Magdalena">Paseo en champán por el Magdalena</h5><p data-en="The sunset from the river is the image that stays with you from Mompox. Traditional boats with palm-leaf roofs and wooden benches. Departs an hour before sunset.">El atardecer desde el río es la imagen que se queda de Mompox. Lanchas tradicionales con techo de palma y bancos de madera. Sale una hora antes del ocaso.</p></div>
+      <div class="sendero"><div class="num">SENDEROS · III</div><h5 data-en="Mompox filigree workshop">Taller de filigrana momposina</h5><p data-en="Three hours with a master artisan weaving silver threads into your own piece — a ring, a pendant, a pair of earrings. Over 300 years of tradition. You take the jewel home.">Tres horas con un maestro artesano tejiendo hilos de plata hasta formar tu propia pieza — un anillo, un dije, unos aretes. Tradición de más de 300 años. Te llevas la joya.</p></div>
+      <div class="sendero"><div class="num">SENDEROS · IV</div><h5 data-en="Tour of the six churches">Recorrido por las seis iglesias</h5><p data-en="Santa Bárbara with its baroque tower, the Inmaculada by the river, San Francisco, San Agustín, San Juan de Dios and Santo Domingo. Each holds a story. On foot or by tuk-tuk.">Santa Bárbara con su torre barroca, la Inmaculada junto al río, San Francisco, San Agustín, San Juan de Dios y Santo Domingo. Cada una guarda una historia. A pie o en tuk-tuk.</p></div>
+      <div class="sendero"><div class="num">SENDEROS · V</div><h5 data-en="Walk along the Albarrada">Caminata por la Albarrada</h5><p data-en="The stone wall that holds back the river is also the most beautiful street in Mompox. 17th-century house-shops line the albarrada, and at sunset everything turns golden.">El muro de piedra que contiene al río es también la calle más bella de Mompox. Casas-tienda del siglo XVII se alinean sobre la albarrada, y al atardecer todo se vuelve dorado.</p></div>
+      <div class="sendero"><div class="num">SENDEROS · VI</div><h5 data-en="Boat trip to farming communities">Crucero a las comunidades campesinas</h5><p data-en="Cross the river on a public boat to the communities that grow Mompox's vegetables. Share fish with coconut rice with a local family. Authentic community tourism.">Cruzar el río en lancha pública hasta las comunidades que cultivan las hortalizas de Mompox. Compartir pescado con arroz de coco con una familia local. Turismo comunitario auténtico.</p></div>
     </div>
   </div>
 </section>
@@ -1206,7 +1236,7 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
         <p style="font-family: var(--font-hand); font-style: italic; font-size: 1.6rem; color: var(--brass-light); line-height: 1.3; margin-bottom: 18px;">Del mar al río, del uniforme al libro — mismo código de honor.</p>
         <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--parchment); margin-bottom: 4px;" data-en="Mr Felipe Cadena">Sr Felipe Cadena</h3>
         <div style="font-family: var(--font-caps); font-size: 0.65rem; letter-spacing: 0.32em; color: var(--brass-light); opacity: 0.7; margin-bottom: 20px;">Fundador · Oficial de la Armada Colombiana</div>
-        <p style="font-family: var(--font-body); font-size: 0.98rem; line-height: 1.75; color: var(--parchment); opacity: 0.9;">Felipe Cadena es un oficial de carrera de la Armada Colombiana — hombre de mar y de disciplina. Nació en Huila, donde su familia cultiva café desde generaciones. Ese café, el "café único" de la finca familiar, es el que se sirve cada mañana en Literatium. Cuando conoció Mompox, supo que aquí estaba su refugio: un lugar donde la calma del río Magdalena se encuentra con el mundo de los libros. Del mar al río, del uniforme al libro — mismo sentido de orden, mismo amor por lo bien hecho.</p>
+        <p style="font-family: var(--font-body); font-size: 0.98rem; line-height: 1.75; color: var(--parchment); opacity: 0.9;" data-en="Felipe Cadena is a career officer in the Colombian Navy — a man of the sea and of discipline. He was born in Huila">Felipe Cadena es un oficial de carrera de la Armada Colombiana — hombre de mar y de disciplina. Nació en Huila, donde su familia cultiva café desde generaciones. Ese café, el "café único" de la finca familiar, es el que se sirve cada mañana en Literatium. Cuando conoció Mompox, supo que aquí estaba su refugio: un lugar donde la calma del río Magdalena se encuentra con el mundo de los libros. Del mar al río, del uniforme al libro — mismo sentido de orden, mismo amor por lo bien hecho.</p>
       </div>
     </div>
 
@@ -1217,7 +1247,7 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
         <p style="font-family: var(--font-hand); font-style: italic; font-size: 1.6rem; color: var(--brass-light); line-height: 1.3; margin-bottom: 18px;">La calma detrás de cada detalle — el alma de la casa.</p>
         <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--parchment); margin-bottom: 4px;" data-en="Mrs Nelcy">Sra Nelcy</h3>
         <div style="font-family: var(--font-caps); font-size: 0.65rem; letter-spacing: 0.32em; color: var(--brass-light); opacity: 0.7; margin-bottom: 20px;">Esposa de Felipe · Apoyo de la casa</div>
-        <p style="font-family: var(--font-body); font-size: 0.98rem; line-height: 1.75; color: var(--parchment); opacity: 0.9;">Nelcy es la serenidad caribeña detrás de Literatium. Mexicana de nacimiento, esposa de Felipe, su apoyo ha sido parte de cada decisión de la casa, desde el nombre hasta el último libro de la biblioteca. Su gusto por los detalles — las flores, los colores, el equilibrio entre lo colonial y lo literario — se respira en cada rincón.</p>
+        <p style="font-family: var(--font-body); font-size: 0.98rem; line-height: 1.75; color: var(--parchment); opacity: 0.9;" data-en="Nelcy is the Caribbean serenity behind Literatium. Mexican by birth, Felipe's wife, her support has been part of every decision in the house, from the name to the last book in the library. Her eye for detail — the flowers, the colours, the balance between the colonial and the literary — is felt in every corner.">Nelcy es la serenidad caribeña detrás de Literatium. Mexicana de nacimiento, esposa de Felipe, su apoyo ha sido parte de cada decisión de la casa, desde el nombre hasta el último libro de la biblioteca. Su gusto por los detalles — las flores, los colores, el equilibrio entre lo colonial y lo literario — se respira en cada rincón.</p>
       </div>
       <div style="position:relative; min-height:400px; background: url('assets/owner-nelcy.jpg') center/cover no-repeat; filter: sepia(0.2) contrast(1.05); border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px; box-shadow: 0 18px 40px rgba(0,0,0,0.5);"></div>
     </div>
@@ -1242,18 +1272,18 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
     <div class="reveal"><div class="eyebrow" style="color: var(--brass-light);" data-en="Final Chapter · The colophon">Capítulo Final · El colofón</div><h2 class="chapter-title on-dark">Tu próximo capítulo <em>empieza aquí</em></h2><div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div></div>
     <div class="colofon-grid">
       <div class="colofon-text reveal">
-        <p class="drop-cap" style="color: var(--parchment);">Escríbenos por WhatsApp para consultar disponibilidad, tarifas y fechas. Martica o alguien de su equipo te responderá personalmente — sin formularios, sin call centers, sin prisa. Aquí las cosas se hacen como se hacen en Mompox: despacio, con calma, con el corazón.</p>
-        <p>Para nosotros, hospedarte no es una transacción. Es la primera línea de una historia que tú vas a escribir desde La Casa de las Historias. Cuéntanos cuándo llegas, qué habitación te llama, qué senderos quieres caminar — y nosotros nos encargamos del resto.</p>
+        <p class="drop-cap" style="color: var(--parchment);" data-en="Message us on WhatsApp to ask about availability, rates and dates. Martica or someone from her team will answer you personally — no forms, no call centres, no rush. Here, things are done as they are done in Mompox: slowly, with calm, with heart.">Escríbenos por WhatsApp para consultar disponibilidad, tarifas y fechas. Martica o alguien de su equipo te responderá personalmente — sin formularios, sin call centers, sin prisa. Aquí las cosas se hacen como se hacen en Mompox: despacio, con calma, con el corazón.</p>
+        <p data-en="For us, hosting you is not a transaction. It is the first line of a story you will write from The House of Stories. Tell us when you arrive, which room calls to you, which paths you want to walk — and we will take care of the rest.">Para nosotros, hospedarte no es una transacción. Es la primera línea de una historia que tú vas a escribir desde La Casa de las Historias. Cuéntanos cuándo llegas, qué habitación te llama, qué senderos quieres caminar — y nosotros nos encargamos del resto.</p>
         <p style="font-family: var(--font-hand); font-size: 1.5rem; color: var(--brass-light); font-style: italic; margin-top: 24px;">— te esperamos en Mompox, junto al río —</p>
         <div class="colofon-cta"><a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary">WhatsApp +57 315 538 2112</a><a href="https://www.instagram.com/literatium/" target="_blank" rel="noopener" class="btn-ghost">@literatium</a></div>
       </div>
       <div class="booking-card reveal delay-1">
         <h4 data-en="Book details">Datos del libro</h4>
-        <div class="booking-row"><div class="icon">⌖</div><div><div class="label">Dirección</div><div class="value">Calle 21 #2-47, Santa Cruz de Mompox, Bolívar, Colombia</div></div></div>
-        <div class="booking-row"><div class="icon">☎</div><div><div class="label">WhatsApp</div><div class="value">+57 315 538 2112</div></div></div>
-        <div class="booking-row"><div class="icon">✦</div><div><div class="label">Inspiración</div><div class="value">El pueblo que soñó Macondo</div></div></div>
-        <div class="booking-row"><div class="icon">⌘</div><div><div class="label">Patrimonio</div><div class="value">UNESCO 1995 · Fundación 1537</div></div></div>
-        <div class="booking-row"><div class="icon">☕</div><div><div class="label">Café</div><div class="value">De la finca familiar en Huila</div></div></div>
+        <div class="booking-row"><div class="icon">⌖</div><div><div class="label" data-en="Address">Dirección</div><div class="value" data-en="Calle 21 #2-47, Santa Cruz de Mompox, Bolívar, Colombia">Calle 21 #2-47, Santa Cruz de Mompox, Bolívar, Colombia</div></div></div>
+        <div class="booking-row"><div class="icon">☎</div><div><div class="label" data-en="WhatsApp">WhatsApp</div><div class="value">+57 315 538 2112</div></div></div>
+        <div class="booking-row"><div class="icon">✦</div><div><div class="label" data-en="Inspiration">Inspiración</div><div class="value" data-en="The town that dreamt Macondo">El pueblo que soñó Macondo</div></div></div>
+        <div class="booking-row"><div class="icon">⌘</div><div><div class="label" data-en="Heritage">Patrimonio</div><div class="value" data-en="UNESCO 1995 · Founded 1537">UNESCO 1995 · Fundación 1537</div></div></div>
+        <div class="booking-row"><div class="icon">☕</div><div><div class="label">Café</div><div class="value" data-en="From the family farm in Huila">De la finca familiar en Huila</div></div></div>
       </div>
     </div>
     <div class="wax-seal" id="wax-seal" aria-hidden="true">
@@ -1267,8 +1297,8 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
   <img src="assets/favicon-180.png" alt="Literatium" style="width:50px;height:50px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:1px solid var(--brass);">
   <div class="footer-mark">Literatium</div>
   <div class="footer-fleuron">✦ ❦ ✦</div>
-  <div>La Casa de las Historias · Mompox · Bolívar · Colombia</div>
-  <div class="footer-meta">Hotel Boutique · Libros &amp; Café · UNESCO 1995<br>Calle 21 #2-47, Santa Cruz de Mompox · WhatsApp +57 315 538 2112 · @literatium</div>
+  <div data-en="The House of Stories · Mompox · Bolívar · Colombia">La Casa de las Historias · Mompox · Bolívar · Colombia</div>
+  <div class="footer-meta" data-en="Boutique Hotel · Books &amp; Coffee · UNESCO 1995<br>Calle 21 #2-47, Santa Cruz de Mompox · WhatsApp +57 315 538 2112 · @literatium">Hotel Boutique · Libros &amp; Café · UNESCO 1995<br>Calle 21 #2-47, Santa Cruz de Mompox · WhatsApp +57 315 538 2112 · @literatium</div>
   <button id="motion-toggle" onclick="toggleMotion()" data-en="Motion: ON">Animación: ON</button>
 </footer>
 
@@ -1465,6 +1495,34 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
     window.addEventListener('resize', updateBoatPosition);
     updateBoatPosition();
   }
+
+  
+  /* MOMPOX SUB-NAV — show when in Mompox family, track active */
+  const mompoxSubnav = document.getElementById('mompox-subnav');
+  const mompoxFamily = ['mompox', 'viaje', 'sabores', 'diccionario'];
+  const mompoxSubnavLinks = mompoxSubnav ? mompoxSubnav.querySelectorAll('a') : [];
+  function updateMompoxSubnav() {
+    if (!mompoxSubnav) return;
+    let inFamily = false;
+    let activeId = '';
+    mompoxFamily.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.5 && r.bottom > window.innerHeight * 0.3) {
+          inFamily = true;
+          activeId = id;
+        }
+      }
+    });
+    mompoxSubnav.classList.toggle('show', inFamily);
+    mompoxSubnavLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
+    });
+  }
+  window.addEventListener('scroll', updateMompoxSubnav, { passive: true });
+  window.addEventListener('resize', updateMompoxSubnav);
+  updateMompoxSubnav();
 
   /* 10a. MARQUEE — pause only when hovering a polaroid, not the whole section */
   document.querySelectorAll('.polaroid').forEach(function(pol) {
