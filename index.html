@@ -589,19 +589,38 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 .sendero h5 { font-family: var(--font-display); font-style: italic; font-size: 1.3rem; color: var(--forest); margin-bottom: 10px; line-height: 1.2; }
 .sendero p { font-family: var(--font-body); font-size: 0.9rem; line-height: 1.65; color: var(--espresso); }
 
-/* CARTAS */
+/* CARTAS — "Wall of Stories" — pinned letters with brass pins, wax seals, postmarks */
 #cartas { background: linear-gradient(180deg, var(--parchment-dark) 0%, var(--parchment-warm) 100%); position: relative; }
-.cartas-grid { margin-top: 50px; columns: 3; column-gap: 22px; }
-@media (max-width: 880px) { .cartas-grid { columns: 2; column-gap: 14px; } }
-@media (max-width: 540px) { .cartas-grid { columns: 1; } }
-.carta { break-inside: avoid; margin-bottom: 22px; background: var(--parchment-warm); padding: 28px 26px 30px; border: 1px solid var(--brass-dark); outline: 1px solid var(--brass); outline-offset: 5px; box-shadow: 0 12px 28px rgba(44,36,22,0.14); position: relative; transform: rotate(var(--rot, 0deg)); }
-.carta:nth-child(odd)  { --rot: -1deg; }
-.carta:nth-child(even) { --rot: 0.8deg; }
-.carta:nth-child(3n)   { --rot: -0.5deg; }
-.carta .quote-mark { font-family: var(--font-display); font-size: 3rem; line-height: 0.5; color: var(--brass); opacity: 0.4; margin-bottom: 8px; }
-.carta p { font-family: var(--font-body); font-style: italic; font-size: 0.98rem; line-height: 1.7; color: var(--espresso); }
-.carta .sign { margin-top: 16px; font-family: var(--font-hand); font-size: 1.15rem; color: var(--burgundy); }
-.carta .meta { margin-top: 4px; font-family: var(--font-caps); font-size: 0.6rem; letter-spacing: 0.25em; color: var(--espresso-light); }
+.cartas-grid { margin-top: 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 64px 34px; perspective: 1600px; }
+@media (max-width: 980px) { .cartas-grid { grid-template-columns: repeat(2, 1fr); gap: 52px 24px; } }
+@media (max-width: 600px) { .cartas-grid { grid-template-columns: 1fr; gap: 46px 0; } }
+.carta { --rot: -1.2deg; position: relative; transform: rotate(var(--rot)); transform-origin: 50% 4%; background: radial-gradient(circle at 14% 18%, rgba(114,47,55,0.07) 0 2px, transparent 3px), radial-gradient(circle at 78% 64%, rgba(139,101,32,0.09) 0 2px, transparent 3px), radial-gradient(circle at 38% 86%, rgba(114,47,55,0.05) 0 2px, transparent 4px), radial-gradient(circle at 92% 12%, rgba(139,101,32,0.07) 0 1.5px, transparent 2.5px), repeating-linear-gradient(115deg, rgba(139,101,32,0.02) 0 1px, transparent 1px 5px), linear-gradient(155deg, var(--parchment-warm) 0%, var(--parchment-dark) 100%); padding: 46px 30px 40px; clip-path: polygon(0% 2%,5% 0%,11% 1.4%,19% 0.3%,28% 1.5%,37% 0.5%,47% 1.3%,57% 0.4%,67% 1.5%,77% 0.6%,87% 1.2%,95% 0.3%,100% 1.4%,100% 97%,95% 98.6%,87% 96.7%,77% 99%,67% 96.7%,57% 99.2%,47% 96.8%,37% 99%,28% 96.6%,19% 99.1%,11% 96.9%,5% 98.7%,0% 96.5%); border: none; outline: none; box-shadow: inset 0 0 0 1px rgba(139,101,32,0.18), 0 1px 0 rgba(0,0,0,0.05), 0 14px 30px rgba(44,36,22,0.16), 0 30px 60px -22px rgba(44,36,22,0.22); transition: transform .55s cubic-bezier(.2,.85,.25,1), box-shadow .55s ease; will-change: transform; }
+.carta:nth-child(1) { --rot: -1.8deg; }
+.carta:nth-child(2) { --rot: 1.1deg; }
+.carta:nth-child(3) { --rot: -0.6deg; }
+.carta:nth-child(4) { --rot: 1.6deg; }
+.carta:nth-child(5) { --rot: -1.2deg; }
+.carta:nth-child(6) { --rot: 0.7deg; }
+.carta::before { content: ''; position: absolute; top: 10px; left: 50%; width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #F5E1A4 0%, #DDB95E 35%, #8B6520 75%, #5C4314 100%); box-shadow: 0 2px 3px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.28), inset 0 -2px 4px rgba(0,0,0,0.45); transform: translateX(-50%); z-index: 3; transition: background .4s ease; }
+.carta::after { content: '❦'; position: absolute; bottom: 22px; right: 22px; width: 54px; height: 54px; display: grid; place-items: center; font-family: var(--font-display); font-size: 1.5rem; line-height: 1; color: rgba(242,232,207,0.92); background: radial-gradient(circle at 38% 32%, #9B444C 0%, #722F37 45%, #4E1F25 100%); border-radius: 50%; box-shadow: 0 0 0 2px rgba(78,31,37,0.6), 0 0 0 3px rgba(114,47,55,0.22), 0 3px 8px rgba(0,0,0,0.35), inset 0 -3px 6px rgba(0,0,0,0.42), inset 0 2px 4px rgba(255,255,255,0.18); transform: rotate(-12deg); z-index: 3; transition: transform .4s cubic-bezier(.2,.85,.25,1); }
+.carta[data-seal]::after { content: attr(data-seal); font-family: var(--font-script); font-size: 1.95rem; text-shadow: 0 1px 1px rgba(0,0,0,0.4); }
+.carta .meta { position: absolute; top: 14px; right: 16px; width: 64px; height: 64px; display: grid; place-items: center; font-family: var(--font-caps); font-size: 0.5rem; letter-spacing: 0.14em; line-height: 1.25; text-align: center; color: var(--burgundy); border: 1.4px dashed var(--burgundy); border-radius: 50%; opacity: 0.74; transform: rotate(9deg); padding: 4px; pointer-events: none; -webkit-mask-image: radial-gradient(circle at 60% 40%, #000 78%, transparent 100%); mask-image: radial-gradient(circle at 60% 40%, #000 78%, transparent 100%); transition: transform .4s ease, opacity .4s ease; }
+@media (max-width: 600px) { .carta .meta { width: 54px; height: 54px; font-size: 0.45rem; } }
+.carta .quote-mark { font-family: var(--font-display); font-style: italic; font-size: 3.4rem; line-height: 0.6; color: var(--brass); opacity: 0.28; margin: 0 0 4px; max-width: 68%; }
+.carta p { font-family: var(--font-body); font-style: italic; font-size: 1.02rem; line-height: 1.78; color: var(--espresso); padding-right: 58px; }
+@media (max-width: 600px) { .carta p { padding-right: 0; } }
+.carta .sign { margin-top: 18px; font-family: var(--font-script); font-size: 1.85rem; line-height: 1; color: var(--burgundy); text-shadow: 0 1px 0 rgba(114,47,55,0.08); padding-right: 60px; }
+/* Pin-drop + ink-bleed reveal */
+.js .cartas-grid .carta { opacity: 0; filter: blur(7px); transform: rotate(var(--rot)) translateY(32px) scale(0.97); transition: opacity .9s ease, filter 1.1s ease, transform 1s cubic-bezier(.2,.85,.25,1); }
+.js .cartas-grid.in-view .carta { opacity: 1; filter: blur(0); transform: rotate(var(--rot)) translateY(0) scale(1); }
+.js .cartas-grid.in-view .carta:nth-child(1) { transition-delay: 0.04s; }
+.js .cartas-grid.in-view .carta:nth-child(2) { transition-delay: 0.16s; }
+.js .cartas-grid.in-view .carta:nth-child(3) { transition-delay: 0.28s; }
+.js .cartas-grid.in-view .carta:nth-child(4) { transition-delay: 0.40s; }
+.js .cartas-grid.in-view .carta:nth-child(5) { transition-delay: 0.52s; }
+.js .cartas-grid.in-view .carta:nth-child(6) { transition-delay: 0.64s; }
+@media (hover: hover) { .carta:hover { transform: rotate(0deg) translateY(-8px) scale(1.02) !important; box-shadow: inset 0 0 0 1px rgba(139,101,32,0.22), 0 2px 0 rgba(0,0,0,0.05), 0 28px 50px rgba(44,36,22,0.26), 0 50px 90px -28px rgba(44,36,22,0.30); z-index: 5; } .carta:hover::before { background: radial-gradient(circle at 30% 25%, #FFF6D8 0%, #F5E1A4 30%, #DDB95E 60%, #8B6520 100%); } .carta:hover::after { transform: rotate(-6deg) scale(1.05); } .carta:hover .meta { transform: rotate(4deg); opacity: 0.88; } }
+html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !important; transform: rotate(var(--rot)) !important; transition: none !important; }
 
 /* COLOFÓN */
 #colofon { background: linear-gradient(180deg, var(--forest) 0%, var(--forest-dark) 100%); color: var(--parchment); position: relative; overflow: hidden; }
@@ -696,7 +715,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
     <h1 class="hero-script-title"><span class="word">La</span> <span class="word">Casa</span></h1>
     <div class="hero-subtitle" data-en="of Stories">de las Historias</div>
     <p class="hero-hand" data-en="— where time stops between the pages">— donde el tiempo se detiene entre las páginas</p>
-    <p class="hero-body drop-cap">Muchos años después, frente al murmullo del Magdalena, el viajero habría de recordar aquella remota tarde en que llegó a Literatium y descubrió que aquí, entre libros y café, el tiempo no pasa — sino que se queda, como el calor sobre las piedras del río. Cada rincón cuenta una historia. Cada mañana, un café único de nuestra finca en Huila. Cada atardecer, el Magdalena derramándose como tinta dorada sobre el mundo.</p>
+    <p class="hero-body drop-cap">Hay lugares que se recuerdan antes de conocerlos. Literatium es uno de ellos: una casa colonial a orillas del Magdalena, donde los libros, el café y el río marcan el ritmo de los días. Cada rincón cuenta una historia. Cada mañana, un café único de nuestra finca en Huila. Cada atardecer, el Magdalena volviéndose oro sobre el agua.</p>
     <div class="hero-cta">
       <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary" data-en="Book on WhatsApp">Reservar por WhatsApp</a>
       <a href="#casa" class="btn-ghost" data-en="Discover the house ↓">Descubre la casa ↓</a>
@@ -724,10 +743,10 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
     <div class="reveal"><div class="eyebrow" data-en="Chapter One">Capítulo Primero</div><h2 class="chapter-title">Un refugio donde cada página <em>es una mañana</em></h2><p class="chapter-hand">La Casa de las Historias</p><div class="fleuron">✦ ❦ ✦</div></div>
     <div class="casa-grid">
       <div class="body-text reveal">
-        <p class="drop-cap">Literatium nació, como nacen todas las historias que merecen contarse, del amor por los libros, el café y un pueblo que a veces parece soñado. Felipe Cadena, fundador y hombre de mar — oficial de la Armada Colombiana — soñaba con un lugar donde la calma del río Magdalena se encontrara con el mundo de las letras. Y un día, sin que nadie supiera exactamente cómo, el sueño se hizo casa. Así nació La Casa de las Historias.</p>
-        <p>La casa colonial se transformó despacio, como se transforman los pueblos que se resisten a morir: cada habitación tiene libros, cada rincón invita a leer. El jardín se volvió refugio. La biblioteca, punto de encuentro. Y el café — un café único de la finca familiar en Huila — se convirtió en el alma de la casa, en la primera palabra de cada mañana.</p>
-        <p><em>Estamos un poco apartados del centro histórico — y eso es exactamente lo que nos hace especiales. Aquí no llega el ruido del pueblo. Llega el canto de los pájaros, el aroma del café, y el susurro de las páginas. Una pausa en el tiempo, a minutos de todo.</em></p>
-        <div class="marginalia">— aquí, el tiempo se mide en tazas de café, no en horas —</div>
+        <p class="drop-cap">Literatium nació del amor por tres cosas: los libros, el café y Mompox. Felipe Cadena, fundador y hombre de mar — oficial de la Armada Colombiana — soñaba con un lugar donde la calma del río Magdalena se encontrara con el mundo de las letras. Lo encontró en una casa colonial a orillas del río, y poco a poco esa casa se fue llenando de historias. Así nació La Casa de las Historias.</p>
+        <p>La casa colonial se transformó despacio. Cada habitación tiene libros; cada rincón invita a leer. El jardín se volvió refugio. La biblioteca, punto de encuentro. Y el café — un café único de la finca familiar en Huila — se convirtió en el alma de la casa, en la primera palabra de cada mañana.</p>
+        <p><em>Estamos un poco apartados del centro histórico — y eso es exactamente lo que nos hace especiales. Aquí no llega el ruido del pueblo. Llega el canto de los pájaros, el aroma del café, y de vez en cuando, el rumor de una página que se vuelve en el jardín. Una pausa, a minutos de todo.</em></p>
+        <div class="marginalia">— aquí, las mañanas se cuentan por tazas de café —</div>
       </div>
       <div class="casa-stats reveal delay-1">
         <div class="stat-card"><div class="value">9.5</div><div class="label">Puntuación · 151+ reseñas</div></div>
@@ -737,12 +756,12 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
       </div>
     </div>
     <div class="spaces-mosaic reveal">
-      <figure class="space-plate"><div class="space-plate-num">PLATE I</div><img src="assets/real-lobby-arches.webp" alt="Arcos coloniales de hierro forjado"><figcaption class="space-caption"><h4>Arcos que susurran</h4><p>El primer paso — donde la calma te recibe entre hierro y madera, como una promesa.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num">PLATE II</div><img src="assets/space-moody-entrance.webp" alt="Lámpara colgante iluminando la entrada"><figcaption class="space-caption"><h4>Luz suspendida</h4><p>La lámpara cuelga como una constelación sobre el silencio de la tarde.</p></figcaption></figure>
+      <figure class="space-plate"><div class="space-plate-num">PLATE I</div><img src="assets/real-lobby-arches.webp" alt="Arcos coloniales de hierro forjado"><figcaption class="space-caption"><h4>Arcos que susurran</h4><p>El primer paso — la calma te recibe entre hierro y madera.</p></figcaption></figure>
+      <figure class="space-plate"><div class="space-plate-num">PLATE II</div><img src="assets/space-moody-entrance.webp" alt="Lámpara colgante iluminando la entrada"><figcaption class="space-caption"><h4>Luz suspendida</h4><p>La lámpara cuelga quieta sobre el silencio de la tarde.</p></figcaption></figure>
       <figure class="space-plate"><div class="space-plate-num">PLATE III</div><img src="assets/space-recepcion.webp" alt="Butacas de mimbre junto a una pared de libros"><figcaption class="space-caption"><h4>Mimbre y libros</h4><p>Butacas que invitan a quedarse — toda una pared de historias que esperan ser leídas.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num">PLATE IV</div><img src="assets/space-corredor.webp" alt="Corredor cubierto con helechos colgantes"><figcaption class="space-caption"><h4>Helechos y ladrillo</h4><p>Plantas que cuelgan como páginas verdes del techo, meciéndose con la brisa del río.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num">PLATE V</div><img src="assets/guest-chillin.webp" alt="Huésped leyendo en un rincón"><figcaption class="space-caption"><h4>El rincón del descanso</h4><p>Donde el tiempo se inclina sobre una página abierta y olvida su oficio.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num">PLATE VI</div><img src="assets/space-zona-verde.webp" alt="Jardín tropical con faroles"><figcaption class="space-caption"><h4>El jardín secreto</h4><p>Tropical y callado — donde los grillos escriben el final del día con tinta de luz.</p></figcaption></figure>
+      <figure class="space-plate"><div class="space-plate-num">PLATE IV</div><img src="assets/space-corredor.webp" alt="Corredor cubierto con helechos colgantes"><figcaption class="space-caption"><h4>Helechos y ladrillo</h4><p>Helechos que cuelgan del techo y se mecen con la brisa del río.</p></figcaption></figure>
+      <figure class="space-plate"><div class="space-plate-num">PLATE V</div><img src="assets/guest-chillin.webp" alt="Huésped leyendo en un rincón"><figcaption class="space-caption"><h4>El rincón del descanso</h4><p>El rincón donde uno se sienta con un libro y olvida la hora.</p></figcaption></figure>
+      <figure class="space-plate"><div class="space-plate-num">PLATE VI</div><img src="assets/space-zona-verde.webp" alt="Jardín tropical con faroles"><figcaption class="space-caption"><h4>El jardín secreto</h4><p>Tropical y callado — al anochecer, los grillos son la única conversación.</p></figcaption></figure>
     </div>
     <article class="martica-card reveal">
       <div class="martica-card-img" role="img" aria-label="Retrato de Martica"></div>
@@ -792,11 +811,11 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
     <div class="cafe-grid">
       <div class="cafe-image-wrap reveal"><div class="cafe-steam" aria-hidden="true"><span></span><span></span><span></span></div><img src="assets/coffee-farm-huila.jpg" alt="Café de Huila — la finca familiar"></div>
       <div class="body-text reveal delay-1">
-        <p class="drop-cap">En las montañas de Huila, donde los Andes se inclinan para mirar el río y el aire huele a café y a tierra húmeda, la familia Cadena cultiva café desde antes de que Gabriel García Márquez soñara con Macondo. No es una finca grande — es una finca familiar, donde cada grano se cosecha a mano y se tuesta en lotes pequeños, como quien escribe un libro a pulso, página por página.</p>
+        <p class="drop-cap">En las montañas de Huila, donde los Andes se inclinan hacia el río y el aire huele a café y a tierra húmeda, la familia Cadena cultiva café desde hace generaciones. No es una finca grande — es una finca familiar, donde cada grano se cosecha a mano y se tuesta en lotes pequeños, con la paciencia de quien escribe un libro a pulso, página por página.</p>
         <p>Felipe lo trae desde Huila hasta Mompox, cruzando Colombia de cordillera a río. Lo llama <em>"café único"</em> — no porque sea el único del mundo, sino porque cada taza cuenta la historia de la familia, de la finca, del viaje. Un café que sabe a monte, a lluvia, a mañana.</p>
-        <p class="cafe-tagline">"En Literatium, el café no es una bebida. Es un ritual que abre cada mañana como se abre un libro."</p>
+        <p class="cafe-tagline">"En Literatium, el café no es solo una bebida: es el ritual que abre cada mañana, la primera página del día."</p>
         <div class="cafe-tag">Café único · De la finca a tu taza</div>
-        <div class="marginalia right">— del monte al río, de la finca al libro, del sueño al despertar —</div>
+        <div class="marginalia right">— del monte de Huila, al río de Mompox, a tu taza —</div>
       </div>
     </div>
     <div class="reveal" style="margin-top:70px;"><div class="eyebrow center">El desayuno · El primer capítulo del día</div><h3 class="chapter-title" style="text-align:center; font-size: clamp(1.6rem, 3vw, 2.4rem);">Servido en el comedor colonial o en el jardín, <em>junto a los murales</em></h3></div>
@@ -882,7 +901,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
     <div class="folio-number" style="color: var(--brass-light);" data-en="Folio V · Mompox">Folio V · Mompox</div>
     <div class="page-curl" data-next="sabores" role="button" tabindex="0"><svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill="#DDB95E" opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill="#0F2419"/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke="#DDB95E" stroke-width="1" fill="none" opacity="0.7"/></svg><span class="page-curl-label">turn →</span></div>
     <div class="folio-inner">
-      <div class="reveal"><div class="eyebrow" style="color: var(--brass-light);">El mapa del río</div><h3 class="chapter-title on-dark">Santa Cruz de Mompox — <em>fundada 1537</em></h3><p style="font-family: var(--font-body); color: var(--parchment); opacity:0.85; max-width:640px; margin-top:18px; font-size:1.05rem; line-height:1.8;">Patrimonio de la Humanidad por la UNESCO desde 1995, Mompox es el pueblo que inspiró a García Márquez el realismo mágico de Macondo. Aquí, las calles empedradas, las iglesias coloniales y el río lento crean una atmósfera que no se encuentra en ningún otro lugar — donde lo extraordinario se cuenta como cotidiano, y lo cotidiano esconde milagros.</p></div>
+      <div class="reveal"><div class="eyebrow" style="color: var(--brass-light);">El mapa del río</div><h3 class="chapter-title on-dark">Santa Cruz de Mompox — <em>fundada 1537</em></h3><p style="font-family: var(--font-body); color: var(--parchment); opacity:0.85; max-width:640px; margin-top:18px; font-size:1.05rem; line-height:1.8;">Patrimonio de la Humanidad por la UNESCO desde 1995, Mompox es un pueblo que inspiró a García Márquez y que aún hoy parece detenido en otro siglo. Las calles empedradas, las iglesias coloniales y el río lento le dan una atmósfera que no se encuentra en ningún otro lugar del Caribe colombiano.</p></div>
       <div class="mompox-map-grid">
         <div class="river-map reveal" id="river-map">
           <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
@@ -940,7 +959,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
             <!-- Cartouche -->
             <g class="map-compass" transform="translate(200, 40)"><rect x="-60" y="-12" width="120" height="24" fill="rgba(247,240,220,0.6)" stroke="#8B6520" stroke-width="0.5"/><text x="0" y="0" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="11" fill="#2C2416" font-weight="600">Río Magdalena</text><text x="0" y="9" text-anchor="middle" font-family="IBM Plex Mono" font-size="6" fill="#8B6520">— el mapa se dibuja al leer —</text></g>
           </svg>
-          <p class="river-map-caption">— el río es el mapa, y el mapa es el río —</p>
+          <p class="river-map-caption">— el río es el mejor mapa de Mompox —</p>
         </div>
         <div class="mompox-stats reveal delay-1">
           <div class="lily-pad"><div class="value">1995</div><div class="label">Patrimonio UNESCO</div></div>
@@ -1030,17 +1049,17 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
     <!-- Feature quote — full-width, dramatic -->
     <div class="reveal delay-1" style="margin: 40px auto; max-width: 800px; text-align: center; position: relative; padding: 40px 20px;">
       <div style="font-family: var(--font-display); font-size: 6rem; color: var(--brass); opacity: 0.15; line-height: 0.5; position: absolute; top: 0; left: 50%; transform: translateX(-50%);">"</div>
-      <p style="font-family: var(--font-display); font-style: italic; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.4; color: var(--burgundy); position: relative; z-index: 2;" data-en="Many years later, faced with the murmur of the Magdalena, the traveller was to remember that remote afternoon when he arrived at Literatium and discovered that here, between books and coffee, time does not pass — it stays.">Muchos años después, frente al murmullo del Magdalena, el viajero habría de recordar aquella remota tarde en que llegó a Literatium y descubrió que aquí, entre libros y café, el tiempo no pasa — sino que se queda.</p>
+      <p style="font-family: var(--font-display); font-style: italic; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.4; color: var(--burgundy); position: relative; z-index: 2;" data-en="Many years later, faced with the murmur of the Magdalena, the traveller was to remember that remote afternoon when he arrived at Literatium and discovered that here, between books and coffee, time does not pass — it stays.">Aquí, entre libros y café, los días pierden su número. Solo importan las mañanas y los atardeceres.</p>
       <div style="margin-top: 16px; font-family: var(--font-caps); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--brass-dark);" data-en="— The first line, written by a guest">— La primera línea, escrita por un huésped</div>
     </div>
 
     <div class="cartas-grid reveal delay-1">
-      <article class="carta"><div class="quote-mark">"</div><p data-en="We came for one night and stayed four. It's the kind of place where the clock loses meaning, as if time had fallen asleep between the pages. The library, the garden, the coffee… everything asks you to stay one chapter more.">Llegamos por una noche y nos quedamos cuatro. Es el tipo de lugar donde el reloj pierde sentido, como si el tiempo se hubiera quedado dormido entre las páginas. La biblioteca, el jardín, el café… todo te pide quedarte un capítulo más.</p><div class="sign">— María y Andrés</div><div class="meta" data-en="Madrid · Spain">Madrid · España</div></article>
-      <article class="carta"><div class="quote-mark">"</div><p data-en="Martica arranged a champán boat ride at sunset. When the sun fell over the Magdalena, I understood what Gabo meant by Macondo. Here, magical realism is not literature — it's geography.">Martica nos organizó el paseo en champán al atardecer. Cuando el sol cayó sobre el Magdalena, entendí lo que Gabo quiso decir con Macondo. Aquí el realismo mágico no es literatura — es geografía.</p><div class="sign">— Thomas</div><div class="meta" data-en="Berlin · Germany">Berlín · Alemania</div></article>
-      <article class="carta"><div class="quote-mark">"</div><p data-en="The Huila coffee, served in the green ceramic, is the best welcome I've ever received at a hotel. And the books… books in every corner, as if the house itself had grown them like moss grows on river stones.">El café de Huila, servido en la cerámica verde, es la mejor bienvenida que he recibido en un hotel. Y los libros… libros en cada rincón, como si la casa misma los hubiera crecido como crece el musgo sobre las piedras del río.</p><div class="sign">— Camille</div><div class="meta" data-en="Lyon · France">Lyon · Francia</div></article>
-      <article class="carta"><div class="quote-mark">"</div><p data-en="The suite with tub and garden is a dream. But what stays with you is the sound: crickets at dusk, the bells of Santa Bárbara, the river in the background. The silence of Mompox, told in other words.">La suite con bañera y jardín es un sueño. Pero lo que se queda contigo es el sonido: los grillos al anochecer, las campanas de Santa Bárbara, el río al fondo. El silencio de Mompox, dicho en otras palabras.</p><div class="sign">— Sebastián y Valeria</div><div class="meta" data-en="Bogotá · Colombia">Bogotá · Colombia</div></article>
-      <article class="carta"><div class="quote-mark">"</div><p data-en="I came to write a book. I finished three chapters in four days. The breakfast table, the corridor with ferns, the jacuzzi lit at night — every corner invites you to think slowly, as if ideas here had time to ripen.">Vine a escribir un libro. Terminé tres capítulos en cuatro días. La mesa del desayuno, el corredor con helechos, el jacuzzi iluminado de noche — cada rincón invita a pensar despacio, como si las ideas aquí tuvieran tiempo de madurar.</p><div class="sign">— Elena</div><div class="meta" data-en="Buenos Aires · Argentina">Buenos Aires · Argentina</div></article>
-      <article class="carta"><div class="quote-mark">"</div><p data-en='"You don\'t pass through Mompox, you arrive at Mompox," Martica told us the first day. She was right. This is a place you arrive at, not one you pass through. And Literatium is its best door — the door of a book you don\'t want to close.'>"Por Mompox no se pasa, a Mompox se llega", nos dijo Martica el primer día. Tenía razón. Este es un lugar al que se llega, no por el que se pasa. Y Literatium es su mejor puerta — la puerta de un libro que no quieres cerrar.</p><div class="sign">— Henry &amp; Sue</div><div class="meta" data-en="Vancouver · Canada">Vancouver · Canadá</div></article>
+      <article class="carta" data-seal="M"><div class="quote-mark">"</div><p data-en="We came for one night and stayed four. It's the kind of place where the clock loses meaning, as if time had fallen asleep between the pages. The library, the garden, the coffee… everything asks you to stay one chapter more.">Llegamos por una noche y nos quedamos cuatro. Es el tipo de lugar donde el reloj pierde sentido. La biblioteca, el jardín, el café… todo te pide quedarte un capítulo más.</p><div class="sign">— María y Andrés</div><div class="meta" data-en="Madrid · Spain">Madrid · España</div></article>
+      <article class="carta" data-seal="T"><div class="quote-mark">"</div><p data-en="Martica arranged a champán boat ride at sunset. When the sun fell over the Magdalena, I understood what Gabo meant by Macondo. Here, magical realism is not literature — it's geography.">Martica nos organizó el paseo en champán al atardecer. Cuando el sol cayó sobre el Magdalena, entendí que este pueblo se cuenta mejor en novela que en guía de viajes. Hay algo aquí que pide ser escrito.</p><div class="sign">— Thomas</div><div class="meta" data-en="Berlin · Germany">Berlín · Alemania</div></article>
+      <article class="carta" data-seal="C"><div class="quote-mark">"</div><p data-en="The Huila coffee, served in the green ceramic, is the best welcome I've ever received at a hotel. And the books… books in every corner, as if the house itself had grown them like moss grows on river stones.">El café de Huila, servido en la cerámica verde, es la mejor bienvenida que he recibido en un hotel. Y los libros… en cada rincón, en cada mesa de noche, en cada corredor. Uno tiene la sensación de que llevan aquí más tiempo que nosotros.</p><div class="sign">— Camille</div><div class="meta" data-en="Lyon · France">Lyon · Francia</div></article>
+      <article class="carta" data-seal="S"><div class="quote-mark">"</div><p data-en="The suite with tub and garden is a dream. But what stays with you is the sound: crickets at dusk, the bells of Santa Bárbara, the river in the background. The silence of Mompox, told in other words.">La suite con bañera y jardín es un sueño. Pero lo que se queda contigo es el sonido: los grillos al anochecer, las campanas de Santa Bárbara, el río al fondo. Así suena el silencio de Mompox.</p><div class="sign">— Sebastián y Valeria</div><div class="meta" data-en="Bogotá · Colombia">Bogotá · Colombia</div></article>
+      <article class="carta" data-seal="E"><div class="quote-mark">"</div><p data-en="I came to write a book. I finished three chapters in four days. The breakfast table, the corridor with ferns, the jacuzzi lit at night — every corner invites you to think slowly, as if ideas here had time to ripen.">Vine a escribir un libro. Terminé tres capítulos en cuatro días. La mesa del desayuno, el corredor con helechos, el jacuzzi iluminado de noche — cada rincón invita a pensar despacio. Aquí las ideas tienen tiempo de madurar.</p><div class="sign">— Elena</div><div class="meta" data-en="Buenos Aires · Argentina">Buenos Aires · Argentina</div></article>
+      <article class="carta" data-seal="H"><div class="quote-mark">"</div><p data-en='"You don\'t pass through Mompox, you arrive at Mompox," Martica told us the first day. She was right. This is a place you arrive at, not one you pass through. And Literatium is its best door — the door of a book you don\'t want to close.'>"Por Mompox no se pasa, a Mompox se llega", nos dijo Martica el primer día. Tenía razón. Este es un lugar al que se llega, no por el que se pasa. Y Literatium es su mejor puerta — la puerta de un libro que no quieres cerrar.</p><div class="sign">— Henry &amp; Sue</div><div class="meta" data-en="Vancouver · Canada">Vancouver · Canadá</div></article>
     </div>
   </div>
 </section>
@@ -1070,7 +1089,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
         <p style="font-family: var(--font-hand); font-style: italic; font-size: 1.6rem; color: var(--brass-light); line-height: 1.3; margin-bottom: 18px;">Del mar al río, del uniforme al libro — mismo código de honor.</p>
         <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--parchment); margin-bottom: 4px;">Sr Felipe Cadena</h3>
         <div style="font-family: var(--font-caps); font-size: 0.65rem; letter-spacing: 0.32em; color: var(--brass-light); opacity: 0.7; margin-bottom: 20px;">Fundador · Oficial de la Armada Colombiana</div>
-        <p style="font-family: var(--font-body); font-size: 0.98rem; line-height: 1.75; color: var(--parchment); opacity: 0.9;">Felipe Cadena es un oficial de carrera de la Armada Colombiana — hombre de mar, de disciplina y de silencios largos. Nació en Huila, donde su familia cultiva café desde generaciones. Ese café, el "café único" de la finca familiar, es el que se sirve cada mañana en Literatium. Cuando conoció Mompox, supo que aquí estaba su refugio: un lugar donde la calma del río Magdalena se encuentra con el mundo de los libros. Del mar al río, del uniforme al libro — mismo sentido de orden, mismo amor por lo bien hecho.</p>
+        <p style="font-family: var(--font-body); font-size: 0.98rem; line-height: 1.75; color: var(--parchment); opacity: 0.9;">Felipe Cadena es un oficial de carrera de la Armada Colombiana — hombre de mar y de disciplina. Nació en Huila, donde su familia cultiva café desde generaciones. Ese café, el "café único" de la finca familiar, es el que se sirve cada mañana en Literatium. Cuando conoció Mompox, supo que aquí estaba su refugio: un lugar donde la calma del río Magdalena se encuentra con el mundo de los libros. Del mar al río, del uniforme al libro — mismo sentido de orden, mismo amor por lo bien hecho.</p>
       </div>
     </div>
 
@@ -1078,10 +1097,10 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
     <div class="reveal delay-1" style="display:grid; grid-template-columns: 1.1fr 0.9fr; gap:50px; align-items:center; margin-top:60px;">
       <div>
         <div style="font-family: var(--font-display); font-size: 4.5rem; color: var(--brass); opacity: 0.3; line-height: 0.5; margin-bottom: 8px;">"</div>
-        <p style="font-family: var(--font-hand); font-style: italic; font-size: 1.6rem; color: var(--brass-light); line-height: 1.3; margin-bottom: 18px;">La calma detrás de cada detalle — el alma silenciosa de la casa.</p>
+        <p style="font-family: var(--font-hand); font-style: italic; font-size: 1.6rem; color: var(--brass-light); line-height: 1.3; margin-bottom: 18px;">La calma detrás de cada detalle — el alma de la casa.</p>
         <h3 style="font-family: var(--font-display); font-size: 2rem; color: var(--parchment); margin-bottom: 4px;">Sra Nelcy</h3>
         <div style="font-family: var(--font-caps); font-size: 0.65rem; letter-spacing: 0.32em; color: var(--brass-light); opacity: 0.7; margin-bottom: 20px;">Esposa de Felipe · Apoyo de la casa</div>
-        <p style="font-family: var(--font-body); font-size: 0.98rem; line-height: 1.75; color: var(--parchment); opacity: 0.9;">Nelcy es la serenidad caribeña detrás de Literatium. Mexicana de nacimiento, esposa de Felipe, su apoyo ha sido parte de cada decisión de la casa, desde el nombre hasta el último libro de la biblioteca. Su gusto por los detalles — las flores, los colores, el equilibrio entre lo colonial y lo literario — se respira en cada rincón. Es la calma que rodea la historia.</p>
+        <p style="font-family: var(--font-body); font-size: 0.98rem; line-height: 1.75; color: var(--parchment); opacity: 0.9;">Nelcy es la serenidad caribeña detrás de Literatium. Mexicana de nacimiento, esposa de Felipe, su apoyo ha sido parte de cada decisión de la casa, desde el nombre hasta el último libro de la biblioteca. Su gusto por los detalles — las flores, los colores, el equilibrio entre lo colonial y lo literario — se respira en cada rincón.</p>
       </div>
       <div style="position:relative; min-height:400px; background: url('assets/owner-nelcy.jpg') center/cover no-repeat; filter: sepia(0.2) contrast(1.05); border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px; box-shadow: 0 18px 40px rgba(0,0,0,0.5);"></div>
     </div>
@@ -1108,7 +1127,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
       <div class="colofon-text reveal">
         <p class="drop-cap" style="color: var(--parchment);">Escríbenos por WhatsApp para consultar disponibilidad, tarifas y fechas. Martica o alguien de su equipo te responderá personalmente — sin formularios, sin call centers, sin prisa. Aquí las cosas se hacen como se hacen en Mompox: despacio, con calma, con el corazón.</p>
         <p>Para nosotros, hospedarte no es una transacción. Es la primera línea de una historia que tú vas a escribir desde La Casa de las Historias. Cuéntanos cuándo llegas, qué habitación te llama, qué senderos quieres caminar — y nosotros nos encargamos del resto.</p>
-        <p style="font-family: var(--font-hand); font-size: 1.5rem; color: var(--brass-light); font-style: italic; margin-top: 24px;">— te esperamos en Mompox, donde el río sueña —</p>
+        <p style="font-family: var(--font-hand); font-size: 1.5rem; color: var(--brass-light); font-style: italic; margin-top: 24px;">— te esperamos en Mompox, junto al río —</p>
         <div class="colofon-cta"><a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary">WhatsApp +57 315 538 2112</a><a href="https://www.instagram.com/literatium/" target="_blank" rel="noopener" class="btn-ghost">@literatium</a></div>
       </div>
       <div class="booking-card reveal delay-1">
@@ -1410,10 +1429,10 @@ function toggleLang() {
   // Swap all elements with data-en attribute
   document.querySelectorAll('[data-en]').forEach(function(el) {
     if (currentLang === 'en') {
-      if (!el.dataset.origEs) el.dataset.origEs = el.textContent;
-      el.textContent = el.dataset.en;
+      if (!el.dataset.origEs) el.dataset.origEs = el.innerHTML;
+      el.innerHTML = el.dataset.en;
     } else {
-      if (el.dataset.origEs) el.textContent = el.dataset.origEs;
+      if (el.dataset.origEs) el.innerHTML = el.dataset.origEs;
     }
   });
   // Swap alt text on images with data-en-alt
