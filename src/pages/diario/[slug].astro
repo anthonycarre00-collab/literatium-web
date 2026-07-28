@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Folio from '../../components/Folio.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import JournalCard from '../../components/JournalCard.astro';
+import {
+  journalArticles,
+  getArticleBySlug,
+  getRelatedArticles,
+  slugifyCategory,
+  slugifyTag,
+  formatDateEs,
+  formatDateEn
+} from '../../data/journal-articles';
+import type { JournalArticle } from '../../data/journal-articles';
+
+export function getStaticPaths() {
+  return journalArticles.map((article) => ({
+    params: { slug: article.slug }
+  }));
+}
+
+interface Props { slug: string; }
+const { slug } = Astro.params as Props;
+const article = getArticleBySlug(slug) as JournalArticle;
+if (!article) {
+  return Astro.redirect('/404');
+}
+
+const related = getRelatedArticles(article);
+const dateEs = formatDateEs(article.date);
+const dateEn = formatDateEn(article.date);
+const readingEs = `⏱ ${article.readingTime} min de lectura`;
+const readingEn = `⏱ ${article.readingTime} min read`;
+const catHref = `/diario/categoria/${slugifyCategory(article.category)}`;
+
+// Build the localized tag href list once.
+const tagLinks = article.tags.map((t) => ({
+  label: t,
+  href: `/diario/etiqueta/${slugifyTag(t)}`
+}));
+---
+<Layout
+  title={`${article.title} — Diario · Literatium`}
+  description={article.excerpt}
+>
+<Folio id="diario-article" folioNumber="Folio XI · Diario" folioNumberEn="Folio XI · Journal" dark={true}>
+  <Breadcrumbs items={[
+    { label: 'Literatium', href: '/' },
+    { label: 'Diario', href: '/diario' },
+    { label: article.category, href: catHref },
+    { label: article.title }
+  ]} />
+
+  <header class="journal-article-header reveal">
+    <div class="journal-article-eyebrow">
+      <a href={catHref} data-en={article.categoryEn}>{article.category}</a>
+    </div>
+    <h1 class="journal-article-title" data-en={article.titleEn}>{article.title}</h1>
+    <div class="journal-article-byline">
+      <span data-en={article.author === 'Redacción Literatium' ? 'Literatium Editorial' : article.author}>{article.author}</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span data-en={dateEn}>{dateEs}</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span data-en={readingEn}>{readingEs}</span>
+    </div>
+  </header>
+
+  <figure class="journal-article-cover reveal delay-1">
+    <img src={article.coverImage} alt={article.title} data-en-alt={article.titleEn} loading="lazy" />
+  </figure>
+
+  <!--
+    Article body — rendered in two language containers.
+    The inline script at the bottom of this page swaps visibility
+    based on the current lang (set by toggles.js). We do NOT use
+    data-en on the body container because the body is multi-paragraph
+    HTML with inner double quotes (would break the attribute).
+  -->
+  <article class="journal-article-body reveal delay-1" data-lang="es" set:html={article.body}></article>
+  <article class="journal-article-body reveal delay-1" data-lang="en" hidden set:html={article.bodyEn}></article>
+
+  <!-- Tags -->
+  <div class="journal-tags reveal delay-1">
+    <span class="journal-tags-label" data-en="Tags">Etiquetas</span>
+    {tagLinks.map((t) => (
+      <a class="journal-tag-link" href={t.href}>{t.label}</a>
+    ))}
+  </div>
+
+  <!-- Related articles -->
+  {related.length > 0 && (
+    <section class="journal-related reveal delay-2">
+      <h2 class="journal-related-title" data-en="Continue <em>reading</em>">Continuar <em>leyendo</em></h2>
+      <div class="journal-related-sub" data-en="Two more chapters from the journal">Dos capítulos más del diario</div>
+      <div class="journal-grid">
+        {related.map((rel) => (
+          <JournalCard article={rel} compact={true} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <div class="reveal delay-2" style="margin-top: 70px; text-align: center;">
+    <a href="/diario" class="nav-cta" style="display: inline-block; padding: 12px 28px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--brass-light); border: 1px solid var(--brass); background: transparent; text-decoration: none; border-radius: 2px;" data-en="← Back to the Journal">← Volver al Diario</a>
+  </div>
+</Folio>
+
+<script is:inline>
+  (function () {
+    function syncJournalLang() {
+      var lang = document.documentElement.lang || 'es';
+      var bodies = document.querySelectorAll('.journal-article-body[data-lang]');
+      bodies.forEach(function (el) {
+        var isCurrent = el.getAttribute('data-lang') === lang;
+        if (isCurrent) {
+          el.removeAttribute('hidden');
+          el.style.display = '';
+        } else {
+          el.setAttribute('hidden', '');
+          el.style.display = 'none';
+        }
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', syncJournalLang);
+    } else {
+      syncJournalLang();
+    }
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('#lang-toggle')) {
+        setTimeout(syncJournalLang, 0);
+      }
+    });
+  })();
+</script>
+</Layout>

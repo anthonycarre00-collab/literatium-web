@@ -16,7 +16,7 @@
     }
   }
 
-  /* 2. BOOK COVER — opens on click OR auto after 4s.
+  /* 2. BOOK COVER — opens on click OR auto after 2.5s.
      Snappy: 1.4s rotation, smooth ease. */
   const cover = document.getElementById('cover');
   const coverFace = document.getElementById('cover-face');
@@ -32,19 +32,19 @@
     cover.classList.add('is-open');
     // Trigger hero animations when cover opens (not on page load)
     document.documentElement.classList.add('hero-revealed');
-    setTimeout(() => { cover.style.display = 'none'; }, 1800);
+    setTimeout(() => { cover.style.display = 'none'; }, 1200);
     armFallback();
-    // Safety net: force-show hero title after 3s in case animation fails
+    // Safety net: force-show hero title after 2.5s in case animation fails
     setTimeout(() => {
       var words = document.querySelectorAll('.hero-script-title .word');
       words.forEach(function(w) { w.style.opacity = '1'; w.style.filter = 'none'; w.style.transform = 'none'; });
-    }, 3000);
+    }, 2500);
   }
   cover.addEventListener('click', openCover);
   coverFace.addEventListener('click', (e) => { e.stopPropagation(); openCover(); });
   cover.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCover(); } });
-  // Auto-open after 4s if the user hasn't clicked — keeps the experience flowing.
-  autoTimer = setTimeout(openCover, 4000);
+  // Auto-open after 2.5s if the user hasn't clicked — keeps the experience flowing.
+  autoTimer = setTimeout(openCover, 2500);
   } // end cover guard
 
   /* 3. SECTION REVEAL via IntersectionObserver + CONDITIONAL FALLBACK */

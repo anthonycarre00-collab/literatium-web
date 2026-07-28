@@ -1,0 +1,58 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Folio from '../../../components/Folio.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import JournalCard from '../../../components/JournalCard.astro';
+import {
+  journalArticles,
+  getAllCategories,
+  getArticlesByCategory,
+  slugifyCategory
+} from '../../../data/journal-articles';
+import type { JournalArticle } from '../../../data/journal-articles';
+
+export function getStaticPaths() {
+  const cats = getAllCategories();
+  return cats.map((c) => ({
+    params: { cat: slugifyCategory(c.es) },
+    props: { catEs: c.es, catEn: c.en }
+  }));
+}
+
+interface Props { cat: string; catEs: string; catEn: string; }
+const { cat: catSlug, catEs, catEn } = Astro.props as Props;
+const articles: JournalArticle[] = getArticlesByCategory(catEs);
+---
+<Layout
+  title={`${catEs} — Diario · Literatium`}
+  description={`Artículos del diario de Literatium en la categoría ${catEs}.`}
+>
+<Folio id="diario-categoria" folioNumber="Folio XI · Diario" folioNumberEn="Folio XI · Journal" dark={true}>
+  <Breadcrumbs items={[
+    { label: 'Literatium', href: '/' },
+    { label: 'Diario', href: '/diario' },
+    { label: catEs }
+  ]} />
+
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Category">Categoría</div>
+    <h1 class="chapter-title on-dark" data-en={catEn}>{catEs}</h1>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1">
+    <p class="journal-intro" data-en={`A chapter of the journal: ${articles.length} ${articles.length === 1 ? 'article' : 'articles'} in this category.`}>{articles.length === 1 ? `Un capítulo del diario: ${articles.length} artículo en esta categoría.` : `Un capítulo del diario: ${articles.length} artículos en esta categoría.`}</p>
+    <div class="journal-archive-count" data-en={`${articles.length} ${articles.length === 1 ? 'article' : 'articles'}`}>{articles.length} {articles.length === 1 ? 'artículo' : 'artículos'}</div>
+  </div>
+
+  <div class="journal-grid reveal delay-2">
+    {articles.map((article) => (
+      <JournalCard article={article} />
+    ))}
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 70px; text-align: center;">
+    <a href="/diario" class="nav-cta" style="display: inline-block; padding: 12px 28px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--brass-light); border: 1px solid var(--brass); background: transparent; text-decoration: none; border-radius: 2px;" data-en="← All articles">← Todos los artículos</a>
+  </div>
+</Folio>
+</Layout>

@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Folio from '../components/Folio.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import JournalCard from '../components/JournalCard.astro';
+import {
+  journalArticles,
+  getAllCategories,
+  getAllTags,
+  slugifyCategory,
+  slugifyTag
+} from '../data/journal-articles';
+
+const categories = getAllCategories();      // [{ es, en }, ...]
+const tags = getAllTags();                  // ['García Márquez', ...]
+const tagSlugs = tags.map((t) => ({ label: t, slug: slugifyTag(t) }));
+---
+<Layout
+  title="Diario — Literatium"
+  description="Diario de Literatium — ensayos breves sobre Mompox, la literatura, el río Magdalena, el café y la casa. Lecturas pausadas, no un blog."
+>
+<Folio id="diario" folioNumber="Folio XI · Diario" folioNumberEn="Folio XI · Journal" dark={true}>
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Diario', href: '/diario' }]} />
+
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Chapter Eleven · The Journal">Capítulo Once · El Diario</div>
+    <h1 class="chapter-title on-dark">Crónicas de la casa <em>y del río</em></h1>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1">
+    <p class="journal-intro" data-en="Short essays from the house: the opening line of Macondo, the river that does not forget, the family coffee from Huila, the albarrada at sunset, the hand-drawn maps, three hundred years of filigree. Read slowly — there is no hurry here.">Ensayos breves desde la casa: la primera línea de Macondo, el río que no se olvida, el café familiar de Huila, la albarrada al atardecer, los mapas a mano, trescientos años de filigrana. Léase despacio — aquí no hay prisa.</p>
+  </div>
+
+  <!-- Toolbar: search + categories + tags -->
+  <div class="journal-toolbar reveal delay-1">
+    <div class="journal-search-row">
+      <div class="journal-search">
+        <span class="journal-search-icon" aria-hidden="true">⌕</span>
+        <input
+          id="journal-search-input"
+          type="search"
+          autocomplete="off"
+          placeholder="Buscar en el diario…"
+          data-en-placeholder="Search the journal…"
+          aria-label="Buscar en el diario"
+        />
+      </div>
+    </div>
+
+    <div>
+      <div class="journal-pills-row-label" data-en="Categories">Categorías</div>
+      <div class="journal-pills" id="journal-cat-pills">
+        <button class="journal-pill active" data-cat="" data-en="All">Todos</button>
+        {categories.map((c) => (
+          <button class="journal-pill" data-cat={c.es} data-en={c.en}>{c.es}</button>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <div class="journal-pills-row-label" data-en="Tags">Etiquetas</div>
+      <div class="journal-pills" id="journal-tag-pills">
+        <button class="journal-pill active" data-tag="" data-en="All">Todas</button>
+        {tagSlugs.map((t) => (
+          <button class="journal-pill" data-tag={t.slug} data-en={t.label}>{t.label}</button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Card grid -->
+  <div class="journal-grid reveal delay-2" id="journal-grid">
+    {journalArticles.map((article) => (
+      <JournalCard article={article} />
+    ))}
+  </div>
+
+  <!-- Empty state -->
+  <div class="journal-empty" id="journal-empty" hidden data-en="No articles found — try another word.">
+    No se encontraron artículos — prueba con otra palabra.
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 70px; display: flex; justify-content: center;">
+    <div class="marginalia" style="max-width: 560px; color: var(--brass-light); background: rgba(15,36,25,0.5);" data-en="— Here every article is also a walk. When you finish reading, come down to the river. —">— Aquí cada artículo es también un paseo. Cuando termines de leer, baja al río. —</div>
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 50px; text-align: center;">
+    <a href="/book" class="nav-cta" style="display: inline-block; padding: 14px 32px; font-family: var(--font-caps); font-size: 0.7rem; letter-spacing: 0.25em; color: var(--forest-dark); background: var(--brass); text-decoration: none; border-radius: 2px;" data-en="Plan your visit →">Planifica tu visita →</a>
+  </div>
+</Folio>
+
+<script is:inline>
+  (function () {
+    var grid = document.getElementById('journal-grid');
+    var empty = document.getElementById('journal-empty');
+    var searchInput = document.getElementById('journal-search-input');
+    var catPills = document.getElementById('journal-cat-pills');
+    var tagPills = document.getElementById('journal-tag-pills');
+    if (!grid || !searchInput || !catPills || !tagPills) return;
+
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.journal-card'));
+    var activeCat = '';
+    var activeTag = '';
+    var query = '';
+
+    function currentLang() {
+      try { return localStorage.getItem('literatium-lang') || 'es'; }
+      catch (e) { return 'es'; }
+    }
+
+    function applyFilters() {
+      var lang = currentLang();
+      var visible = 0;
+      cards.forEach(function (card) {
+        var cat = card.getAttribute('data-category') || '';
+        var tags = (card.getAttribute('data-tags') || '').split(/\s+/);
+        var haystack = (lang === 'en'
+          ? card.getAttribute('data-search-en')
+          : card.getAttribute('data-search-es')) || '';
+        var catOk = !activeCat || cat === activeCat;
+        var tagOk = !activeTag || tags.indexOf(activeTag) !== -1;
+        var qOk = !query || haystack.indexOf(query) !== -1;
+        if (catOk && tagOk && qOk) {
+          card.style.display = '';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      if (empty) empty.hidden = visible !== 0;
+    }
+
+    // Category pills
+    catPills.addEventListener('click', function (e) {
+      var btn = e.target.closest('.journal-pill');
+      if (!btn) return;
+      activeCat = btn.getAttribute('data-cat') || '';
+      Array.prototype.forEach.call(catPills.querySelectorAll('.journal-pill'), function (p) {
+        p.classList.toggle('active', p === btn);
+      });
+      applyFilters();
+    });
+
+    // Tag pills
+    tagPills.addEventListener('click', function (e) {
+      var btn = e.target.closest('.journal-pill');
+      if (!btn) return;
+      activeTag = btn.getAttribute('data-tag') || '';
+      Array.prototype.forEach.call(tagPills.querySelectorAll('.journal-pill'), function (p) {
+        p.classList.toggle('active', p === btn);
+      });
+      applyFilters();
+    });
+
+    // Search input
+    searchInput.addEventListener('input', function () {
+      query = searchInput.value.trim().toLowerCase();
+      applyFilters();
+    });
+
+    // Re-run search when language toggles (lang toggle replaces innerHTML
+    // on cards but does not touch data-search-* attributes, so we just
+    // need to swap which haystack we read). Also swap the search input
+    // placeholder, since toggles.js does not handle it.
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('#lang-toggle');
+      if (!btn) return;
+      setTimeout(function () {
+        var lang = currentLang();
+        if (lang === 'en') {
+          if (!searchInput.dataset.origPlaceholderEs) {
+            searchInput.dataset.origPlaceholderEs = searchInput.placeholder;
+          }
+          if (searchInput.dataset.enPlaceholder) {
+            searchInput.placeholder = searchInput.dataset.enPlaceholder;
+          }
+        } else if (searchInput.dataset.origPlaceholderEs) {
+          searchInput.placeholder = searchInput.dataset.origPlaceholderEs;
+        }
+        applyFilters();
+      }, 50);
+    });
+  })();
+</script>
+</Layout>

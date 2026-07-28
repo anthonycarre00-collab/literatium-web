@@ -1,0 +1,46 @@
+---
+import type { JournalArticle } from '../data/journal-articles';
+import { formatDateEs, formatDateEn, slugifyCategory, slugifyTag } from '../data/journal-articles';
+
+interface Props {
+  article: JournalArticle;
+  /** When true, render as a flat "related" card (no meta footer). */
+  compact?: boolean;
+}
+const { article, compact = false } = Astro.props;
+
+const dateEs = formatDateEs(article.date);
+const dateEn = formatDateEn(article.date);
+const readingEs = `⏱ ${article.readingTime} min de lectura`;
+const readingEn = `⏱ ${article.readingTime} min read`;
+const searchEs = `${article.title} ${article.excerpt} ${article.tags.join(' ')}`.toLowerCase();
+const searchEn = `${article.titleEn} ${article.excerptEn} ${article.tags.join(' ')}`.toLowerCase();
+---
+<a
+  href={`/diario/${article.slug}`}
+  class="journal-card"
+  data-category={article.category}
+  data-tags={article.tags.map(slugifyTag).join(' ')}
+  data-search-es={searchEs}
+  data-search-en={searchEn}
+>
+  <div class="journal-card-img-wrap">
+    <div
+      class="journal-card-img"
+      style={`background-image: url('${article.coverImage}');`}
+      role="img"
+      aria-label={article.title}
+    ></div>
+  </div>
+  <div class="journal-card-body">
+    <div class="journal-card-cat" data-en={article.categoryEn}>{article.category}</div>
+    <h3 class="journal-card-title" data-en={article.titleEn}>{article.title}</h3>
+    <p class="journal-card-excerpt" data-en={article.excerptEn}>{article.excerpt}</p>
+    {!compact && (
+      <div class="journal-card-meta">
+        <span data-en={dateEn}>{dateEs}</span>
+        <span class="journal-reading-pill" data-en={readingEn}>{readingEs}</span>
+      </div>
+    )}
+  </div>
+</a>
