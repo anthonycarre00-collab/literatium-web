@@ -1,0 +1,48 @@
+---
+import globalCssRaw from '../styles/global.css?raw';
+import mainJsRaw from '../scripts/main.js?raw';
+import togglesJsRaw from '../scripts/toggles.js?raw';
+import Motes from '../components/Motes.astro';
+import Vignette from '../components/Vignette.astro';
+import RiverSpine from '../components/RiverSpine.astro';
+import ProgressLine from '../components/ProgressLine.astro';
+import Nav from '../components/Nav.astro';
+import MompoxSubnav from '../components/MompoxSubnav.astro';
+import BookCover from '../components/BookCover.astro';
+import Footer from '../components/Footer.astro';
+import Butterfly from '../components/Butterfly.astro';
+
+const {
+  title = 'Literatium — La Casa de las Historias · Mompox',
+  description = 'Un refugio boutique en Mompox, donde la literatura, el café y el río Magdalena se confunden con el sueño. Hotel boutique · Libros & Café · UNESCO 1995.',
+  showCover = false
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta name="description" content={description}>
+<script is:inline>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IM+Fell+English+SC&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&family=Cinzel:wght@500;600;700&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+<style is:inline set:html={globalCssRaw} />
+</head>
+<body>
+<Motes />
+<Vignette />
+<RiverSpine />
+<ProgressLine />
+<Nav />
+<MompoxSubnav />
+{showCover && <BookCover />}
+<slot />
+<Footer />
+<Butterfly />
+<script is:inline set:html={mainJsRaw} />
+<script is:inline set:html={togglesJsRaw} />
+</body>
+</html>

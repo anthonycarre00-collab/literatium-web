@@ -1,0 +1,10 @@
+---
+---
+<div id="river-spine" aria-hidden="true">
+  <svg viewBox="0 0 80 1200" preserveAspectRatio="none">
+    <defs><filter id="river-turb"><feTurbulence type="fractalNoise" baseFrequency="0.018 0.04" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="6"/></filter><linearGradient id="river-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7A8B6F" stop-opacity="0.5"/><stop offset="50%" stop-color="#DDB95E" stop-opacity="0.8"/><stop offset="100%" stop-color="#7A8B6F" stop-opacity="0.5"/></linearGradient></defs>
+    <path d="M 40 0 Q 60 100, 30 200 T 50 400 Q 70 500, 35 600 T 55 800 Q 75 900, 40 1000 T 50 1200" stroke="url(#river-grad)" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#river-turb)" stroke-dasharray="8 6"><animate attributeName="stroke-dashoffset" from="0" to="-28" dur="3s" repeatCount="indefinite"/></path>
+  </svg>
+</div>
+<div class="river-pin-trail" id="river-pin-trail"></div>
+<div class="river-pin" id="river-pin" aria-hidden="true"></div>
