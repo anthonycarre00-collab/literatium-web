@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Folio from '../components/Folio.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const rooms = [
+  { num: 'HABITACIÓN V', name: 'Suite con Jardín y Bañera', bed: '1 king + sofá cama', size: '428 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-suite-9.webp', desc: 'La suite estrella. Bañera, jardín privado, chocolate para los huéspedes. El jacuzzi del jardín disponible para todos.', descEn: 'The flagship suite. Tub, private garden, chocolate for guests. Garden jacuzzi available to all.', featured: true },
+  { num: 'HABITACIÓN IV', name: 'Deluxe Suite', bed: '1 king + sofá cama', size: '410 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-deluxe-3.webp', desc: 'Suite amplia con sala de estar, baño con bañera y ducha. Aire acondicionado, TV con streaming, minibar.', descEn: 'Spacious suite with seating area, bathroom with tub and shower. AC, TV with streaming, mini-bar.' },
+  { num: 'HABITACIÓN I', name: 'King Room', bed: '1 king', size: '290 sq ft', view: 'Ciudad', viewEn: 'City', img: '/assets/room-king-7.webp', desc: 'Habitación doble amplia con cama king extragrande. Baño privado con ducha, batas y artículos de aseo.', descEn: 'Spacious double room with extra-large king bed. Private bathroom with shower, bathrobes and toiletries.' },
+  { num: 'HABITACIÓN II', name: 'Standard Doble', bed: '1 queen', size: '225 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-standard-3.webp', desc: 'Habitación doble con cama queen grande. Baño privado, aire acondicionado, TV, cafetera.', descEn: 'Double room with large queen bed. Private bathroom, AC, TV, coffee maker.' },
+  { num: 'HABITACIÓN III', name: 'Standard Doble · Jardín', bed: '1 queen', size: '225 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-garden-1.webp', desc: 'Segunda habitación doble con cama queen. Vista al jardín, baño privado, todas las comodidades.', descEn: 'Second double room with queen bed. Garden view, private bathroom, all amenities.' },
+];
+
+const amenities = [
+  { icon: '❄️', label: 'Aire acondicionado', labelEn: 'Air conditioning' },
+  { icon: '🚿', label: 'Baño privado', labelEn: 'Private bathroom' },
+  { icon: '📺', label: 'TV pantalla plana', labelEn: 'Flat-screen TV' },
+  { icon: '🥃', label: 'Minibar', labelEn: 'Mini-bar' },
+  { icon: '☕', label: 'Cafetera y tetera', labelEn: 'Tea/coffee maker' },
+  { icon: '📶', label: 'WiFi gratis', labelEn: 'Free WiFi' },
+  { icon: '👔', label: 'Batas y artículos de aseo', labelEn: 'Bathrobes & toiletries' },
+  { icon: '🍽️', label: 'Desayuno momposino', labelEn: 'Momposino breakfast' },
+];
+---
+<Layout title="Habitaciones — Literatium" description="Cinco capítulos para elegir. Cada habitación tiene su propio carácter, sus libros, su luz.">
+<Folio id="rooms" folioNumber="Folio II · Habitaciones" folioNumberEn="Folio II · Rooms" dark={true} next="cafe">
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Habitaciones' }]} />
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Chapter Two">Capítulo Segundo</div>
+    <h1 class="chapter-title on-dark">Cinco capítulos <em>para elegir</em></h1>
+    <p class="rooms-intro">Cada habitación tiene su propio carácter, sus libros, su luz — como cinco historias distintas dentro de la misma casa. Todas con aire acondicionado, baño privado, TV, cafetera y el silencio que solo se encuentra lejos del centro, donde el río se confunde con el sueño.</p>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="rooms-row reveal delay-1">
+    {rooms.map((room) => (
+      <article class={`room-card ${room.featured ? 'featured' : ''}`}>
+        <img class="room-card-img" src={room.img} alt={room.name} />
+        <div class="room-card-body">
+          <div class="room-card-num">{room.num}</div>
+          <h3>{room.name}</h3>
+          <div class="room-card-specs">
+            <span>{room.bed}</span>
+            <span>{room.size}</span>
+            <span data-en={room.viewEn}>{room.view}</span>
+          </div>
+          <p style="font-family: var(--font-body); font-size: 0.88rem; color: var(--espresso-light); line-height: 1.6; margin-top: 10px;" data-en={room.descEn}>{room.desc}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 60px;">
+    <div class="eyebrow center" style="color: var(--brass-light);" data-en="What every room includes">Lo que incluyen todas las habitaciones</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 30px; max-width: 900px; margin-left: auto; margin-right: auto;">
+      {amenities.map((a) => (
+        <div style="background: rgba(247,240,220,0.06); border: 1px solid rgba(221,185,94,0.25); padding: 16px; text-align: center;">
+          <div style="font-size: 1.4rem; margin-bottom: 6px;">{a.icon}</div>
+          <div style="font-family: var(--font-caps); font-size: 0.58rem; letter-spacing: 0.18em; color: var(--brass-light);" data-en={a.labelEn}>{a.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:30px; text-align:center;">
+    <p style="font-family: var(--font-body); font-style: italic; color: var(--parchment); opacity:0.8; max-width:620px; margin:0 auto;">El jacuzzi del jardín, disponible para todos los huéspedes, se enciende de noche en azul, verde y rosa — como un acuario de luz bajo las estrellas.</p>
+    <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary" style="margin-top:26px;" data-en="Check availability">Consultar disponibilidad</a>
+  </div>
+</Folio>
+</Layout>

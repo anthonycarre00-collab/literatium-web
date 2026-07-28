@@ -1,0 +1,14 @@
+---
+interface Props {
+  items: { label: string; href?: string }[];
+}
+const { items } = Astro.props;
+---
+<div class="eyebrow" style="margin-bottom: 16px;">
+  {items.map((item, i) => (
+    <>
+      {item.href ? <a href={item.href} style="color: var(--brass-dark); text-decoration: none;">{item.label}</a> : <span>{item.label}</span>}
+      {i < items.length - 1 && <span style="margin: 0 8px; opacity: 0.5;">❦</span>}
+    </>
+  ))}
+</div>

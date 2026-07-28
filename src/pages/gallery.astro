@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Folio from '../components/Folio.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const images = [
+  { src: '/assets/mompox-river-sunset-real.jpg', cap: 'El Magdalena al ocaso', cat: 'mompox' },
+  { src: '/assets/mompox-santa-barbara-night.jpg', cap: 'Santa Bárbara de noche', cat: 'mompox' },
+  { src: '/assets/jacuzzi-blue-lit.webp', cap: 'Jacuzzi · luz azul', cat: 'house' },
+  { src: '/assets/coffee-farm-huila.jpg', cap: 'La finca en Huila', cat: 'cafe' },
+  { src: '/assets/mompox-colonial-street.jpg', cap: 'Calle colonial', cat: 'mompox' },
+  { src: '/assets/breakfast-coffee.webp', cap: 'El café de la mañana', cat: 'cafe' },
+  { src: '/assets/mompox-drone.jpg', cap: 'Mompox desde el cielo', cat: 'mompox' },
+  { src: '/assets/hotel-patio-evening.jpg', cap: 'El patio al anochecer', cat: 'house' },
+  { src: '/assets/mural-art.jpg', cap: 'Murales de la casa', cat: 'house' },
+  { src: '/assets/mompox-plaza-real.jpg', cap: 'La plaza de Mompox', cat: 'mompox' },
+  { src: '/assets/jacuzzi-pink-lit.webp', cap: 'Jacuzzi · luz rosa', cat: 'house' },
+  { src: '/assets/facade-with-guests.webp', cap: 'La entrada', cat: 'house' },
+  { src: '/assets/mompox-church-night.jpg', cap: 'Iglesia nocturna', cat: 'mompox' },
+  { src: '/assets/real-reading-nook.jpg', cap: 'El rincón de lectura', cat: 'house' },
+  { src: '/assets/champan-boat.png', cap: 'El champán en el río', cat: 'mompox' },
+  { src: '/assets/jacuzzi-green-lit.webp', cap: 'Jacuzzi · luz verde', cat: 'house' },
+  { src: '/assets/guest-with-books.webp', cap: 'Huésped entre libros', cat: 'house' },
+  { src: '/assets/filigree-1.webp', cap: 'Filigrana momposina', cat: 'mompox' },
+  { src: '/assets/magdalena-sunset.png', cap: 'El Magdalena', cat: 'mompox' },
+  { src: '/assets/rocking-chair-porch.png', cap: 'La mecedora del portal', cat: 'house' },
+  { src: '/assets/guest-beauty-lobby.webp', cap: 'El lobby', cat: 'house' },
+  { src: '/assets/breakfast-1.webp', cap: 'El desayuno momposino', cat: 'cafe' },
+  { src: '/assets/filigree-2.webp', cap: 'Filigrana · detalle', cat: 'mompox' },
+  { src: '/assets/mompox-sunset.jpg', cap: 'Atardecer momposino', cat: 'mompox' },
+];
+---
+<Layout title="Galería — Literatium" description="Literatium en imágenes. Un río de postales del hotel, el café y Mompox.">
+<Folio id="gallery" folioNumber="Folio IV · Galería" folioNumberEn="Folio IV · Gallery" next="mompox">
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Galería' }]} />
+  <div class="reveal">
+    <div class="eyebrow" data-en="Gallery · Images of the river and the house">Galería · Imágenes del río y la casa</div>
+    <h1 class="chapter-title">Literatium <em>en imágenes</em></h1>
+    <p style="font-family: var(--font-body); color: var(--espresso-light); max-width:560px; margin:18px auto 0; font-style:italic;" data-en="A river of postcards. Click any image to enlarge.">Un río de postales. Toca cualquier imagen para ampliar.</p>
+    <div class="fleuron">✦ ❦ ✦</div>
+  </div>
+  <div class="spaces-mosaic reveal delay-1">
+    {images.map((img) => (
+      <figure class="space-plate">
+        <img src={img.src} alt={img.cap} loading="lazy" />
+        <figcaption class="space-caption">
+          <h4>{img.cap}</h4>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+</Folio>
+</Layout>

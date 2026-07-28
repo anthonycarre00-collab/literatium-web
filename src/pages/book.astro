@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Folio from '../components/Folio.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+---
+<Layout title="Reservar — Literatium" description="Reserva tu estancia en Literatium. WhatsApp +57 315 538 2112. Sin formularios, sin call centers, sin prisa.">
+<Folio id="book" folioNumber="Folio X · Colofón" folioNumberEn="Folio X · Colophon" dark={true}>
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Reservar' }]} />
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Final Chapter · The colophon">Capítulo Final · El colofón</div>
+    <h1 class="chapter-title on-dark">Tu próximo capítulo <em>empieza aquí</em></h1>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+  <div class="colofon-grid">
+    <div class="colofon-text reveal">
+      <p class="drop-cap" style="color: var(--parchment);" data-en="Message us on WhatsApp to ask about availability, rates and dates. Martica or someone from her team will answer you personally — no forms, no call centres, no rush. Here, things are done as they are done in Mompox: slowly, with calm, with heart.">Escríbenos por WhatsApp para consultar disponibilidad, tarifas y fechas. Martica o alguien de su equipo te responderá personalmente — sin formularios, sin call centers, sin prisa. Aquí las cosas se hacen como se hacen en Mompox: despacio, con calma, con el corazón.</p>
+      <p style="color: var(--parchment);" data-en="For us, hosting you is not a transaction. It is the first line of a story you will write from The House of Stories. Tell us when you arrive, which room calls to you, which paths you want to walk — and we will take care of the rest.">Para nosotros, hospedarte no es una transacción. Es la primera línea de una historia que tú vas a escribir desde La Casa de las Historias. Cuéntanos cuándo llegas, qué habitación te llama, qué senderos quieres caminar — y nosotros nos encargamos del resto.</p>
+      <p style="font-family: var(--font-hand); font-size: 1.5rem; color: var(--brass-light); font-style: italic; margin-top: 24px;" data-en="— we wait for you in Mompox, by the river —">— te esperamos en Mompox, junto al río —</p>
+      <div class="colofon-cta">
+        <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary" data-en="WhatsApp +57 315 538 2112">WhatsApp +57 315 538 2112</a>
+        <a href="https://www.instagram.com/literatium/" target="_blank" rel="noopener" class="btn-ghost">@literatium</a>
+      </div>
+    </div>
+    <div class="booking-card reveal delay-1">
+      <h2 style="font-family: var(--font-display); font-style: italic; font-size: 1.5rem; color: var(--brass-light); margin-bottom: 18px;" data-en="Book details">Datos del libro</h2>
+      <div class="booking-row"><div class="icon">⌖</div><div><div class="label" data-en="Address">Dirección</div><div class="value">Calle 21 #2-47, Santa Cruz de Mompox, Bolívar, Colombia</div></div></div>
+      <div class="booking-row"><div class="icon">☎</div><div><div class="label" data-en="WhatsApp">WhatsApp</div><div class="value">+57 315 538 2112</div></div></div>
+      <div class="booking-row"><div class="icon">✦</div><div><div class="label" data-en="Inspiration">Inspiración</div><div class="value" data-en="The town that dreamt Macondo">El pueblo que soñó Macondo</div></div></div>
+      <div class="booking-row"><div class="icon">⌘</div><div><div class="label" data-en="Heritage">Patrimonio</div><div class="value" data-en="UNESCO 1995 · Founded 1537">UNESCO 1995 · Fundación 1537</div></div></div>
+      <div class="booking-row"><div class="icon">☕</div><div><div class="label" data-en="Coffee">Café</div><div class="value" data-en="From the family farm in Huila">De la finca familiar en Huila</div></div></div>
+    </div>
+  </div>
+</Folio>
+</Layout>

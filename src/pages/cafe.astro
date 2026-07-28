@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Folio from '../components/Folio.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+---
+<Layout title="Café — Literatium" description="Literatium Café — de la finca al libro. Café único de la finca familiar en Huila.">
+<Folio id="cafe" folioNumber="Folio III · Café" folioNumberEn="Folio III · Coffee" next="mompox">
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Café' }]} />
+  <div class="reveal">
+    <div class="eyebrow" data-en="Chapter Three · Coffee from Huila">Capítulo Tercero · Café de Huila</div>
+    <h1 class="chapter-title">Literatium Café — <em>de la finca al libro</em></h1>
+    <div class="fleuron">✦ ❦ ✦</div>
+  </div>
+  <div class="cafe-grid">
+    <div class="cafe-image-wrap reveal">
+      <div class="cafe-steam" aria-hidden="true"><span></span><span></span><span></span></div>
+      <img src="/assets/coffee-farm-huila.jpg" alt="Café de Huila — la finca familiar">
+    </div>
+    <div class="body-text reveal delay-1">
+      <p class="drop-cap" data-en="In the mountains of Huila, where the Andes lean toward the river and the air smells of coffee and damp earth, the Cadena family has grown coffee for generations. It is not a large farm — it is a family farm, where every bean is harvested by hand and roasted in small batches, with the patience of someone writing a book by hand, page by page.">En las montañas de Huila, donde los Andes se inclinan hacia el río y el aire huele a café y a tierra húmeda, la familia Cadena cultiva café desde hace generaciones. No es una finca grande — es una finca familiar, donde cada grano se cosecha a mano y se tuesta en lotes pequeños, con la paciencia de quien escribe un libro a pulso, página por página.</p>
+      <p data-en="Felipe brings it from Huila to Mompox, crossing Colombia from mountain range to river. He calls it café único — not because it is the only one in the world, but because every cup tells the story of the family, the farm, the journey. A coffee that tastes of mountain, of rain, of morning.">Felipe lo trae desde Huila hasta Mompox, cruzando Colombia de cordillera a río. Lo llama <em>"café único"</em> — no porque sea el único del mundo, sino porque cada taza cuenta la historia de la familia, de la finca, del viaje. Un café que sabe a monte, a lluvia, a mañana.</p>
+      <p class="cafe-tagline" data-en="At Literatium, coffee is not just a beverage: it is the ritual that opens every morning, the first page of the day.">"En Literatium, el café no es solo una bebida: es el ritual que abre cada mañana, la primera página del día."</p>
+      <div class="cafe-tag" data-en="Unique coffee · From our farm to your cup">Café único · De la finca a tu taza</div>
+      <div class="marginalia right" data-en="— from the mountains of Huila, to the river of Mompox, to your cup —">— del monte de Huila, al río de Mompox, a tu taza —</div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:70px;">
+    <div class="eyebrow center" data-en="Breakfast · The first chapter of the day">El desayuno · El primer capítulo del día</div>
+    <h2 class="chapter-title" style="text-align:center; font-size: clamp(1.6rem, 3vw, 2.4rem);" data-en="Served in the colonial dining room or in the garden, <em>beside the murals</em>">Servido en el comedor colonial o en el jardín, <em>junto a los murales</em></h2>
+  </div>
+  <div class="breakfast-row reveal delay-1">
+    <div class="breakfast-plate"><div class="breakfast-plate-num" data-en="PLATE I">PLATE I</div><img src="/assets/breakfast-coffee.webp" alt="Café"><h3 data-en="The morning coffee">El café de la mañana</h3><p data-en="A good story tastes of coffee — the green ceramic cup that welcomes you like the first line of a book.">"Una buena historia sabe a café" — la taza de Cerámica Verde que te recibe como la primera línea de un libro.</p></div>
+    <div class="breakfast-plate"><div class="breakfast-plate-num" data-en="PLATE II">PLATE II</div><img src="/assets/breakfast-1.webp" alt="Desayuno"><h3 data-en="The Caribbean plate">El plato caribeño</h3><p data-en="Scrambled eggs, fried plantain, cream and fruit — the Caribbean breakfast in its most honest form.">Huevos revueltos, plátano frito, crema y frutas — el desayuno caribeño en su forma más honesta.</p></div>
+    <div class="breakfast-plate"><div class="breakfast-plate-num" data-en="PLATE III">PLATE III</div><img src="/assets/breakfast-3.webp" alt="Mesa"><h3 data-en="The set table">La mesa puesta</h3><p data-en="Eggs, tropical fruit, Huila coffee and orange juice — the table every morning, waiting for you like a blank page.">Huevos, fruta del trópico, café de Huila y jugo de naranja — la mesa cada mañana, esperándote como una página en blanco.</p></div>
+  </div>
+</Folio>
+</Layout>

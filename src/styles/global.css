@@ -360,7 +360,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
    HERO — cinematic full-bleed image behind book cover
    ============================================================ */
 #frontispiece { min-height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--parchment); text-align: center; padding: 8rem 2rem 6rem; }
-.hero-bg { position: absolute; inset: 0; background: url('assets/real-lobby-books.webp') center/cover no-repeat; z-index: 0; animation: ken-burns 28s ease-in-out infinite alternate; }
+.hero-bg { position: absolute; inset: 0; background: url('/assets/real-lobby-books.webp') center/cover no-repeat; z-index: 0; animation: ken-burns 28s ease-in-out infinite alternate; }
 @keyframes ken-burns { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.12) translate(-2%, -3%); } }
 .hero-overlay { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(15,36,25,0.7) 0%, rgba(15,36,25,0.5) 50%, rgba(15,36,25,0.9) 100%), radial-gradient(ellipse 60% 50% at 50% 45%, transparent 0%, rgba(15,36,25,0.4) 100%); }
 .hero-polaroid { position: absolute; background: var(--parchment-warm); padding: 8px 8px 24px; box-shadow: 0 18px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(184,134,47,0.4); z-index: 2; pointer-events: none; }
@@ -420,7 +420,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 .space-plate-num { position: absolute; top: 12px; left: 14px; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.2em; color: var(--brass-light); background: rgba(15,36,25,0.55); padding: 3px 8px; z-index: 2; }
 .martica-card { margin-top: 80px; display: grid; grid-template-columns: 0.9fr 1.1fr; background: linear-gradient(135deg, var(--parchment-dark) 0%, var(--parchment-warm) 100%); border: 1px solid var(--brass); outline: 1px solid var(--brass-dark); outline-offset: 6px; box-shadow: 0 18px 40px rgba(44,36,22,0.18); overflow: hidden; position: relative; }
 @media (max-width: 880px) { .martica-card { grid-template-columns: 1fr; } }
-.martica-card-img { position: relative; min-height: 380px; background: url('assets/martha-desk.jpeg') center/cover no-repeat; filter: sepia(0.12) contrast(1.05); }
+.martica-card-img { position: relative; min-height: 380px; background: url('/assets/martha-desk.jpeg') center/cover no-repeat; filter: sepia(0.12) contrast(1.05); }
 .martica-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(114,47,55,0.35) 100%); }
 .martica-card-body { padding: 44px 44px 48px; position: relative; }
 .martica-card-body .quote-mark { font-family: var(--font-display); font-size: 4.5rem; color: var(--brass); opacity: 0.3; line-height: 0.5; margin-bottom: 8px; }
@@ -510,7 +510,7 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 /* MOMPOX */
 #mompox { position: relative; background: var(--forest-dark); color: var(--parchment); padding: 0; overflow: hidden; }
 .mompox-hero { position: relative; min-height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 2rem; overflow: hidden; }
-.mompox-hero-bg { position: absolute; inset: 0; background: url('assets/mompox-river-sunset-real.jpg') center/cover no-repeat; filter: brightness(0.6) saturate(1.15); z-index: 0; animation: ken-burns 32s ease-in-out infinite alternate; }
+.mompox-hero-bg { position: absolute; inset: 0; background: url('/assets/mompox-river-sunset-real.jpg') center/cover no-repeat; filter: brightness(0.6) saturate(1.15); z-index: 0; animation: ken-burns 32s ease-in-out infinite alternate; }
 .mompox-hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,36,25,0.55) 0%, rgba(15,36,25,0.3) 50%, rgba(15,36,25,0.9) 100%); }
 .mompox-hero-inner { position: relative; z-index: 2; max-width: 880px; }
 .mompox-eyebrow { font-family: var(--font-caps); font-size: 0.72rem; letter-spacing: 0.42em; color: var(--brass-light); margin-bottom: 32px; display: flex; align-items: center; justify-content: center; gap: 14px; }

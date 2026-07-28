@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Folio from '../components/Folio.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const topics = [
+  { title: 'Guía a pie', titleEn: 'Walking guide', icon: '🚶', desc: 'Recorre Mompox a pie — albarrada, plazas, iglesias, portales.', descEn: 'Walk Mompox — albarrada, plazas, churches, porticos.', href: '/mompox/walking-guide' },
+  { title: 'Iglesias', titleEn: 'Churches', icon: '⛪', desc: 'Seis iglesias coloniales, cada una con su historia.', descEn: 'Six colonial churches, each with its story.', href: '/mompox/churches' },
+  { title: 'Historia', titleEn: 'History', icon: '📜', desc: 'Fundada 1537, patrimonio UNESCO 1995.', descEn: 'Founded 1537, UNESCO heritage 1995.', href: '/mompox/history' },
+  { title: 'Sabores', titleEn: 'Food', icon: '🍽️', desc: 'Bocachico, casabito, corozo, arepa \'e huevo.', descEn: 'Bocachico, casabito, corozo, egg arepa.', href: '/mompox/food' },
+  { title: 'Festivales', titleEn: 'Festivals', icon: '🎭', desc: 'Semana Santa, Totó, Festijazz, Cumbión.', descEn: 'Holy Week, Totó, Festijazz, Cumbión.', href: '/mompox/festivals' },
+  { title: 'Naturaleza', titleEn: 'Nature', icon: '🦜', desc: 'Ciénaga de Pijiño, 300+ especies de aves.', descEn: 'Ciénaga de Pijiño, 300+ bird species.', href: '/mompox/nature' },
+  { title: 'Fotografía', titleEn: 'Photography', icon: '📷', desc: 'Los atardeceres, las calles, el río.', descEn: 'Sunsets, streets, the river.', href: '/mompox/photography' },
+  { title: 'Vida del río', titleEn: 'River life', icon: '🛶', desc: 'Champán, boga, planchón, ciénaga.', descEn: 'Champán, boga, ferry, lagoon.', href: '/mompox/river-life' },
+  { title: 'Tradiciones', titleEn: 'Local traditions', icon: '✨', desc: 'Filigrana, meceredora, siesta, realismo mágico.', descEn: 'Filigree, rocking chair, siesta, magical realism.', href: '/mompox/local-traditions' },
+];
+---
+<Layout title="Mompox — Literatium" description="Descubre Mompox — el pueblo que inspiró a García Márquez. Patrimonio UNESCO, fundado 1537.">
+<Folio id="mompox-hub" folioNumber="Folio VI · Mompox" folioNumberEn="Folio VI · Mompox" dark={true} next="book">
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Mompox' }]} />
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Chapter Four · Mompox">Capítulo Cuarto · Mompox</div>
+    <h1 class="chapter-title on-dark">El pueblo donde <em>el tiempo se detiene</em></h1>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+  <div class="reveal delay-1" style="max-width: 640px; margin: 30px auto;">
+    <p style="font-family: var(--font-body); color: var(--parchment); opacity: 0.9; font-size: 1.05rem; line-height: 1.8; text-align: center;" data-en="A UNESCO World Heritage Site since 1995, Mompox is a town that inspired García Márquez and that still today seems stopped in another century. The cobblestone streets, colonial churches and the slow river give it an atmosphere found nowhere else in the Colombian Caribbean.">Patrimonio de la Humanidad por la UNESCO desde 1995, Mompox es un pueblo que inspiró a García Márquez y que aún hoy parece detenido en otro siglo. Las calles empedradas, las iglesias coloniales y el río lento le dan una atmósfera que no se encuentra en ningún otro lugar del Caribe colombiano.</p>
+  </div>
+  <div class="reveal delay-1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 50px; max-width: 1000px; margin-left: auto; margin-right: auto;">
+    {topics.map((topic) => (
+      <a href={topic.href} style="text-decoration: none; color: inherit;">
+        <div style="background: rgba(247,240,220,0.06); border: 1px solid rgba(221,185,94,0.3); padding: 24px; transition: border-color 0.4s ease, background 0.4s ease; height: 100%;">
+          <div style="font-size: 2rem; margin-bottom: 12px;">{topic.icon}</div>
+          <h3 style="font-family: var(--font-display); font-style: italic; font-size: 1.3rem; color: var(--brass-light); margin-bottom: 8px;" data-en={topic.titleEn}>{topic.title}</h3>
+          <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--parchment); opacity: 0.8; line-height: 1.5;" data-en={topic.descEn}>{topic.desc}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+  <div class="reveal delay-2" style="margin-top: 60px; display: flex; justify-content: center;">
+    <div class="marginalia" style="max-width: 560px; color: var(--brass-light); background: rgba(15,36,25,0.5);" data-en="— In Mompox there are no bad seasons — only different forms of heat and calm. —">— En Mompox no hay estaciones malas — solo distintas formas de calor y de calma. —</div>
+  </div>
+</Folio>
+</Layout>

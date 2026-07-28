@@ -1,0 +1,14 @@
+---
+interface Props {
+  next: string;
+  dark?: boolean;
+}
+const { next, dark = false } = Astro.props;
+const outer = dark ? '#DDB95E' : '#8B6520';
+const inner = dark ? '#0F2419' : '#FCF8EE';
+const stroke = dark ? '#DDB95E' : '#C9A04E';
+---
+<div class="page-curl" data-next={next} role="button" tabindex="0">
+  <svg viewBox="0 0 90 90"><path d="M 90 0 L 90 90 L 0 90 Z" fill={outer} opacity="0.85"/><path d="M 90 0 L 90 90 L 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0 Z" fill={inner}/><path d="M 18 90 Q 35 75 50 60 Q 65 45 78 25 Q 84 12 90 0" stroke={stroke} stroke-width="1" fill="none" opacity="0.7"/></svg>
+  <span class="page-curl-label">turn →</span>
+</div>

@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Folio from '../components/Folio.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const spaces = [
+  { img: '/assets/real-lobby-arches.webp', title: 'Arcos que susurran', titleEn: 'Whispering arches', desc: 'El primer paso — la calma te recibe entre hierro y madera.', descEn: 'The first step — calm welcomes you among iron and wood.' },
+  { img: '/assets/space-moody-entrance.webp', title: 'Luz suspendida', titleEn: 'Suspended light', desc: 'La lámpara cuelga quieta sobre el silencio de la tarde.', descEn: 'The lamp hangs still over the silence of the afternoon.' },
+  { img: '/assets/space-recepcion.webp', title: 'Mimbre y libros', titleEn: 'Wicker and books', desc: 'Butacas que invitan a quedarse — toda una pared de historias.', descEn: 'Armchairs that invite you to stay — a whole wall of stories.' },
+  { img: '/assets/space-corredor.webp', title: 'Helechos y ladrillo', titleEn: 'Ferns and brick', desc: 'Helechos que cuelgan del techo y se mecen con la brisa del río.', descEn: 'Ferns hanging from the ceiling, swaying with the river breeze.' },
+  { img: '/assets/guest-chillin.webp', title: 'El rincón del descanso', titleEn: 'The corner of rest', desc: 'El rincón donde uno se sienta con un libro y olvida la hora.', descEn: 'The corner where one sits with a book and forgets the time.' },
+  { img: '/assets/space-zona-verde.webp', title: 'El jardín secreto', titleEn: 'The secret garden', desc: 'Tropical y callado — al anochecer, los grillos son la única conversación.', descEn: 'Tropical and hushed — at dusk, the crickets are the only conversation.' },
+];
+---
+<Layout title="La Casa — Literatium" description="La Casa de las Historias. Un refugio boutique cerca del Magdalena, donde los libros y el café marcan el ritmo de los días.">
+<Folio id="casa" folioNumber="Folio I · La Casa" folioNumberEn="Folio I · The House" next="rooms">
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'La Casa' }]} />
+  <div class="reveal">
+    <div class="eyebrow" data-en="Chapter One">Capítulo Primero</div>
+    <h1 class="chapter-title">Un refugio donde cada página <em>es una mañana</em></h1>
+    <p class="chapter-hand" data-en="The House of Stories">La Casa de las Historias</p>
+    <div class="fleuron">✦ ❦ ✦</div>
+  </div>
+  <div class="casa-grid">
+    <div class="body-text reveal">
+      <p class="drop-cap" data-en="Literatium was born from a love of three things: books, coffee and Mompox. Felipe Cadena, founder and man of the sea — officer in the Colombian Navy — dreamed of a place where the calm of the Magdalena River met the world of letters. He found it in a colonial house near the river, and little by little that house filled with stories. Thus was born The House of Stories.">Literatium nació del amor por tres cosas: los libros, el café y Mompox. Felipe Cadena, fundador y hombre de mar — oficial de la Armada Colombiana — soñaba con un lugar donde la calma del río Magdalena se encontrara con el mundo de las letras. Lo encontró en una casa colonial cerca del río, y poco a poco esa casa se fue llenando de historias. Así nació La Casa de las Historias.</p>
+      <p data-en="The colonial house was transformed slowly. Every room has books; every corner invites you to read. The garden became a retreat. The library, a meeting point. And the coffee — a unique coffee from the family farm in Huila — became the soul of the house, the first word of every morning.">La casa colonial se transformó despacio. Cada habitación tiene libros; cada rincón invita a leer. El jardín se volvió refugio. La biblioteca, punto de encuentro. Y el café — un café único de la finca familiar en Huila — se convirtió en el alma de la casa, en la primera palabra de cada mañana.</p>
+      <p data-en="We are a little removed from the historic centre — and that is exactly what makes us special. Here, the noise of the town does not reach. The song of birds arrives, the aroma of coffee, and occasionally, the sound of a page turning in the garden. A pause, minutes from everything."><em>Estamos un poco apartados del centro histórico — y eso es exactamente lo que nos hace especiales. Aquí no llega el ruido del pueblo. Llega el canto de los pájaros, el aroma del café, y de vez en cuando, el rumor de una página que se vuelve en el jardín. Una pausa, a minutos de todo.</em></p>
+      <div class="marginalia" data-en="— here, mornings are counted by cups of coffee —">— aquí, las mañanas se cuentan por tazas de café —</div>
+    </div>
+    <div class="casa-stats reveal delay-1">
+      <div class="stat-card"><div class="value">9.5</div><div class="label" data-en="Score · 151+ reviews">Puntuación · 151+ reseñas</div></div>
+      <div class="stat-card"><div class="value">★</div><div class="label" data-en="Unique coffee · Family farm in Huila">Café único · Finca en Huila</div></div>
+      <div class="stat-card"><div class="value">✦</div><div class="label" data-en="Books in every corner">Libros en cada rincón</div></div>
+      <div class="stat-card"><div class="value">5′</div><div class="label" data-en="Minutes from the historic centre">Minutos del centro histórico</div></div>
+    </div>
+  </div>
+  <div class="spaces-mosaic reveal">
+    {spaces.map((space) => (
+      <figure class="space-plate">
+        <img src={space.img} alt={space.title} />
+        <figcaption class="space-caption">
+          <h4>{space.title}</h4>
+          <p data-en={space.descEn}>{space.desc}</p>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+  <article class="martica-card reveal">
+    <div class="martica-card-img" role="img" aria-label="Martica en su escritorio" style="background: url('/assets/martha-desk.jpeg') center/cover no-repeat; filter: sepia(0.2) contrast(1.05);"></div>
+    <div class="martica-card-body">
+      <div class="quote-mark">"</div>
+      <p class="tagline" data-en="The momposina who makes everything happen — and makes everyone return.">La momposina que hace que todo pase — y que todos vuelvan.</p>
+      <h2>Marta — "Martica"</h2>
+      <div class="role" data-en="Manager · The star of Literatium">Gerente · La estrella de Literatium</div>
+      <p class="bio" data-en="Martica is the soul of Literatium, that invisible force that makes things happen without anyone seeing them happen. Momposina by birth, she knows the town as only someone who grew up among its streets can know it — every church, every boatman, every recipe passed down by word of mouth. She welcomes guests as one welcomes a friend arriving from afar: with coffee, with a hand-drawn map, and with the certainty that here, for a few nights, the world will be all right.">Martica es el alma de Literatium, esa fuerza invisible que hace que las cosas sucedan sin que nadie las vea suceder. Momposina de nacimiento, conoce el pueblo como solo quien ha crecido entre sus calles puede conocerlo — cada iglesia, cada boga, cada receta que se transmite de boca en boca. Recibe a los huéspedes como se recibe a un amigo que llega de lejos: con café, con un mapa dibujado a mano, y con la certeza de que aquí, por unas noches, el mundo va a estar bien.</p>
+    </div>
+  </article>
+</Folio>
+</Layout>

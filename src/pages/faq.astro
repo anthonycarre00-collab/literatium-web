@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Folio from '../components/Folio.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const faqs = [
+  { q: '¿Cómo llego a Literatium desde Cartagena?', qEn: 'How do I get to Literatium from Cartagena?', a: '3 buses diarios con Unitransco, ~6h. El Puente Roncador (2020) conecta sin ferry. Tuk-tuk al centro en 5 min.', aEn: '3 daily buses with Unitransco, ~6h. Puente Roncador (2020) connects without ferry. Tuk-tuk to centre in 5 min.' },
+  { q: '¿Hay vuelos a Mompox?', qEn: 'Are there flights to Mompox?', a: 'Satena opera vuelos Medellín → Mompox. Aeropuerto San Bernardo activo en Semana Santa y Festijazz.', aEn: 'Satena operates Medellín → Mompox flights. San Bernardo airport active during Holy Week and Festijazz.' },
+  { q: '¿Cuál es la mejor época para visitar?', qEn: 'When is the best time to visit?', a: 'Diciembre a febrero: cielo despejado, menos lluvia. Marzo es el más caluroso (37°C). Octubre el más lluvioso.', aEn: 'December to February: clear skies, less rain. March is hottest (37°C). October is wettest.' },
+  { q: '¿El desayuno está incluido?', qEn: 'Is breakfast included?', a: 'Sí, desayuno momposino incluido en todas las habitaciones. Preparado al momento, opciones locales e internacionales.', aEn: 'Yes, momposino breakfast included in all rooms. Made to order, local and international options.' },
+  { q: '¿Tienen jacuzzi?', qEn: 'Do you have a jacuzzi?', a: 'Sí, jacuzzi del jardín disponible para todos los huéspedes. Se enciende de noche en azul, verde y rosa.', aEn: 'Yes, garden jacuzzi available to all guests. Lights up at night in blue, green and pink.' },
+  { q: '¿Son pet-friendly?', qEn: 'Are you pet-friendly?', a: 'Sí, mascotas bienvenidas. Tenemos un perro residente, Max, que supervisa el jardín.', aEn: 'Yes, pets welcome. We have a resident dog, Max, who supervises the garden.' },
+  { q: '¿Cómo reservo?', qEn: 'How do I book?', a: 'Por WhatsApp: +57 315 538 2112. Martica o alguien de su equipo te responderá personalmente — sin formularios, sin call centers.', aEn: 'Via WhatsApp: +57 315 538 2112. Martica or someone from her team will answer you personally — no forms, no call centres.' },
+  { q: '¿Hay WiFi?', qEn: 'Is there WiFi?', a: 'Sí, WiFi gratis en todo el recinto. Pero honestamente, el río y los libros son mejores distracciones.', aEn: 'Yes, free WiFi throughout. But honestly, the river and the books are better distractions.' },
+  { q: '¿Pueden organizar paseos?', qEn: 'Can you arrange tours?', a: 'Sí, Martica coordina todo: ciénaga, champán al atardecer, filigrana, iglesias, albarrada, comunidades campesinas.', aEn: 'Yes, Martica coordinates everything: lagoon, sunset boat ride, filigree, churches, albarrada, farming communities.' },
+  { q: '¿Qué idiomas se hablan?', qEn: 'What languages are spoken?', a: 'Español e inglés. La página web tiene toggle EN/ES.', aEn: 'Spanish and English. The website has an EN/ES toggle.' },
+];
+---
+<Layout title="FAQ — Literatium" description="Preguntas frecuentes sobre Literatium. Cómo llegar, cuándo venir, qué incluir, cómo reservar.">
+<Folio id="faq" folioNumber="Folio V · Preguntas" folioNumberEn="Folio V · FAQ" next="book">
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'FAQ' }]} />
+  <div class="reveal">
+    <div class="eyebrow" data-en="Frequently asked questions">Preguntas frecuentes</div>
+    <h1 class="chapter-title">Lo que <em>quizás te preguntas</em></h1>
+    <div class="fleuron">✦ ❦ ✦</div>
+  </div>
+  <div class="reveal delay-1" style="max-width: 800px; margin: 40px auto;">
+    {faqs.map((faq) => (
+      <div style="background: var(--parchment); border: 1px solid var(--brass-dark); outline: 1px solid var(--brass); outline-offset: 4px; padding: 20px 24px; margin-bottom: 16px; box-shadow: 0 8px 18px rgba(44,36,22,0.1);">
+        <h3 style="font-family: var(--font-display); font-style: italic; font-size: 1.2rem; color: var(--burgundy); margin-bottom: 8px;" data-en={faq.qEn}>{faq.q}</h3>
+        <p style="font-family: var(--font-body); font-size: 0.95rem; line-height: 1.65; color: var(--espresso);" data-en={faq.aEn}>{faq.a}</p>
+      </div>
+    ))}
+  </div>
+  <div class="reveal" style="text-align: center; margin-top: 40px;">
+    <p style="font-family: var(--font-hand); font-size: 1.3rem; color: var(--brass-dark); font-style: italic;" data-en="— more questions? Martica has the answers —">— ¿más preguntas? Martica tiene las respuestas —</p>
+    <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary" style="margin-top: 20px;" data-en="Ask on WhatsApp">Preguntar por WhatsApp</a>
+  </div>
+</Folio>
+</Layout>
