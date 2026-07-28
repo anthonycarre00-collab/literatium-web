@@ -43,6 +43,20 @@ const tagLinks = article.tags.map((t) => ({
 <Layout
   title={`${article.title} — Diario · Literatium`}
   description={article.excerpt}
+  titleEn={`${article.titleEn} — Journal · Literatium`}
+  descriptionEn={article.excerptEn}
+  ogImage={article.coverImage}
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.titleEn,
+    description: article.excerptEn,
+    image: 'https://literatium-web.vercel.app' + article.coverImage,
+    author: { '@type': 'Person', name: article.author === 'Redacción Literatium' ? 'Literatium Editorial' : article.author },
+    publisher: { '@type': 'Organization', name: 'LITERATIUM', logo: { '@type': 'ImageObject', url: 'https://literatium-web.vercel.app/assets/literatium-logo-icon.jpeg' } },
+    datePublished: article.date,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://literatium-web.vercel.app/diario/' + article.slug }
+  }}
 >
 <Folio id="diario-article" folioNumber="Folio XI · Diario" folioNumberEn="Folio XI · Journal" dark={true}>
   <Breadcrumbs items={[

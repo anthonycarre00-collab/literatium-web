@@ -3,7 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Folio from '../components/Folio.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 ---
-<Layout title="Reservar — Literatium" description="Reserva tu estancia en Literatium. WhatsApp +57 315 538 2112. Sin formularios, sin call centers, sin prisa.">
+<Layout
+  title="Reservar — Literatium"
+  description="Reserva tu estancia en Literatium. WhatsApp +57 315 538 2112. Sin formularios, sin call centers, sin prisa."
+  titleEn="Book — Literatium"
+  descriptionEn="Book your stay at Literatium. WhatsApp +57 315 538 2112. No forms, no call centres, no rush."
+>
 <Folio id="book" folioNumber="Folio X · Reservar" folioNumberEn="Folio X · Booking" dark={true}>
   <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Reservar' }]} />
 
@@ -36,7 +41,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 
   <div class="reveal">
     <div class="eyebrow" style="color: var(--brass-light);" data-en="Final Chapter · The booking">Capítulo Final · La reserva</div>
-    <h1 class="chapter-title on-dark">Tu próximo capítulo <em>empieza aquí</em></h1>
+    <h1 class="chapter-title on-dark" data-en="Your next chapter <em>begins here</em>">Tu próximo capítulo <em>empieza aquí</em></h1>
     <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
   </div>
 

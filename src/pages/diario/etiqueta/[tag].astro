@@ -25,6 +25,8 @@ const articles: JournalArticle[] = getArticlesByTag(tagLabel);
 <Layout
   title={`Etiqueta: ${tagLabel} — Diario · Literatium`}
   description={`Artículos del diario de Literatium etiquetados con «${tagLabel}».`}
+  titleEn={`Tag: ${tagLabel} — Journal · Literatium`}
+  descriptionEn={`Literatium journal articles tagged with «${tagLabel}».`}
 >
 <Folio id="diario-etiqueta" folioNumber="Folio XI · Diario" folioNumberEn="Folio XI · Journal" dark={true}>
   <Breadcrumbs items={[

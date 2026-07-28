@@ -90,7 +90,11 @@
   }
   document.querySelectorAll('.gabo-quote, .interstitial-quote').forEach(setupGaboQuote);
 
-  /* 5. RIVER SPINE */
+  /* 5. RIVER SPINE — left-side vertical river with folio labels.
+     Updated for current page structure:
+     (a) On the home page: scroll-spy across all home sections (in DOM order).
+     (b) On dedicated pages: read the folio number from the .folio-number element
+         and show it as a static label (no scroll-spy needed). */
   const riverPin = document.getElementById('river-pin');
   const riverTrail = document.getElementById('river-pin-trail');
   if (riverPin && riverTrail) {
@@ -98,16 +102,47 @@
   riverLabel.className = 'river-pin-label';
   riverLabel.textContent = 'Folio I';
   document.body.appendChild(riverLabel);
-  const sectionMap = [
-    { id: 'frontispiece', label: 'Folio I · La Casa' },
-    { id: 'casa',         label: 'Folio I · La Casa' },
-    { id: 'rooms',        label: 'Folio II · Habitaciones' },
-    { id: 'cafe',         label: 'Folio III · Café' },
-    { id: 'mompox',       label: 'Folio IV · Mompox' },
-    { id: 'sabores',      label: 'Folio V · Sabores' },
-    { id: 'cartas',       label: 'Folio VI · Cartas' },
-    { id: 'colofon',      label: 'Folio VIII · Colofón' },
+
+  // Home page section map — in DOM order, matches the new folio numbering I-VIII.
+  // Includes ALL major sections (cartas-preview, gallery-marquee, macondo, viaje,
+  // diccionario, owners were previously missing).
+  const homeSectionMap = [
+    { id: 'frontispiece',    label: 'Folio I · La Casa' },
+    { id: 'cartas-preview',  label: 'Cartas de huéspedes' },
+    { id: 'casa',            label: 'Folio I · La Casa' },
+    { id: 'rooms',           label: 'Folio II · Habitaciones' },
+    { id: 'cafe',            label: 'Folio III · Café' },
+    { id: 'macondo',         label: 'Folio III½ · Macondo' },
+    { id: 'gallery-marquee', label: 'Galería · Imágenes' },
+    { id: 'mompox',          label: 'Folio IV · Mompox' },
+    { id: 'viaje',           label: 'Folio IV½ · El Viaje' },
+    { id: 'sabores',         label: 'Folio V · Sabores' },
+    { id: 'diccionario',     label: 'Folio V½ · Palabras' },
+    { id: 'cartas',          label: 'Folio VI · Cartas' },
+    { id: 'owners',          label: 'Folio VII · Anfitriones' },
+    { id: 'colofon',         label: 'Folio VIII · Colofón' },
   ];
+
+  // Detect dedicated page (any path other than '/') — read folio from DOM.
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
+  const onHomePage = path === '/';
+  let staticLabel = '';
+  if (!onHomePage) {
+    // Try to read the folio number from the page's first .folio-number element
+    var fnEl = document.querySelector('.folio-number');
+    if (fnEl) {
+      // Use the data-en attribute if present (English version is shorter/cleaner),
+      // otherwise the textContent.
+      staticLabel = fnEl.getAttribute('data-en') || fnEl.textContent.trim();
+    }
+    // Special-case subpages: prefix with parent section
+    if (path.indexOf('/mompox/') === 0) staticLabel = 'Mompox · ' + staticLabel;
+    else if (path.indexOf('/biblioteca/') === 0) staticLabel = 'Biblioteca · ' + staticLabel;
+    else if (path.indexOf('/diario/') === 0) staticLabel = 'Diario · ' + staticLabel;
+    else if (path.indexOf('/diario/categoria/') === 0) staticLabel = 'Diario · Categoría';
+    else if (path.indexOf('/diario/etiqueta/') === 0) staticLabel = 'Diario · Etiqueta';
+  }
+
   function updateRiverPin() {
     const scrollPct = window.scrollY / Math.max(1, (document.documentElement.scrollHeight - window.innerHeight));
     const y = Math.max(20, Math.min(window.innerHeight - 20, scrollPct * window.innerHeight));
@@ -115,10 +150,26 @@
     riverLabel.style.top = y + 'px';
     riverTrail.style.top = '0px';
     riverTrail.style.height = y + 'px';
+
+    if (!onHomePage) {
+      // Static label for dedicated pages
+      riverLabel.textContent = staticLabel || 'Literatium';
+      riverPin.classList.add('active');
+      riverLabel.classList.add('show');
+      return;
+    }
+
+    // Home page: scroll-spy across homeSectionMap
     let activeIdx = 0;
     const mid = window.innerHeight / 2;
-    sectionMap.forEach((s, i) => { const el = document.getElementById(s.id); if (el) { const r = el.getBoundingClientRect(); if (r.top <= mid && r.bottom >= mid) activeIdx = i; } });
-    riverLabel.textContent = sectionMap[activeIdx].label;
+    homeSectionMap.forEach(function(s, i) {
+      var el = document.getElementById(s.id);
+      if (el) {
+        var r = el.getBoundingClientRect();
+        if (r.top <= mid && r.bottom >= mid) activeIdx = i;
+      }
+    });
+    riverLabel.textContent = homeSectionMap[activeIdx].label;
     riverPin.classList.add('active');
     riverLabel.classList.add('show');
   }

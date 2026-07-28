@@ -4,6 +4,7 @@ import Folio from '../components/Folio.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 const faqs = [
+
   { q: '¿Cómo llego a Literatium desde Cartagena?', qEn: 'How do I get to Literatium from Cartagena?', a: '3 buses diarios con Unitransco, ~6h. El Puente Roncador (2020) conecta sin ferry. Tuk-tuk al centro en 5 min.', aEn: '3 daily buses with Unitransco, ~6h. Puente Roncador (2020) connects without ferry. Tuk-tuk to centre in 5 min.' },
   { q: '¿Hay vuelos a Mompox?', qEn: 'Are there flights to Mompox?', a: 'Satena opera vuelos Medellín → Mompox. Aeropuerto San Bernardo activo en Semana Santa y Festijazz.', aEn: 'Satena operates Medellín → Mompox flights. San Bernardo airport active during Holy Week and Festijazz.' },
   { q: '¿Cuál es la mejor época para visitar?', qEn: 'When is the best time to visit?', a: 'Diciembre a febrero: cielo despejado, menos lluvia. Marzo es el más caluroso (37°C). Octubre el más lluvioso.', aEn: 'December to February: clear skies, less rain. March is hottest (37°C). October is wettest.' },
@@ -16,12 +17,26 @@ const faqs = [
   { q: '¿Qué idiomas se hablan?', qEn: 'What languages are spoken?', a: 'Español e inglés. La página web tiene toggle EN/ES.', aEn: 'Spanish and English. The website has an EN/ES toggle.' },
 ];
 ---
-<Layout title="FAQ — Literatium" description="Preguntas frecuentes sobre Literatium. Cómo llegar, cuándo venir, qué incluir, cómo reservar.">
+<Layout
+  title="FAQ — Literatium"
+  description="Preguntas frecuentes sobre Literatium. Cómo llegar, cuándo venir, qué incluir, cómo reservar."
+  titleEn="FAQ — Literatium"
+  descriptionEn="Frequently asked questions about Literatium. How to get here, when to come, what to expect, how to book."
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.qEn,
+      acceptedAnswer: { '@type': 'Answer', text: f.aEn }
+    }))
+  }}
+>
 <Folio id="faq" folioNumber="Folio IX · Preguntas" folioNumberEn="Folio IX · FAQ" next="book">
   <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'FAQ' }]} />
   <div class="reveal">
     <div class="eyebrow" data-en="Frequently asked questions">Preguntas frecuentes</div>
-    <h1 class="chapter-title">Lo que <em>quizás te preguntas</em></h1>
+    <h1 class="chapter-title" data-en="What you <em>might be wondering</em>">Lo que <em>quizás te preguntas</em></h1>
     <div class="fleuron">✦ ❦ ✦</div>
   </div>
   <div class="reveal delay-1" style="max-width: 800px; margin: 40px auto;">

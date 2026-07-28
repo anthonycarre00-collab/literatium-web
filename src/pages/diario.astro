@@ -18,13 +18,15 @@ const tagSlugs = tags.map((t) => ({ label: t, slug: slugifyTag(t) }));
 <Layout
   title="Diario — Literatium"
   description="Diario de Literatium — ensayos breves sobre Mompox, la literatura, el río Magdalena, el café y la casa. Lecturas pausadas, no un blog."
+  titleEn="Journal — Literatium"
+  descriptionEn="Literatium Journal — brief essays on Mompox, literature, the Magdalena River, coffee and the house. Slow reading, not a blog."
 >
 <Folio id="diario" folioNumber="Folio XI · Diario" folioNumberEn="Folio XI · Journal" dark={true}>
   <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Diario', href: '/diario' }]} />
 
   <div class="reveal">
     <div class="eyebrow" style="color: var(--brass-light);" data-en="Chapter Eleven · The Journal">Capítulo Once · El Diario</div>
-    <h1 class="chapter-title on-dark">Crónicas de la casa <em>y del río</em></h1>
+    <h1 class="chapter-title on-dark" data-en="Chronicles of the house <em>and of the river</em>">Crónicas de la casa <em>y del río</em></h1>
     <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
   </div>
 

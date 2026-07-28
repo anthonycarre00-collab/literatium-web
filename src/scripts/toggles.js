@@ -32,6 +32,25 @@ function toggleLang() {
       if (el.dataset.origAlt) el.alt = el.dataset.origAlt;
     }
   });
+  // Swap <title> and meta description (head elements)
+  var titleEl = document.querySelector('title[data-en]');
+  if (titleEl) {
+    if (currentLang === 'en') {
+      if (!titleEl.dataset.origEs) titleEl.dataset.origEs = titleEl.textContent;
+      titleEl.textContent = titleEl.dataset.en;
+    } else {
+      if (titleEl.dataset.origEs) titleEl.textContent = titleEl.dataset.origEs;
+    }
+  }
+  var descEl = document.querySelector('meta[name="description"][data-en]');
+  if (descEl) {
+    if (currentLang === 'en') {
+      if (!descEl.dataset.origEs) descEl.dataset.origEs = descEl.getAttribute('content');
+      descEl.setAttribute('content', descEl.dataset.en);
+    } else {
+      if (descEl.dataset.origEs) descEl.setAttribute('content', descEl.dataset.origEs);
+    }
+  }
   try { localStorage.setItem('literatium-lang', currentLang); } catch(e) {}
 }
 // Restore language preference on load

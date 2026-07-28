@@ -4,11 +4,11 @@ import Folio from '../components/Folio.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 const rooms = [
-  { num: 'HABITACIÓN V', name: 'Suite con Jardín y Bañera', bed: '1 king + sofá cama', size: '428 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-suite-9.webp', desc: 'La suite estrella. Bañera, jardín privado, chocolate para los huéspedes. El jacuzzi del jardín disponible para todos.', descEn: 'The flagship suite. Tub, private garden, chocolate for guests. Garden jacuzzi available to all.', featured: true },
-  { num: 'HABITACIÓN IV', name: 'Deluxe Suite', bed: '1 king + sofá cama', size: '410 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-deluxe-3.webp', desc: 'Suite amplia con sala de estar, baño con bañera y ducha. Aire acondicionado, TV con streaming, minibar.', descEn: 'Spacious suite with seating area, bathroom with tub and shower. AC, TV with streaming, mini-bar.' },
-  { num: 'HABITACIÓN I', name: 'King Room', bed: '1 king', size: '290 sq ft', view: 'Ciudad', viewEn: 'City', img: '/assets/room-king-7.webp', desc: 'Habitación doble amplia con cama king extragrande. Baño privado con ducha, batas y artículos de aseo.', descEn: 'Spacious double room with extra-large king bed. Private bathroom with shower, bathrobes and toiletries.' },
-  { num: 'HABITACIÓN II', name: 'Standard Doble', bed: '1 queen', size: '225 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-standard-3.webp', desc: 'Habitación doble con cama queen grande. Baño privado, aire acondicionado, TV, cafetera.', descEn: 'Double room with large queen bed. Private bathroom, AC, TV, coffee maker.' },
-  { num: 'HABITACIÓN III', name: 'Standard Doble · Jardín', bed: '1 queen', size: '225 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-garden-1.webp', desc: 'Segunda habitación doble con cama queen. Vista al jardín, baño privado, todas las comodidades.', descEn: 'Second double room with queen bed. Garden view, private bathroom, all amenities.' },
+  { num: 'HABITACIÓN V', numEn: 'ROOM V', name: 'Suite con Jardín y Bañera', nameEn: 'Suite with Garden and Tub', bed: '1 king + sofá cama', bedEn: '1 king + sofa bed', size: '428 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-suite-9.webp', desc: 'La suite estrella. Bañera, jardín privado, chocolate para los huéspedes. El jacuzzi del jardín disponible para todos.', descEn: 'The flagship suite. Tub, private garden, chocolate for guests. Garden jacuzzi available to all.', featured: true },
+  { num: 'HABITACIÓN IV', numEn: 'ROOM IV', name: 'Deluxe Suite', nameEn: 'Deluxe Suite', bed: '1 king + sofá cama', bedEn: '1 king + sofa bed', size: '410 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-deluxe-3.webp', desc: 'Suite amplia con sala de estar, baño con bañera y ducha. Aire acondicionado, TV con streaming, minibar.', descEn: 'Spacious suite with seating area, bathroom with tub and shower. AC, TV with streaming, mini-bar.' },
+  { num: 'HABITACIÓN I', numEn: 'ROOM I', name: 'King Room', nameEn: 'King Room', bed: '1 king', bedEn: '1 king', size: '290 sq ft', view: 'Ciudad', viewEn: 'City', img: '/assets/room-king-7.webp', desc: 'Habitación doble amplia con cama king extragrande. Baño privado con ducha, batas y artículos de aseo.', descEn: 'Spacious double room with extra-large king bed. Private bathroom with shower, bathrobes and toiletries.' },
+  { num: 'HABITACIÓN II', numEn: 'ROOM II', name: 'Standard Doble', nameEn: 'Standard Double', bed: '1 queen', bedEn: '1 queen', size: '225 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-standard-3.webp', desc: 'Habitación doble con cama queen grande. Baño privado, aire acondicionado, TV, cafetera.', descEn: 'Double room with large queen bed. Private bathroom, AC, TV, coffee maker.' },
+  { num: 'HABITACIÓN III', numEn: 'ROOM III', name: 'Standard Doble · Jardín', nameEn: 'Standard Double · Garden', bed: '1 queen', bedEn: '1 queen', size: '225 sq ft', view: 'Jardín', viewEn: 'Garden', img: '/assets/room-garden-1.webp', desc: 'Segunda habitación doble con cama queen. Vista al jardín, baño privado, todas las comodidades.', descEn: 'Second double room with queen bed. Garden view, private bathroom, all amenities.' },
 ];
 
 const amenities = [
@@ -22,25 +22,30 @@ const amenities = [
   { icon: '🍽️', label: 'Desayuno momposino', labelEn: 'Momposino breakfast' },
 ];
 ---
-<Layout title="Habitaciones — Literatium" description="Cinco capítulos para elegir. Cada habitación tiene su propio carácter, sus libros, su luz.">
+<Layout
+  title="Habitaciones — Literatium"
+  description="Cinco capítulos para elegir. Cada habitación tiene su propio carácter, sus libros, su luz."
+  titleEn="Rooms — Literatium"
+  descriptionEn="Five chapters to choose from. Every room has its own character, its books, its light."
+>
 <Folio id="rooms" folioNumber="Folio II · Habitaciones" folioNumberEn="Folio II · Rooms" dark={true} next="cafe">
   <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Habitaciones' }]} />
   <div class="reveal">
     <div class="eyebrow" style="color: var(--brass-light);" data-en="Chapter Two">Capítulo Segundo</div>
-    <h1 class="chapter-title on-dark">Cinco capítulos <em>para elegir</em></h1>
-    <p class="rooms-intro">Cada habitación tiene su propio carácter, sus libros, su luz — como cinco historias distintas dentro de la misma casa. Todas con aire acondicionado, baño privado, TV, cafetera y el silencio que solo se encuentra lejos del centro, donde el río se confunde con el sueño.</p>
+    <h1 class="chapter-title on-dark" data-en="Five chapters <em>to choose from</em>">Cinco capítulos <em>para elegir</em></h1>
+    <p class="rooms-intro" data-en="Every room has its own character, its books, its light — like five different stories within the same house. All with air conditioning, private bathroom, TV, coffee maker and the silence found only far from the centre, where the river blends with dream.">Cada habitación tiene su propio carácter, sus libros, su luz — como cinco historias distintas dentro de la misma casa. Todas con aire acondicionado, baño privado, TV, cafetera y el silencio que solo se encuentra lejos del centro, donde el río se confunde con el sueño.</p>
     <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
   </div>
 
   <div class="rooms-row reveal delay-1">
     {rooms.map((room) => (
       <article class={`room-card ${room.featured ? 'featured' : ''}`}>
-        <img class="room-card-img" src={room.img} alt={room.name} />
+        <img class="room-card-img" src={room.img} alt={room.name} data-en-alt={room.nameEn} loading="lazy" decoding="async" />
         <div class="room-card-body">
-          <div class="room-card-num">{room.num}</div>
-          <h3>{room.name}</h3>
+          <div class="room-card-num" data-en={room.numEn}>{room.num}</div>
+          <h3 data-en={room.nameEn}>{room.name}</h3>
           <div class="room-card-specs">
-            <span>{room.bed}</span>
+            <span data-en={room.bedEn}>{room.bed}</span>
             <span>{room.size}</span>
             <span data-en={room.viewEn}>{room.view}</span>
           </div>
@@ -63,7 +68,7 @@ const amenities = [
   </div>
 
   <div class="reveal" style="margin-top:30px; text-align:center;">
-    <p style="font-family: var(--font-body); font-style: italic; color: var(--parchment); opacity:0.8; max-width:620px; margin:0 auto;">El jacuzzi del jardín, disponible para todos los huéspedes, se enciende de noche en azul, verde y rosa — como un acuario de luz bajo las estrellas.</p>
+    <p style="font-family: var(--font-body); font-style: italic; color: var(--parchment); opacity:0.8; max-width:620px; margin:0 auto;" data-en="The garden jacuzzi, available to all guests, lights up at night in blue, green and pink — like an aquarium of light beneath the stars.">El jacuzzi del jardín, disponible para todos los huéspedes, se enciende de noche en azul, verde y rosa — como un acuario de luz bajo las estrellas.</p>
     <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary" style="margin-top:26px;" data-en="Check availability">Consultar disponibilidad</a>
   </div>
 </Folio>

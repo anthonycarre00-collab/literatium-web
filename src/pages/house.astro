@@ -12,12 +12,17 @@ const spaces = [
   { img: '/assets/space-zona-verde.webp', title: 'El jardín secreto', titleEn: 'The secret garden', desc: 'Tropical y callado — al anochecer, los grillos son la única conversación.', descEn: 'Tropical and hushed — at dusk, the crickets are the only conversation.' },
 ];
 ---
-<Layout title="La Casa — Literatium" description="La Casa de las Historias. Un refugio boutique cerca del Magdalena, donde los libros y el café marcan el ritmo de los días.">
+<Layout
+  title="La Casa — Literatium"
+  description="La Casa de las Historias. Un refugio boutique cerca del Magdalena, donde los libros y el café marcan el ritmo de los días."
+  titleEn="The House — Literatium"
+  descriptionEn="The House of Stories. A boutique refuge near the Magdalena, where books and coffee set the rhythm of the days."
+>
 <Folio id="casa" folioNumber="Folio I · La Casa" folioNumberEn="Folio I · The House" next="rooms">
   <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'La Casa' }]} />
   <div class="reveal">
     <div class="eyebrow" data-en="Chapter One">Capítulo Primero</div>
-    <h1 class="chapter-title">Un refugio donde cada página <em>es una mañana</em></h1>
+    <h1 class="chapter-title" data-en="A refuge where every page <em>is a morning</em>">Un refugio donde cada página <em>es una mañana</em></h1>
     <p class="chapter-hand" data-en="The House of Stories">La Casa de las Historias</p>
     <div class="fleuron">✦ ❦ ✦</div>
   </div>
@@ -38,9 +43,9 @@ const spaces = [
   <div class="spaces-mosaic reveal">
     {spaces.map((space) => (
       <figure class="space-plate">
-        <img src={space.img} alt={space.title} />
+        <img src={space.img} alt={space.title} data-en-alt={space.titleEn} loading="lazy" decoding="async" />
         <figcaption class="space-caption">
-          <h4>{space.title}</h4>
+          <h4 data-en={space.titleEn}>{space.title}</h4>
           <p data-en={space.descEn}>{space.desc}</p>
         </figcaption>
       </figure>
@@ -61,7 +66,7 @@ const spaces = [
     <div class="martica-card-body">
       <div class="quote-mark">"</div>
       <p class="tagline" data-en="The momposina who makes everything happen — and makes everyone return.">La momposina que hace que todo pase — y que todos vuelvan.</p>
-      <h2>Marta — "Martica"</h2>
+      <h2 data-en='Marta — "Martica"'>Marta — "Martica"</h2>
       <div class="role" data-en="Manager · The star of Literatium">Gerente · La estrella de Literatium</div>
       <p class="bio" data-en="Martica is the soul of Literatium, that invisible force that makes things happen without anyone seeing them happen. Momposina by birth, she knows the town as only someone who grew up among its streets can know it — every church, every boatman, every recipe passed down by word of mouth. She welcomes guests as one welcomes a friend arriving from afar: with coffee, with a hand-drawn map, and with the certainty that here, for a few nights, the world will be all right.">Martica es el alma de Literatium, esa fuerza invisible que hace que las cosas sucedan sin que nadie las vea suceder. Momposina de nacimiento, conoce el pueblo como solo quien ha crecido entre sus calles puede conocerlo — cada iglesia, cada boga, cada receta que se transmite de boca en boca. Recibe a los huéspedes como se recibe a un amigo que llega de lejos: con café, con un mapa dibujado a mano, y con la certeza de que aquí, por unas noches, el mundo va a estar bien.</p>
     </div>

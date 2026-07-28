@@ -23,12 +23,17 @@ const senderos = [
   { num: 'VI', name: 'Crucero a las comunidades campesinas', nameEn: 'Boat trip to farming communities', note: 'Cruzar el río en lancha pública hasta las comunidades que cultivan las hortalizas de Mompox. Compartir pescado con arroz de coco con una familia local. Turismo comunitario auténtico.', noteEn: 'Cross the river on a public boat to the communities that grow Mompox\'s vegetables. Share fish with coconut rice with a local family. Authentic community tourism.' },
 ];
 ---
-<Layout title="Mompox · Sabores — Literatium" description="Sabores de Mompox: bocachico, casabito, queso de capa, corozo, arepa 'e huevo. Y seis senderos para explorar el Caribe fluvial.">
+<Layout
+  title="Mompox · Sabores — Literatium"
+  description="Sabores de Mompox: bocachico, casabito, queso de capa, corozo, arepa 'e huevo. Y seis senderos para explorar el Caribe fluvial."
+  titleEn="Mompox · Flavours — Literatium"
+  descriptionEn="Flavours of Mompox: bocachico, casabito, capa cheese, corozo, egg arepa. And six paths to explore the riverine Caribbean."
+>
 <Folio id="mompox-sabores" folioNumber="Folio IV·II · Sabores" folioNumberEn="Folio IV·II · Flavours" dark={true}>
   <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Mompox', href: '/mompox' }, { label: 'Sabores' }]} />
   <div class="reveal">
     <div class="eyebrow" style="color: var(--brass-light);" data-en="Mompox · Flavours of the riverine Caribbean">Mompox · Sabores del Caribe fluvial</div>
-    <h1 class="chapter-title on-dark">El sabor del <em>Caribe fluvial</em></h1>
+    <h1 class="chapter-title on-dark" data-en="The flavour of the <em>riverine Caribbean</em>">El sabor del <em>Caribe fluvial</em></h1>
     <p class="chapter-hand" style="color: var(--parchment); opacity: 0.7;" data-en="Bocachico del Magdalena, casabito, queso de capa y vino de corozo">Bocachico del Magdalena, casabito, queso de capa y vino de corozo</p>
     <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
   </div>
@@ -43,7 +48,7 @@ const senderos = [
       ))}
     </div>
     <div class="reveal delay-1">
-      <img src="/assets/momposina-food.png" alt="Comida momposina" style="width: 100%; border: 1px solid rgba(221,185,94,0.3); filter: saturate(0.9) brightness(0.95);">
+      <img src="/assets/momposina-food.png" alt="Comida momposina" data-en-alt="Momposino food" loading="lazy" decoding="async" style="width: 100%; border: 1px solid rgba(221,185,94,0.3); filter: saturate(0.9) brightness(0.95);">
       <p style="font-family: var(--font-caps); font-size: 0.58rem; letter-spacing: 0.22em; color: var(--brass); opacity: 0.7; text-align: center; margin-top: 10px;" data-en="— fish, cassava, coconut, palm fruit —">— pescado, yuca, coco, palma —</p>
     </div>
   </div>
