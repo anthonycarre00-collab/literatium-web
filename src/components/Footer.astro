@@ -1,10 +1,29 @@
 ---
 ---
 <footer id="footer">
-  <img src="/assets/favicon-180.png" alt="Literatium" style="width:50px;height:50px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:1px solid var(--brass);">
+  <img src="/assets/favicon-180.png" alt="Literatium" data-en-alt="Literatium" style="width:50px;height:50px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:1px solid var(--brass);">
   <div class="footer-mark">Literatium</div>
   <div class="footer-fleuron">✦ ❦ ✦</div>
   <div data-en="The House of Stories · Mompox · Bolívar · Colombia">La Casa de las Historias · Mompox · Bolívar · Colombia</div>
   <div class="footer-meta" data-en="Boutique Hotel · Books &amp; Coffee · UNESCO 1995<br>Calle 21 #2-47, Santa Cruz de Mompox · WhatsApp +57 315 538 2112 · @literatium">Hotel Boutique · Libros &amp; Café · UNESCO 1995<br>Calle 21 #2-47, Santa Cruz de Mompox · WhatsApp +57 315 538 2112 · @literatium</div>
+  <div class="footer-future">
+    <a href="/proximamente" data-en="Coming soon →">Próximamente →</a>
+  </div>
   <button id="motion-toggle" onclick="toggleMotion()" data-en="Motion: ON">Animación: ON</button>
 </footer>
+
+<style is:global>
+  .footer-future { margin-top: 16px; }
+  .footer-future a {
+    font-family: var(--font-caps);
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    color: var(--brass-light);
+    opacity: 0.7;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(221,185,94,0.3);
+    padding-bottom: 3px;
+    transition: opacity 0.3s ease;
+  }
+  .footer-future a:hover { opacity: 1; }
+</style>

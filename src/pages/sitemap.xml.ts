@@ -24,7 +24,8 @@ const staticPages: { path: string; priority: number; changefreq: string }[] = [
   { path: '/biblioteca/mapa', priority: 0.6, changefreq: 'monthly' },
   { path: '/biblioteca/quiz', priority: 0.6, changefreq: 'monthly' },
   { path: '/faq', priority: 0.8, changefreq: 'monthly' },
-  { path: '/book', priority: 0.8, changefreq: 'monthly' }
+  { path: '/book', priority: 0.8, changefreq: 'monthly' },
+  { path: '/proximamente', priority: 0.4, changefreq: 'monthly' }
 ];
 
 // Dynamic routes

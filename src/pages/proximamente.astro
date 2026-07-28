@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Folio from '../components/Folio.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+// Stage 9 — Future Expansion hooks (per spec).
+// This page exists so that future features can be linked without 404s.
+// When a feature is ready, create its own page and remove the entry from this list.
+const upcoming = [
+  {
+    icon: '🎭',
+    title: 'Eventos',
+    titleEn: 'Events',
+    desc: 'Conciertos de jazz en el patio, lecturas de poesía, noches de cuentos junto al río.',
+    descEn: 'Jazz concerts in the courtyard, poetry readings, storytelling nights by the river.',
+    eta: '2026'
+  },
+  {
+    icon: '✍️',
+    title: 'Talleres',
+    titleEn: 'Workshops',
+    desc: 'Taller de filigrana con maestros momposinos. Taller de escritura con autores invitados.',
+    descEn: 'Filigree workshop with momposino masters. Writing workshop with guest authors.',
+    eta: '2026'
+  },
+  {
+    icon: '📖',
+    title: 'Veladas de lectura',
+    titleEn: 'Reading evenings',
+    desc: 'Una vez al mes, leemos un capítulo de Gabo en voz alta, con café de Huila.',
+    descEn: 'Once a month, we read a chapter of Gabo aloud, with Huila coffee.',
+    eta: '2026'
+  },
+  {
+    icon: '✉️',
+    title: 'Historias de huéspedes',
+    titleEn: 'Guest stories',
+    desc: 'Un archivo de las cartas que los huéspedes dejan en el muro de Literatium.',
+    descEn: 'An archive of the letters guests leave on the Literatium wall.',
+    eta: '2027'
+  },
+  {
+    icon: '🛍️',
+    title: 'Tienda',
+    titleEn: 'Shop',
+    desc: 'Café único de Huila, filigrana momposina, libros seleccionados, cerámica verde.',
+    descEn: 'Unique Huila coffee, momposino filigree, selected books, green ceramics.',
+    eta: '2027'
+  },
+  {
+    icon: '📲',
+    title: 'Guías digitales',
+    titleEn: 'Digital guidebooks',
+    desc: 'Descargas PDF: mapa del río, guía de iglesias, diccionario momposino, senderos.',
+    descEn: 'PDF downloads: river map, churches guide, momposino dictionary, trails.',
+    eta: '2027'
+  },
+  {
+    icon: '📦',
+    title: 'Paquetes',
+    titleEn: 'Booking packages',
+    desc: 'Dos noches + champán al atardecer. Tres noches + taller de filigrana. Semana santa.',
+    descEn: 'Two nights + sunset champán. Three nights + filigree workshop. Holy Week.',
+    eta: '2026'
+  },
+];
+---
+<Layout title="Próximamente — Literatium" description="Lo que viene en Literatium: eventos, talleres, veladas de lectura, tienda, guías digitales, paquetes." titleEn="Coming Soon — Literatium" descriptionEn="What's coming to Literatium: events, workshops, reading evenings, shop, digital guidebooks, packages.">
+<Folio id="proximamente" folioNumber="Folio XIII · Próximamente" folioNumberEn="Folio XIII · Coming Soon" dark={true}>
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Próximamente' }]} />
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Future chapters · In preparation">Capítulos futuros · En preparación</div>
+    <h1 class="chapter-title on-dark">Lo que <em>viene</em></h1>
+    <p class="chapter-hand" style="color: var(--parchment); opacity: 0.7;" data-en="Seven ideas we are shaping, slowly, with calm">Siete ideas que estamos formando, despacio, con calma</p>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1" style="max-width: 720px; margin: 30px auto;">
+    <p style="font-family: var(--font-body); color: var(--parchment); opacity: 0.85; font-size: 1.02rem; line-height: 1.85; text-align: center;" data-en="The House of Stories keeps growing. These are the chapters we are preparing — each one will arrive when it is ready, in its own time, as things arrive in Mompox. If you want to know first, write to us on WhatsApp.">La Casa de las Historias sigue creciendo. Estos son los capítulos que estamos preparando — cada uno llegará cuando esté listo, a su tiempo, como llegan las cosas en Mompox. Si quieres saber primero, escríbenos por WhatsApp.</p>
+  </div>
+
+  <div class="reveal delay-1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 50px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+    {upcoming.map((u) => (
+      <article style="background: rgba(247,240,220,0.05); border: 1px solid rgba(221,185,94,0.25); padding: 26px; position: relative;">
+        <div style="font-size: 2rem; margin-bottom: 14px; line-height: 1;">{u.icon}</div>
+        <h3 style="font-family: var(--font-display); font-style: italic; font-size: 1.3rem; color: var(--brass-light); margin: 0 0 10px;" data-en={u.titleEn}>{u.title}</h3>
+        <p style="font-family: var(--font-body); font-size: 0.92rem; color: var(--parchment); opacity: 0.82; line-height: 1.6; margin: 0 0 16px;" data-en={u.descEn}>{u.desc}</p>
+        <span style="font-family: var(--font-caps); font-size: 0.56rem; letter-spacing: 0.22em; color: var(--brass); opacity: 0.7; padding: 4px 10px; border: 1px solid rgba(221,185,94,0.3); border-radius: 2px;" data-en={`Planned · ${u.eta}`}>Planificado · {u.eta}</span>
+      </article>
+    ))}
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 60px; display: flex; justify-content: center;">
+    <a href="/book" class="nav-cta" style="padding: 12px 24px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--forest-dark); background: var(--brass); text-decoration: none; border-radius: 2px;" data-en="Reserve your stay →">Reserva tu estancia →</a>
+  </div>
+</Folio>
+</Layout>
