@@ -117,6 +117,7 @@
   window.addEventListener('scroll', updateRiverPin, { passive: true });
   window.addEventListener('resize', updateRiverPin);
   updateRiverPin();
+  } // end river pin guard
 
   /* 6. PROGRESS LINE */
   const progressFill = document.getElementById('progress-fill');
@@ -165,6 +166,7 @@
     requestAnimationFrame(animateButterfly);
   }
   animateButterfly();
+  } // end butterfly guard
 
   /* 9. RIVER MAP — boat travels on scroll */
   const riverMap = document.getElementById('river-map');

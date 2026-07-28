@@ -1,7 +1,4 @@
 ---
-import globalCssRaw from '../styles/global.css?raw';
-import mainJsRaw from '../scripts/main.js?raw';
-import togglesJsRaw from '../scripts/toggles.js?raw';
 import Motes from '../components/Motes.astro';
 import Vignette from '../components/Vignette.astro';
 import RiverSpine from '../components/RiverSpine.astro';
@@ -11,6 +8,9 @@ import MompoxSubnav from '../components/MompoxSubnav.astro';
 import BookCover from '../components/BookCover.astro';
 import Footer from '../components/Footer.astro';
 import Butterfly from '../components/Butterfly.astro';
+import mainJs from '../scripts/main.js?raw';
+import togglesJs from '../scripts/toggles.js?raw';
+import globalCss from '../styles/global.css?raw';
 
 const {
   title = 'Literatium — La Casa de las Historias · Mompox',
@@ -29,7 +29,7 @@ const {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IM+Fell+English+SC&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;700&family=Cinzel:wght@500;600;700&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
-<style is:inline set:html={globalCssRaw} />
+<style is:inline set:html={globalCss} />
 </head>
 <body>
 <Motes />
@@ -42,7 +42,7 @@ const {
 <slot />
 <Footer />
 <Butterfly />
-<script is:inline set:html={mainJsRaw} />
-<script is:inline set:html={togglesJsRaw} />
+<script is:inline set:html={mainJs} />
+<script is:inline set:html={togglesJs} />
 </body>
 </html>
