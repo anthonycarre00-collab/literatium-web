@@ -12,7 +12,7 @@ const subsections = [
     titleEn: 'Guides',
     desc: 'Recorre Mompox a pie: albarrada, seis iglesias coloniales, plazas y portales. Historia viva desde 1537.',
     descEn: 'Walk Mompox: albarrada, six colonial churches, plazas and porticos. Living history since 1537.',
-    img: '/assets/mompox-colonial-street.jpg'
+    img: '/assets/mompox-cards/guias.jpg'
   },
   {
     slug: 'sabores',
@@ -21,7 +21,7 @@ const subsections = [
     titleEn: 'Flavours',
     desc: 'Bocachico del Magdalena, casabito, queso de capa, corozo, arepa \'e huevo. El sabor del Caribe fluvial.',
     descEn: 'Bocachico from the Magdalena, casabito, queso de capa, corozo, egg arepa. The taste of the riverine Caribbean.',
-    img: '/assets/momposina-food.png'
+    img: '/assets/mompox-cards/sabores.jpg'
   },
   {
     slug: 'palabras',
@@ -30,7 +30,7 @@ const subsections = [
     titleEn: 'Words',
     desc: 'Albarrada, champán, boga, filigrana, Macondo. Doce palabras para leer Mompox en su propio léxico.',
     descEn: 'Albarrada, champán, boga, filigree, Macondo. Twelve words to read Mompox in its own lexicon.',
-    img: '/assets/mural-art.jpg'
+    img: '/assets/mompox-cards/palabras.jpg'
   },
   {
     slug: 'mapas',
@@ -39,7 +39,7 @@ const subsections = [
     titleEn: 'Maps',
     desc: 'El mapa del río — cómo llegar por aire, tierra o agua. El puente Roncador, el terminal fluvial, el centro.',
     descEn: 'The river map — how to arrive by air, land or water. The Roncador bridge, the river terminal, the centre.',
-    img: '/assets/mompox-drone.jpg'
+    img: '/assets/mompox-cards/mapas.jpg'
   },
   {
     slug: 'juegos',
@@ -48,12 +48,12 @@ const subsections = [
     titleEn: 'Games',
     desc: 'Parqués momposino, canastas, capa, boliche. Los juegos del portal donde el tiempo se vuelve lento.',
     descEn: 'Momposino parqués, canastas, capa, bowls. The porch games where time turns slow.',
-    img: '/assets/rocking-chair-porch.png'
+    img: '/assets/mompox-cards/juegos.jpg'
   },
 ];
 ---
 <Layout title="Mompox — Literatium" description="Descubre Mompox — el pueblo que inspiró a García Márquez. Patrimonio UNESCO, fundado 1537. Guías, sabores, palabras, mapas y juegos.">
-<Folio id="mompox-hub" folioNumber="Folio V · Mompox" folioNumberEn="Folio V · Mompox" dark={true}>
+<Folio id="mompox-hub" folioNumber="Folio IV · Mompox" folioNumberEn="Folio IV · Mompox" dark={true}>
   <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Mompox' }]} />
   <div class="reveal">
     <div class="eyebrow" style="color: var(--brass-light);" data-en="Chapter Four · Mompox">Capítulo Cuarto · Mompox</div>
@@ -68,7 +68,7 @@ const subsections = [
   <div class="reveal delay-1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 50px; max-width: 1100px; margin-left: auto; margin-right: auto;">
     {subsections.map((s) => (
       <a href={`/mompox/${s.slug}`} class="mompox-card" style="text-decoration: none; color: inherit;">
-        <div class="mompox-card-img" style="background-image: url('{s.img}');"></div>
+        <div class="mompox-card-img" style={`background-image: url('${s.img}');`}></div>
         <div class="mompox-card-body">
           <div style="font-size: 1.8rem; margin-bottom: 8px;">{s.icon}</div>
           <h3 style="font-family: var(--font-display); font-style: italic; font-size: 1.4rem; color: var(--brass-light); margin-bottom: 10px;" data-en={s.titleEn}>{s.title}</h3>

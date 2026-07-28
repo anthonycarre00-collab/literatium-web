@@ -16,32 +16,35 @@
     }
   }
 
-  /* 2. BOOK COVER — opens on click OR auto after 3.5s.
-     Smoother: 3.4s rotation with ease-in-out, vellum back face visible mid-turn. */
+  /* 2. BOOK COVER — opens on click OR auto after 4s.
+     Snappy: 1.4s rotation, smooth ease. */
   const cover = document.getElementById('cover');
   const coverFace = document.getElementById('cover-face');
   let coverOpened = false;
   if (cover && coverFace) {
   let fallbackTimer;
+  let autoTimer;
   function openCover() {
     if (coverOpened) return;
     coverOpened = true;
+    clearTimeout(autoTimer);
     coverFace.style.animation = '';
     cover.classList.add('is-open');
     // Trigger hero animations when cover opens (not on page load)
     document.documentElement.classList.add('hero-revealed');
-    setTimeout(() => { cover.style.display = 'none'; }, 3800);
+    setTimeout(() => { cover.style.display = 'none'; }, 1800);
     armFallback();
-    // Safety net: force-show hero title after 5s in case animation fails
+    // Safety net: force-show hero title after 3s in case animation fails
     setTimeout(() => {
       var words = document.querySelectorAll('.hero-script-title .word');
       words.forEach(function(w) { w.style.opacity = '1'; w.style.filter = 'none'; w.style.transform = 'none'; });
-    }, 5000);
+    }, 3000);
   }
   cover.addEventListener('click', openCover);
   coverFace.addEventListener('click', (e) => { e.stopPropagation(); openCover(); });
   cover.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCover(); } });
-  // Cover WAITS for click — no auto-open. The book must be opened by the reader.
+  // Auto-open after 4s if the user hasn't clicked — keeps the experience flowing.
+  autoTimer = setTimeout(openCover, 4000);
   } // end cover guard
 
   /* 3. SECTION REVEAL via IntersectionObserver + CONDITIONAL FALLBACK */
@@ -91,14 +94,14 @@
   riverLabel.textContent = 'Folio I';
   document.body.appendChild(riverLabel);
   const sectionMap = [
-    { id: 'frontispiece', label: 'Folio I · Frontispiece' },
-    { id: 'casa',         label: 'Folio II · La Casa' },
+    { id: 'frontispiece', label: 'Folio I · La Casa' },
+    { id: 'casa',         label: 'Folio I · La Casa' },
     { id: 'rooms',        label: 'Folio II · Habitaciones' },
     { id: 'cafe',         label: 'Folio III · Café' },
-    { id: 'mompox',       label: 'Folio V · Mompox' },
-    { id: 'sabores',      label: 'Folio VI · Sabores' },
-    { id: 'cartas',       label: 'Folio VII · Cartas' },
-    { id: 'colofon',      label: 'Folio IX · Colofón' },
+    { id: 'mompox',       label: 'Folio IV · Mompox' },
+    { id: 'sabores',      label: 'Folio V · Sabores' },
+    { id: 'cartas',       label: 'Folio VI · Cartas' },
+    { id: 'colofon',      label: 'Folio VIII · Colofón' },
   ];
   function updateRiverPin() {
     const scrollPct = window.scrollY / Math.max(1, (document.documentElement.scrollHeight - window.innerHeight));

@@ -62,14 +62,14 @@ a { color: inherit; text-decoration: none; }
   position: fixed; inset: 0; z-index: 100;
   perspective: 2400px;
   pointer-events: auto;
-  transition: opacity 0.8s ease 2.6s;
+  transition: opacity 0.5s ease 1.0s;
 }
 #cover.is-open { opacity: 0; pointer-events: none; }
 .cover-face {
   position: absolute; inset: 0;
   transform-origin: left center;
   transform-style: preserve-3d;
-  transition: transform 3.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: transform 1.4s cubic-bezier(0.4, 0.0, 0.2, 1);
   cursor: pointer;
 }
 .cover-front, .cover-back {
@@ -169,9 +169,9 @@ a { color: inherit; text-decoration: none; }
   0%,100% { opacity: 0.55; transform: translateX(-50%) translateY(0); border-color: rgba(221,185,94,0.35);}
   50%     { opacity: 1;    transform: translateX(-50%) translateY(4px); border-color: rgba(221,185,94,0.7);}
 }
-/* Cover opens automatically after 3.5s if no click */
+/* Cover opens automatically after 4s if no click — feels snappy */
 #cover.auto-open .cover-face { transform: rotateY(-160deg); }
-#cover.auto-open { opacity: 0; pointer-events: none; transition: opacity 0.6s ease 3s; }
+#cover.auto-open { opacity: 0; pointer-events: none; transition: opacity 0.4s ease 1.0s; }
 
 /* RIVER SPINE */
 #river-spine { position: fixed; top: 0; left: 0; width: 80px; height: 100vh; z-index: 30; pointer-events: none; }
@@ -296,19 +296,19 @@ a { color: inherit; text-decoration: none; }
 .js .hero-polaroid { opacity: 0; }
 /* When cover opens (hero-revealed class added), transition elements back to visible */
 .js.hero-revealed .hero-logo { opacity: 1; transition-delay: 0s; }
-.js.hero-revealed .hero-eyebrow { opacity: 1; transition-delay: 0s; }
-.js.hero-revealed .hero-script-title .word { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); transition-delay: 0s; transition-duration: 0.4s; }
-.js.hero-revealed .hero-script-title .word:nth-child(2) { transition-delay: 0.1s; }
-.js.hero-revealed .hero-subtitle { opacity: 1; transition-delay: 0.2s; }
-.js.hero-revealed .hero-hand { opacity: 1; transition-delay: 0.3s; }
-.js.hero-revealed .hero-body { opacity: 1; transition-delay: 0.4s; }
-.js.hero-revealed .hero-cta { opacity: 1; transition-delay: 0.5s; }
-.js.hero-revealed .hero-rating { opacity: 1; transition-delay: 0.6s; }
-.js.hero-revealed .hero-curl { opacity: 1; transition-delay: 0.7s; }
+.js.hero-revealed .hero-eyebrow { opacity: 1; transition-delay: 0.05s; }
+.js.hero-revealed .hero-script-title .word { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); transition-delay: 0s; transition-duration: 0.35s; }
+.js.hero-revealed .hero-script-title .word:nth-child(2) { transition-delay: 0.08s; }
+.js.hero-revealed .hero-subtitle { opacity: 1; transition-delay: 0.15s; }
+.js.hero-revealed .hero-hand { opacity: 1; transition-delay: 0.22s; }
+.js.hero-revealed .hero-body { opacity: 1; transition-delay: 0.30s; }
+.js.hero-revealed .hero-cta { opacity: 1; transition-delay: 0.38s; }
+.js.hero-revealed .hero-rating { opacity: 1; transition-delay: 0.45s; }
+.js.hero-revealed .hero-curl { opacity: 1; transition-delay: 0.52s; }
 .js.hero-revealed .hero-polaroid.p1 { opacity: 0.92; transition-delay: 0.1s; }
-.js.hero-revealed .hero-polaroid.p2 { opacity: 0.92; transition-delay: 0.2s; }
-.js.hero-revealed .hero-polaroid.p3 { opacity: 0.92; transition-delay: 0.3s; }
-.js.hero-revealed .hero-polaroid.p4 { opacity: 0.92; transition-delay: 0.4s; }
+.js.hero-revealed .hero-polaroid.p2 { opacity: 0.92; transition-delay: 0.18s; }
+.js.hero-revealed .hero-polaroid.p3 { opacity: 0.92; transition-delay: 0.26s; }
+.js.hero-revealed .hero-polaroid.p4 { opacity: 0.92; transition-delay: 0.34s; }
 /* The script title words start blurred and offset, then transition to clear */
 .js .hero-script-title .word { filter: blur(20px); transform: translateY(20px) scale(0.9); }
 
@@ -422,6 +422,29 @@ html.motion-off .wax-seal { opacity: 1 !important; transform: scale(1) rotate(-8
 @media (max-width: 880px) { .martica-card { grid-template-columns: 1fr; } }
 .martica-card-img { position: relative; min-height: 380px; background: url('/assets/martha-desk.jpeg') center/cover no-repeat; filter: sepia(0.12) contrast(1.05); }
 .martica-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(114,47,55,0.35) 100%); }
+
+/* MARTHA PHOTO — decorative yellow butterflies scattered across the image (Gabo's symbol) */
+.martha-butterflies { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.martha-butterflies .mb { position: absolute; width: 28px; height: 24px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4)); }
+.martha-butterflies .mb-wing-l { transform-origin: right center; animation: mb-flap-l 0.22s ease-in-out infinite alternate; }
+.martha-butterflies .mb-wing-r { transform-origin: left center; animation: mb-flap-r 0.22s ease-in-out infinite alternate; }
+.martha-butterflies .mb-1 { top: 12%; left: 14%; animation: mb-drift-1 7s ease-in-out infinite; }
+.martha-butterflies .mb-2 { top: 28%; left: 68%; width: 22px; height: 18px; animation: mb-drift-2 9s ease-in-out infinite 0.5s; }
+.martha-butterflies .mb-3 { top: 50%; left: 22%; width: 24px; height: 20px; animation: mb-drift-3 8s ease-in-out infinite 1s; }
+.martha-butterflies .mb-4 { top: 65%; left: 55%; width: 30px; height: 26px; animation: mb-drift-4 10s ease-in-out infinite 1.5s; }
+.martha-butterflies .mb-5 { top: 78%; left: 12%; width: 20px; height: 17px; animation: mb-drift-5 11s ease-in-out infinite 2s; }
+.martha-butterflies .mb-6 { top: 38%; left: 42%; width: 26px; height: 22px; animation: mb-drift-6 8.5s ease-in-out infinite 0.8s; }
+@keyframes mb-flap-l { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(-70deg); } }
+@keyframes mb-flap-r { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(70deg); } }
+@keyframes mb-drift-1 { 0%,100% { transform: translate(0,0) rotate(-3deg); } 50% { transform: translate(22px,-14px) rotate(4deg); } }
+@keyframes mb-drift-2 { 0%,100% { transform: translate(0,0) rotate(2deg); } 50% { transform: translate(-18px,12px) rotate(-3deg); } }
+@keyframes mb-drift-3 { 0%,100% { transform: translate(0,0) rotate(-2deg); } 50% { transform: translate(28px,8px) rotate(3deg); } }
+@keyframes mb-drift-4 { 0%,100% { transform: translate(0,0) rotate(3deg); } 50% { transform: translate(-22px,-18px) rotate(-4deg); } }
+@keyframes mb-drift-5 { 0%,100% { transform: translate(0,0) rotate(-3deg); } 50% { transform: translate(20px,-22px) rotate(2deg); } }
+@keyframes mb-drift-6 { 0%,100% { transform: translate(0,0) rotate(2deg); } 50% { transform: translate(-25px,16px) rotate(-3deg); } }
+@media (max-width: 880px) {
+  .martha-butterflies .mb { width: 22px; height: 18px; }
+}
 .martica-card-body { padding: 44px 44px 48px; position: relative; }
 .martica-card-body .quote-mark { font-family: var(--font-display); font-size: 4.5rem; color: var(--brass); opacity: 0.3; line-height: 0.5; margin-bottom: 8px; }
 .martica-card-body .tagline { font-family: var(--font-hand); font-style: italic; font-size: 1.6rem; color: var(--burgundy); line-height: 1.3; margin-bottom: 18px; }
