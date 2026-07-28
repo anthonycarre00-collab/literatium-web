@@ -1,0 +1,112 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Folio from '../../components/Folio.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const routes = [
+  { num: 'I', icon: '✈', name: 'Por aire', nameEn: 'By air', img: '/assets/flight-mompox.jpg', note: 'Satena opera vuelos Medellín → Mompox. Aeropuerto San Bernardo activo en Semana Santa y Festijazz.', noteEn: 'Satena operates Medellín → Mompox flights. San Bernardo airport active during Holy Week and Festijazz.' },
+  { num: 'II', icon: '🚌', name: 'Por tierra', nameEn: 'By land', img: '/assets/mompox-street-banners.jpg', note: 'Desde Cartagena: 3 buses diarios con Unitransco, ~6h. Puente Roncador (2020) conecta sin ferry. Tuk-tuk al centro en 5 min.', noteEn: 'From Cartagena: 3 daily buses with Unitransco, ~6h. Puente Roncador (2020) connects without ferry. Tuk-tuk to centre in 5 min.' },
+  { num: 'III', icon: '🛶', name: 'Por agua', nameEn: 'By water', img: '/assets/champan-boat.png', note: 'Terminal fluvial con embarcaciones desde Magangué, El Banco, Santa Ana y Barrancabermeja. El modo lento — y el más antiguo.', noteEn: 'River terminal with vessels from Magangué, El Banco, Santa Ana and Barrancabermeja. The slow way — and the oldest.' },
+  { num: 'IV', icon: '🛺', name: 'Cómo moverse', nameEn: 'Getting around', img: '/assets/rocking-chair-porch.png', note: 'A pie, en tuk-tuk, o en lancha. Martica te ayuda a coordinar cualquier transporte.', noteEn: 'On foot, by tuk-tuk, or by boat. Martica helps you coordinate any transport.' },
+];
+
+const climate = [
+  { value: 'Dic–Feb', valueEn: 'Dec–Feb', label: 'Mejor época · Cielo despejado', labelEn: 'Best time · Clear skies' },
+  { value: 'Marzo · 37°C', valueEn: 'March · 37°C', label: 'Más caluroso · Hidrátate bien', labelEn: 'Hottest · Hydrate well', small: true },
+  { value: 'Octubre', valueEn: 'October', label: 'Más lluvia · Trae impermeable', labelEn: 'Wettest · Bring a raincoat' },
+  { value: 'Semana Santa · Festijazz', valueEn: 'Holy Week · Festijazz', label: 'Festivales · Reserva con tiempo', labelEn: 'Festivals · Book ahead', small: true },
+];
+---
+<Layout title="Mompox · Mapas — Literatium" description="Mapas de Mompox: el río Magdalena, cómo llegar por aire, tierra o agua. El puente Roncador, el terminal fluvial, el centro histórico.">
+<Folio id="mompox-mapas" folioNumber="Folio V·IV · Mapas" folioNumberEn="Folio V·IV · Maps" dark={true}>
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Mompox', href: '/mompox' }, { label: 'Mapas' }]} />
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Mompox · The river map">Mompox · El mapa del río</div>
+    <h1 class="chapter-title on-dark">Santa Cruz de Mompox — <em>fundada 1537</em></h1>
+    <p class="chapter-hand" style="color: var(--parchment); opacity: 0.7;" data-en="How to arrive, and how to find your way around">Cómo llegar, y cómo orientarse</p>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <!-- RIVER MAP -->
+  <div class="reveal delay-1" style="margin-top: 50px; max-width: 760px; margin-left: auto; margin-right: auto;">
+    <div class="river-map" style="background: rgba(247,240,220,0.04); border: 1px solid rgba(221,185,94,0.3); padding: 24px;">
+      <svg viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+        <rect x="3" y="3" width="394" height="374" fill="none" stroke="#8B6520" stroke-width="0.5" opacity="0.4"/>
+        <rect x="8" y="8" width="384" height="364" fill="none" stroke="#C9A04E" stroke-width="0.3" opacity="0.5"/>
+        <!-- Main river path -->
+        <path d="M 30 50 Q 80 70 110 100 T 180 140 Q 210 160 200 200 T 240 250 Q 270 280 250 320 T 290 360"
+              fill="none" stroke="#5B7A8C" stroke-width="3.5" opacity="0.85"/>
+        <!-- Tributary -->
+        <path d="M 110 100 Q 90 140 130 170 Q 170 200 160 230"
+              fill="none" stroke="#5B7A8C" stroke-width="2" opacity="0.55" stroke-dasharray="3 3"/>
+        <!-- Mompox marker -->
+        <circle cx="200" cy="200" r="7" fill="#DDB95E"/>
+        <circle cx="200" cy="200" r="14" fill="none" stroke="#DDB95E" stroke-width="1" opacity="0.5"/>
+        <text x="215" y="205" fill="#DDB95E" font-family="Cinzel, serif" font-size="13" font-weight="600">MOMPAX</text>
+        <text x="215" y="219" fill="#DDB95E" font-family="EB Garamond, serif" font-size="9" opacity="0.8" font-style="italic">fundada 1537</text>
+        <!-- Other towns -->
+        <circle cx="80" cy="70" r="3" fill="#C9A04E" opacity="0.7"/>
+        <text x="90" y="74" fill="#C9A04E" font-family="EB Garamond, serif" font-size="9" opacity="0.8">Magangué</text>
+        <circle cx="290" cy="360" r="3" fill="#C9A04E" opacity="0.7"/>
+        <text x="220" y="370" fill="#C9A04E" font-family="EB Garamond, serif" font-size="9" opacity="0.8">El Banco</text>
+        <circle cx="30" cy="50" r="3" fill="#C9A04E" opacity="0.7"/>
+        <text x="40" y="44" fill="#C9A04E" font-family="EB Garamond, serif" font-size="9" opacity="0.8">Barrancabermeja</text>
+        <circle cx="250" cy="320" r="3" fill="#C9A04E" opacity="0.7"/>
+        <text x="260" y="324" fill="#C9A04E" font-family="EB Garamond, serif" font-size="9" opacity="0.8">Santa Ana</text>
+        <!-- Compass -->
+        <g transform="translate(360, 40)">
+          <circle r="14" fill="none" stroke="#C9A04E" stroke-width="0.6" opacity="0.5"/>
+          <path d="M 0 -10 L 3 0 L 0 10 L -3 0 Z" fill="#DDB95E"/>
+          <text y="-18" text-anchor="middle" fill="#DDB95E" font-family="Cinzel, serif" font-size="8">N</text>
+        </g>
+        <!-- Title cartouche -->
+        <g transform="translate(20, 340)">
+          <text fill="#DDB95E" font-family="Cinzel, serif" font-size="10" letter-spacing="2" opacity="0.8">RÍO MAGDALENA · COLOMBIA</text>
+        </g>
+      </svg>
+      <p style="font-family: var(--font-caps); font-size: 0.58rem; letter-spacing: 0.22em; color: var(--brass); opacity: 0.7; text-align: center; margin-top: 12px;" data-en="— the river that made Mompox, and that Mompox still greets every dawn —">— el río que hizo a Mompox, y que Mompox todavía saluda cada amanecer —</p>
+    </div>
+  </div>
+
+  <!-- HOW TO ARRIVE -->
+  <div class="reveal delay-2" style="margin-top: 80px;">
+    <div class="eyebrow center" style="color: var(--brass-light);" data-en="How to arrive">Cómo llegar</div>
+    <h2 class="chapter-title on-dark" style="text-align: center; font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-top: 8px;" data-en="By air, land <em>or river</em>">Por aire, tierra <em>o río</em></h2>
+  </div>
+
+  <div class="reveal delay-2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px; margin-top: 40px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+    {routes.map((r) => (
+      <article style="background: rgba(247,240,220,0.05); border: 1px solid rgba(221,185,94,0.25); padding: 20px; text-align: left;">
+        <div style="font-family: var(--font-caps); font-size: 0.6rem; letter-spacing: 0.28em; color: var(--brass); margin-bottom: 10px;" data-en={`ROUTE ${r.num}`}>RUTA {r.num}</div>
+        <img src={r.img} alt={r.name} style="width: 100%; height: 120px; object-fit: cover; filter: saturate(0.85) brightness(0.9); margin-bottom: 12px; border: 1px solid rgba(221,185,94,0.2);">
+        <h5 style="font-family: var(--font-display); font-style: italic; font-size: 1.15rem; color: var(--brass-light); margin: 0 0 8px;">{r.icon} <span data-en={r.nameEn}>{r.name}</span></h5>
+        <p style="font-family: var(--font-body); font-size: 0.88rem; color: var(--parchment); opacity: 0.82; line-height: 1.55; margin: 0;" data-en={r.noteEn}>{r.note}</p>
+      </article>
+    ))}
+  </div>
+
+  <!-- CLIMATE -->
+  <div class="reveal delay-2" style="margin-top: 80px;">
+    <div class="eyebrow center" style="color: var(--brass-light);" data-en="Climate &amp; when to visit">Clima y cuándo venir</div>
+    <h2 class="chapter-title on-dark" style="text-align: center; font-size: clamp(1.6rem, 3vw, 2.4rem); margin-top: 8px;" data-en="Heat all year, <em>calm in every season</em>">Calor todo el año, <em>calma en cada estación</em></h2>
+  </div>
+
+  <div class="reveal delay-2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; margin-top: 40px; max-width: 1000px; margin-left: auto; margin-right: auto;">
+    {climate.map((c) => (
+      <div class="lily-pad" style="background: rgba(247,240,220,0.05); border: 1px solid rgba(221,185,94,0.25); padding: 22px; text-align: center;">
+        <div style={`font-family: var(--font-display); font-style: italic; font-size: ${c.small ? '1.25rem' : '1.8rem'}; color: var(--brass-light); margin-bottom: 6px;`} data-en={c.valueEn}>{c.value}</div>
+        <div style="font-family: var(--font-caps); font-size: 0.6rem; letter-spacing: 0.18em; color: var(--parchment); opacity: 0.7;" data-en={c.labelEn}>{c.label}</div>
+      </div>
+    ))}
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 60px; display: flex; justify-content: center;">
+    <div class="marginalia" style="max-width: 560px; color: var(--brass-light); background: rgba(15,36,25,0.5);" data-en="— In Mompox there are no bad seasons — only different forms of heat and calm. —">— En Mompox no hay estaciones malas — solo distintas formas de calor y de calma. —</div>
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 50px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+    <a href="/mompox/palabras" class="nav-cta" style="padding: 12px 24px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--brass-light); border: 1px solid var(--brass); text-decoration: none; border-radius: 2px;" data-en="← Palabras">← Palabras</a>
+    <a href="/mompox/juegos" class="nav-cta" style="padding: 12px 24px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--forest-dark); background: var(--brass); text-decoration: none; border-radius: 2px;" data-en="Next: Juegos →">Siguiente: Juegos →</a>
+  </div>
+</Folio>
+</Layout>

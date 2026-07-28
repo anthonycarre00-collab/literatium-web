@@ -1,0 +1,81 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Folio from '../../components/Folio.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const sabores = [
+  { name: 'Bocachico', nameEn: 'Bocachico', note: 'Pescado del Magdalena, base de la cocina momposina. En guiso, asado o frito — sabe a río.', noteEn: 'River fish from the Magdalena, the base of momposino cooking. In stew, grilled or fried — it tastes of river.' },
+  { name: 'Casabito', nameEn: 'Casabito', note: 'Tortilla de yuca cruda, queso, coco y azúcar. El snack callejero por excelencia.', noteEn: 'Flatbread of raw cassava, cheese, coconut and sugar. The quintessential street snack.' },
+  { name: 'Queso de capa', nameEn: 'Queso de capa', note: 'Queso hilado, elástico, con más de 100 años de tradición artesanal.', noteEn: 'Stretched, elastic cheese with over 100 years of artisanal tradition.' },
+  { name: 'Corozo', nameEn: 'Corozo', note: 'Fruto de palma caribeña. Vino, jugo y dulce. Color rubí intenso.', noteEn: 'Caribbean palm fruit. Wine, juice and sweet. Intense ruby colour.' },
+  { name: 'Arepa \'e huevo', nameEn: 'Arepa \'e huevo', note: 'Arepa frita rellena de huevo. Patrimonio caribe. Peligrosamente adictiva.', noteEn: 'Fried arepa stuffed with egg. Caribbean heritage. Dangerously addictive.' },
+  { name: 'Butifarra', nameEn: 'Butifarra', note: 'Salchicha seca y curada de origen español, adaptada al Caribe colombiano.', noteEn: 'Dry cured sausage of Spanish origin, adapted to the Colombian Caribbean.' },
+  { name: 'Cayeye', nameEn: 'Cayeye', note: 'Plátano verde machacado con queso costeño y mantequilla. El desayuno del trabajador.', noteEn: 'Mashed green plantain with coastal cheese and butter. The worker\'s breakfast.' },
+  { name: 'Carimañola', nameEn: 'Carimañola', note: 'Rollo frito de yuca relleno de queso o carne. Crujiente por fuera, cremoso por dentro.', noteEn: 'Fried cassava roll stuffed with cheese or meat. Crisp outside, creamy inside.' },
+];
+
+const senderos = [
+  { num: 'I', name: 'Ciénaga de Pijiño', nameEn: 'Ciénaga de Pijiño', note: 'Medio día en lancha por el brazo del Magdalena hasta la ciénaga. Más de 300 especies de aves — garzas, martín pescador, ibis, babillas y, con suerte, el mono aullador al amanecer.', noteEn: 'Half a day by boat down the arm of the Magdalena to the lagoon. Over 300 bird species — herons, kingfishers, ibis, caimans and, if you\'re lucky, the howler monkey at dawn.' },
+  { num: 'II', name: 'Paseo en champán por el Magdalena', nameEn: 'Champán boat ride on the Magdalena', note: 'El atardecer desde el río es la imagen que se queda de Mompox. Lanchas tradicionales con techo de palma y bancos de madera. Sale una hora antes del ocaso.', noteEn: 'The sunset from the river is the image that stays with you from Mompox. Traditional boats with palm-leaf roofs and wooden benches. Departs an hour before sunset.' },
+  { num: 'III', name: 'Taller de filigrana momposina', nameEn: 'Mompox filigree workshop', note: 'Tres horas con un maestro artesano tejiendo hilos de plata hasta formar tu propia pieza — un anillo, un dije, unos aretes. Tradición de más de 300 años. Te llevas la joya.', noteEn: 'Three hours with a master artisan weaving silver threads into your own piece — a ring, a pendant, a pair of earrings. Over 300 years of tradition. You take the jewel home.' },
+  { num: 'IV', name: 'Recorrido por las seis iglesias', nameEn: 'Tour of the six churches', note: 'Santa Bárbara con su torre barroca, la Inmaculada junto al río, San Francisco, San Agustín, San Juan de Dios y Santo Domingo. Cada una guarda una historia. A pie o en tuk-tuk.', noteEn: 'Santa Bárbara with its baroque tower, the Inmaculada by the river, San Francisco, San Agustín, San Juan de Dios and Santo Domingo. Each holds a story. On foot or by tuk-tuk.' },
+  { num: 'V', name: 'Caminata por la Albarrada', nameEn: 'Walk along the Albarrada', note: 'El muro de piedra que contiene al río es también la calle más bella de Mompox. Casas-tienda del siglo XVII se alinean sobre la albarrada, y al atardecer todo se vuelve dorado.', noteEn: 'The stone wall that holds back the river is also the most beautiful street in Mompox. 17th-century house-shops line the albarrada, and at sunset everything turns golden.' },
+  { num: 'VI', name: 'Crucero a las comunidades campesinas', nameEn: 'Boat trip to farming communities', note: 'Cruzar el río en lancha pública hasta las comunidades que cultivan las hortalizas de Mompox. Compartir pescado con arroz de coco con una familia local. Turismo comunitario auténtico.', noteEn: 'Cross the river on a public boat to the communities that grow Mompox\'s vegetables. Share fish with coconut rice with a local family. Authentic community tourism.' },
+];
+---
+<Layout title="Mompox · Sabores — Literatium" description="Sabores de Mompox: bocachico, casabito, queso de capa, corozo, arepa 'e huevo. Y seis senderos para explorar el Caribe fluvial.">
+<Folio id="mompox-sabores" folioNumber="Folio V·II · Sabores" folioNumberEn="Folio V·II · Flavours" dark={true}>
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Mompox', href: '/mompox' }, { label: 'Sabores' }]} />
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Mompox · Flavours of the riverine Caribbean">Mompox · Sabores del Caribe fluvial</div>
+    <h1 class="chapter-title on-dark">El sabor del <em>Caribe fluvial</em></h1>
+    <p class="chapter-hand" style="color: var(--parchment); opacity: 0.7;" data-en="Bocachico del Magdalena, casabito, queso de capa y vino de corozo">Bocachico del Magdalena, casabito, queso de capa y vino de corozo</p>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1" style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; margin-top: 50px; max-width: 1100px; margin-left: auto; margin-right: auto; align-items: center;">
+    <div class="sabores-list">
+      {sabores.map((s) => (
+        <div class="sabor-item" style="background: rgba(247,240,220,0.05); border: 1px solid rgba(221,185,94,0.2); padding: 16px 20px; margin-bottom: 12px;">
+          <h5 style="font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--brass-light); margin: 0 0 6px;" data-en={s.nameEn}>{s.name}</h5>
+          <p style="font-family: var(--font-body); font-size: 0.88rem; color: var(--parchment); opacity: 0.8; line-height: 1.55; margin: 0;" data-en={s.noteEn}>{s.note}</p>
+        </div>
+      ))}
+    </div>
+    <div class="reveal delay-1">
+      <img src="/assets/momposina-food.png" alt="Comida momposina" style="width: 100%; border: 1px solid rgba(221,185,94,0.3); filter: saturate(0.9) brightness(0.95);">
+      <p style="font-family: var(--font-caps); font-size: 0.58rem; letter-spacing: 0.22em; color: var(--brass); opacity: 0.7; text-align: center; margin-top: 10px;" data-en="— fish, cassava, coconut, palm fruit —">— pescado, yuca, coco, palma —</p>
+    </div>
+  </div>
+
+  <!-- SENDEROS -->
+  <div class="reveal delay-2" style="margin-top: 90px;">
+    <div class="eyebrow center" style="color: var(--brass-light);" data-en="Paths · Things to do from Literatium">Senderos · Qué hacer desde Literatium</div>
+    <h2 class="chapter-title on-dark" style="text-align: center; font-size: clamp(1.7rem, 3.5vw, 2.6rem); margin-top: 8px;" data-en="Tours, river, filigree <em>and sunsets</em>">Paseos, río, filigrana <em>y atardeceres</em></h2>
+    <p style="font-family: var(--font-body); color: var(--parchment); opacity: 0.8; max-width: 620px; margin: 18px auto 0; text-align: center;" data-en="From Literatium we help you arrange every experience. Martica or someone from her team can coordinate any of these excursions — just ask at reception.">Desde Literatium te ayudamos a organizar cada experiencia. Martica o alguien de su equipo pueden coordinar cualquiera de estos paseos — solo pregunta en recepción.</p>
+  </div>
+
+  <div class="senderos-list reveal delay-2" style="margin-top: 40px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+    {senderos.map((s) => (
+      <article class="sendero" style="background: rgba(247,240,220,0.05); border: 1px solid rgba(221,185,94,0.25); padding: 22px 24px; margin-bottom: 14px; display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: start;">
+        <div style="font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.28em; color: var(--brass); padding-top: 4px; white-space: nowrap;">SENDEROS · {s.num}</div>
+        <div>
+          <h5 style="font-family: var(--font-display); font-style: italic; font-size: 1.18rem; color: var(--brass-light); margin: 0 0 8px;" data-en={s.nameEn}>{s.name}</h5>
+          <p style="font-family: var(--font-body); font-size: 0.92rem; color: var(--parchment); opacity: 0.82; line-height: 1.6; margin: 0;" data-en={s.noteEn}>{s.note}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 60px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+    <a href="/mompox/guias" class="nav-cta" style="padding: 12px 24px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--brass-light); border: 1px solid var(--brass); text-decoration: none; border-radius: 2px;" data-en="← Guías">← Guías</a>
+    <a href="/mompox/palabras" class="nav-cta" style="padding: 12px 24px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--forest-dark); background: var(--brass); text-decoration: none; border-radius: 2px;" data-en="Next: Palabras →">Siguiente: Palabras →</a>
+  </div>
+</Folio>
+
+<style is:global>
+  @media (max-width: 800px) {
+    .sabores-list { grid-column: 1 / -1 !important; }
+  }
+</style>
+</Layout>

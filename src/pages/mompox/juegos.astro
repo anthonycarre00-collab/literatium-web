@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Folio from '../../components/Folio.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+// Local momposino / Caribbean games
+const juegos = [
+  {
+    icon: '🎲',
+    name: 'Parqués momposino',
+    nameEn: 'Momposino parqués',
+    players: '2–4',
+    where: 'En cualquier portal',
+    desc: 'El primó hermano del parchís, pero con su propia gracia. Se juega en tableros de madera pintados a mano, con fichas de semillas de totumo. Cada familia tiene el suyo, muchas veces heredado de los abuelos. Las tardes de domingo en Mompox se miden en partidas de parqués, no en horas.',
+    descEn: 'The cousin of parcheesi, but with its own grace. Played on hand-painted wooden boards with totumo-seed pieces. Every family has its own, often inherited from grandparents. Sunday afternoons in Mompox are measured in parqués games, not in hours.'
+  },
+  {
+    icon: '🃏',
+    name: 'Canastas',
+    nameEn: 'Canastas',
+    players: '4 (en parejas)',
+    where: 'En el comedor, después del almuerzo',
+    desc: 'Juego de naipes de origen sudamericano que se volvió caribeño. Las señoras de Mompox lo juegan con una seriedad de torneo, sentadas frente al ventilador, con un café al lado. Para aprenderlo hay que sentarse a perder varias veces — y dejar que las tías te corrijan la jugada.',
+    descEn: 'Card game of South American origin that became Caribbean. The ladies of Mompox play it with tournament-level seriousness, seated in front of the fan, with a coffee by their side. To learn it you have to sit and lose several times — and let the aunts correct your play.'
+  },
+  {
+    icon: '🥏',
+    name: 'Capa',
+    nameEn: 'Capa',
+    players: '2+',
+    where: 'En la calle, al atardecer',
+    desc: 'Una tapa de botella de gaseosa, dos equipos, una calle empedrada. El objeto es simple: lanzar la tapa para que caiga dentro de un círculo dibujado con tiza. Lo difícil es la puntería con que los niños de Mompox la lanzan — deben nacer con ella. El juego más antiguo y más barato del mundo.',
+    descEn: 'A soda-bottle cap, two teams, a cobblestone street. The object is simple: throw the cap so it lands inside a chalk-drawn circle. The hard part is the aim with which Mompox\'s children throw it — they must be born with it. The oldest and cheapest game in the world.'
+  },
+  {
+    icon: '🪀',
+    name: 'Yermis / Trompo',
+    nameEn: 'Yermis / Spinning top',
+    players: '3–10',
+    where: 'En la plaza, después de escuela',
+    desc: 'El trompo de madera, con su soga y su clavo. Los niños lo hacen bailar en la palma de la mano, lo saltan por encima de un libro, lo hacen "dormir". Cada año, en Semana Santa, hay un campeonato informal en la plaza de Santo Domingo. Los abuelos todavía ganan.',
+    descEn: 'The wooden top, with its string and nail. Children make it dance on the palm of their hand, jump over a book, "sleep". Every year, during Holy Week, there\'s an informal championship in Plaza de Santo Domingo. The grandparents still win.'
+  },
+  {
+    icon: '🥌',
+    name: 'Boliche momposino',
+    nameEn: 'Momposino bowls',
+    players: '2–6',
+    where: 'Calle Real del Medio, muy temprano',
+    desc: 'No es el boliche europeo — es una variante local con seis bolos de madera y una bola de guayacán, pesada como un puño. Se juega en un tramo de callejón enlosado, en los barrios antiguos. Antes era juego de hombres; hoy juegan todos. El que tira los seis bolos en un lanzamiento compra cerveza para el resto de la tarde.',
+    descEn: 'Not the European bowls — a local variant with six wooden pins and a guayacán-wood ball, heavy as a fist. Played on a paved alley section, in the old neighbourhoods. It used to be a men\'s game; today everyone plays. Whoever knocks down all six pins in one throw buys beer for the rest of the afternoon.'
+  },
+  {
+    icon: '🪁',
+    name: 'Cometa del Magdalena',
+    nameEn: 'Magdalena kite',
+    players: '1+',
+    where: 'En la albarrada, con viento',
+    desc: 'En agosto, cuando el viento sube por el río, el cielo de Mompox se llena de cometas. Las hacen los niños con palo de balsa, papel de seda y hilo de pescar. Las más altas se ven desde el otro lado del río. Hay una regla no escrita: si tu cometa cae en la calle, cualquier niño puede reclamarla.',
+    descEn: 'In August, when the wind rises up the river, Mompox\'s sky fills with kites. Children make them with balsa sticks, tissue paper and fishing line. The highest ones can be seen from across the river. There\'s an unwritten rule: if your kite falls in the street, any child can claim it.'
+  },
+];
+
+// Reader's challenge — interactive prompt
+const retos = [
+  { reto: 'Aprende una palabra nueva del léxico momposino y úsala en una conversación.', retoEn: 'Learn a new word from the momposino lexicon and use it in a conversation.' },
+  { reto: 'Pregunta en recepción por un taller de filigrana de una hora.', retoEn: 'Ask at reception about a one-hour filigree workshop.' },
+  { reto: 'Toma un café en Literatium mirando la albarrada, sin móvil.', retoEn: 'Drink a coffee at Literatium looking at the albarrada, no phone.' },
+  { reto: 'Encuentra las seis iglesias y toca la puerta de cada una.', retoEn: 'Find the six churches and knock on each door.' },
+];
+---
+<Layout title="Mompox · Juegos — Literatium" description="Juegos de Mompox: parqués momposino, canastas, capa, trompo, boliche, cometa. Los juegos del portal donde el tiempo se vuelve lento.">
+<Folio id="mompox-juegos" folioNumber="Folio V·V · Juegos" folioNumberEn="Folio V·V · Games" dark={true}>
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Mompox', href: '/mompox' }, { label: 'Juegos' }]} />
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Mompox · Games of the porch and the street">Mompox · Juegos del portal y la calle</div>
+    <h1 class="chapter-title on-dark">Donde el tiempo <em>se vuelve lento</em></h1>
+    <p class="chapter-hand" style="color: var(--parchment); opacity: 0.7;" data-en="Parqués, canastas, capa, trompo — the games that hold the town together">Parqués, canastas, capa, trompo — los juegos que sostienen al pueblo</p>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1" style="max-width: 720px; margin: 30px auto;">
+    <p style="font-family: var(--font-body); color: var(--parchment); opacity: 0.9; font-size: 1.05rem; line-height: 1.85; text-align: center;" data-en="In Mompox, play has not yet been replaced by screens. The porch is still a parlour, the street is still a playing field, the plaza is still a championship court. These six games are not folklore — they are what people do on a Sunday afternoon, when the heat loosens its grip and the river breeze begins. To play them is to read another chapter of the town.">En Mompox, el juego todavía no ha sido reemplazado por las pantallas. El portal sigue siendo un salón, la calle sigue siendo una cancha, la plaza sigue siendo un torneo. Estos seis juegos no son folclore — son lo que la gente hace un domingo por la tarde, cuando el calor afloja y empieza la brisa del río. Jugarlos es leer otro capítulo del pueblo.</p>
+  </div>
+
+  <!-- GAMES GRID -->
+  <div class="reveal delay-1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; margin-top: 50px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+    {juegos.map((j) => (
+      <article style="background: rgba(247,240,220,0.05); border: 1px solid rgba(221,185,94,0.25); padding: 26px; transition: border-color 0.3s ease, background 0.3s ease;">
+        <div style="font-size: 2.2rem; margin-bottom: 14px; line-height: 1;">{j.icon}</div>
+        <h3 style="font-family: var(--font-display); font-style: italic; font-size: 1.3rem; color: var(--brass-light); margin: 0 0 12px;" data-en={j.nameEn}>{j.name}</h3>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; font-family: var(--font-caps); font-size: 0.56rem; letter-spacing: 0.2em; color: var(--brass); opacity: 0.8;">
+          <span>· {j.players}</span>
+          <span>· {j.where}</span>
+        </div>
+        <p style="font-family: var(--font-body); font-size: 0.92rem; color: var(--parchment); opacity: 0.82; line-height: 1.6; margin: 0;" data-en={j.descEn}>{j.desc}</p>
+      </article>
+    ))}
+  </div>
+
+  <!-- A NOTE ON SLOWNESS -->
+  <div class="reveal delay-2" style="margin-top: 80px; max-width: 720px; margin-left: auto; margin-right: auto; padding: 36px 32px; background: rgba(15,36,25,0.55); border-left: 2px solid var(--brass);">
+    <div class="eyebrow" style="color: var(--brass-light); margin-bottom: 14px;" data-en="A note on slowness">Una nota sobre la lentitud</div>
+    <p style="font-family: var(--font-body); font-style: italic; color: var(--parchment); opacity: 0.92; font-size: 1rem; line-height: 1.8; margin: 0;" data-en="Mompox preserves something that almost everywhere else has been lost: the art of spending an afternoon. Not doing nothing — playing. Not being idle — being together. The parqués board, the canastas hand, the spinning top, the kite in the sky — these are not children's games. They are the way a town keeps itself a town. To sit on a porch in Mompox with a coffee and a game is to remember that time, before the clock, was measured in turns.">Mompox preserva algo que en casi todas partes se ha perdido: el arte de pasar una tarde. No haciendo nada — jugando. No estando ocioso — estando juntos. El tablero de parqués, la mano de canastas, el trompo, la cometa en el cielo — no son juegos de niños. Son la forma en que un pueblo se sigue manteniendo como pueblo. Sentarse en un portal de Mompox con un café y un juego es recordar que el tiempo, antes del reloj, se medía en turnos.</p>
+  </div>
+
+  <!-- READER CHALLENGES -->
+  <div class="reveal delay-2" style="margin-top: 80px;">
+    <div class="eyebrow center" style="color: var(--brass-light);" data-en="Reader's challenges">Retos del lector</div>
+    <h2 class="chapter-title on-dark" style="text-align: center; font-size: clamp(1.6rem, 3vw, 2.2rem); margin-top: 8px;" data-en="Four small games <em>for the traveller</em>">Cuatro pequeños juegos <em>para el viajero</em></h2>
+  </div>
+  <div class="reveal delay-2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 40px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+    {retos.map((r, i) => (
+      <article style="background: rgba(247,240,220,0.04); border: 1px solid rgba(221,185,94,0.2); padding: 22px;">
+        <div style="font-family: var(--font-caps); font-size: 0.6rem; letter-spacing: 0.28em; color: var(--brass); margin-bottom: 10px;">RETO · {String(i + 1).padStart(2, '0')}</div>
+        <p style="font-family: var(--font-body); font-style: italic; font-size: 0.95rem; color: var(--parchment); opacity: 0.88; line-height: 1.55; margin: 0;" data-en={r.retoEn}>{r.reto}</p>
+      </article>
+    ))}
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 70px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+    <a href="/mompox/mapas" class="nav-cta" style="padding: 12px 24px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--brass-light); border: 1px solid var(--brass); text-decoration: none; border-radius: 2px;" data-en="← Mapas">← Mapas</a>
+    <a href="/book" class="nav-cta" style="padding: 12px 24px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--forest-dark); background: var(--brass); text-decoration: none; border-radius: 2px;" data-en="Plan your visit →">Planifica tu visita →</a>
+  </div>
+</Folio>
+</Layout>

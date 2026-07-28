@@ -1,8 +1,13 @@
 ---
+// Mompox sub-navigation — appears on /mompox and all /mompox/* subpages
+// Five subsections: Guías, Sabores, Palabras, Mapas, Juegos
+// Active state is set by main.js scroll-spy OR by the `active` prop on each page
 ---
-<nav id="mompox-subnav">
-  <a href="/mompox" data-en="Mompox">Mompox</a>
-  <a href="/#viaje" data-en="Journey">El Viaje</a>
-  <a href="/#sabores" data-en="Flavours">Sabores</a>
-  <a href="/#diccionario" data-en="Words">Palabras</a>
+<nav id="mompox-subnav" data-mompox-subnav>
+  <a href="/mompox"        data-subnav="hub"      data-en="Mompox">Mompox</a>
+  <a href="/mompox/guias"  data-subnav="guias"    data-en="Guides">Guías</a>
+  <a href="/mompox/sabores" data-subnav="sabores" data-en="Flavours">Sabores</a>
+  <a href="/mompox/palabras" data-subnav="palabras" data-en="Words">Palabras</a>
+  <a href="/mompox/mapas"  data-subnav="mapas"    data-en="Maps">Mapas</a>
+  <a href="/mompox/juegos" data-subnav="juegos"   data-en="Games">Juegos</a>
 </nav>

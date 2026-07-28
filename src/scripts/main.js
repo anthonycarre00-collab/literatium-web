@@ -196,12 +196,39 @@
   }
 
   
-  /* MOMPOX SUB-NAV — show when in Mompox family, track active */
+  /* MOMPOX SUB-NAV — two modes:
+     (1) On /mompox and /mompox/* pages: always visible, active link set by URL path.
+     (2) On home page: scroll-spy on the Mompox-family sections (#mompox, #viaje, #sabores, #diccionario). */
   const mompoxSubnav = document.getElementById('mompox-subnav');
   const mompoxFamily = ['mompox', 'viaje', 'sabores', 'diccionario'];
   const mompoxSubnavLinks = mompoxSubnav ? mompoxSubnav.querySelectorAll('a') : [];
+  const path = window.location.pathname;
+  // Detect if we're on a dedicated Mompox page (path starts with /mompox)
+  const onMompoxPage = path === '/mompox' || path.startsWith('/mompox/');
+
+  // Map home-page section IDs to the closest subnav link
+  const homeSectionToSubnav = {
+    mompox: '/mompox',
+    viaje: '/mompox/mapas',
+    sabores: '/mompox/sabores',
+    diccionario: '/mompox/palabras'
+  };
+
+  function setActiveByHref(href) {
+    mompoxSubnavLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === href);
+    });
+  }
+
   function updateMompoxSubnav() {
     if (!mompoxSubnav) return;
+    if (onMompoxPage) {
+      // Always show on dedicated Mompox pages; active link = current URL
+      mompoxSubnav.classList.add('show');
+      setActiveByHref(path);
+      return;
+    }
+    // Home page scroll-spy
     let inFamily = false;
     let activeId = '';
     mompoxFamily.forEach(id => {
@@ -215,9 +242,11 @@
       }
     });
     mompoxSubnav.classList.toggle('show', inFamily);
-    mompoxSubnavLinks.forEach(link => {
-      link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
-    });
+    if (inFamily && activeId && homeSectionToSubnav[activeId]) {
+      setActiveByHref(homeSectionToSubnav[activeId]);
+    } else {
+      mompoxSubnavLinks.forEach(link => link.classList.remove('active'));
+    }
   }
   window.addEventListener('scroll', updateMompoxSubnav, { passive: true });
   window.addEventListener('resize', updateMompoxSubnav);

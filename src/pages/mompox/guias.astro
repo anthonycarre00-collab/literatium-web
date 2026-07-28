@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Folio from '../../components/Folio.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+// Six colonial churches of Mompox
+const churches = [
+  { name: 'Santa Bárbara', nameEn: 'Saint Barbara', year: '1613', note: 'La joya barroca de Mompox — torre adornada con estípites, única en Colombia. Junto al río.', noteEn: 'Mompox\'s baroque jewel — tower adorned with stípites, unique in Colombia. By the river.' },
+  { name: 'Inmaculada Concepción', nameEn: 'Immaculate Conception', year: '1541', note: 'La más antigua. Junto al río, donde los bogas llegaban a rezar antes de partir.', noteEn: 'The oldest. By the river, where the bogas came to pray before departing.' },
+  { name: 'San Francisco', nameEn: 'Saint Francis', year: '1564', note: 'Claustro franciscano con patio interior. Conserva un retablo dorado espectacular.', noteEn: 'Franciscan cloister with inner courtyard. Preserves a spectacular gilded altarpiece.' },
+  { name: 'San Agustín', nameEn: 'Saint Augustine', year: '1570', note: 'Iglesia-convento de los agustinos. Su torre sirve todavía de hito para orientarse.', noteEn: 'Augustinian church-convent. Its tower still serves as a landmark.' },
+  { name: 'San Juan de Dios', nameEn: 'Saint John of God', year: '1640', note: 'Antigua iglesia hospitalaria. Hoy sala de conciertos en Festijazz.', noteEn: 'Former hospice church. Now a concert hall during Festijazz.' },
+  { name: 'Santo Domingo', nameEn: 'Saint Dominic', year: '1544', note: 'De los dominicos. Su plaza es uno de los rincones más fotografiados.', noteEn: 'Of the Dominicans. Its square is one of the most photographed corners.' },
+];
+
+// Walking routes
+const routes = [
+  { num: 'I', name: 'La Albarrada', nameEn: 'The Albarrada', dur: '1h', note: 'El muro de piedra del siglo XVII que contiene al Magdalena. Caminar la albarrada al atardecer es la imagen que se queda de Mompox — casas-tienda coloniales, el río dorado, los bugs del crepúsculo.', noteEn: 'The 17th-century stone wall that holds back the Magdalena. Walking the albarrada at sunset is the image that stays with you from Mompox — colonial house-shops, the golden river, the dusk bugs.' },
+  { num: 'II', name: 'Las tres plazas', nameEn: 'The three plazas', dur: '1.5h', note: 'Plaza de Santa Bárbara, Plaza de la Concepción, Plaza de Santo Domingo. Tres plazas, tres siglos, tres atmósferas. Cada una con su iglesia y su sombra.', noteEn: 'Plaza de Santa Bárbara, Plaza de la Concepción, Plaza de Santo Domingo. Three squares, three centuries, three atmospheres. Each with its church and its shade.' },
+  { num: 'III', name: 'El Cementerio Central', nameEn: 'The Central Cemetery', dur: '45min', note: 'Una ciudadela de mármol blanco. Tumbas del siglo XIX, esculturas que se caen, glicinas que suben por los mausoleos. Es el lugar más extraño y más bello de Mompox.', noteEn: 'A citadel of white marble. 19th-century tombs, crumbling sculptures, wisteria climbing the mausoleums. The strangest, most beautiful place in Mompox.' },
+  { num: 'IV', name: 'Casas de filigrana', nameEn: 'Filigree houses', dur: '1h', note: 'Calle Real del Medio y Calle de la Albarrada. Talleres donde trescientos años de tradición orfebre siguen tejiendo plata y oro en joyas que parecen encaje.', noteEn: 'Calle Real del Medio and Calle de la Albarrada. Workshops where three hundred years of goldsmith tradition still weave silver and gold into lace-like jewels.' },
+];
+---
+<Layout title="Mompox · Guías — Literatium" description="Guías de Mompox: seis iglesias coloniales, la albarrada, las plazas, el cementerio, los talleres de filigrana. Patrimonio UNESCO desde 1537.">
+<Folio id="mompox-guias" folioNumber="Folio V·I · Guías" folioNumberEn="Folio V·I · Guides" dark={true}>
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Mompox', href: '/mompox' }, { label: 'Guías' }]} />
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Mompox · Walking Guides">Mompox · Guías a pie</div>
+    <h1 class="chapter-title on-dark">Caminar Mompox <em>es leerlo despacio</em></h1>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1" style="max-width: 680px; margin: 30px auto;">
+    <p style="font-family: var(--font-body); color: var(--parchment); opacity: 0.9; font-size: 1.05rem; line-height: 1.85; text-align: center;" data-en="Mompox was founded in 1537 by order of the Governor of Cartagena, and soon became the most important river port between the interior and the Caribbean. Its streets still follow the colonial grid, its churches still mark the rhythm of the day, and its albarrada still holds back the Magdalena. The best way to read it is on foot — slowly, in the early morning or at dusk.">Mompox fue fundada en 1537 por orden del Gobernador de Cartagena, y pronto se convirtió en el puerto fluvial más importante entre el interior y el Caribe. Sus calles aún siguen la cuadrícula colonial, sus iglesias aún marcan el ritmo del día, y su albarrada aún contiene al Magdalena. La mejor forma de leerlo es a pie — despacio, al amanecer o al ocaso.</p>
+  </div>
+
+  <!-- SIX CHURCHES -->
+  <div class="reveal delay-1" style="margin-top: 60px;">
+    <div class="eyebrow center" style="color: var(--brass-light);" data-en="Six colonial churches">Seis iglesias coloniales</div>
+    <h2 class="chapter-title on-dark" style="text-align: center; font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-top: 8px;" data-en="Each one <em>a chapter</em> of the founding">Cada una <em>un capítulo</em> de la fundación</h2>
+  </div>
+  <div class="reveal delay-1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+    {churches.map((c) => (
+      <article style="background: rgba(247,240,220,0.05); border: 1px solid rgba(221,185,94,0.25); padding: 22px; transition: border-color 0.3s ease;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+          <h4 style="font-family: var(--font-display); font-style: italic; font-size: 1.2rem; color: var(--brass-light); margin: 0;" data-en={c.nameEn}>{c.name}</h4>
+          <span style="font-family: var(--font-caps); font-size: 0.6rem; letter-spacing: 0.2em; color: var(--brass); opacity: 0.7;">{c.year}</span>
+        </div>
+        <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--parchment); opacity: 0.82; line-height: 1.55; margin: 0;" data-en={c.noteEn}>{c.note}</p>
+      </article>
+    ))}
+  </div>
+
+  <!-- WALKING ROUTES -->
+  <div class="reveal delay-2" style="margin-top: 80px;">
+    <div class="eyebrow center" style="color: var(--brass-light);" data-en="Four walking routes">Cuatro rutas a pie</div>
+    <h2 class="chapter-title on-dark" style="text-align: center; font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-top: 8px;" data-en="From the river wall <em>to the white city of tombs</em>">Del muro del río <em>a la ciudad blanca de tumbas</em></h2>
+  </div>
+  <div class="reveal delay-2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 40px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+    {routes.map((r) => (
+      <article style="background: rgba(247,240,220,0.05); border: 1px solid rgba(221,185,94,0.25); padding: 24px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;">
+          <span style="font-family: var(--font-caps); font-size: 0.6rem; letter-spacing: 0.28em; color: var(--brass);">RUTA · {r.num}</span>
+          <span style="font-family: var(--font-caps); font-size: 0.55rem; letter-spacing: 0.18em; color: var(--parchment); opacity: 0.5;">⏱ {r.dur}</span>
+        </div>
+        <h4 style="font-family: var(--font-display); font-style: italic; font-size: 1.25rem; color: var(--brass-light); margin: 0 0 10px;" data-en={r.nameEn}>{r.name}</h4>
+        <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--parchment); opacity: 0.82; line-height: 1.6; margin: 0;" data-en={r.noteEn}>{r.note}</p>
+      </article>
+    ))}
+  </div>
+
+  <!-- A NOTE ON HISTORY -->
+  <div class="reveal delay-2" style="margin-top: 80px; max-width: 720px; margin-left: auto; margin-right: auto; padding: 32px; background: rgba(15,36,25,0.5); border-left: 2px solid var(--brass);">
+    <div class="eyebrow" style="color: var(--brass-light); margin-bottom: 12px;" data-en="A note on history">Una nota sobre la historia</div>
+    <p style="font-family: var(--font-body); font-style: italic; color: var(--parchment); opacity: 0.9; font-size: 0.98rem; line-height: 1.75; margin: 0;" data-en="Mompox was founded on May 3, 1537, by Don Lucas Fernández de Espinosa, on the orders of the Governor of Cartagena, Pedro de Heredia. For two centuries it was the most important river port of the Viceroyalty: here converged the gold of the interior, the merchandise of Spain, the slaves of Africa, the salt of the Caribbean. The independence was sworn here in 1810 — Mompox was one of the first towns of the New Kingdom of Granada to do so. When the river changed course and the port decayed, Mompox fell asleep. UNESCO declared it a World Heritage Site in 1995, exactly to preserve that sleep.">Mompox fue fundada el 3 de mayo de 1537 por Don Lucas Fernández de Espinosa, por orden del Gobernador de Cartagena, Pedro de Heredia. Durante dos siglos fue el puerto fluvial más importante del Virreinato: aquí convergían el oro del interior, la mercancía de España, los esclavos de África, la sal del Caribe. La independencia se juró aquí en 1810 — Mompox fue uno de los primeros pueblos del Nuevo Reino de Granada en hacerlo. Cuando el río cambió de curso y el puerto decaeció, Mompox se quedó dormido. La UNESCO lo declaró Patrimonio de la Humanidad en 1995, justamente para preservar ese sueño.</p>
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 60px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+    <a href="/mompox" class="nav-cta" style="padding: 12px 24px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--brass-light); border: 1px solid var(--brass); text-decoration: none; border-radius: 2px; transition: background 0.3s ease;" data-en="← Back to Mompox">← Volver a Mompox</a>
+    <a href="/mompox/sabores" class="nav-cta" style="padding: 12px 24px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--forest-dark); background: var(--brass); text-decoration: none; border-radius: 2px; transition: background 0.3s ease;" data-en="Next: Sabores →">Siguiente: Sabores →</a>
+  </div>
+</Folio>
+</Layout>

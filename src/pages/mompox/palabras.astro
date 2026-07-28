@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Folio from '../../components/Folio.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const palabras = [
+  { cat: 'Arquitectura', catEn: 'Architecture', term: 'Albarrada', def: 'El muro de contención a orillas del río. También la calle más bella de Mompox.', defEn: 'The retaining wall along the river. Also the most beautiful street in Mompox.' },
+  { cat: 'Río', catEn: 'River', term: 'Champán', def: 'Embarcación tradicional de madera del Magdalena con techo de palma. NO la bebida.', defEn: 'Traditional wooden boat of the Magdalena with a palm-leaf roof. Not the drink.' },
+  { cat: 'Río', catEn: 'River', term: 'Boga', def: 'El remero del río Magdalena. Profesión ancestral que sobrevive en Mompox.', defEn: 'The oarsman of the Magdalena. An ancestral profession that survives in Mompox.' },
+  { cat: 'Comida', catEn: 'Food', term: 'Casabito', def: 'Tortilla de yuca cruda, queso, coco rallado y azúcar. El snack callejero por excelencia.', defEn: 'Pancake of raw cassava, cheese, ground coconut and sugar. The quintessential street snack.' },
+  { cat: 'Comida', catEn: 'Food', term: 'Corozo', def: 'Fruto de una palma del Caribe. Se hace vino, jugo y dulce. Color rubí intenso.', defEn: 'Fruit of a Caribbean palm. Made into wine, juice and sweets. Deep ruby colour.' },
+  { cat: 'Cultura', catEn: 'Culture', term: 'Filigrana', def: 'Joyería de oro o plata tejida con hilos finísimos. Tradición momposina de 300 años.', defEn: 'Gold or silver jewellery woven from the finest threads. A 300-year momposino tradition.' },
+  { cat: 'Vida diaria', catEn: 'Daily life', term: 'Meceredora', def: 'Silla de madera que se mece. En Mompox, está en todo portal.', defEn: 'A wooden rocking chair. In Mompox, there is one on every porch.' },
+  { cat: 'Vida diaria', catEn: 'Daily life', term: 'Siesta', def: 'El descanso de la 1 a las 4. En Mompox, sagrado.', defEn: 'The rest from one to four in the afternoon. In Mompox, sacred.' },
+  { cat: 'Cultura', catEn: 'Culture', term: 'Macondo', def: 'El pueblo imaginario de García Márquez. Inspirado en Mompox y Aracataca.', defEn: 'García Márquez\'s imaginary town. Inspired by Mompox and Aracataca.' },
+  { cat: 'Cultura', catEn: 'Culture', term: 'Mariposas amarillas', def: 'Símbolo de Gabo. Aparecen en «Cien años de soledad» y, según los momposinos, en Mompox.', defEn: 'Gabo\'s symbol. They appear in One Hundred Years of Solitude and, according to locals, in Mompox.' },
+  { cat: 'Cultura', catEn: 'Culture', term: 'Semana Santa', def: 'La segunda procesión más importante de Colombia. Siete iglesias, Paso Robado, serenata.', defEn: 'Colombia\'s second most important Holy Week. Seven churches, Stolen Effigy, serenade.' },
+  { cat: 'Cultura', catEn: 'Culture', term: 'Realismo mágico', def: 'Género literario donde lo extraordinario se cuenta como cotidiano. Gabo lo hizo universal.', defEn: 'A literary genre where the extraordinary is told as everyday. Gabo made it universal.' },
+];
+
+// Group by category for visual rhythm
+const cats = ['Arquitectura', 'Río', 'Comida', 'Vida diaria', 'Cultura'];
+---
+<Layout title="Mompox · Palabras — Literatium" description="Palabras del río: doce términos para leer Mompox en su propio léxico. Albarrada, champán, boga, filigrana, Macondo.">
+<Folio id="mompox-palabras" folioNumber="Folio V·III · Palabras" folioNumberEn="Folio V·III · Words" dark={true}>
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Mompox', href: '/mompox' }, { label: 'Palabras' }]} />
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Mompox · A river\'s lexicon">Mompox · Léxico del río</div>
+    <h1 class="chapter-title on-dark">Doce palabras para <em data-en="read Mompox">leer Mompox</em></h1>
+    <p class="chapter-hand" style="color: var(--parchment); opacity: 0.7;" data-en="Casabito, albarrada, champán, filigrana — the town tells itself in its own vocabulary">Casabito, albarrada, champán, filigrana — el pueblo se cuenta en su vocabulario</p>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1" style="max-width: 720px; margin: 30px auto;">
+    <p style="font-family: var(--font-body); color: var(--parchment); opacity: 0.85; font-size: 1rem; line-height: 1.85; text-align: center;" data-en="Every place speaks itself in its own vocabulary. Mompox, more than most, has a lexicon that carries its history — the river, the colonial architecture, the food, the daily rhythm of heat and siesta, and the literary mythology that Gabo wove from these streets. Learn these twelve words and the town will start to read itself to you.">Cada lugar se habla en su propio vocabulario. Mompox, más que la mayoría, tiene un léxico que carga su historia — el río, la arquitectura colonial, la comida, el ritmo diario del calor y la siesta, y la mitología literaria que Gabo tejió a partir de estas calles. Aprende estas doce palabras y el pueblo empezará a leerse solo.</p>
+  </div>
+
+  <!-- DICTIONARY GRID -->
+  <div class="reveal delay-1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 50px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+    {palabras.map((p) => (
+      <article style="background: rgba(247,240,220,0.05); border: 1px solid rgba(221,185,94,0.22); padding: 22px; transition: border-color 0.3s ease;">
+        <span style="font-family: var(--font-caps); font-size: 0.58rem; letter-spacing: 0.28em; color: var(--brass); opacity: 0.85; display: block; margin-bottom: 10px;" data-en={p.catEn}>{p.cat}</span>
+        <h5 style="font-family: var(--font-display); font-style: italic; font-size: 1.35rem; color: var(--brass-light); margin: 0 0 8px;">{p.term}</h5>
+        <p style="font-family: var(--font-body); font-size: 0.9rem; color: var(--parchment); opacity: 0.82; line-height: 1.55; margin: 0;" data-en={p.defEn}>{p.def}</p>
+      </article>
+    ))}
+  </div>
+
+  <!-- CATEGORIES LEGEND -->
+  <div class="reveal delay-2" style="margin-top: 60px; text-align: center;">
+    <div class="eyebrow" style="color: var(--brass-light); margin-bottom: 16px;" data-en="Categories">Categorías</div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+      {cats.map((c) => (
+        <span style="font-family: var(--font-caps); font-size: 0.6rem; letter-spacing: 0.22em; color: var(--parchment); opacity: 0.7; padding: 6px 14px; border: 1px solid rgba(221,185,94,0.3); border-radius: 2px;">{c}</span>
+      ))}
+    </div>
+  </div>
+
+  <!-- GARCÍA MÁRQUEZ QUOTE -->
+  <div class="reveal delay-2" style="margin-top: 80px; max-width: 720px; margin-left: auto; margin-right: auto; padding: 40px 32px; text-align: center; background: rgba(15,36,25,0.5); border: 1px solid rgba(221,185,94,0.25);">
+    <div style="font-family: var(--font-display); font-size: 4rem; color: var(--brass); opacity: 0.25; line-height: 0.4; margin-bottom: 12px;">"</div>
+    <p style="font-family: var(--font-display); font-style: italic; font-size: clamp(1.2rem, 2.4vw, 1.6rem); line-height: 1.45; color: var(--parchment); opacity: 0.95; margin: 0;" data-en="Mompox doesn't exist; sometimes we dream of her, but she doesn't exist.">Mompox no existe, a veces soñamos con ella pero no existe.</p>
+    <div style="margin-top: 18px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.3em; color: var(--brass);">— Gabriel García Márquez</div>
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 60px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+    <a href="/mompox/sabores" class="nav-cta" style="padding: 12px 24px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--brass-light); border: 1px solid var(--brass); text-decoration: none; border-radius: 2px;" data-en="← Sabores">← Sabores</a>
+    <a href="/mompox/mapas" class="nav-cta" style="padding: 12px 24px; font-family: var(--font-caps); font-size: 0.62rem; letter-spacing: 0.22em; color: var(--forest-dark); background: var(--brass); text-decoration: none; border-radius: 2px;" data-en="Next: Mapas →">Siguiente: Mapas →</a>
+  </div>
+</Folio>
+</Layout>
