@@ -1,0 +1,161 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Folio from '../../components/Folio.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+interface Milestone {
+  year: string;
+  icon: string;
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+}
+
+const milestones: Milestone[] = [
+  {
+    year: '1537',
+    icon: '⚓',
+    titleEs: 'Fundación de Santa Cruz de Mompox',
+    titleEn: 'Founding of Santa Cruz de Mompox',
+    descEs: 'El 3 de mayo de 1537, Lucas Fernández de Espinosa funda Santa Cruz de Mompox sobre un asentamiento Malibú, a orillas del Magdalena. Nace como puerto de paso entre Cartagena y el interior.',
+    descEn: 'On May 3, 1537, Lucas Fernández de Espinosa founds Santa Cruz de Mompox on a Malibú settlement, on the banks of the Magdalena. It is born as a way-port between Cartagena and the interior.'
+  },
+  {
+    year: '1540–1700',
+    icon: '⛵',
+    titleEs: 'Auge como puerto fluvial del Virreinato',
+    titleEn: 'Boom as a river port of the Viceroyalty',
+    descEs: 'Durante siglo y medio, Mompox es uno de los puertos más prósperos del Nuevo Reino de Granada. Oro, tabaco, caña y esclavizados pasan por sus muelles. Se levantan seis iglesias y la albarrada.',
+    descEn: 'For a century and a half, Mompox is one of the most prosperous ports of the New Kingdom of Granada. Gold, tobacco, cane and the enslaved pass through its docks. Six churches and the albarrada are built.'
+  },
+  {
+    year: '1810',
+    icon: '✦',
+    titleEs: 'Mompox jura la independencia',
+    titleEn: 'Mompox swears independence',
+    descEs: 'El 6 de agosto de 1810, Mompox es la primera ciudad del Nuevo Reino de Granada en jurar la independencia de España. Un acto precursor que el resto del país seguiría dos años después.',
+    descEn: 'On August 6, 1810, Mompox is the first city of the New Kingdom of Granada to swear independence from Spain. A pioneering act that the rest of the country would follow two years later.'
+  },
+  {
+    year: '1819',
+    icon: '⚔',
+    titleEs: 'Bolívar pasa por Mompox',
+    titleEn: 'Bolívar passes through Mompox',
+    descEs: 'En la Campaña Libertadora, Simón Bolívar pasa por Mompox reclutando hombres y embarcaciones. El río Magdalena se vuelve ruta de la independencia. Mompox le da 300 soldados.',
+    descEn: 'During the Liberating Campaign, Simón Bolívar passes through Mompox recruiting men and boats. The Magdalena river becomes the route of independence. Mompox gives him 300 soldiers.'
+  },
+  {
+    year: '1880–1920',
+    icon: '≫',
+    titleEs: 'Decadencia del puerto fluvial',
+    titleEn: 'Decline of the river port',
+    descEs: 'El Magdalena cambia de curso y los grandes barcos de vapor dejan de llegar. El ferrocarril del Caribe no pasa por aquí. Mompox se desconecta lentamente del comercio nacional.',
+    descEn: 'The Magdalena changes course and the great steamboats stop arriving. The Caribbean railway does not pass through here. Mompox slowly disconnects from national commerce.'
+  },
+  {
+    year: '1930–1950',
+    icon: '🕯',
+    titleEs: 'Mompox queda dormido',
+    titleEn: 'Mompox falls asleep',
+    descEs: 'Medio siglo de calma. Sin puerto, sin tren, sin carretera. Las casonas coloniales se cierran, las iglesias se vacían, la población baja. El pueblo se vuelve refugio de memorias.',
+    descEn: 'Half a century of calm. No port, no train, no road. The colonial mansions close, the churches empty, the population drops. The town becomes a refuge of memories.'
+  },
+  {
+    year: '1955',
+    icon: '💡',
+    titleEs: 'Llega la electricidad',
+    titleEn: 'Electricity arrives',
+    descEs: 'Por primera vez, Mompox tiene luz eléctrica — cuatro siglos después de su fundación. La albarrada, que se alumbraba con faroles de aceite, empieza a encenderse de noche.',
+    descEn: 'For the first time, Mompox has electric light — four centuries after its founding. The albarrada, lit by oil lanterns, begins to glow at night.'
+  },
+  {
+    year: '1967',
+    icon: '📖',
+    titleEs: 'Se publica "Cien años de soledad"',
+    titleEn: '"One Hundred Years of Solitude" is published',
+    descEs: 'García Márquez publica la novela que abrirá el realismo mágico al mundo. Macondo, su pueblo imaginario, se identifica para siempre con Mompox — el pueblo que inspiró el paisaje.',
+    descEn: 'García Márquez publishes the novel that will open magical realism to the world. Macondo, his imaginary town, is forever identified with Mompox — the town that inspired its landscape.'
+  },
+  {
+    year: '1982',
+    icon: '🏅',
+    titleEs: 'García Márquez gana el Nobel',
+    titleEn: 'García Márquez wins the Nobel',
+    descEs: 'Gabriel García Márquez recibe el Premio Nobel de Literatura. En su discurso en Estocolmo habla del Caribe colombiano, del río Magdalena, de los pueblos que lo formaron.',
+    descEn: 'Gabriel García Márquez receives the Nobel Prize in Literature. In his Stockholm speech he speaks of the Colombian Caribbean, the Magdalena river, the towns that shaped him.'
+  },
+  {
+    year: '1995',
+    icon: '🏛',
+    titleEs: 'UNESCO — Patrimonio de la Humanidad',
+    titleEn: 'UNESCO — World Heritage Site',
+    descEs: 'La UNESCO inscribe el centro histórico de Santa Cruz de Mompox en la Lista del Patrimonio Mundial. La albarrada, las seis iglesias coloniales y las calles de tapia quedan protegidas para siempre.',
+    descEn: 'UNESCO inscribes the historic centre of Santa Cruz de Mompox on the World Heritage List. The albarrada, the six colonial churches and the tapia streets are protected forever.'
+  },
+  {
+    year: '2020',
+    icon: '🌉',
+    titleEs: 'Puente Roncador — Mompox se reconecta',
+    titleEn: 'Roncador Bridge — Mompox reconnects',
+    descEs: 'Tras cinco siglos de aislamiento relativo, se inaugura el puente sobre el caño de Caño Sicará. Mompox vuelve a tener conexión terrestre directa con la troncal del Caribe.',
+    descEn: 'After five centuries of relative isolation, the bridge over the Sicará channel is inaugurated. Mompox once again has direct land connection with the Caribbean trunk road.'
+  },
+  {
+    year: '2023',
+    icon: '❦',
+    titleEs: 'Literatium abre sus puertas',
+    titleEn: 'Literatium opens its doors',
+    descEs: 'Una casona colonial restaurada se convierte en hotel boutique literario. Cada habitación lleva el nombre de un libro, el café viene de Huila, y la biblioteca no cierra. El Mompox nuevo empieza aquí.',
+    descEn: 'A restored colonial mansion becomes a literary boutique hotel. Each room bears a book\'s name, the coffee comes from Huila, and the library never closes. The new Mompox begins here.'
+  }
+];
+---
+<Layout
+  title="Biblioteca · Línea de Tiempo — Literatium"
+  description="Línea de tiempo de Mompox desde 1537 hasta hoy: doce hitos que explican cómo Mompox fue puerto, fue olvido, fue Patrimonio, fue Macondo. Una cronología para leer despacio."
+>
+<Folio id="biblioteca-timeline" folioNumber="Folio XII·V · Línea de Tiempo" folioNumberEn="Folio XII·V · Timeline" dark={true}>
+  <Breadcrumbs items={[
+    { label: 'Literatium', href: '/' },
+    { label: 'Biblioteca', href: '/biblioteca' },
+    { label: 'Línea de Tiempo' }
+  ]} />
+
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Library · Module V">Biblioteca · Módulo V</div>
+    <h1 class="chapter-title on-dark">Cuatro siglos <em>y medio de Mompox</em></h1>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1">
+    <p class="library-intro" data-en="From its founding in 1537 to the opening of Literatium in 2023: twelve milestones that explain how Mompox was a port, was a battlefield of independence, was oblivion, was Heritage, was Macondo. Read it slowly — the river keeps its own time.">Desde su fundación en 1537 hasta la apertura de Literatium en 2023: doce hitos que explican cómo Mompox fue puerto, fue campo de batalla de la independencia, fue olvido, fue Patrimonio, fue Macondo. Léase despacio — el río tiene su propio tiempo.</p>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="library-timeline reveal delay-1">
+    {milestones.map((m, i) => (
+      <div class={`library-timeline-item ${i % 2 === 0 ? 'left' : 'right'}`}>
+        <div class="library-timeline-dot" aria-hidden="true"></div>
+        <div class="library-timeline-card">
+          <div class="library-timeline-year">{m.year}</div>
+          <div class="library-timeline-title">
+            <span class="library-timeline-icon" aria-hidden="true">{m.icon}</span>
+            <span data-en={m.titleEn}>{m.titleEs}</span>
+          </div>
+          <p class="library-timeline-desc" data-en={m.descEn}>{m.descEs}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 70px; display: flex; justify-content: center;">
+    <div class="marginalia" style="max-width: 560px;" data-en="— In Mompox, time does not pass; it deposits, like silt on the riverbank. —">— En Mompox, el tiempo no pasa; se deposita, como sedimento en la orilla del río. —</div>
+  </div>
+
+  <div class="library-return-nav reveal delay-2">
+    <a href="/biblioteca" class="library-secondary" data-en="← Back to the Library">← Volver a la Biblioteca</a>
+    <a href="/book" class="library-primary" data-en="Plan your visit →">Planifica tu visita →</a>
+  </div>
+</Folio>
+</Layout>

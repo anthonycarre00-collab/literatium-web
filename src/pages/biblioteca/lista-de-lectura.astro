@@ -1,0 +1,281 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Folio from '../../components/Folio.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+interface Book {
+  title: string;
+  author: string;
+  year: string;
+  catEs: string;
+  catEn: string;
+  noteEs: string;
+  noteEn: string;
+  coverBg: string;   // CSS background value for the stylized cover
+  coverInk: string;  // text colour for the cover
+}
+
+// Categories: Gabo, Mompox, Caribe, Realismo mágico
+const books: Book[] = [
+  {
+    title: 'Cien años de soledad',
+    author: 'Gabriel García Márquez',
+    year: '1967',
+    catEs: 'Realismo mágico',
+    catEn: 'Magical realism',
+    noteEs: 'La novela que abrió el realismo mágico al mundo. Macondo — y con él Mompox — entra en la literatura universal. Llevarla a Mompox es leer el paisaje que la inspiró.',
+    noteEn: 'The novel that opened magical realism to the world. Macondo — and with it Mompox — enters universal literature. To read it in Mompox is to read the landscape that inspired it.',
+    coverBg: 'linear-gradient(155deg, #2C2416 0%, #4A3D2A 60%, #2C2416 100%)',
+    coverInk: '#F5E1A4'
+  },
+  {
+    title: 'El amor en los tiempos del cólera',
+    author: 'Gabriel García Márquez',
+    year: '1985',
+    catEs: 'Gabo',
+    catEn: 'Gabo',
+    noteEs: 'Un amor que espera cincuenta años en un puerto fluvial del Caribe. El Magdalena es personaje; la paciencia, argumento. La novela del río que no se olvida.',
+    noteEn: 'A love that waits fifty years in a Caribbean river port. The Magdalena is a character; patience is the plot. The novel of the river that does not forget.',
+    coverBg: 'linear-gradient(155deg, #722F37 0%, #9B444C 60%, #722F37 100%)',
+    coverInk: '#F5EBD0'
+  },
+  {
+    title: 'El otoño del patriarca',
+    author: 'Gabriel García Márquez',
+    year: '1975',
+    catEs: 'Gabo',
+    catEn: 'Gabo',
+    noteEs: 'La soledad del poder en una dictadura caribeña. Frases que se extienden como ríos. Difícil, deslumbrante, indispensable para entender el Caribe político.',
+    noteEn: 'The solitude of power in a Caribbean dictatorship. Sentences that stretch like rivers. Difficult, dazzling, indispensable for understanding the political Caribbean.',
+    coverBg: 'linear-gradient(155deg, #1A3A2E 0%, #2D5A47 60%, #0F2419 100%)',
+    coverInk: '#F5E1A4'
+  },
+  {
+    title: 'Crónica de una muerte anunciada',
+    author: 'Gabriel García Márquez',
+    year: '1981',
+    catEs: 'Gabo',
+    catEn: 'Gabo',
+    noteEs: 'Una muerte que todo un pueblo sabía que ocurriría y nadie impidió. Breve, perfecta como un reloj. La novela del honor y la complicidad en el Caribe.',
+    noteEn: 'A death an entire town knew would happen and no one prevented. Brief, perfect as a clock. The novel of honour and complicity in the Caribbean.',
+    coverBg: 'linear-gradient(155deg, #4A3D2A 0%, #8B6520 60%, #2C2416 100%)',
+    coverInk: '#F5E1A4'
+  },
+  {
+    title: 'Doce cuentos peregrinos',
+    author: 'Gabriel García Márquez',
+    year: '1992',
+    catEs: 'Gabo',
+    catEn: 'Gabo',
+    noteEs: 'Doce relatos de latinoamericanos errantes en Europa. El destierro, el río que se extraña, los fantasmas que se cargan. Léalo en la mecedora del portal.',
+    noteEn: 'Twelve tales of Latin American wanderers in Europe. Exile, the river that is missed, the ghosts one carries. Read it in the rocking chair on the porch.',
+    coverBg: 'linear-gradient(155deg, #2C2416 0%, #722F37 60%, #2C2416 100%)',
+    coverInk: '#F5EBD0'
+  },
+  {
+    title: 'Vivir para contarla',
+    author: 'Gabriel García Márquez',
+    year: '2002',
+    catEs: 'Gabo',
+    catEn: 'Gabo',
+    noteEs: 'El primer tomo de las memorias de Gabo. Su infancia entre Aracataca, Mompox y el río. La materia prima de toda su obra. Empieza aquí para entenderlo.',
+    noteEn: 'The first volume of Gabo\'s memoirs. His childhood between Aracataca, Mompox and the river. The raw material of all his work. Start here to understand him.',
+    coverBg: 'linear-gradient(155deg, #0F2419 0%, #1A3A2E 60%, #0F2419 100%)',
+    coverInk: '#F5E1A4'
+  },
+  {
+    title: 'La hojarasca',
+    author: 'Gabriel García Márquez',
+    year: '1955',
+    catEs: 'Gabo',
+    catEn: 'Gabo',
+    noteEs: 'Su primera novela. Ya está Macondo, ya está el polvo, ya está el médico que nadie quiere enterrar. La semilla de todo lo que vendrá.',
+    noteEn: 'His first novel. Macondo is already here, the dust is here, the doctor no one wishes to bury is here. The seed of everything to come.',
+    coverBg: 'linear-gradient(155deg, #4A3D2A 0%, #2C2416 60%, #4A3D2A 100%)',
+    coverInk: '#F5EBD0'
+  },
+  {
+    title: 'El olor de la guayaba',
+    author: 'G. García Márquez & Plinio Apuleyo Mendoza',
+    year: '1982',
+    catEs: 'Gabo',
+    catEn: 'Gabo',
+    noteEs: 'Conversaciones con su amigo Mendoza. Gabo habla de infancia, periodismo, política, comida. La voz del autor sin la mediación de la ficción.',
+    noteEn: 'Conversations with his friend Mendoza. Gabo speaks of childhood, journalism, politics, food. The author\'s voice without the mediation of fiction.',
+    coverBg: 'linear-gradient(155deg, #722F37 0%, #4A3D2A 60%, #722F37 100%)',
+    coverInk: '#F5E1A4'
+  },
+  {
+    title: 'Mompox: la ciudad que susurra',
+    author: 'Héctor Rojas Herazo',
+    year: '1996',
+    catEs: 'Mompox',
+    catEn: 'Mompox',
+    noteEs: 'El ensayo lírico de un momposino universal sobre su pueblo. Calor, muerte, río, memoria. Rojas Herazo es el otro grande que Mompox dio al país.',
+    noteEn: 'The lyrical essay of a universal momposino on his town. Heat, death, river, memory. Rojas Herazo is the other great that Mompox gave the country.',
+    coverBg: 'linear-gradient(155deg, #1A3A2E 0%, #4A3D2A 60%, #1A3A2E 100%)',
+    coverInk: '#F5E1A4'
+  },
+  {
+    title: 'Historia de Mompox',
+    author: 'Adolfo Mejía',
+    year: '1947',
+    catEs: 'Mompox',
+    catEn: 'Mompox',
+    noteEs: 'La crónica fundacional del Mompox que fue puerto del Virreinato. Mejía, músico y cronista, la escribió desde adentro. Para entender el auge y la caída.',
+    noteEn: 'The foundational chronicle of the Mompox that was a port of the Viceroyalty. Mejía, musician and chronicler, wrote it from within. To understand the rise and the fall.',
+    coverBg: 'linear-gradient(155deg, #2C2416 0%, #4A3D2A 60%, #2C2416 100%)',
+    coverInk: '#F5E1A4'
+  },
+  {
+    title: 'Mompox: patrimonio de la humanidad',
+    author: 'UNESCO · Ministerio de Cultura',
+    year: '1995',
+    catEs: 'Mompox',
+    catEn: 'Mompox',
+    noteEs: 'La publicación oficial de la declaratoria. Documenta el centro histórico que justificó el reconocimiento: iglesias, albarrada, calles coloniales intactas.',
+    noteEn: 'The official declaration publication. Documents the historic centre that justified the recognition: churches, albarrada, intact colonial streets.',
+    coverBg: 'linear-gradient(155deg, #4A3D2A 0%, #1A3A2E 60%, #4A3D2A 100%)',
+    coverInk: '#F5E1A4'
+  },
+  {
+    title: 'Cantos populares de mi tierra',
+    author: 'Candelario Obeso',
+    year: '1877',
+    catEs: 'Caribe',
+    catEn: 'Caribbean',
+    noteEs: 'El primer libro de poesía afrocolombiana. Obeso, momposino de nacimiento, escribió en dialecto del litoral. Mompox en la raíz de las letras colombianas.',
+    noteEn: 'The first book of Afro-Colombian poetry. Obeso, born in Mompox, wrote in the dialect of the coast. Mompox at the root of Colombian letters.',
+    coverBg: 'linear-gradient(155deg, #722F37 0%, #1A3A2E 60%, #722F37 100%)',
+    coverInk: '#F5E1A4'
+  },
+  {
+    title: 'El sendero de los elefantes',
+    author: 'Gabriel García Márquez',
+    year: '1994',
+    catEs: 'Caribe',
+    catEn: 'Caribbean',
+    noteEs: 'Recopilación de sus crónicas periodísticas de los años cincuenta. El oficio que Gabo llamó siempre el suyo: periodista. Mompox y el río asoman entre líneas.',
+    noteEn: 'Collection of his journalistic chronicles from the 1950s. The craft Gabo always called his own: journalist. Mompox and the river peek through the lines.',
+    coverBg: 'linear-gradient(155deg, #0F2419 0%, #4A3D2A 60%, #0F2419 100%)',
+    coverInk: '#F5E1A4'
+  }
+];
+
+// Build category list (with EN counterpart)
+const categories = [
+  { es: 'Todos', en: 'All' },
+  { es: 'Gabo', en: 'Gabo' },
+  { es: 'Mompox', en: 'Mompox' },
+  { es: 'Caribe', en: 'Caribbean' },
+  { es: 'Realismo mágico', en: 'Magical realism' }
+];
+---
+<Layout
+  title="Biblioteca · Lista de Lectura — Literatium"
+  description="Lista de lectura: trece libros para llegar a Mompox sin moverse de la mecedora. García Márquez, Rojas Herazo, Obeso — el Caribe fluvial y sus páginas esenciales."
+>
+<Folio id="biblioteca-lectura" folioNumber="Folio XII·III · Lista de Lectura" folioNumberEn="Folio XII·III · Reading List" dark={true}>
+  <Breadcrumbs items={[
+    { label: 'Literatium', href: '/' },
+    { label: 'Biblioteca', href: '/biblioteca' },
+    { label: 'Lista de Lectura' }
+  ]} />
+
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Library · Module III">Biblioteca · Módulo III</div>
+    <h1 class="chapter-title on-dark">Trece libros <em>para la mecedora</em></h1>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1">
+    <p class="library-intro" data-en="Thirteen books to arrive in Mompox without leaving the rocking chair. Filter by category — Gabo, Mompox, the Caribbean, magical realism. Every cover here is a stylized plate: the spine, the title, the year. Bring the list to the hotel and we will hand you the volume from our shelf.">Trece libros para llegar a Mompox sin moverse de la mecedora. Filtre por categoría — Gabo, Mompox, Caribe, realismo mágico. Cada portada es una placa estilizada: el lomo, el título, el año. Traiga la lista al hotel y le alcanzamos el volumen de nuestra estantería.</p>
+  </div>
+
+  <!-- Filter pills -->
+  <div class="reveal delay-1" style="margin-top: 36px;">
+    <div class="library-pills-label" data-en="Filter by category">Filtrar por categoría</div>
+    <div class="library-pills" id="library-book-pills">
+      {categories.map((c, i) => (
+        <button class={`library-pill ${i === 0 ? 'active' : ''}`} data-cat={c.es} data-en={c.en}>{c.es}</button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Book grid -->
+  <div class="library-books-grid reveal delay-1" id="library-books-grid">
+    {books.map((b) => (
+      <article class="library-book-card" data-category={b.catEs}>
+        <div class="library-book-cover" style={`background: ${b.coverBg}; color: ${b.coverInk};`}>
+          <div class="library-book-cover-author">{b.author}</div>
+          <div class="library-book-cover-title">{b.title}</div>
+          <div class="library-book-cover-year">{b.year}</div>
+        </div>
+        <div>
+          <span class="library-book-tag" data-en={b.catEn}>{b.catEs}</span>
+        </div>
+        <div class="library-book-meta">
+          <span data-en={b.title}>{b.title}</span>
+          <span class="author" data-en={b.author}>{b.author} · {b.year}</span>
+        </div>
+        <p class="library-book-note" data-en={b.noteEn}>{b.noteEs}</p>
+      </article>
+    ))}
+  </div>
+
+  <!-- Empty state -->
+  <div class="journal-empty reveal delay-1" id="library-books-empty" hidden data-en="No books in this category — try another.">
+    No hay libros en esta categoría — pruebe con otra.
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 60px; display: flex; justify-content: center;">
+    <div class="marginalia" style="max-width: 560px;" data-en="— Every room at Literatium carries a book's name. Choose yours, and we will leave the volume on the nightstand. —">— Cada habitación de Literatium lleva el nombre de un libro. Elija la suya, y le dejaremos el volumen en la mesa de noche. —</div>
+  </div>
+
+  <div class="library-return-nav reveal delay-2">
+    <a href="/biblioteca" class="library-secondary" data-en="← Back to the Library">← Volver a la Biblioteca</a>
+    <a href="/biblioteca/quiz" class="library-primary" data-en="Next: Literary Quiz →">Siguiente: Quiz Literario →</a>
+  </div>
+</Folio>
+
+<script is:inline>
+  (function () {
+    var pillsRow = document.getElementById('library-book-pills');
+    var grid = document.getElementById('library-books-grid');
+    var empty = document.getElementById('library-books-empty');
+    if (!pillsRow || !grid) return;
+
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.library-book-card'));
+    var activeCat = 'Todos';
+
+    function applyFilters() {
+      var visible = 0;
+      cards.forEach(function (card) {
+        var cat = card.getAttribute('data-category') || '';
+        var ok = (activeCat === 'Todos') || (cat === activeCat);
+        if (ok) { card.style.display = ''; visible++; }
+        else { card.style.display = 'none'; }
+      });
+      if (empty) empty.hidden = visible !== 0;
+    }
+
+    pillsRow.addEventListener('click', function (e) {
+      var btn = e.target.closest('.library-pill');
+      if (!btn) return;
+      activeCat = btn.getAttribute('data-cat') || 'Todos';
+      Array.prototype.forEach.call(pillsRow.querySelectorAll('.library-pill'), function (p) {
+        p.classList.toggle('active', p === btn);
+      });
+      applyFilters();
+    });
+
+    // Re-apply when language toggles (cards' display state should persist;
+    // we don't need to re-render, but we re-apply to be safe)
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('#lang-toggle');
+      if (!btn) return;
+      setTimeout(applyFilters, 60);
+    });
+  })();
+</script>
+</Layout>

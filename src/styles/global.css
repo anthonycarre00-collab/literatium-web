@@ -1116,3 +1116,813 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
   .journal-article-body blockquote { font-size: 1.2rem; }
   .journal-article-body h2 { font-size: 1.45rem; }
 }
+
+/* ============================================================
+   LIBRARY — Interactive Biblioteca
+   Stage 5 interactive hub (/biblioteca). All modules share
+   this dark, literary design system. Reuses the same CSS
+   variables as the rest of the site (--brass, --parchment,
+   --forest-dark, --font-display, --font-body, --font-caps).
+   ============================================================ */
+
+/* Hub intro paragraph (mirrors .journal-intro) */
+.library-intro {
+  font-family: var(--font-body);
+  color: var(--parchment);
+  opacity: 0.85;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  text-align: center;
+  max-width: 680px;
+  margin: 30px auto 0;
+}
+
+/* Hub cards — mirrors .mompox-card pattern with a folio index badge */
+.library-card {
+  display: block;
+  position: relative;
+  background: rgba(247,240,220,0.04);
+  border: 1px solid rgba(221,185,94,0.3);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.4s ease, border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+}
+.library-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--brass);
+  background: rgba(247,240,220,0.08);
+  box-shadow: 0 18px 36px rgba(0,0,0,0.35);
+}
+.library-card-img {
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid rgba(221,185,94,0.3);
+  filter: saturate(0.85) brightness(0.85);
+  transition: filter 0.4s ease;
+}
+.library-card:hover .library-card-img { filter: saturate(1) brightness(1); }
+.library-card-body { padding: 24px; }
+.library-card-index {
+  position: absolute;
+  top: 12px; left: 12px;
+  font-family: var(--font-caps);
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  color: var(--brass-light);
+  background: rgba(15,36,25,0.78);
+  border: 1px solid rgba(221,185,94,0.4);
+  padding: 4px 9px;
+  border-radius: 2px;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+.library-card-cta {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--brass-light);
+  border-bottom: 1px solid rgba(221,185,94,0.4);
+  padding-bottom: 4px;
+}
+
+/* Generic filter pills (alias of journal-pill but scoped to library) */
+.library-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.library-pill {
+  background: transparent;
+  border: 1px solid rgba(221,185,94,0.35);
+  color: var(--parchment);
+  opacity: 0.7;
+  font-family: var(--font-caps);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  padding: 8px 14px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
+}
+.library-pill:hover { opacity: 1; border-color: var(--brass); }
+.library-pill.active {
+  opacity: 1;
+  background: rgba(221,185,94,0.18);
+  border-color: var(--brass-light);
+  color: var(--brass-light);
+}
+.library-pills-label {
+  font-family: var(--font-caps);
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  color: var(--brass);
+  opacity: 0.6;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+/* Module return nav (bottom CTA row) */
+.library-return-nav {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.library-return-nav a {
+  padding: 12px 24px;
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.library-return-nav a.library-secondary {
+  color: var(--brass-light);
+  border: 1px solid var(--brass);
+}
+.library-return-nav a.library-secondary:hover { background: rgba(221,185,94,0.12); }
+.library-return-nav a.library-primary {
+  color: var(--forest-dark);
+  background: var(--brass);
+}
+.library-return-nav a.library-primary:hover { background: var(--brass-light); }
+
+/* ============================================================
+   MODULE I — Interactive Mompox Map
+   ============================================================ */
+.library-map-layout {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 28px;
+  margin: 50px auto 0;
+  max-width: 1200px;
+  align-items: start;
+}
+.library-map-canvas {
+  background: rgba(247,240,220,0.04);
+  border: 1px solid rgba(221,185,94,0.3);
+  padding: 18px;
+  position: relative;
+}
+.library-map-canvas svg { display: block; width: 100%; height: auto; }
+.library-map-caption {
+  font-family: var(--font-caps);
+  font-size: 0.55rem;
+  letter-spacing: 0.28em;
+  color: var(--brass);
+  opacity: 0.75;
+  text-align: center;
+  margin-top: 12px;
+}
+/* SVG POI marker groups */
+.poi-marker { cursor: pointer; transition: transform 0.3s ease; transform-box: fill-box; transform-origin: center; }
+.poi-marker:hover { transform: scale(1.18); }
+.poi-marker .poi-dot { transition: fill 0.3s ease, stroke 0.3s ease; }
+.poi-marker:hover .poi-dot { fill: var(--brass-pale); }
+.poi-marker.active .poi-dot { fill: var(--brass-pale); stroke: #fff; }
+.poi-marker .poi-num {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  font-weight: 600;
+  fill: var(--forest-dark);
+  text-anchor: middle;
+  pointer-events: none;
+  user-select: none;
+}
+.poi-marker.active .poi-num { fill: var(--forest-dark); }
+.library-info-panel {
+  background: rgba(15,36,25,0.55);
+  border: 1px solid rgba(221,185,94,0.3);
+  padding: 28px 28px 32px;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.library-info-panel-empty {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--parchment);
+  opacity: 0.6;
+  text-align: center;
+  margin: auto;
+  line-height: 1.6;
+  max-width: 320px;
+}
+.library-info-panel-index {
+  font-family: var(--font-caps);
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  color: var(--brass);
+  opacity: 0.8;
+  margin-bottom: 6px;
+}
+.library-info-panel-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.55rem;
+  color: var(--brass-light);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.library-info-panel-year {
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  color: var(--parchment);
+  opacity: 0.7;
+  margin-bottom: 18px;
+}
+.library-info-panel-desc {
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  line-height: 1.75;
+  color: var(--parchment);
+  opacity: 0.88;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+.library-info-panel-link {
+  display: inline-block;
+  font-family: var(--font-caps);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  color: var(--brass-light);
+  border-bottom: 1px solid rgba(221,185,94,0.4);
+  padding-bottom: 4px;
+  text-decoration: none;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  align-self: flex-start;
+}
+.library-info-panel-link:hover { color: var(--brass-pale); border-color: var(--brass-pale); }
+@media (max-width: 880px) {
+  .library-map-layout { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   MODULE II — Word Game flashcards
+   ============================================================ */
+.library-game-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 36px auto 0;
+}
+.library-game-mode-btn {
+  background: transparent;
+  border: 1px solid rgba(221,185,94,0.35);
+  color: var(--parchment);
+  opacity: 0.7;
+  font-family: var(--font-caps);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  padding: 10px 22px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+.library-game-mode-btn:hover { opacity: 1; border-color: var(--brass); }
+.library-game-mode-btn.active {
+  opacity: 1;
+  background: rgba(221,185,94,0.18);
+  border-color: var(--brass-light);
+  color: var(--brass-light);
+}
+.library-flashcard-wrap {
+  margin: 36px auto 0;
+  max-width: 640px;
+  perspective: 1600px;
+}
+.library-flashcard {
+  background: linear-gradient(180deg, rgba(247,240,220,0.06) 0%, rgba(15,36,25,0.5) 100%);
+  border: 1px solid var(--brass);
+  outline: 1px solid var(--brass-dark);
+  outline-offset: 5px;
+  padding: 44px 40px 36px;
+  text-align: center;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.45);
+  position: relative;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.library-flashcard.exiting {
+  opacity: 0;
+  transform: translateY(-18px) rotate(-0.6deg);
+}
+.library-flashcard.entering {
+  opacity: 0;
+  transform: translateY(18px) rotate(0.6deg);
+}
+.library-flashcard-counter {
+  position: absolute;
+  top: 14px; left: 18px;
+  font-family: var(--font-caps);
+  font-size: 0.55rem;
+  letter-spacing: 0.28em;
+  color: var(--brass);
+  opacity: 0.7;
+}
+.library-flashcard-mode-tag {
+  position: absolute;
+  top: 14px; right: 18px;
+  font-family: var(--font-caps);
+  font-size: 0.52rem;
+  letter-spacing: 0.28em;
+  color: var(--brass-light);
+  opacity: 0.75;
+}
+.library-flashcard-cat {
+  font-family: var(--font-caps);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--brass);
+  opacity: 0.8;
+  margin-bottom: 16px;
+}
+.library-flashcard-word {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1.1;
+  color: var(--brass-light);
+  margin-bottom: 16px;
+}
+.library-flashcard-def {
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--parchment);
+  opacity: 0.9;
+  max-width: 480px;
+  margin: 0 auto 26px;
+}
+.library-flashcard-prompt {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--parchment);
+  opacity: 0.85;
+  max-width: 480px;
+  margin: 0 auto 24px;
+}
+.library-flashcard-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  max-width: 520px;
+  margin: 0 auto 16px;
+}
+.library-flashcard-option {
+  background: rgba(247,240,220,0.05);
+  border: 1px solid rgba(221,185,94,0.35);
+  color: var(--parchment);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  padding: 14px 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease, transform 0.15s ease;
+}
+.library-flashcard-option:hover { border-color: var(--brass); background: rgba(221,185,94,0.08); }
+.library-flashcard-option:active { transform: scale(0.98); }
+.library-flashcard-option.correct {
+  border-color: var(--brass-pale);
+  background: rgba(221,185,94,0.25);
+  color: var(--brass-pale);
+}
+.library-flashcard-option.incorrect {
+  border-color: var(--burgundy-light);
+  background: rgba(155,68,76,0.22);
+  color: var(--burgundy-light);
+}
+.library-flashcard-option:disabled { cursor: default; opacity: 0.85; }
+.library-flashcard-feedback {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--parchment);
+  opacity: 0.9;
+  margin: 12px auto 18px;
+  max-width: 480px;
+}
+.library-flashcard-feedback.correct { color: var(--brass-pale); }
+.library-flashcard-feedback.incorrect { color: var(--burgundy-light); }
+.library-flashcard-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+.library-btn {
+  display: inline-block;
+  padding: 12px 26px;
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--forest-dark);
+  background: var(--brass);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+.library-btn:hover { background: var(--brass-light); }
+.library-btn.library-btn-ghost {
+  background: transparent;
+  color: var(--brass-light);
+  border: 1px solid var(--brass);
+}
+.library-btn.library-btn-ghost:hover { background: rgba(221,185,94,0.12); }
+.library-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.library-score-display {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(3rem, 8vw, 5.2rem);
+  line-height: 1;
+  background: linear-gradient(135deg, var(--brass-pale) 0%, var(--brass-light) 50%, var(--brass) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  margin: 8px 0 18px;
+}
+.library-score-label {
+  font-family: var(--font-caps);
+  font-size: 0.65rem;
+  letter-spacing: 0.34em;
+  color: var(--brass);
+  opacity: 0.85;
+  margin-bottom: 22px;
+}
+.library-result-msg {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.55;
+  color: var(--parchment);
+  opacity: 0.92;
+  max-width: 520px;
+  margin: 0 auto 26px;
+}
+@media (max-width: 620px) {
+  .library-flashcard-options { grid-template-columns: 1fr; }
+  .library-flashcard { padding: 36px 22px 28px; }
+}
+
+/* ============================================================
+   MODULE III — Reading List (book cards)
+   ============================================================ */
+.library-books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+  margin: 40px auto 0;
+  max-width: 1200px;
+}
+.library-book-card {
+  background: rgba(247,240,220,0.04);
+  border: 1px solid rgba(221,185,94,0.25);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.4s ease, transform 0.4s ease;
+}
+.library-book-card:hover {
+  border-color: var(--brass);
+  transform: translateY(-3px);
+}
+.library-book-cover {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 14px;
+  border: 1px solid var(--brass-dark);
+  outline: 1px solid var(--brass);
+  outline-offset: 4px;
+  box-shadow: inset 6px 0 0 rgba(0,0,0,0.18), inset -2px 0 0 rgba(255,255,255,0.06),
+              0 14px 24px rgba(0,0,0,0.4);
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+.library-book-cover::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 6px;
+  width: 1px;
+  background: rgba(0,0,0,0.25);
+}
+.library-book-cover-author {
+  font-family: var(--font-caps);
+  font-size: 0.55rem;
+  letter-spacing: 0.28em;
+  opacity: 0.85;
+  width: 100%;
+}
+.library-book-cover-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  padding: 0 6px;
+}
+.library-book-cover-year {
+  font-family: var(--font-caps);
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  opacity: 0.85;
+}
+.library-book-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-caps);
+  font-size: 0.55rem;
+  letter-spacing: 0.26em;
+  color: var(--brass-light);
+  background: rgba(221,185,94,0.12);
+  border: 1px solid rgba(221,185,94,0.4);
+  padding: 4px 11px;
+  border-radius: 999px;
+}
+.library-book-meta {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--brass-light);
+  line-height: 1.3;
+}
+.library-book-meta .author {
+  display: block;
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--parchment);
+  opacity: 0.78;
+  margin-top: 2px;
+}
+.library-book-note {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--parchment);
+  opacity: 0.85;
+  flex-grow: 1;
+}
+
+/* ============================================================
+   MODULE IV — Literary Quiz
+   ============================================================ */
+.library-quiz-progress {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 30px auto 0;
+  flex-wrap: wrap;
+  max-width: 600px;
+}
+.library-quiz-step {
+  width: 28px;
+  height: 4px;
+  background: rgba(221,185,94,0.2);
+  transition: background 0.3s ease;
+}
+.library-quiz-step.done { background: var(--brass); }
+.library-quiz-step.current { background: var(--brass-light); box-shadow: 0 0 6px rgba(221,185,94,0.6); }
+.library-quiz-card {
+  margin: 30px auto 0;
+  max-width: 720px;
+  background: linear-gradient(180deg, rgba(247,240,220,0.06) 0%, rgba(15,36,25,0.5) 100%);
+  border: 1px solid var(--brass);
+  outline: 1px solid var(--brass-dark);
+  outline-offset: 5px;
+  padding: 36px 36px 32px;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.library-quiz-card.exiting { opacity: 0; transform: translateX(-18px); }
+.library-quiz-card.entering { opacity: 0; transform: translateX(18px); }
+.library-quiz-counter {
+  font-family: var(--font-caps);
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  color: var(--brass);
+  opacity: 0.8;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.library-quiz-question {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  line-height: 1.35;
+  color: var(--parchment);
+  text-align: center;
+  margin-bottom: 28px;
+}
+.library-quiz-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  max-width: 580px;
+  margin: 0 auto;
+}
+.library-quiz-option {
+  background: rgba(247,240,220,0.04);
+  border: 1px solid rgba(221,185,94,0.3);
+  color: var(--parchment);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 14px 18px;
+  border-radius: 2px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease, transform 0.15s ease;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.library-quiz-option .letter {
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--brass);
+  opacity: 0.85;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.library-quiz-option:hover { border-color: var(--brass); background: rgba(221,185,94,0.08); }
+.library-quiz-option:active { transform: scale(0.99); }
+.library-quiz-option.correct {
+  border-color: var(--brass-pale);
+  background: rgba(221,185,94,0.22);
+  color: var(--brass-pale);
+}
+.library-quiz-option.correct .letter { color: var(--brass-pale); opacity: 1; }
+.library-quiz-option.incorrect {
+  border-color: var(--burgundy-light);
+  background: rgba(155,68,76,0.2);
+  color: var(--burgundy-light);
+}
+.library-quiz-option.incorrect .letter { color: var(--burgundy-light); }
+.library-quiz-option:disabled { cursor: default; }
+.library-quiz-feedback {
+  margin: 22px auto 18px;
+  max-width: 580px;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--parchment);
+  opacity: 0.92;
+  padding: 14px 18px;
+  border-left: 2px solid var(--brass);
+  background: rgba(15,36,25,0.45);
+}
+.library-quiz-feedback .verdict {
+  display: block;
+  font-family: var(--font-caps);
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  margin-bottom: 6px;
+}
+.library-quiz-feedback.correct .verdict { color: var(--brass-pale); }
+.library-quiz-feedback.incorrect .verdict { color: var(--burgundy-light); }
+.library-quiz-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+@media (max-width: 620px) {
+  .library-quiz-card { padding: 28px 22px 24px; }
+}
+
+/* ============================================================
+   MODULE V — Historical Timeline
+   ============================================================ */
+.library-timeline {
+  position: relative;
+  max-width: 980px;
+  margin: 50px auto 0;
+  padding: 10px 0;
+}
+.library-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent 0%, var(--brass) 8%, var(--brass) 92%, transparent 100%);
+  transform: translateX(-50%);
+  opacity: 0.55;
+}
+.library-timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 18px 40px;
+  margin-bottom: 16px;
+}
+.library-timeline-item.left { left: 0; text-align: right; }
+.library-timeline-item.right { left: 50%; text-align: left; }
+.library-timeline-card {
+  background: rgba(247,240,220,0.05);
+  border: 1px solid rgba(221,185,94,0.28);
+  padding: 20px 22px;
+  transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
+}
+.library-timeline-card:hover {
+  border-color: var(--brass);
+  background: rgba(247,240,220,0.08);
+  transform: translateY(-2px);
+}
+.library-timeline-dot {
+  position: absolute;
+  top: 32px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--brass-pale) 0%, var(--brass-light) 40%, var(--brass) 80%, transparent 100%);
+  box-shadow: 0 0 12px rgba(221,185,94,0.7);
+  z-index: 2;
+}
+.library-timeline-item.left .library-timeline-dot { right: -8px; }
+.library-timeline-item.right .library-timeline-dot { left: -8px; }
+.library-timeline-year {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.7rem;
+  color: var(--brass-light);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.library-timeline-icon {
+  font-size: 1.2rem;
+  display: inline-block;
+  margin-right: 6px;
+  opacity: 0.85;
+}
+.library-timeline-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.18rem;
+  color: var(--parchment);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.library-timeline-desc {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--parchment);
+  opacity: 0.82;
+}
+@media (max-width: 760px) {
+  .library-timeline::before { left: 8px; }
+  .library-timeline-item,
+  .library-timeline-item.left,
+  .library-timeline-item.right {
+    width: 100%;
+    left: 0;
+    padding: 12px 12px 12px 36px;
+    text-align: left;
+  }
+  .library-timeline-item.left .library-timeline-dot,
+  .library-timeline-item.right .library-timeline-dot {
+    left: 0; right: auto;
+  }
+}
+
+/* Library-only marginalia dark-mode override (mirrors journal pattern) */
+#biblioteca-hub .marginalia,
+#biblioteca-mapa .marginalia,
+#biblioteca-palabras .marginalia,
+#biblioteca-lectura .marginalia,
+#biblioteca-quiz .marginalia,
+#biblioteca-timeline .marginalia {
+  background: rgba(15,36,25,0.55);
+  color: var(--brass-light);
+  border-left-color: var(--brass);
+}

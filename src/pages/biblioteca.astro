@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Folio from '../components/Folio.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+// Five interactive modules — each links to a real /biblioteca/<slug> page
+const modules = [
+  {
+    slug: 'mapa',
+    index: 'XII·I',
+    icon: '🗺️',
+    title: 'Mapa Interactivo',
+    titleEn: 'Interactive Map',
+    desc: 'Recorre Mompox punto a punto: Santa Bárbara, la Inmaculada, la albarrada, el terminal fluvial. Un mapa dibujado a mano, diez hitos clicables.',
+    descEn: 'Walk Mompox point by point: Santa Bárbara, the Inmaculada, the albarrada, the river terminal. A hand-drawn map with ten clickable landmarks.',
+    img: '/assets/mompox-cards/mapas.jpg'
+  },
+  {
+    slug: 'juego-de-palabras',
+    index: 'XII·II',
+    icon: '🃏',
+    title: 'Juego de Palabras',
+    titleEn: 'Word Game',
+    desc: 'Doce vocablos del río en tarjetas que se voltean. Modo estudio para leer, modo quiz para probar cuánto llevas de Mompox.',
+    descEn: 'Twelve river words on flip cards. Study mode to read, quiz mode to test how much of Mompox you carry.',
+    img: '/assets/mompox-cards/palabras.jpg'
+  },
+  {
+    slug: 'lista-de-lectura',
+    index: 'XII·III',
+    icon: '📚',
+    title: 'Lista de Lectura',
+    titleEn: 'Reading List',
+    desc: 'Quince libros para llegar a Mompox sin moverse de la mecedora. Gabo, Rojas, Obeso — el Caribe fluvial y sus páginas esenciales.',
+    descEn: 'Fifteen books to reach Mompox without leaving the rocking chair. Gabo, Rojas, Obeso — the riverine Caribbean and its essential pages.',
+    img: '/assets/mural-art.jpg'
+  },
+  {
+    slug: 'quiz',
+    index: 'XII·IV',
+    icon: '❦',
+    title: 'Quiz Literario',
+    titleEn: 'Literary Quiz',
+    desc: 'Diez preguntas sobre Gabo, Mompox y el realismo mágico. Al final, un veredicto: recién llegado, caminante, lector o maestro de Macondo.',
+    descEn: 'Ten questions on Gabo, Mompox and magical realism. At the end, a verdict: newcomer, walker, reader or master of Macondo.',
+    img: '/assets/garcia-marquez-mural.jpg'
+  },
+  {
+    slug: 'linea-de-tiempo',
+    index: 'XII·V',
+    icon: '🕯️',
+    title: 'Línea de Tiempo',
+    titleEn: 'Timeline',
+    desc: 'De 1537 a hoy: doce hitos que explican cómo Mompox fue puerto, fue olvido, fue Patrimonio, fue Macondo. Una cronología para leer despacio.',
+    descEn: 'From 1537 to today: twelve milestones that explain how Mompox was a port, was oblivion, was Heritage, was Macondo. A chronology to read slowly.',
+    img: '/assets/mompox-colonial-street.jpg'
+  },
+];
+---
+<Layout
+  title="Biblioteca — Literatium"
+  description="Biblioteca interactiva de Literatium — mapa, juego de palabras, lista de lecturas, quiz literario y línea de tiempo. Mompox, García Márquez y el realismo mágico para hojear despacio."
+>
+<Folio id="biblioteca-hub" folioNumber="Folio XII · Biblioteca" folioNumberEn="Folio XII · Library" dark={true}>
+  <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Biblioteca' }]} />
+
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Chapter Twelve · The Library">Capítulo Doce · La Biblioteca</div>
+    <h1 class="chapter-title on-dark">La casa de las historias <em>se hojea</em></h1>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1">
+    <p class="library-intro" data-en="Not a museum, not a blog: a slow library. Five interactive modules to read Mompox, García Márquez and the riverine Caribbean at your own pace — a hand-drawn map, twelve river words in flip cards, fifteen books for the rocking chair, ten quiz questions with verdict, and twelve centuries-from-now milestones. Open one. Linger.">No es un museo, ni un blog: una biblioteca lenta. Cinco módulos interactivos para leer Mompox, a García Márquez y al Caribe fluvial a su propio ritmo — un mapa dibujado a mano, doce palabras del río en tarjetas, quince libros para la mecedora, diez preguntas con veredicto, y doce hitos que duran hasta hoy. Abra uno. Demórese.</p>
+  </div>
+
+  <!-- MODULE GRID -->
+  <div class="reveal delay-1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 50px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+    {modules.map((m) => (
+      <a href={`/biblioteca/${m.slug}`} class="library-card">
+        <div class="library-card-index" data-en={m.index}>{m.index}</div>
+        <div class="library-card-img" style={`background-image: url('${m.img}');`}></div>
+        <div class="library-card-body">
+          <div style="font-size: 1.8rem; margin-bottom: 8px;">{m.icon}</div>
+          <h3 style="font-family: var(--font-display); font-style: italic; font-size: 1.4rem; color: var(--brass-light); margin-bottom: 10px;" data-en={m.titleEn}>{m.title}</h3>
+          <p style="font-family: var(--font-body); font-size: 0.92rem; color: var(--parchment); opacity: 0.82; line-height: 1.6;" data-en={m.descEn}>{m.desc}</p>
+          <span class="library-card-cta" data-en="Open →">Abrir →</span>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 70px; display: flex; justify-content: center;">
+    <div class="marginalia" style="max-width: 560px;" data-en="— A library, in Mompox, is not a room: it is the slow way of looking at the river. —">— Una biblioteca, en Mompox, no es una sala: es la manera lenta de mirar el río. —</div>
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 60px; text-align: center;">
+    <a href="/book" class="nav-cta" style="display: inline-block; padding: 14px 32px; font-family: var(--font-caps); font-size: 0.7rem; letter-spacing: 0.25em; color: var(--forest-dark); background: var(--brass); text-decoration: none; border-radius: 2px; transition: background 0.3s ease;" data-en="Plan your visit →">Planifica tu visita →</a>
+  </div>
+</Folio>
+</Layout>

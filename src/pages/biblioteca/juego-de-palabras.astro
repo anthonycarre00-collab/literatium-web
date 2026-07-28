@@ -1,0 +1,408 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Folio from '../../components/Folio.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+---
+<Layout
+  title="Biblioteca · Juego de Palabras — Literatium"
+  description="Juego de palabras: doce vocablos del río en tarjetas que se voltean. Modo estudio y modo quiz. Albarrada, champán, boga, filigrana, Macondo — aprende a leer Mompox en su propio léxico."
+>
+<Folio id="biblioteca-palabras" folioNumber="Folio XII·II · Juego de Palabras" folioNumberEn="Folio XII·II · Word Game" dark={true}>
+  <Breadcrumbs items={[
+    { label: 'Literatium', href: '/' },
+    { label: 'Biblioteca', href: '/biblioteca' },
+    { label: 'Juego de Palabras' }
+  ]} />
+
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Library · Module II">Biblioteca · Módulo II</div>
+    <h1 class="chapter-title on-dark">Doce palabras <em>que se voltean</em></h1>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1">
+    <p class="library-intro" data-en="Twelve river words, two ways to read them. In Study mode, flip card by card and learn the lexicon of Mompox at your own pace. In Quiz mode, read a definition and pick which word it names — twelve rounds, score at the end. Albarrada, champán, boga, filigrana, Macondo: this is the vocabulary the town speaks.">Doce palabras del río, dos maneras de leerlas. En Modo Estudio, voltee tarjeta por tarjeta y aprenda el léxico de Mompox a su propio ritmo. En Modo Quiz, lea una definición y elija la palabra que nombra — doce rondas, puntaje al final. Albarrada, champán, boga, filigrana, Macondo: este es el vocabulario que habla el pueblo.</p>
+  </div>
+
+  <!-- MODE SWITCH -->
+  <div class="library-game-toolbar reveal delay-1">
+    <button class="library-game-mode-btn active" id="mode-study" data-en="Study Mode">Modo Estudio</button>
+    <button class="library-game-mode-btn" id="mode-quiz" data-en="Quiz Mode">Modo Quiz</button>
+    <button class="library-game-mode-btn" id="restart-btn" data-en="↺ Restart">↺ Reiniciar</button>
+  </div>
+
+  <!-- FLASHCARD -->
+  <div class="library-flashcard-wrap reveal delay-1">
+    <div class="library-flashcard" id="library-flashcard">
+      <div class="library-flashcard-counter" id="fc-counter">1 / 12</div>
+      <div class="library-flashcard-mode-tag" id="fc-mode-tag" data-en="STUDY">ESTUDIO</div>
+
+      <!-- Study mode body -->
+      <div id="fc-study-body">
+        <div class="library-flashcard-cat" id="fc-cat">Cultura</div>
+        <div class="library-flashcard-word" id="fc-word">Albarrada</div>
+        <p class="library-flashcard-def" id="fc-def">El muro de contención a orillas del río. También la calle más bella de Mompox.</p>
+        <div class="library-flashcard-actions">
+          <button class="library-btn library-btn-ghost" id="fc-prev" data-en="← Previous">← Anterior</button>
+          <button class="library-btn" id="fc-next" data-en="Next →">Siguiente →</button>
+        </div>
+      </div>
+
+      <!-- Quiz mode body (hidden by default) -->
+      <div id="fc-quiz-body" hidden>
+        <div class="library-flashcard-prompt" id="quiz-prompt">¿Qué palabra nombra esta definición?</div>
+        <div class="library-flashcard-options" id="quiz-options"></div>
+        <div class="library-flashcard-feedback" id="quiz-feedback" hidden></div>
+        <div class="library-flashcard-actions" id="quiz-actions" hidden>
+          <button class="library-btn" id="quiz-next" data-en="Next →">Siguiente →</button>
+        </div>
+      </div>
+
+      <!-- Quiz result body (hidden by default) -->
+      <div id="fc-result-body" hidden>
+        <div class="library-flashcard-cat" id="result-label" data-en="FINAL SCORE">PUNTAJE FINAL</div>
+        <div class="library-score-display" id="result-score">0 / 12</div>
+        <div class="library-score-label" id="result-out-of" data-en="of twelve words">de doce palabras</div>
+        <p class="library-result-msg" id="result-msg"></p>
+        <div class="library-flashcard-actions">
+          <button class="library-btn" id="result-restart" data-en="↺ Play again">↺ Jugar de nuevo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 60px; display: flex; justify-content: center;">
+    <div class="marginalia" style="max-width: 560px;" data-en="— In Mompox, words are not signs: they are places. —">— En Mompox, las palabras no son signos: son lugares. —</div>
+  </div>
+
+  <div class="library-return-nav reveal delay-2">
+    <a href="/biblioteca" class="library-secondary" data-en="← Back to the Library">← Volver a la Biblioteca</a>
+    <a href="/biblioteca/lista-de-lectura" class="library-primary" data-en="Next: Reading List →">Siguiente: Lista de Lectura →</a>
+  </div>
+</Folio>
+
+<script is:inline>
+  (function () {
+    // 12 momposino words — same data as /mompox/palabras, plus ES/EN terms for quiz
+    var WORDS = [
+      { termEs: 'Albarrada', termEn: 'Albarrada', catEs: 'Arquitectura', catEn: 'Architecture',
+        defEs: 'El muro de contención a orillas del río. También la calle más bella de Mompox.',
+        defEn: 'The retaining wall along the river. Also the most beautiful street in Mompox.' },
+      { termEs: 'Champán', termEn: 'Champán', catEs: 'Río', catEn: 'River',
+        defEs: 'Embarcación tradicional de madera del Magdalena con techo de palma. NO la bebida.',
+        defEn: 'Traditional wooden boat of the Magdalena with a palm-leaf roof. Not the drink.' },
+      { termEs: 'Boga', termEn: 'Boga', catEs: 'Río', catEn: 'River',
+        defEs: 'El remero del río Magdalena. Profesión ancestral que sobrevive en Mompox.',
+        defEn: 'The oarsman of the Magdalena. An ancestral profession that survives in Mompox.' },
+      { termEs: 'Casabito', termEn: 'Casabito', catEs: 'Comida', catEn: 'Food',
+        defEs: 'Tortilla de yuca cruda, queso, coco rallado y azúcar. El snack callejero por excelencia.',
+        defEn: 'Pancake of raw cassava, cheese, ground coconut and sugar. The quintessential street snack.' },
+      { termEs: 'Corozo', termEn: 'Corozo', catEs: 'Comida', catEn: 'Food',
+        defEs: 'Fruto de una palma del Caribe. Se hace vino, jugo y dulce. Color rubí intenso.',
+        defEn: 'Fruit of a Caribbean palm. Made into wine, juice and sweets. Deep ruby colour.' },
+      { termEs: 'Filigrana', termEn: 'Filigrana', catEs: 'Cultura', catEn: 'Culture',
+        defEs: 'Joyería de oro o plata tejida con hilos finísimos. Tradición momposina de 300 años.',
+        defEn: 'Gold or silver jewellery woven from the finest threads. A 300-year momposino tradition.' },
+      { termEs: 'Meceredora', termEn: 'Meceredora', catEs: 'Vida diaria', catEn: 'Daily life',
+        defEs: 'Silla de madera que se mece. En Mompox, está en todo portal.',
+        defEn: 'A wooden rocking chair. In Mompox, there is one on every porch.' },
+      { termEs: 'Siesta', termEn: 'Siesta', catEs: 'Vida diaria', catEn: 'Daily life',
+        defEs: 'El descanso de la 1 a las 4. En Mompox, sagrado.',
+        defEn: 'The rest from one to four in the afternoon. In Mompox, sacred.' },
+      { termEs: 'Macondo', termEn: 'Macondo', catEs: 'Cultura', catEn: 'Culture',
+        defEs: 'El pueblo imaginario de García Márquez. Inspirado en Mompox y Aracataca.',
+        defEn: 'García Márquez\'s imaginary town. Inspired by Mompox and Aracataca.' },
+      { termEs: 'Mariposas amarillas', termEn: 'Yellow butterflies', catEs: 'Cultura', catEn: 'Culture',
+        defEs: 'Símbolo de Gabo. Aparecen en «Cien años de soledad» y, según los momposinos, en Mompox.',
+        defEn: 'Gabo\'s symbol. They appear in One Hundred Years of Solitude and, according to locals, in Mompox.' },
+      { termEs: 'Semana Santa', termEn: 'Holy Week', catEs: 'Cultura', catEn: 'Culture',
+        defEs: 'La segunda procesión más importante de Colombia. Siete iglesias, Paso Robado, serenata.',
+        defEn: 'Colombia\'s second most important Holy Week. Seven churches, Stolen Effigy, serenade.' },
+      { termEs: 'Realismo mágico', termEn: 'Magical realism', catEs: 'Cultura', catEn: 'Culture',
+        defEs: 'Género literario donde lo extraordinario se cuenta como cotidiano. Gabo lo hizo universal.',
+        defEn: 'A literary genre where the extraordinary is told as everyday. Gabo made it universal.' }
+    ];
+
+    // DOM refs
+    var card = document.getElementById('library-flashcard');
+    var counter = document.getElementById('fc-counter');
+    var modeTag = document.getElementById('fc-mode-tag');
+    var studyBody = document.getElementById('fc-study-body');
+    var quizBody = document.getElementById('fc-quiz-body');
+    var resultBody = document.getElementById('fc-result-body');
+    var fcCat = document.getElementById('fc-cat');
+    var fcWord = document.getElementById('fc-word');
+    var fcDef = document.getElementById('fc-def');
+    var quizPrompt = document.getElementById('quiz-prompt');
+    var quizOptions = document.getElementById('quiz-options');
+    var quizFeedback = document.getElementById('quiz-feedback');
+    var quizActions = document.getElementById('quiz-actions');
+    var quizNextBtn = document.getElementById('quiz-next');
+    var resultScore = document.getElementById('result-score');
+    var resultMsg = document.getElementById('result-msg');
+    var resultRestart = document.getElementById('result-restart');
+    var prevBtn = document.getElementById('fc-prev');
+    var nextBtn = document.getElementById('fc-next');
+    var modeStudy = document.getElementById('mode-study');
+    var modeQuiz = document.getElementById('mode-quiz');
+    var restartBtn = document.getElementById('restart-btn');
+
+    // State
+    var mode = 'study';
+    var idx = 0;
+    var score = 0;
+    var answered = false;
+    var quizOrder = []; // shuffled indices
+
+    function currentLang() {
+      return (document.documentElement.lang === 'en') ? 'en' : 'es';
+    }
+
+    function shuffle(arr) {
+      var a = arr.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+
+    function transition(renderFn) {
+      card.classList.add('exiting');
+      setTimeout(function () {
+        renderFn();
+        card.classList.remove('exiting');
+        card.classList.add('entering');
+        void card.offsetHeight; // force reflow
+        card.classList.remove('entering');
+      }, 320);
+    }
+
+    function renderStudy() {
+      studyBody.hidden = false;
+      quizBody.hidden = true;
+      resultBody.hidden = true;
+      modeTag.textContent = (currentLang() === 'en') ? 'STUDY' : 'ESTUDIO';
+      counter.textContent = (idx + 1) + ' / ' + WORDS.length;
+      var w = WORDS[idx];
+      var lang = currentLang();
+      fcCat.textContent = (lang === 'en') ? w.catEn : w.catEs;
+      fcWord.textContent = (lang === 'en') ? w.termEn : w.termEs;
+      fcDef.textContent = (lang === 'en') ? w.defEn : w.defEs;
+      prevBtn.disabled = (idx === 0);
+      nextBtn.textContent = (idx === WORDS.length - 1)
+        ? ((lang === 'en') ? '✦ Finish' : '✦ Terminar')
+        : ((lang === 'en') ? 'Next →' : 'Siguiente →');
+    }
+
+    function renderQuizQuestion() {
+      studyBody.hidden = true;
+      resultBody.hidden = true;
+      quizBody.hidden = false;
+      answered = false;
+      modeTag.textContent = (currentLang() === 'en') ? 'QUIZ' : 'QUIZ';
+      counter.textContent = (idx + 1) + ' / ' + WORDS.length;
+      var lang = currentLang();
+      var wIdx = quizOrder[idx];
+      var w = WORDS[wIdx];
+      // Prompt: in current lang
+      quizPrompt.textContent = (lang === 'en')
+        ? 'Which word does this definition name?'
+        : '¿Qué palabra nombra esta definición?';
+      // The definition shown
+      var defText = (lang === 'en') ? w.defEn : w.defEs;
+      // Build 4 options: the correct word + 3 random distractors
+      var distractors = [];
+      while (distractors.length < 3) {
+        var r = Math.floor(Math.random() * WORDS.length);
+        if (r === wIdx) continue;
+        if (distractors.indexOf(r) !== -1) continue;
+        distractors.push(r);
+      }
+      var optionIndices = shuffle([wIdx].concat(distractors));
+      // Clear options
+      quizOptions.innerHTML = '';
+      optionIndices.forEach(function (oi) {
+        var btn = document.createElement('button');
+        btn.className = 'library-flashcard-option';
+        btn.type = 'button';
+        btn.textContent = (lang === 'en') ? WORDS[oi].termEn : WORDS[oi].termEs;
+        btn.setAttribute('data-idx', oi);
+        btn.addEventListener('click', function () { handleAnswer(btn, oi, wIdx); });
+        quizOptions.appendChild(btn);
+      });
+      // Hide feedback + actions
+      quizFeedback.hidden = true;
+      quizFeedback.className = 'library-flashcard-feedback';
+      quizActions.hidden = true;
+      // Update prompt to include the definition
+      var defPara = document.createElement('div');
+      defPara.style.fontFamily = 'var(--font-display)';
+      defPara.style.fontStyle = 'italic';
+      defPara.style.fontSize = '1.15rem';
+      defPara.style.lineHeight = '1.5';
+      defPara.style.color = 'var(--parchment)';
+      defPara.style.opacity = '0.92';
+      defPara.style.margin = '0 auto 22px';
+      defPara.style.maxWidth = '480px';
+      defPara.textContent = '«' + defText + '»';
+      // Replace prompt with question + definition
+      quizPrompt.innerHTML = '';
+      var q = document.createElement('div');
+      q.style.fontFamily = 'var(--font-caps)';
+      q.style.fontSize = '0.58rem';
+      q.style.letterSpacing = '0.3em';
+      q.style.color = 'var(--brass)';
+      q.style.opacity = '0.85';
+      q.style.marginBottom = '14px';
+      q.textContent = (lang === 'en') ? 'DEFINITION' : 'DEFINICIÓN';
+      quizPrompt.appendChild(q);
+      quizPrompt.appendChild(defPara);
+    }
+
+    function handleAnswer(btn, chosenIdx, correctIdx) {
+      if (answered) return;
+      answered = true;
+      var lang = currentLang();
+      var isCorrect = (chosenIdx === correctIdx);
+      if (isCorrect) score++;
+      // Mark all options
+      var opts = quizOptions.querySelectorAll('.library-flashcard-option');
+      Array.prototype.forEach.call(opts, function (b) {
+        b.disabled = true;
+        var oi = parseInt(b.getAttribute('data-idx'), 10);
+        if (oi === correctIdx) b.classList.add('correct');
+        else if (b === btn) b.classList.add('incorrect');
+      });
+      // Feedback
+      quizFeedback.hidden = false;
+      quizFeedback.className = 'library-flashcard-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+      var verdict = document.createElement('span');
+      verdict.className = 'verdict';
+      verdict.textContent = isCorrect
+        ? ((lang === 'en') ? '✓ Correct' : '✓ Correcto')
+        : ((lang === 'en') ? '✗ Incorrect' : '✗ Incorrecto');
+      var correctWord = document.createElement('span');
+      correctWord.textContent = (lang === 'en')
+        ? 'The word was «' + WORDS[correctIdx].termEn + '».'
+        : 'La palabra era «' + WORDS[correctIdx].termEs + '».';
+      quizFeedback.innerHTML = '';
+      quizFeedback.appendChild(verdict);
+      quizFeedback.appendChild(correctWord);
+      // Show next button
+      quizActions.hidden = false;
+      quizNextBtn.textContent = (idx === WORDS.length - 1)
+        ? ((lang === 'en') ? '✦ See result' : '✦ Ver resultado')
+        : ((lang === 'en') ? 'Next →' : 'Siguiente →');
+    }
+
+    function renderResult() {
+      studyBody.hidden = true;
+      quizBody.hidden = true;
+      resultBody.hidden = false;
+      modeTag.textContent = (currentLang() === 'en') ? 'RESULT' : 'RESULTADO';
+      counter.textContent = '✦';
+      resultScore.textContent = score + ' / ' + WORDS.length;
+      var lang = currentLang();
+      var msg = '';
+      if (score <= 3) {
+        msg = (lang === 'en')
+          ? 'Recién llegado a Macondo — the river has only just begun to whisper its names to you.'
+          : 'Recién llegado a Macondo — el río apenas empieza a susurrarte sus nombres.';
+      } else if (score <= 6) {
+        msg = (lang === 'en')
+          ? 'Caminante de la albarrada — you walk the river wall with sure steps.'
+          : 'Caminante de la albarrada — caminas el muro del río con paso seguro.';
+      } else if (score <= 9) {
+        msg = (lang === 'en')
+          ? 'Lector de Gabo — you have read Mompox in its own lexicon.'
+          : 'Lector de Gabo — has leído a Mompox en su propio léxico.';
+      } else {
+        msg = (lang === 'en')
+          ? 'Maestro del realismo mágico — the words are no longer words to you; they are places.'
+          : 'Maestro del realismo mágico — las palabras ya no son palabras para ti; son lugares.';
+      }
+      resultMsg.textContent = msg;
+    }
+
+    function startMode(m) {
+      mode = m;
+      idx = 0;
+      score = 0;
+      answered = false;
+      modeStudy.classList.toggle('active', m === 'study');
+      modeQuiz.classList.toggle('active', m === 'quiz');
+      if (m === 'quiz') {
+        quizOrder = shuffle(WORDS.map(function (_, i) { return i; }));
+      }
+      transition(function () {
+        if (mode === 'study') renderStudy();
+        else renderQuizQuestion();
+      });
+    }
+
+    // Mode buttons
+    modeStudy.addEventListener('click', function () { startMode('study'); });
+    modeQuiz.addEventListener('click', function () { startMode('quiz'); });
+    restartBtn.addEventListener('click', function () { startMode(mode); });
+
+    // Study navigation
+    prevBtn.addEventListener('click', function () {
+      if (idx > 0) {
+        idx--;
+        transition(renderStudy);
+      }
+    });
+    nextBtn.addEventListener('click', function () {
+      if (idx < WORDS.length - 1) {
+        idx++;
+        transition(renderStudy);
+      } else {
+        // Loop back to start in study mode
+        idx = 0;
+        transition(renderStudy);
+      }
+    });
+
+    // Quiz next
+    quizNextBtn.addEventListener('click', function () {
+      if (idx < WORDS.length - 1) {
+        idx++;
+        transition(renderQuizQuestion);
+      } else {
+        transition(renderResult);
+      }
+    });
+
+    // Result restart
+    resultRestart.addEventListener('click', function () { startMode('quiz'); });
+
+    // Re-render on language toggle
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('#lang-toggle');
+      if (!btn) return;
+      setTimeout(function () {
+        if (resultBody && !resultBody.hidden) {
+          renderResult();
+        } else if (quizBody && !quizBody.hidden) {
+          // Only re-render question text if not yet answered
+          if (!answered) renderQuizQuestion();
+          else {
+            // Just update the next button text & mode tag
+            modeTag.textContent = (currentLang() === 'en') ? 'QUIZ' : 'QUIZ';
+            var lang = currentLang();
+            quizNextBtn.textContent = (idx === WORDS.length - 1)
+              ? ((lang === 'en') ? '✦ See result' : '✦ Ver resultado')
+              : ((lang === 'en') ? 'Next →' : 'Siguiente →');
+          }
+        } else if (studyBody && !studyBody.hidden) {
+          renderStudy();
+        }
+      }, 60);
+    });
+
+    // Initial render
+    startMode('study');
+  })();
+</script>
+</Layout>

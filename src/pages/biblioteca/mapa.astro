@@ -1,0 +1,419 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Folio from '../../components/Folio.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+// POI data lives at the top of this page (typed).
+interface Poi {
+  id: number;
+  x: number;
+  y: number;
+  nameEs: string;
+  nameEn: string;
+  yearEs: string;
+  yearEn: string;
+  descEs: string;
+  descEn: string;
+  linkToGuides: boolean;
+}
+
+const pois: Poi[] = [
+  {
+    id: 1,
+    x: 200, y: 150,
+    nameEs: 'Iglesia de Santa Bárbara',
+    nameEn: 'Church of Santa Bárbara',
+    yearEs: 'Construida 1610 · Torre 1750s',
+    yearEn: 'Built 1610 · Tower 1750s',
+    descEs: 'La joya de Mompox. Su torre barroca desprendida del cuerpo de la iglesia — única en América — se alza sobre el cementerio viejo y se refleja en el Magdalena al atardecer.',
+    descEn: 'Mompox\'s jewel. Its baroque tower, separated from the church body — unique in the Americas — rises over the old cemetery and reflects in the Magdalena at dusk.',
+    linkToGuides: true
+  },
+  {
+    id: 2,
+    x: 340, y: 120,
+    nameEs: 'Iglesia de la Inmaculada Concepción',
+    nameEn: 'Church of the Immaculate Conception',
+    yearEs: 'Iniciada 1550 · Reconstruida 1621',
+    yearEn: 'Begun 1550 · Rebuilt 1621',
+    descEs: 'La más grande de las siete iglesias momposinas. Aquí se guarda el Santo Sepulcro del Paso Robado, centro de la Semana Santa más solemne del país después de Popayán.',
+    descEn: 'The largest of Mompox\'s seven churches. The Holy Sepulchre of the Stolen Effigy is kept here, the heart of the country\'s most solemn Holy Week after Popayán.',
+    linkToGuides: true
+  },
+  {
+    id: 3,
+    x: 410, y: 230,
+    nameEs: 'Plaza de Santo Domingo',
+    nameEn: 'Santo Domingo Square',
+    yearEs: 'Traza colonial, s. XVII',
+    yearEn: 'Colonial layout, 17th c.',
+    descEs: 'El corazón cívico del Mompox colonial. Portales, palmas y la antigua casa de gobierno. Aquí se juró la independencia el 6 de agosto de 1810.',
+    descEn: 'The civic heart of colonial Mompox. Porticos, palms and the old government house. Independence was sworn here on August 6, 1810.',
+    linkToGuides: true
+  },
+  {
+    id: 4,
+    x: 90, y: 250,
+    nameEs: 'La Albarrada',
+    nameEn: 'The Albarrada',
+    yearEs: 'Construida s. XVII–XIX',
+    yearEn: 'Built 17th–19th c.',
+    descEs: 'El muro de contención que defiende a Mompox del Magdalena — y la calle más bella del pueblo. A cada paso, una rampa baja al río donde las lanchas aún amarran.',
+    descEn: 'The retaining wall that shields Mompox from the Magdalena — and the town\'s most beautiful street. Every few steps, a ramp descends to the river where boats still tie up.',
+    linkToGuides: true
+  },
+  {
+    id: 5,
+    x: 70, y: 380,
+    nameEs: 'Terminal Fluvial',
+    nameEn: 'River Terminal',
+    yearEs: 'Activo desde el s. XIX',
+    yearEn: 'Active since the 19th c.',
+    descEs: 'Donde atracan los champánes y lanchas que llegan de Magangué, El Banco y Barrancabermeja. El modo lento de llegar — y el más antiguo. El río aquí es la única calle que nunca se durmió.',
+    descEn: 'Where champans and launches arrive from Magangué, El Banco and Barrancabermeja. The slow way in — and the oldest. The river here is the only street that never fell asleep.',
+    linkToGuides: true
+  },
+  {
+    id: 6,
+    x: 240, y: 80,
+    nameEs: 'Cementerio Central',
+    nameEn: 'Central Cemetery',
+    yearEs: 'Inaugurado 1840',
+    yearEn: 'Opened 1840',
+    descEs: 'Paseo de bóvedas blancas y palmas donde descansan los apellidos del Mompox colonial. La torre de Santa Bárbara lo vigila desde el sur.',
+    descEn: 'A promenade of white vaults and palms where the surnames of colonial Mompox rest. The Santa Bárbara tower keeps watch from the south.',
+    linkToGuides: false
+  },
+  {
+    id: 7,
+    x: 320, y: 270,
+    nameEs: 'Calle Real del Medio',
+    nameEn: 'Calle Real del Medio',
+    yearEs: 'Trazada s. XVI',
+    yearEn: 'Laid out 16th c.',
+    descEs: 'La arteria principal del casco colonial. Casas de tapia y teja, portales de madera tallada, talleres de filigrana que abren al atardecer cuando el calor afloja.',
+    descEn: 'The main artery of the colonial core. Tapia-and-tile houses, carved wooden portals, filigree workshops that open at dusk when the heat eases.',
+    linkToGuides: true
+  },
+  {
+    id: 8,
+    x: 470, y: 180,
+    nameEs: 'Casa de la Cultura',
+    nameEn: 'House of Culture',
+    yearEs: 'Casa colonial s. XVIII',
+    yearEn: 'Colonial house, 18th c.',
+    descEs: 'Antigua casona colonial hoy museo y centro cultural. Exhibe filigrana, cuadros coloniales y archivos del Mompox que fue puerto del Virreinato.',
+    descEn: 'Former colonial mansion, now museum and cultural centre. Displays filigree, colonial paintings and archives of the Mompox that was a port of the Viceroyalty.',
+    linkToGuides: false
+  },
+  {
+    id: 9,
+    x: 540, y: 410,
+    nameEs: 'Puente Roncador',
+    nameEn: 'Roncador Bridge',
+    yearEs: 'Inaugurado 2020',
+    yearEn: 'Opened 2020',
+    descEs: 'El puente que devolvió a Mompox su conexión por tierra después de cinco siglos de aislamiento. Cruza el caño que separa al pueblo de la troncal del Caribe.',
+    descEn: 'The bridge that restored Mompox\'s land connection after five centuries of isolation. It crosses the channel that separates the town from the Caribbean trunk road.',
+    linkToGuides: false
+  },
+  {
+    id: 10,
+    x: 380, y: 340,
+    nameEs: 'Literatium — La Casa de las Historias',
+    nameEn: 'Literatium — The House of Stories',
+    yearEs: 'Hotel boutique desde 2023',
+    yearEn: 'Boutique hotel since 2023',
+    descEs: 'Su anfitrión en Mompox. Una casona colonial restaurada donde cada habitación lleva el nombre de un libro, el café viene de Huila y la biblioteca no cierra.',
+    descEn: 'Your host in Mompox. A restored colonial mansion where every room bears a book\'s name, the coffee comes from Huila, and the library never closes.',
+    linkToGuides: false
+  },
+];
+---
+<Layout
+  title="Biblioteca · Mapa Interactivo — Literatium"
+  description="Mapa interactivo de Mompox con diez hitos clicables: Santa Bárbara, la Inmaculada, la albarrada, el terminal fluvial, el puente Roncador. Un plano dibujado a mano para leer el pueblo."
+>
+<Folio id="biblioteca-mapa" folioNumber="Folio XII·I · Mapa Interactivo" folioNumberEn="Folio XII·I · Interactive Map" dark={true}>
+  <Breadcrumbs items={[
+    { label: 'Literatium', href: '/' },
+    { label: 'Biblioteca', href: '/biblioteca' },
+    { label: 'Mapa Interactivo' }
+  ]} />
+
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Library · Module I">Biblioteca · Módulo I</div>
+    <h1 class="chapter-title on-dark">Mompox, <em>diez hitos</em> para leer el pueblo</h1>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1">
+    <p class="library-intro" data-en="Not a satellite map: a hand-drawn plan, like the ones kept in the municipal archive. Ten clickable landmarks trace Mompox from its 1550 churches to the 2020 bridge that finally ended its isolation. Tap a number; read its story.">No es un mapa satelital: un plano dibujado a mano, como los que se guardan en el archivo municipal. Diez hitos clicables trazan a Mompox desde sus iglesias de 1550 hasta el puente de 2020 que al fin rompió su aislamiento. Toque un número; lea su historia.</p>
+  </div>
+
+  <!-- MAP + INFO PANEL -->
+  <div class="library-map-layout reveal delay-1">
+    <!-- LEFT: SVG map -->
+    <div class="library-map-canvas">
+      <svg viewBox="0 0 620 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa ilustrado de Mompox con diez hitos">
+        <!-- Decorative frame -->
+        <rect x="4" y="4" width="612" height="532" fill="none" stroke="#8B6520" stroke-width="0.5" opacity="0.4"/>
+        <rect x="10" y="10" width="600" height="520" fill="none" stroke="#C9A04E" stroke-width="0.3" opacity="0.45"/>
+
+        <!-- River Magdalena (main channel) -->
+        <path d="M 0 60 Q 80 100, 100 160 T 130 280 Q 110 360, 60 420 Q 30 470, 0 510 L 0 540 L 220 540 Q 220 480, 200 420 Q 180 360, 210 300 Q 240 240, 220 180 Q 200 120, 220 60 Q 220 30, 220 0 L 0 0 Z"
+              fill="#2D4A5C" opacity="0.45"/>
+        <!-- River surface ripples (decorative) -->
+        <path d="M 30 120 Q 50 122, 70 120 M 20 220 Q 45 222, 80 220 M 35 320 Q 60 322, 85 320 M 25 410 Q 50 412, 75 410"
+              fill="none" stroke="#5B7A8C" stroke-width="0.6" opacity="0.6"/>
+        <!-- Caño / channel on right side (where bridge crosses) -->
+        <path d="M 620 360 Q 560 380, 540 410 Q 520 440, 510 480 Q 505 510, 510 540 L 620 540 Z"
+              fill="#2D4A5C" opacity="0.42"/>
+
+        <!-- Albarrada (river wall) — thick brass line -->
+        <path d="M 130 60 Q 145 120, 165 200 Q 175 280, 155 360 Q 130 440, 90 510"
+              fill="none" stroke="#C9A04E" stroke-width="2.4" opacity="0.85"/>
+        <!-- Albarrada ramp markers (small perpendicular ticks) -->
+        <g opacity="0.6" stroke="#C9A04E" stroke-width="0.8" fill="none">
+          <path d="M 145 110 L 160 105"/>
+          <path d="M 152 165 L 168 162"/>
+          <path d="M 158 230 L 175 228"/>
+          <path d="M 155 295 L 172 294"/>
+          <path d="M 145 365 L 162 366"/>
+          <path d="M 130 430 L 146 432"/>
+        </g>
+
+        <!-- Streets (colonial grid — light) -->
+        <g stroke="#C9A04E" stroke-width="0.4" opacity="0.28" fill="none">
+          <line x1="200" y1="100" x2="520" y2="100"/>
+          <line x1="200" y1="170" x2="520" y2="170"/>
+          <line x1="200" y1="240" x2="520" y2="240"/>
+          <line x1="200" y1="310" x2="520" y2="310"/>
+          <line x1="200" y1="380" x2="520" y2="380"/>
+          <line x1="200" y1="450" x2="520" y2="450"/>
+          <line x1="220" y1="60" x2="220" y2="500"/>
+          <line x1="290" y1="60" x2="290" y2="500"/>
+          <line x1="360" y1="60" x2="360" y2="500"/>
+          <line x1="430" y1="60" x2="430" y2="500"/>
+          <line x1="500" y1="60" x2="500" y2="500"/>
+        </g>
+
+        <!-- Plaza Santo Domingo (open square) -->
+        <rect x="380" y="200" width="60" height="60" fill="#C9A04E" stroke="#C9A04E" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.15"/>
+        <text x="410" y="232" text-anchor="middle" fill="#C9A04E" font-family="EB Garamond, serif" font-size="7" font-style="italic" opacity="0.7">Plaza</text>
+
+        <!-- River labels -->
+        <text x="20" y="40" fill="#5B7A8C" font-family="Cinzel, serif" font-size="10" letter-spacing="2" opacity="0.85">RÍO MAGDALENA</text>
+        <text x="20" y="52" fill="#5B7A8C" font-family="EB Garamond, serif" font-size="8" font-style="italic" opacity="0.7">— la calle que nunca se durmió —</text>
+
+        <!-- Compass rose -->
+        <g transform="translate(560, 60)">
+          <circle r="22" fill="none" stroke="#C9A04E" stroke-width="0.6" opacity="0.5"/>
+          <circle r="14" fill="none" stroke="#C9A04E" stroke-width="0.4" opacity="0.4"/>
+          <path d="M 0 -18 L 4 0 L 0 18 L -4 0 Z" fill="#DDB95E"/>
+          <path d="M -18 0 L 0 -4 L 18 0 L 0 4 Z" fill="#C9A04E" opacity="0.6"/>
+          <text y="-26" text-anchor="middle" fill="#DDB95E" font-family="Cinzel, serif" font-size="9">N</text>
+          <text y="32" text-anchor="middle" fill="#C9A04E" font-family="Cinzel, serif" font-size="8" opacity="0.7">S</text>
+          <text x="-26" y="3" text-anchor="middle" fill="#C9A04E" font-family="Cinzel, serif" font-size="8" opacity="0.7">O</text>
+          <text x="26" y="3" text-anchor="middle" fill="#C9A04E" font-family="Cinzel, serif" font-size="8" opacity="0.7">E</text>
+        </g>
+
+        <!-- Title cartouche -->
+        <g transform="translate(220, 510)">
+          <text fill="#DDB95E" font-family="Cinzel, serif" font-size="11" letter-spacing="3" opacity="0.85">SANTA CRUZ DE MOMPOX</text>
+          <text x="0" y="14" fill="#C9A04E" font-family="EB Garamond, serif" font-size="9" font-style="italic" opacity="0.7">Fundada 1537 · Patrimonio UNESCO 1995</text>
+        </g>
+
+        <!-- POI markers (rendered from data) -->
+        {pois.map((p) => (
+          <g class="poi-marker" data-id={p.id} tabindex="0" role="button" aria-label={p.nameEs}>
+            <circle class="poi-dot" cx={p.x} cy={p.y} r="11" fill="#DDB95E" stroke="#8B6520" stroke-width="1.2"/>
+            <text class="poi-num" x={p.x} y={p.y + 3}>{p.id}</text>
+          </g>
+        ))}
+      </svg>
+      <p class="library-map-caption" data-en="— Touch a number; the river will tell you who lived there. —">— Toque un número; el río le contará quién vivió allí. —</p>
+    </div>
+
+    <!-- RIGHT: Info panel -->
+    <aside class="library-info-panel" id="library-poi-panel" aria-live="polite">
+      <div class="library-info-panel-empty" id="library-poi-empty" data-en="Tap a numbered marker on the map to read its story. Or start with number 1 — Santa Bárbara, the tower that Mompox reflects in the river.">
+        Toque un marcador numerado del mapa para leer su historia. O empiece por el número 1 — Santa Bárbara, la torre que Mompox refleja en el río.
+      </div>
+      <div id="library-poi-content" hidden>
+        <div class="library-info-panel-index" id="library-poi-index"></div>
+        <div class="library-info-panel-name" id="library-poi-name"></div>
+        <div class="library-info-panel-year" id="library-poi-year"></div>
+        <p class="library-info-panel-desc" id="library-poi-desc"></p>
+        <a class="library-info-panel-link" id="library-poi-link" href="/mompox/guias" data-en="Read in the Guías →">Leer en las Guías →</a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- POI legend (numbers + names) -->
+  <div class="reveal delay-2" style="margin-top: 60px; max-width: 1100px; margin-left: auto; margin-right: auto;">
+    <div class="eyebrow center" style="color: var(--brass-light);" data-en="Index of landmarks">Índice de hitos</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin-top: 24px;">
+      {pois.map((p) => (
+        <button
+          class="library-pill"
+          data-poi-jump={p.id}
+          data-en={`${p.id}. ${p.nameEn}`}
+          style="text-align: left; justify-content: flex-start; display: flex; align-items: center; gap: 8px;"
+        >
+          <span style="font-family: 'Cinzel', serif; color: var(--brass-light); min-width: 18px;">{p.id}.</span>
+          <span>{p.nameEs}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 60px; display: flex; justify-content: center;">
+    <div class="marginalia" style="max-width: 560px;" data-en="— In Mompox, every corner is a coordinate; every coordinate, a name. —">— En Mompox, cada esquina es una coordenada; cada coordenada, un nombre. —</div>
+  </div>
+
+  <div class="library-return-nav reveal delay-2">
+    <a href="/biblioteca" class="library-secondary" data-en="← Back to the Library">← Volver a la Biblioteca</a>
+    <a href="/biblioteca/juego-de-palabras" class="library-primary" data-en="Next: Word Game →">Siguiente: Juego de Palabras →</a>
+  </div>
+</Folio>
+
+<script is:inline>
+  (function () {
+    // POI data (must match the server-rendered array exactly)
+    var POIS = [
+      { id: 1, nameEs: 'Iglesia de Santa Bárbara', nameEn: 'Church of Santa Bárbara',
+        yearEs: 'Construida 1610 · Torre 1750s', yearEn: 'Built 1610 · Tower 1750s',
+        descEs: 'La joya de Mompox. Su torre barroca desprendida del cuerpo de la iglesia — única en América — se alza sobre el cementerio viejo y se refleja en el Magdalena al atardecer.',
+        descEn: 'Mompox\'s jewel. Its baroque tower, separated from the church body — unique in the Americas — rises over the old cemetery and reflects in the Magdalena at dusk.',
+        link: true },
+      { id: 2, nameEs: 'Iglesia de la Inmaculada Concepción', nameEn: 'Church of the Immaculate Conception',
+        yearEs: 'Iniciada 1550 · Reconstruida 1621', yearEn: 'Begun 1550 · Rebuilt 1621',
+        descEs: 'La más grande de las siete iglesias momposinas. Aquí se guarda el Santo Sepulcro del Paso Robado, centro de la Semana Santa más solemne del país después de Popayán.',
+        descEn: 'The largest of Mompox\'s seven churches. The Holy Sepulchre of the Stolen Effigy is kept here, the heart of the country\'s most solemn Holy Week after Popayán.',
+        link: true },
+      { id: 3, nameEs: 'Plaza de Santo Domingo', nameEn: 'Santo Domingo Square',
+        yearEs: 'Traza colonial, s. XVII', yearEn: 'Colonial layout, 17th c.',
+        descEs: 'El corazón cívico del Mompox colonial. Portales, palmas y la antigua casa de gobierno. Aquí se juró la independencia el 6 de agosto de 1810.',
+        descEn: 'The civic heart of colonial Mompox. Porticos, palms and the old government house. Independence was sworn here on August 6, 1810.',
+        link: true },
+      { id: 4, nameEs: 'La Albarrada', nameEn: 'The Albarrada',
+        yearEs: 'Construida s. XVII–XIX', yearEn: 'Built 17th–19th c.',
+        descEs: 'El muro de contención que defiende a Mompox del Magdalena — y la calle más bella del pueblo. A cada paso, una rampa baja al río donde las lanchas aún amarran.',
+        descEn: 'The retaining wall that shields Mompox from the Magdalena — and the town\'s most beautiful street. Every few steps, a ramp descends to the river where boats still tie up.',
+        link: true },
+      { id: 5, nameEs: 'Terminal Fluvial', nameEn: 'River Terminal',
+        yearEs: 'Activo desde el s. XIX', yearEn: 'Active since the 19th c.',
+        descEs: 'Donde atracan los champánes y lanchas que llegan de Magangué, El Banco y Barrancabermeja. El modo lento de llegar — y el más antiguo. El río aquí es la única calle que nunca se durmió.',
+        descEn: 'Where champans and launches arrive from Magangué, El Banco and Barrancabermeja. The slow way in — and the oldest. The river here is the only street that never fell asleep.',
+        link: true },
+      { id: 6, nameEs: 'Cementerio Central', nameEn: 'Central Cemetery',
+        yearEs: 'Inaugurado 1840', yearEn: 'Opened 1840',
+        descEs: 'Paseo de bóvedas blancas y palmas donde descansan los apellidos del Mompox colonial. La torre de Santa Bárbara lo vigila desde el sur.',
+        descEn: 'A promenade of white vaults and palms where the surnames of colonial Mompox rest. The Santa Bárbara tower keeps watch from the south.',
+        link: false },
+      { id: 7, nameEs: 'Calle Real del Medio', nameEn: 'Calle Real del Medio',
+        yearEs: 'Trazada s. XVI', yearEn: 'Laid out 16th c.',
+        descEs: 'La arteria principal del casco colonial. Casas de tapia y teja, portales de madera tallada, talleres de filigrana que abren al atardecer cuando el calor afloja.',
+        descEn: 'The main artery of the colonial core. Tapia-and-tile houses, carved wooden portals, filigree workshops that open at dusk when the heat eases.',
+        link: true },
+      { id: 8, nameEs: 'Casa de la Cultura', nameEn: 'House of Culture',
+        yearEs: 'Casa colonial s. XVIII', yearEn: 'Colonial house, 18th c.',
+        descEs: 'Antigua casona colonial hoy museo y centro cultural. Exhibe filigrana, cuadros coloniales y archivos del Mompox que fue puerto del Virreinato.',
+        descEn: 'Former colonial mansion, now museum and cultural centre. Displays filigree, colonial paintings and archives of the Mompox that was a port of the Viceroyalty.',
+        link: false },
+      { id: 9, nameEs: 'Puente Roncador', nameEn: 'Roncador Bridge',
+        yearEs: 'Inaugurado 2020', yearEn: 'Opened 2020',
+        descEs: 'El puente que devolvió a Mompox su conexión por tierra después de cinco siglos de aislamiento. Cruza el caño que separa al pueblo de la troncal del Caribe.',
+        descEn: 'The bridge that restored Mompox\'s land connection after five centuries of isolation. It crosses the channel that separates the town from the Caribbean trunk road.',
+        link: false },
+      { id: 10, nameEs: 'Literatium — La Casa de las Historias', nameEn: 'Literatium — The House of Stories',
+        yearEs: 'Hotel boutique desde 2023', yearEn: 'Boutique hotel since 2023',
+        descEs: 'Su anfitrión en Mompox. Una casona colonial restaurada donde cada habitación lleva el nombre de un libro, el café viene de Huila y la biblioteca no cierra.',
+        descEn: 'Your host in Mompox. A restored colonial mansion where every room bears a book\'s name, the coffee comes from Huila, and the library never closes.',
+        link: false }
+    ];
+
+    var markers = Array.prototype.slice.call(document.querySelectorAll('.poi-marker'));
+    var empty = document.getElementById('library-poi-empty');
+    var content = document.getElementById('library-poi-content');
+    var idxEl = document.getElementById('library-poi-index');
+    var nameEl = document.getElementById('library-poi-name');
+    var yearEl = document.getElementById('library-poi-year');
+    var descEl = document.getElementById('library-poi-desc');
+    var linkEl = document.getElementById('library-poi-link');
+    var activeId = null;
+
+    function currentLang() {
+      return (document.documentElement.lang === 'en') ? 'en' : 'es';
+    }
+
+    function findPoi(id) {
+      for (var i = 0; i < POIS.length; i++) {
+        if (POIS[i].id === id) return POIS[i];
+      }
+      return null;
+    }
+
+    function renderPanel(id) {
+      var p = findPoi(id);
+      if (!p) return;
+      var lang = currentLang();
+      activeId = id;
+      // Toggle marker active class
+      markers.forEach(function (m) {
+        m.classList.toggle('active', parseInt(m.getAttribute('data-id'), 10) === id);
+      });
+      // Show content, hide empty
+      if (empty) empty.hidden = true;
+      if (content) content.hidden = false;
+      // Fill fields
+      if (idxEl) idxEl.textContent = 'Hito ' + p.id + ' / 10';
+      if (nameEl) nameEl.textContent = (lang === 'en') ? p.nameEn : p.nameEs;
+      if (yearEl) yearEl.textContent = (lang === 'en') ? p.yearEn : p.yearEs;
+      if (descEl) descEl.textContent = (lang === 'en') ? p.descEn : p.descEs;
+      if (linkEl) {
+        if (p.link) {
+          linkEl.style.display = '';
+          linkEl.textContent = (lang === 'en') ? 'Read in the Guías →' : 'Leer en las Guías →';
+        } else {
+          linkEl.style.display = 'none';
+        }
+      }
+    }
+
+    // Click handler on markers
+    markers.forEach(function (m) {
+      m.addEventListener('click', function () {
+        var id = parseInt(m.getAttribute('data-id'), 10);
+        if (!isNaN(id)) renderPanel(id);
+      });
+      m.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          var id = parseInt(m.getAttribute('data-id'), 10);
+          if (!isNaN(id)) renderPanel(id);
+        }
+      });
+    });
+
+    // Click handler on the legend pill buttons
+    var jumpButtons = Array.prototype.slice.call(document.querySelectorAll('[data-poi-jump]'));
+    jumpButtons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var id = parseInt(b.getAttribute('data-poi-jump'), 10);
+        if (!isNaN(id)) renderPanel(id);
+      });
+    });
+
+    // Re-render on language toggle (the panel content is JS-driven, not data-en)
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('#lang-toggle');
+      if (!btn) return;
+      setTimeout(function () {
+        if (activeId !== null) renderPanel(activeId);
+      }, 60);
+    });
+  })();
+</script>
+</Layout>

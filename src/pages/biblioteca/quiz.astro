@@ -1,0 +1,433 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Folio from '../../components/Folio.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+---
+<Layout
+  title="Biblioteca · Quiz Literario — Literatium"
+  description="Quiz literario: diez preguntas sobre García Márquez, Mompox y el realismo mágico. Al final, un veredicto — recién llegado, caminante, lector o maestro de Macondo."
+>
+<Folio id="biblioteca-quiz" folioNumber="Folio XII·IV · Quiz Literario" folioNumberEn="Folio XII·IV · Literary Quiz" dark={true}>
+  <Breadcrumbs items={[
+    { label: 'Literatium', href: '/' },
+    { label: 'Biblioteca', href: '/biblioteca' },
+    { label: 'Quiz Literario' }
+  ]} />
+
+  <div class="reveal">
+    <div class="eyebrow" style="color: var(--brass-light);" data-en="Library · Module IV">Biblioteca · Módulo IV</div>
+    <h1 class="chapter-title on-dark">Diez preguntas <em>para medir el Macondo</em></h1>
+    <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
+  </div>
+
+  <div class="reveal delay-1">
+    <p class="library-intro" data-en="Ten questions on García Márquez, Mompox and magical realism. Choose an answer; receive a short explanation; advance. At the end, a verdict: newcomer to Macondo, walker of the albarrada, reader of Gabo, or master of magical realism.">Diez preguntas sobre García Márquez, Mompox y el realismo mágico. Elija una respuesta; reciba una breve explicación; avance. Al final, un veredicto: recién llegado a Macondo, caminante de la albarrada, lector de Gabo o maestro del realismo mágico.</p>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="library-quiz-progress reveal delay-1" id="quiz-progress" aria-hidden="true"></div>
+
+  <!-- QUESTION CARD -->
+  <div class="library-quiz-card reveal delay-1" id="quiz-card">
+    <div class="library-quiz-counter" id="quiz-counter">1 / 10</div>
+    <div class="library-quiz-question" id="quiz-question"></div>
+    <div class="library-quiz-options" id="quiz-options"></div>
+    <div class="library-quiz-feedback" id="quiz-feedback" hidden></div>
+    <div class="library-quiz-actions" id="quiz-actions" hidden>
+      <button class="library-btn" id="quiz-next-btn" data-en="Next →">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- RESULT CARD (hidden until last) -->
+  <div class="library-quiz-card reveal delay-1" id="quiz-result" hidden style="text-align: center; padding: 48px 40px;">
+    <div class="library-quiz-counter" id="result-counter" data-en="VERDICT">VEREDICTO</div>
+    <div class="library-score-display" id="result-score">0 / 10</div>
+    <div class="library-score-label" id="result-label" data-en="of ten questions">de diez preguntas</div>
+    <p class="library-result-msg" id="result-message"></p>
+    <div class="library-quiz-actions" style="justify-content: center;">
+      <button class="library-btn" id="quiz-restart-btn" data-en="↺ Play again">↺ Jugar de nuevo</button>
+    </div>
+  </div>
+
+  <div class="reveal delay-2" style="margin-top: 60px; display: flex; justify-content: center;">
+    <div class="marginalia" style="max-width: 560px;" data-en="— A quiz, in Mompox, is just a way of asking the river what it remembers. —">— Un quiz, en Mompox, es solo una manera de preguntar al río qué recuerda. —</div>
+  </div>
+
+  <div class="library-return-nav reveal delay-2">
+    <a href="/biblioteca" class="library-secondary" data-en="← Back to the Library">← Volver a la Biblioteca</a>
+    <a href="/biblioteca/linea-de-tiempo" class="library-primary" data-en="Next: Timeline →">Siguiente: Línea de Tiempo →</a>
+  </div>
+</Folio>
+
+<script is:inline>
+  (function () {
+    var QUESTIONS = [
+      {
+        qEs: '¿En qué año se fundó Santa Cruz de Mompox?',
+        qEn: 'In what year was Santa Cruz de Mompox founded?',
+        optsEs: ['1537', '1550', '1610', '1810'],
+        optsEn: ['1537', '1550', '1610', '1810'],
+        correct: 0,
+        explainEs: 'Lucas Fernández de Espinosa fundó Santa Cruz de Mompox el 3 de mayo de 1537, sobre un asentamiento indígena de la cultura Malibú.',
+        explainEn: 'Lucas Fernández de Espinosa founded Santa Cruz de Mompox on May 3, 1537, on a Malibú-culture indigenous settlement.'
+      },
+      {
+        qEs: '¿En qué año Mompox fue declarada Patrimonio de la Humanidad por la UNESCO?',
+        qEn: 'In what year was Mompox declared a UNESCO World Heritage Site?',
+        optsEs: ['1982', '1990', '1995', '2000'],
+        optsEn: ['1982', '1990', '1995', '2000'],
+        correct: 2,
+        explainEs: 'La UNESCO inscribió el centro histórico de Santa Cruz de Mompox en la Lista del Patrimonio Mundial en 1995, por conservar su traza colonial intacta.',
+        explainEn: 'UNESCO inscribed the historic centre of Santa Cruz de Mompox on the World Heritage List in 1995, for preserving its intact colonial layout.'
+      },
+      {
+        qEs: '¿Cuál es la primera línea de "Cien años de soledad"?',
+        qEn: 'What is the opening line of "One Hundred Years of Solitude"?',
+        optsEs: [
+          'Muchos años después, frente al pelotón de fusilamiento, el coronel Aureliano Buendía había de recordar aquella tarde remota en que su padre lo llevó a conocer el hielo.',
+          'Era inevitable: el olor de las almendras amargas le recordaba siempre el destino de los amores contrariados.',
+          'Algo ha pasado en el pueblo que nadie quiere contar.',
+          'Macondo era entonces una aldea de veinte casas de barro y cañabrava construidas a la orilla de un río.'
+        ],
+        optsEn: [
+          'Many years later, as he faced the firing squad, Colonel Aureliano Buendía was to remember that distant afternoon when his father took him to discover ice.',
+          'It was inevitable: the smell of bitter almonds always reminded him of the fate of unrequited loves.',
+          'Something has happened in the village that no one wishes to tell.',
+          'Macondo was then a village of twenty adobe and reed houses built on the bank of a river.'
+        ],
+        correct: 0,
+        explainEs: 'La primera línea es una de las más célebres de la literatura universal: abre el tiempo circular de la novela y condensa pasado, presente y futuro en una sola frase.',
+        explainEn: 'The opening line is one of the most celebrated in world literature: it opens the novel\'s circular time and condenses past, present and future in a single sentence.'
+      },
+      {
+        qEs: '¿Qué premio recibió García Márquez en 1982?',
+        qEn: 'What prize did García Márquez receive in 1982?',
+        optsEs: ['Premio Cervantes', 'Premio Nobel de Literatura', 'Premio Rómulo Gallegos', 'Premio Neustadt'],
+        optsEn: ['Cervantes Prize', 'Nobel Prize in Literature', 'Rómulo Gallegos Prize', 'Neustadt Prize'],
+        correct: 1,
+        explainEs: 'García Márquez recibió el Premio Nobel de Literatura en 1982 "por sus novelas e historias cortas en las que lo fantástico y lo real se combinan en un mundo ricamente compuesto de imaginación."',
+        explainEn: 'García Márquez received the Nobel Prize in Literature in 1982 "for his novels and short stories, in which the fantastic and the realistic are combined in a richly composed world of imagination."'
+      },
+      {
+        qEs: '¿Qué es la albarrada de Mompox?',
+        qEn: 'What is the albarrada of Mompox?',
+        optsEs: [
+          'Una iglesia colonial del siglo XVII',
+          'Un baile tradicional de Semana Santa',
+          'El muro de contención a orillas del río Magdalena',
+          'Una embarcación de madera con techo de palma'
+        ],
+        optsEn: [
+          'A 17th-century colonial church',
+          'A traditional Holy Week dance',
+          'The retaining wall along the Magdalena river',
+          'A wooden boat with a palm-leaf roof'
+        ],
+        correct: 2,
+        explainEs: 'La albarrada es el muro de contención construido entre los siglos XVII y XIX para defender a Mompox de las crecidas del Magdalena — y hoy la calle más bella del pueblo.',
+        explainEn: 'The albarrada is the retaining wall built between the 17th and 19th centuries to shield Mompox from the Magdalena floods — and today the town\'s most beautiful street.'
+      },
+      {
+        qEs: '¿Qué es un champán en Mompox?',
+        qEn: 'What is a champán in Mompox?',
+        optsEs: [
+          'Una bebida espumosa de uva',
+          'Una embarcación tradicional de madera con techo de palma',
+          'Un postre de coco y yuca',
+          'Un instrumento musical de cuerdas'
+        ],
+        optsEn: [
+          'A sparkling grape drink',
+          'A traditional wooden boat with a palm-leaf roof',
+          'A coconut-and-cassava dessert',
+          'A stringed musical instrument'
+        ],
+        correct: 1,
+        explainEs: 'El champán es la embarcación tradicional del Magdalena: una balsa de madera larga con techo de palma, impulsada por la boga. En Mompox aún navega.',
+        explainEn: 'The champán is the Magdalena\'s traditional boat: a long wooden raft with a palm-leaf roof, propelled by the boga. In Mompox it still sails.'
+      },
+      {
+        qEs: '¿En qué departamento colombiano está Mompox?',
+        qEn: 'In which Colombian department is Mompox located?',
+        optsEs: ['Magdalena', 'Atlántico', 'Bolívar', 'Sucre'],
+        optsEn: ['Magdalena', 'Atlántico', 'Bolívar', 'Sucre'],
+        correct: 2,
+        explainEs: 'Mompox está en el sur del departamento de Bolívar, sobre el río Magdalena, en la depresión momposina — una zona de ciénagas y brazos de río entre Bolívar y Magdalena.',
+        explainEn: 'Mompox is in the south of the department of Bolívar, on the Magdalena river, in the Momposina depression — a region of swamps and river branches between Bolívar and Magdalena.'
+      },
+      {
+        qEs: '¿Qué es la filigrana momposina?',
+        qEn: 'What is momposino filigree?',
+        optsEs: [
+          'Un tejido de palma para sombreros',
+          'Una danza de Semana Santa',
+          'Joyería de oro o plata tejida con hilos finísimos',
+          'Una técnica de pintura colonial'
+        ],
+        optsEn: [
+          'A palm weave for hats',
+          'A Holy Week dance',
+          'Gold or silver jewellery woven from the finest threads',
+          'A colonial painting technique'
+        ],
+        correct: 2,
+        explainEs: 'La filigrana momposina es una joyería de oro o plata tejida con hilos finísimos. Tradición de 300 años, hoy declarada Patrimonio Cultural Inmaterial de Colombia.',
+        explainEn: 'Momposino filigree is gold or silver jewellery woven from the finest threads. A 300-year tradition, now declared Intangible Cultural Heritage of Colombia.'
+      },
+      {
+        qEs: '¿Cuál es la segunda procesión de Semana Santa más importante de Colombia?',
+        qEn: 'Which is Colombia\'s second most important Holy Week procession?',
+        optsEs: ['La de Mompox (después de Popayán)', 'La de Cartagena (después de Mompox)', 'La de Tunja (después de Popayán)', 'La de Santa Marta (después de Mompox)'],
+        optsEn: ['Mompox (after Popayán)', 'Cartagena (after Mompox)', 'Tunja (after Popayán)', 'Santa Marta (after Mompox)'],
+        correct: 0,
+        explainEs: 'La Semana Santa de Mompox es la segunda más importante de Colombia después de la de Popayán. Siete iglesias, el Paso Robado, y la serenata a los difuntos la hacen única.',
+        explainEn: 'Mompox\'s Holy Week is Colombia\'s second most important after Popayán\'s. Seven churches, the Stolen Effigy, and the serenade to the dead make it unique.'
+      },
+      {
+        qEs: '¿Cuál es el símbolo literario que aparece en "Cien años de soledad" y se asocia con Mompox?',
+        qEn: 'What literary symbol appears in "One Hundred Years of Solitude" and is associated with Mompox?',
+        optsEs: ['Los girasoles amarillos', 'Las mariposas amarillas', 'Los colibríes plateados', 'Las golondrinas negras'],
+        optsEn: ['Yellow sunflowers', 'Yellow butterflies', 'Silver hummingbirds', 'Black swallows'],
+        correct: 1,
+        explainEs: 'Las mariposas amarillas siguen a Mauricio Babilonia en la novela. Según los momposinos, también siguen al río en ciertas tardes de calor — Mompox, leído por Gabo.',
+        explainEn: 'Yellow butterflies follow Mauricio Babilonia in the novel. According to locals, they also follow the river on certain hot afternoons — Mompox, as read by Gabo.'
+      }
+    ];
+
+    var card = document.getElementById('quiz-card');
+    var resultCard = document.getElementById('quiz-result');
+    var counter = document.getElementById('quiz-counter');
+    var questionEl = document.getElementById('quiz-question');
+    var optionsEl = document.getElementById('quiz-options');
+    var feedback = document.getElementById('quiz-feedback');
+    var actions = document.getElementById('quiz-actions');
+    var nextBtn = document.getElementById('quiz-next-btn');
+    var restartBtn = document.getElementById('quiz-restart-btn');
+    var progressBar = document.getElementById('quiz-progress');
+    var resultScore = document.getElementById('result-score');
+    var resultMessage = document.getElementById('result-message');
+
+    var idx = 0;
+    var score = 0;
+    var answered = false;
+
+    // Build progress segments
+    function buildProgress() {
+      progressBar.innerHTML = '';
+      for (var i = 0; i < QUESTIONS.length; i++) {
+        var seg = document.createElement('div');
+        seg.className = 'library-quiz-step';
+        progressBar.appendChild(seg);
+      }
+    }
+
+    function updateProgress() {
+      var segs = progressBar.querySelectorAll('.library-quiz-step');
+      for (var i = 0; i < segs.length; i++) {
+        segs[i].classList.remove('done', 'current');
+        if (i < idx) segs[i].classList.add('done');
+        else if (i === idx) segs[i].classList.add('current');
+      }
+    }
+
+    function currentLang() {
+      return (document.documentElement.lang === 'en') ? 'en' : 'es';
+    }
+
+    function transition(renderFn) {
+      card.classList.add('exiting');
+      setTimeout(function () {
+        renderFn();
+        card.classList.remove('exiting');
+        card.classList.add('entering');
+        void card.offsetHeight;
+        card.classList.remove('entering');
+      }, 320);
+    }
+
+    function renderQuestion() {
+      resultCard.hidden = true;
+      card.hidden = false;
+      answered = false;
+      var q = QUESTIONS[idx];
+      var lang = currentLang();
+      counter.textContent = (idx + 1) + ' / ' + QUESTIONS.length;
+      questionEl.textContent = (lang === 'en') ? q.qEn : q.qEs;
+      // Options
+      optionsEl.innerHTML = '';
+      var letters = ['A', 'B', 'C', 'D'];
+      for (var i = 0; i < q.optsEs.length; i++) {
+        var btn = document.createElement('button');
+        btn.className = 'library-quiz-option';
+        btn.type = 'button';
+        var letter = document.createElement('span');
+        letter.className = 'letter';
+        letter.textContent = letters[i];
+        var text = document.createElement('span');
+        text.textContent = (lang === 'en') ? q.optsEn[i] : q.optsEs[i];
+        btn.appendChild(letter);
+        btn.appendChild(text);
+        (function (i) {
+          btn.addEventListener('click', function () { handleAnswer(i); });
+        })(i);
+        optionsEl.appendChild(btn);
+      }
+      // Reset feedback + actions
+      feedback.hidden = true;
+      feedback.className = 'library-quiz-feedback';
+      actions.hidden = true;
+      nextBtn.textContent = (idx === QUESTIONS.length - 1)
+        ? ((lang === 'en') ? '✦ See verdict' : '✦ Ver veredicto')
+        : ((lang === 'en') ? 'Next →' : 'Siguiente →');
+      updateProgress();
+    }
+
+    function handleAnswer(chosen) {
+      if (answered) return;
+      answered = true;
+      var q = QUESTIONS[idx];
+      var lang = currentLang();
+      var isCorrect = (chosen === q.correct);
+      if (isCorrect) score++;
+      // Mark options
+      var opts = optionsEl.querySelectorAll('.library-quiz-option');
+      Array.prototype.forEach.call(opts, function (b, i) {
+        b.disabled = true;
+        if (i === q.correct) b.classList.add('correct');
+        else if (i === chosen) b.classList.add('incorrect');
+      });
+      // Feedback
+      feedback.hidden = false;
+      feedback.className = 'library-quiz-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+      var verdict = document.createElement('span');
+      verdict.className = 'verdict';
+      verdict.textContent = isCorrect
+        ? ((lang === 'en') ? '✓ Correct' : '✓ Correcto')
+        : ((lang === 'en') ? '✗ Incorrect' : '✗ Incorrecto');
+      var explain = document.createElement('span');
+      explain.textContent = (lang === 'en') ? q.explainEn : q.explainEs;
+      feedback.innerHTML = '';
+      feedback.appendChild(verdict);
+      feedback.appendChild(explain);
+      // Show next button
+      actions.hidden = false;
+    }
+
+    function renderResult() {
+      card.hidden = true;
+      resultCard.hidden = false;
+      resultScore.textContent = score + ' / ' + QUESTIONS.length;
+      var lang = currentLang();
+      var msg = '';
+      if (score <= 3) {
+        msg = (lang === 'en')
+          ? 'Recién llegado a Macondo. The river has only just begun to whisper its names to you — come back, read more, return.'
+          : 'Recién llegado a Macondo. El río apenas empieza a susurrarte sus nombres — vuelve, lee más, regresa.';
+      } else if (score <= 6) {
+        msg = (lang === 'en')
+          ? 'Caminante de la albarrada. You walk the river wall with sure steps; you already recognise half the streets.'
+          : 'Caminante de la albarrada. Caminas el muro del río con paso seguro; ya reconoces la mitad de las calles.';
+      } else if (score <= 9) {
+        msg = (lang === 'en')
+          ? 'Lector de Gabo. You have read Mompox in its own lexicon. A few doors still remain to open.'
+          : 'Lector de Gabo. Has leído a Mompox en su propio léxico. Aún quedan unas puertas por abrir.';
+      } else {
+        msg = (lang === 'en')
+          ? 'Maestro del realismo mágico. Ten out of ten — Mompox has no secrets left for you.'
+          : 'Maestro del realismo mágico. Diez de diez — Mompox ya no tiene secretos para ti.';
+      }
+      resultMessage.textContent = msg;
+    }
+
+    function startQuiz() {
+      idx = 0;
+      score = 0;
+      answered = false;
+      transition(renderQuestion);
+    }
+
+    nextBtn.addEventListener('click', function () {
+      if (idx < QUESTIONS.length - 1) {
+        idx++;
+        transition(renderQuestion);
+      } else {
+        transition(renderResult);
+      }
+    });
+
+    restartBtn.addEventListener('click', startQuiz);
+
+    // Re-render on language toggle (only if not answered yet, otherwise just update button labels)
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('#lang-toggle');
+      if (!btn) return;
+      setTimeout(function () {
+        if (card.hidden && !resultCard.hidden) {
+          renderResult();
+        } else if (!card.hidden) {
+          if (!answered) {
+            renderQuestion();
+          } else {
+            // Update only labels (next button + counter), keep answered state visible
+            var lang = currentLang();
+            nextBtn.textContent = (idx === QUESTIONS.length - 1)
+              ? ((lang === 'en') ? '✦ See verdict' : '✦ Ver veredicto')
+              : ((lang === 'en') ? 'Next →' : 'Siguiente →');
+            // Also update the verdict prefix on existing feedback (just the verdict span)
+            var verdictSpan = feedback.querySelector('.verdict');
+            if (verdictSpan) {
+              // Determine if correct by class
+              var wasCorrect = feedback.classList.contains('correct');
+              verdictSpan.textContent = wasCorrect
+                ? ((lang === 'en') ? '✓ Correct' : '✓ Correcto')
+                : ((lang === 'en') ? '✗ Incorrect' : '✗ Incorrecto');
+            }
+            // Update explanation
+            var q = QUESTIONS[idx];
+            var spans = feedback.querySelectorAll('span');
+            if (spans.length > 1) {
+              spans[spans.length - 1].textContent = (lang === 'en') ? q.explainEn : q.explainEs;
+            }
+            // Update option text without changing state — re-render question with answer state preserved
+            // (For simplicity, we re-render the question text + options + feedback in EN/ES but keep the same disabled+correct/incorrect classes)
+            var previouslyChosen = -1;
+            var prevOpts = optionsEl.querySelectorAll('.library-quiz-option');
+            Array.prototype.forEach.call(prevOpts, function (b, i) {
+              if (b.classList.contains('incorrect')) previouslyChosen = i;
+            });
+            if (previouslyChosen === -1) {
+              Array.prototype.forEach.call(prevOpts, function (b, i) {
+                if (b.classList.contains('correct')) previouslyChosen = i; // not chosen but we need to find chosen... fallback
+              });
+            }
+            // Re-render options with new language, preserving correct/incorrect state
+            var letters = ['A', 'B', 'C', 'D'];
+            optionsEl.innerHTML = '';
+            for (var i = 0; i < q.optsEs.length; i++) {
+              var nb = document.createElement('button');
+              nb.className = 'library-quiz-option';
+              nb.type = 'button';
+              nb.disabled = true;
+              if (i === q.correct) nb.classList.add('correct');
+              else if (i === previouslyChosen) nb.classList.add('incorrect');
+              var letter = document.createElement('span');
+              letter.className = 'letter';
+              letter.textContent = letters[i];
+              var text = document.createElement('span');
+              text.textContent = (lang === 'en') ? q.optsEn[i] : q.optsEs[i];
+              nb.appendChild(letter);
+              nb.appendChild(text);
+              optionsEl.appendChild(nb);
+            }
+            // Re-render the question text in new lang
+            questionEl.textContent = (lang === 'en') ? q.qEn : q.qEs;
+          }
+        }
+      }, 60);
+    });
+
+    buildProgress();
+    startQuiz();
+  })();
+</script>
+</Layout>
