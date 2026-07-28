@@ -32,13 +32,18 @@
     cover.classList.add('is-open');
     // Trigger hero animations when cover opens (not on page load)
     document.documentElement.classList.add('hero-revealed');
-    setTimeout(() => { cover.style.display = 'none'; }, 1200);
+    setTimeout(() => { cover.style.display = 'none'; }, 1800);
     armFallback();
-    // Safety net: force-show hero title after 2.5s in case animation fails
-    setTimeout(() => {
+    // SAFETY NET: explicitly force-show "La Casa" title words after 1s.
+    // Previous CSS animations were unreliable; this guarantees the title appears.
+    setTimeout(function() {
       var words = document.querySelectorAll('.hero-script-title .word');
-      words.forEach(function(w) { w.style.opacity = '1'; w.style.filter = 'none'; w.style.transform = 'none'; });
-    }, 2500);
+      for (var i = 0; i < words.length; i++) {
+        words[i].style.opacity = '1';
+        words[i].style.filter = 'none';
+        words[i].style.transform = 'none';
+      }
+    }, 1000);
   }
   cover.addEventListener('click', openCover);
   coverFace.addEventListener('click', (e) => { e.stopPropagation(); openCover(); });

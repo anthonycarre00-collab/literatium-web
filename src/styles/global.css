@@ -282,30 +282,38 @@ a { color: inherit; text-decoration: none; }
 .js .reveal.delay-1 { transition-delay: 0.15s; }
 .js .reveal.delay-2 { transition-delay: 0.3s; }
 
-/* Hero animations — CSS-only, no JS dependency. Cover book removed.
-   Everything visible by default with a gentle CSS fade-in on page load. */
+/* Hero animations fire ONLY when cover opens (html.hero-revealed), not on page load.
+   NOTE: The .hero-script-title .word ("La Casa") has NO blur/transform animation —
+   it just fades in. Previous blur(20px) + scale + translateY animation was unreliable
+   and the words sometimes never appeared. Simpler = safer. */
 .hero-logo, .hero-eyebrow, .hero-script-title .word, .hero-subtitle, .hero-hand, .hero-body, .hero-cta, .hero-rating, .hero-curl, .hero-polaroid {
   opacity: 1;
   transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
 }
-/* CSS-only fade-in cascade on page load — no JS class needed */
-.hero-eyebrow { animation: hero-fade 0.6s ease 0.2s both; }
-.hero-script-title .word { animation: hero-fade 0.6s ease 0.5s both; }
-.hero-script-title .word:nth-child(2) { animation-delay: 0.7s; }
-.hero-subtitle { animation: hero-fade 0.6s ease 0.9s both; }
-.hero-hand { animation: hero-fade 0.6s ease 1.1s both; }
-.hero-body { animation: hero-fade 0.6s ease 1.3s both; }
-.hero-cta { animation: hero-fade 0.6s ease 1.5s both; }
-.hero-rating { animation: hero-fade 0.6s ease 1.7s both; }
-.hero-curl { animation: hero-fade 0.6s ease 1.9s both; }
-.hero-polaroid.p1 { animation: hero-fade 0.6s ease 0.4s both; }
-.hero-polaroid.p2 { animation: hero-fade 0.6s ease 0.6s both; }
-.hero-polaroid.p3 { animation: hero-fade 0.6s ease 0.8s both; }
-.hero-polaroid.p4 { animation: hero-fade 0.6s ease 1.0s both; }
-@keyframes hero-fade {
-  from { opacity: 0; filter: blur(8px); transform: translateY(12px); }
-  to   { opacity: 1; filter: blur(0);  transform: translateY(0); }
+/* When JS is active, hide hero elements BEFORE cover opens (they're behind the cover anyway) */
+.js .hero-logo, .js .hero-eyebrow, .js .hero-script-title .word, .js .hero-subtitle,
+.js .hero-hand, .js .hero-body, .js .hero-cta, .js .hero-rating, .js .hero-curl {
+  opacity: 0;
 }
+.js .hero-polaroid { opacity: 0; }
+/* When cover opens (hero-revealed class added), transition elements back to visible */
+.js.hero-revealed .hero-logo { opacity: 1; transition-delay: 0s; }
+.js.hero-revealed .hero-eyebrow { opacity: 1; transition-delay: 0.05s; }
+/* La Casa title — SIMPLE opacity fade only, no blur, no transform. GUARANTEED visible. */
+.js.hero-revealed .hero-script-title .word { opacity: 1; transition-delay: 0.1s; transition-duration: 0.4s; }
+.js.hero-revealed .hero-script-title .word:nth-child(2) { transition-delay: 0.2s; }
+.js.hero-revealed .hero-subtitle { opacity: 1; transition-delay: 0.3s; }
+.js.hero-revealed .hero-hand { opacity: 1; transition-delay: 0.4s; }
+.js.hero-revealed .hero-body { opacity: 1; transition-delay: 0.5s; }
+.js.hero-revealed .hero-cta { opacity: 1; transition-delay: 0.6s; }
+.js.hero-revealed .hero-rating { opacity: 1; transition-delay: 0.7s; }
+.js.hero-revealed .hero-curl { opacity: 1; transition-delay: 0.8s; }
+.js.hero-revealed .hero-polaroid.p1 { opacity: 0.92; transition-delay: 0.15s; }
+.js.hero-revealed .hero-polaroid.p2 { opacity: 0.92; transition-delay: 0.25s; }
+.js.hero-revealed .hero-polaroid.p3 { opacity: 0.92; transition-delay: 0.35s; }
+.js.hero-revealed .hero-polaroid.p4 { opacity: 0.92; transition-delay: 0.45s; }
+/* The script title words start at opacity:0 ONLY — no blur, no transform (those caused the bug) */
+.js .hero-script-title .word { }
 
 @keyframes fade-in { to { opacity: 1; } }
 @keyframes script-materialize { to { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); } }

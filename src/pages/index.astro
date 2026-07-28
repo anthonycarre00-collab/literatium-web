@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout showCover={false}>
+<Layout showCover={true}>
 <section id="frontispiece">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
@@ -43,21 +43,21 @@ import Layout from '../layouts/Layout.astro';
   <div class="cartas-preview-grid">
     <article class="cartas-preview-card">
       <div class="quote-mark">"</div>
-      <p class="quote" data-en="We came for one night and stayed four. The clock loses meaning here.">Llegamos por una noche y nos quedamos cuatro. Aquí el reloj pierde sentido.</p>
-      <div class="sign">— María y Andrés</div>
-      <div class="meta" data-en="Madrid · Spain">Madrid · España</div>
+      <p class="quote" data-en="The hotel is beautiful, the spectacular peace, the impeccable attention. Without a doubt we will return.">El hotel hermoso, la tranquilidad espectacular. La atención inmejorable. Sin duda regresaremos.</p>
+      <div class="sign">— Booking.com guest</div>
+      <div class="meta" data-en="Verified review · Booking.com">Reseña verificada · Booking.com</div>
     </article>
     <article class="cartas-preview-card">
       <div class="quote-mark">"</div>
-      <p class="quote" data-en="When the sun fell over the Magdalena, I understood what Gabo meant by Macondo.">Cuando el sol cayó sobre el Magdalena, entendí lo que Gabo llamaba Macondo.</p>
-      <div class="sign">— Thomas</div>
-      <div class="meta" data-en="Berlin · Germany">Berlín · Alemania</div>
+      <p class="quote" data-en="An exceptional experience — easily one of the highlights of our trip. Beautiful, peaceful, aligned with the historic charm of Mompox.">Una experiencia excepcional — fácilmente uno de los momentos destacados de nuestro viaje. Hermoso, tranquilo, alineado con el encanto histórico de Mompox.</p>
+      <div class="sign">— Hotels.com guest</div>
+      <div class="meta" data-en="Verified review · Hotels.com">Reseña verificada · Hotels.com</div>
     </article>
     <article class="cartas-preview-card">
       <div class="quote-mark">"</div>
-      <p class="quote" data-en="The Huila coffee, in the green ceramic, is the best welcome I have ever received.">El café de Huila, en la cerámica verde, es la mejor bienvenida que he recibido.</p>
-      <div class="sign">— Camille</div>
-      <div class="meta" data-en="Lyon · France">Lyon · Francia</div>
+      <p class="quote" data-en="Absolutely everything was beautiful. The human quality of Marta and all the staff made us feel at home.">Absolutamente todo fue muy hermoso. La calidad humana de Marta y de todos los trabajadores nos hicieron sentir como en casa.</p>
+      <div class="sign">— Booking.com guest</div>
+      <div class="meta" data-en="Verified review · Booking.com">Reseña verificada · Booking.com</div>
     </article>
   </div>
   <a href="#cartas" class="cartas-preview-link" data-en="Read all letters →">Leer todas las cartas →</a>
@@ -534,20 +534,20 @@ import Layout from '../layouts/Layout.astro';
       <div class="fleuron">✦ ❦ ✦</div>
     </div>
 
-    <!-- Feature quote — full-width, dramatic -->
+    <!-- Feature quote — full-width, dramatic. Real review from Hotels.com/Expedia -->
     <div class="reveal delay-1" style="margin: 40px auto; max-width: 800px; text-align: center; position: relative; padding: 40px 20px;">
       <div style="font-family: var(--font-display); font-size: 6rem; color: var(--brass); opacity: 0.15; line-height: 0.5; position: absolute; top: 0; left: 50%; transform: translateX(-50%);">"</div>
-      <p style="font-family: var(--font-display); font-style: italic; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.4; color: var(--burgundy); position: relative; z-index: 2;" data-en="Many years later, faced with the murmur of the Magdalena, the traveller was to remember that remote afternoon when he arrived at Literatium and discovered that here, between books and coffee, time does not pass — it stays.">Aquí, entre libros y café, los días pierden su número. Solo importan las mañanas y los atardeceres.</p>
-      <div style="margin-top: 16px; font-family: var(--font-caps); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--brass-dark);" data-en="— The first line, written by a guest">— La primera línea, escrita por un huésped</div>
+      <p style="font-family: var(--font-display); font-style: italic; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.4; color: var(--burgundy); position: relative; z-index: 2;" data-en="Staying at Literatium was an exceptional experience — easily one of the highlights of our trip. Beautiful, peaceful, perfectly aligned with the historic charm of Mompox. What truly sets this place apart, however, is the service.">Quedarse en Literatium fue una experiencia excepcional — fácilmente uno de los momentos destacados de nuestro viaje. Hermoso, tranquilo, perfectamente alineado con el encanto histórico de Mompox. Lo que verdaderamente distingue a este lugar, sin embargo, es el servicio.</p>
+      <div style="margin-top: 16px; font-family: var(--font-caps); font-size: 0.65rem; letter-spacing: 0.3em; color: var(--brass-dark);" data-en="— Verified review · Hotels.com">— Reseña verificada · Hotels.com</div>
     </div>
 
     <div class="cartas-grid reveal delay-1">
-      <article class="carta" data-seal="M"><div class="quote-mark">"</div><p data-en="We came for one night and stayed four. It's the kind of place where the clock loses meaning, as if time had fallen asleep between the pages. The library, the garden, the coffee… everything asks you to stay one chapter more.">Llegamos por una noche y nos quedamos cuatro. Es el tipo de lugar donde el reloj pierde sentido. La biblioteca, el jardín, el café… todo te pide quedarte un capítulo más.</p><div class="sign">— María y Andrés</div><div class="meta" data-en="Madrid · Spain">Madrid · España</div></article>
-      <article class="carta" data-seal="T"><div class="quote-mark">"</div><p data-en="Martica arranged a champán boat ride at sunset. When the sun fell over the Magdalena, I understood what Gabo meant by Macondo. Here, magical realism is not literature — it's geography.">Martica nos organizó el paseo en champán al atardecer. Cuando el sol cayó sobre el Magdalena, entendí que este pueblo se cuenta mejor en novela que en guía de viajes. Hay algo aquí que pide ser escrito.</p><div class="sign">— Thomas</div><div class="meta" data-en="Berlin · Germany">Berlín · Alemania</div></article>
-      <article class="carta" data-seal="C"><div class="quote-mark">"</div><p data-en="The Huila coffee, served in the green ceramic, is the best welcome I've ever received at a hotel. And the books… books in every corner, as if the house itself had grown them like moss grows on river stones.">El café de Huila, servido en la cerámica verde, es la mejor bienvenida que he recibido en un hotel. Y los libros… en cada rincón, en cada mesa de noche, en cada corredor. Uno tiene la sensación de que llevan aquí más tiempo que nosotros.</p><div class="sign">— Camille</div><div class="meta" data-en="Lyon · France">Lyon · Francia</div></article>
-      <article class="carta" data-seal="S"><div class="quote-mark">"</div><p data-en="The suite with tub and garden is a dream. But what stays with you is the sound: crickets at dusk, the bells of Santa Bárbara, the river in the background. The silence of Mompox, told in other words.">La suite con bañera y jardín es un sueño. Pero lo que se queda contigo es el sonido: los grillos al anochecer, las campanas de Santa Bárbara, el río al fondo. Así suena el silencio de Mompox.</p><div class="sign">— Sebastián y Valeria</div><div class="meta" data-en="Bogotá · Colombia">Bogotá · Colombia</div></article>
-      <article class="carta" data-seal="E"><div class="quote-mark">"</div><p data-en="I came to write a book. I finished three chapters in four days. The breakfast table, the corridor with ferns, the jacuzzi lit at night — every corner invites you to think slowly, as if ideas here had time to ripen.">Vine a escribir un libro. Terminé tres capítulos en cuatro días. La mesa del desayuno, el corredor con helechos, el jacuzzi iluminado de noche — cada rincón invita a pensar despacio. Aquí las ideas tienen tiempo de madurar.</p><div class="sign">— Elena</div><div class="meta" data-en="Buenos Aires · Argentina">Buenos Aires · Argentina</div></article>
-      <article class="carta" data-seal="H"><div class="quote-mark">"</div><p data-en='"You don\'t pass through Mompox, you arrive at Mompox," Martica told us the first day. She was right. This is a place you arrive at, not one you pass through. And Literatium is its best door — the door of a book you don\'t want to close.'>"Por Mompox no se pasa, a Mompox se llega", nos dijo Martica el primer día. Tenía razón. Este es un lugar al que se llega, no por el que se pasa. Y Literatium es su mejor puerta — la puerta de un libro que no quieres cerrar.</p><div class="sign">— Henry &amp; Sue</div><div class="meta" data-en="Vancouver · Canada">Vancouver · Canadá</div></article>
+      <article class="carta" data-seal="B"><div class="quote-mark">"</div><p data-en="Everything we liked — the hotel beautiful, the spectacular peace. The attention impeccable. Martha looked after us very well and was always attentive to our needs, Ruby very attentive. Without a doubt we will return.">Todo nos gustó, el hotel hermoso, la tranquilidad espectacular. La atención inmejorable, Martha nos atendió muy bien y siempre atenta a nuestras necesidades, Ruby muy atenta. Sin duda regresaremos.</p><div class="sign">— Booking.com guest</div><div class="meta" data-en="Verified review · Booking.com">Reseña verificada · Booking.com</div></article>
+      <article class="carta" data-seal="H"><div class="quote-mark">"</div><p data-en="Staying at Literatium Hotel was an exceptional experience and easily one of the highlights of our trip. The hotel itself is beautiful, peaceful, and perfectly aligned with the historic charm of Mompox, offering both comfort and authenticity. What truly sets this place apart, however, is the service.">Quedarse en el Literatium Hotel fue una experiencia excepcional y fácilmente uno de los momentos destacados de nuestro viaje. El hotel en sí es hermoso, tranquilo y perfectamente alineado con el encanto histórico de Mompox, ofreciendo tanto comodidad como autenticidad. Lo que verdaderamente distingue a este lugar, sin embargo, es el servicio.</p><div class="sign">— Hotels.com guest</div><div class="meta" data-en="Verified review · Hotels.com">Reseña verificada · Hotels.com</div></article>
+      <article class="carta" data-seal="C"><div class="quote-mark">"</div><p data-en="Absolutely everything was beautiful! The human quality of Marta and of all the workers made us feel at home. They were very kind to us. The place is very beautiful, very well kept, full of greenery, spacious, tranquil.">Absolutamente todo fue muy hermoso! La calidad humana de Marta y de los todos los trabajadores nos hicieron sentir como es casa. Fueron muy amables con nosotros. El lugar es muy hermoso, muy conservado, tiene mucho verde, amplio, tranquilo.</p><div class="sign">— Booking.com guest</div><div class="meta" data-en="Verified review · Booking.com">Reseña verificada · Booking.com</div></article>
+      <article class="carta" data-seal="E"><div class="quote-mark">"</div><p data-en="The attention was excellent. The room was impeccable and the night was absolutely silent. Marta was a very attentive and diligent person. The hotel facilities are very beautiful and comfortable. The breakfast was perfect.">La atención fue excelente. La habitación era impecable y la noche fue absolutamente silenciosa. Marta fue una persona muy atenta y diligente. Las instalaciones del hotel son muy bonitas y confortables. El desayuno fue perfecto.</p><div class="sign">— Booking.com guest</div><div class="meta" data-en="Verified review · Booking.com">Reseña verificada · Booking.com</div></article>
+      <article class="carta" data-seal="J"><div class="quote-mark">"</div><p data-en="Excellent — comfortable, clean rooms and a very pleasant atmosphere, plus very friendly staff, competent and concerned to solve any situation or request. Marta, Ruby and Antoni always have a smile on…">Excelente, habitaciones cómodas, limpias y muy agradable el ambiente, además de un personal muy amable, competente y preocupado por solucionar cualquier situación o solicitud que se tenga. Tanto Marta, Ruby y Antoni siempre tienen una sonrisa en…</p><div class="sign">— Booking.com guest</div><div class="meta" data-en="Verified review · Booking.com">Reseña verificada · Booking.com</div></article>
+      <article class="carta" data-seal="Q"><div class="quote-mark">"</div><p data-en="This hotel is a few minutes walking distance from the centre of Mompos. It is very quiet, clean and well run. The staff were very pleasant and helpful. Breakfast was very good.">Este hotel está a pocos minutos a pie del centro de Mompos. Es muy tranquilo, limpio y bien llevado. El personal fue muy agradable y servicial. El desayuno fue muy bueno.</p><div class="sign">— Booking.com guest</div><div class="meta" data-en="Verified review · Booking.com">Reseña verificada · Booking.com</div></article>
     </div>
   </div>
 </section>
