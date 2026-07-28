@@ -8,6 +8,7 @@ import MompoxSubnav from '../components/MompoxSubnav.astro';
 import BookCover from '../components/BookCover.astro';
 import Footer from '../components/Footer.astro';
 import Butterfly from '../components/Butterfly.astro';
+import FloatingBookCta from '../components/FloatingBookCta.astro';
 import mainJs from '../scripts/main.js?raw';
 import togglesJs from '../scripts/toggles.js?raw';
 import globalCss from '../styles/global.css?raw';
@@ -42,6 +43,7 @@ const {
 <slot />
 <Footer />
 <Butterfly />
+<FloatingBookCta />
 <script is:inline set:html={mainJs} />
 <script is:inline set:html={togglesJs} />
 </body>

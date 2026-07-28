@@ -6,11 +6,68 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 <Layout title="Reservar — Literatium" description="Reserva tu estancia en Literatium. WhatsApp +57 315 538 2112. Sin formularios, sin call centers, sin prisa.">
 <Folio id="book" folioNumber="Folio X · Reservar" folioNumberEn="Folio X · Booking" dark={true}>
   <Breadcrumbs items={[{ label: 'Literatium', href: '/' }, { label: 'Reservar' }]} />
+
+  <!-- Booking strip — most prominent CTA at the top of the folio -->
+  <div class="booking-strip reveal" role="group" aria-label="Datos de reserva rápida">
+    <a class="booking-strip-item is-link" href="https://wa.me/573155382112" target="_blank" rel="noopener">
+      <span class="bs-icon" aria-hidden="true">📱</span>
+      <span>
+        <span class="bs-label" data-en="WhatsApp">WhatsApp</span>
+        <span class="bs-value">+57 315 538 2112</span>
+      </span>
+    </a>
+    <span class="booking-strip-sep" aria-hidden="true"></span>
+    <div class="booking-strip-item">
+      <span class="bs-icon" aria-hidden="true">⏱</span>
+      <span>
+        <span class="bs-label" data-en="Response time">Tiempo de respuesta</span>
+        <span class="bs-value" data-en="Reply within hours">Respuesta en horas</span>
+      </span>
+    </div>
+    <span class="booking-strip-sep" aria-hidden="true"></span>
+    <a class="booking-strip-item is-link" href="https://www.instagram.com/literatium/" target="_blank" rel="noopener">
+      <span class="bs-icon" aria-hidden="true">🌐</span>
+      <span>
+        <span class="bs-label" data-en="Instagram">Instagram</span>
+        <span class="bs-value">@literatium</span>
+      </span>
+    </a>
+  </div>
+
   <div class="reveal">
     <div class="eyebrow" style="color: var(--brass-light);" data-en="Final Chapter · The booking">Capítulo Final · La reserva</div>
     <h1 class="chapter-title on-dark">Tu próximo capítulo <em>empieza aquí</em></h1>
     <div class="fleuron" style="color: var(--brass-light);">✦ ❦ ✦</div>
   </div>
+
+  <!-- Why book direct — 4 benefit cards above the booking-card -->
+  <section class="why-direct reveal delay-1" aria-labelledby="why-direct-title">
+    <div class="why-direct-eyebrow" data-en="Why book direct">Por qué reservar directo</div>
+    <h2 id="why-direct-title" class="why-direct-title" data-en="The way we have always done it <em>— slowly, with calm</em>">Como lo hemos hecho siempre <em>— despacio, con calma</em></h2>
+    <div class="why-direct-grid">
+      <article class="why-direct-card">
+        <div class="wd-icon" aria-hidden="true">📱</div>
+        <h3 class="wd-title" data-en="No middlemen">Sin intermediarios</h3>
+        <p class="wd-desc" data-en="Direct bookings with Martica. No commissions, no call centres.">Reservas directas con Martica. Sin comisiones, sin call centers.</p>
+      </article>
+      <article class="why-direct-card">
+        <div class="wd-icon" aria-hidden="true">💬</div>
+        <h3 class="wd-title" data-en="Personal reply">Respuesta personal</h3>
+        <p class="wd-desc" data-en="Martica or someone from her team replies on WhatsApp within hours.">Martica o alguien de su equipo te responde por WhatsApp en horas.</p>
+      </article>
+      <article class="why-direct-card">
+        <div class="wd-icon" aria-hidden="true">⏳</div>
+        <h3 class="wd-title" data-en="Flexibility">Flexibilidad</h3>
+        <p class="wd-desc" data-en="Date changes without penalty up to 72h before. Just ask.">Cambios de fecha sin penalización hasta 72h antes. Pregúntanos.</p>
+      </article>
+      <article class="why-direct-card">
+        <div class="wd-icon" aria-hidden="true">☕</div>
+        <h3 class="wd-title" data-en="House welcome">Bienvenida de la casa</h3>
+        <p class="wd-desc" data-en="Huila coffee on arrival. Hand-drawn map. A book on your nightstand.">Café de Huila al llegar. Mapa dibujado a mano. Un libro en la mesita de noche.</p>
+      </article>
+    </div>
+  </section>
+
   <div class="colofon-grid">
     <div class="colofon-text reveal">
       <p class="drop-cap" style="color: var(--parchment);" data-en="Message us on WhatsApp to ask about availability, rates and dates. Martica or someone from her team will answer you personally — no forms, no call centres, no rush. Here, things are done as they are done in Mompox: slowly, with calm, with heart.">Escríbenos por WhatsApp para consultar disponibilidad, tarifas y fechas. Martica o alguien de su equipo te responderá personalmente — sin formularios, sin call centers, sin prisa. Aquí las cosas se hacen como se hacen en Mompox: despacio, con calma, con el corazón.</p>

@@ -1,0 +1,89 @@
+---
+// FloatingBookCta.astro — persistent "Reservar" / "Book" CTA
+// Renders on every page EXCEPT /book (where it would be redundant).
+// On the home page (/), it is hidden over the hero and reveals after the user
+// scrolls past ~100vh. On all other pages it is visible from the top.
+// On mobile (<640px) it is a bottom-center pill that does not expand on hover.
+// Vanilla JS only — no external deps, respects the existing lang-toggle system.
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isBookPage = path === '/book';
+const isHomePage = path === '/';
+---
+
+{!isBookPage && (
+  <a
+    href="/book"
+    class={`floating-cta${isHomePage ? ' floating-cta--hide-on-hero' : ''}`}
+    aria-label="Reservar"
+    data-aria-en="Book"
+  >
+    <span class="floating-cta-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none">
+        <path d="M12 4.2 C9.4 3.3 5.6 3.3 3 4.2 L3 19 C5.6 18.1 9.4 18.1 12 19 C14.6 18.1 18.4 18.1 21 19 L21 4.2 C18.4 3.3 14.6 3.3 12 4.2 Z"
+              fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+        <line x1="12" y1="4.2" x2="12" y2="19" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M5.5 7.5 L10 7 M5.5 10 L10 9.5 M14 7 L18.5 7.5 M14 9.5 L18.5 10"
+              stroke="currentColor" stroke-width="0.9" stroke-linecap="round" opacity="0.7"/>
+      </svg>
+    </span>
+    <span class="floating-cta-text" data-en="Book">Reservar</span>
+    <span class="floating-cta-wa" aria-hidden="true">💬</span>
+  </a>
+)}
+
+<script is:inline>
+(function () {
+  var cta = document.querySelector('.floating-cta');
+  if (!cta) return;
+
+  var footer = document.getElementById('footer');
+  var hideOnHero = cta.classList.contains('floating-cta--hide-on-hero');
+
+  // Footer-offset + hero-reveal logic, called on scroll/resize.
+  function update() {
+    var vh = window.innerHeight;
+
+    // --- Footer slide-up: push the CTA up by exactly the visible footer height
+    //     so it never awkwardly overlaps the colophon. ---
+    if (footer) {
+      var rect = footer.getBoundingClientRect();
+      var visible = Math.max(0, Math.min(rect.bottom, vh) - Math.max(rect.top, 0));
+      // Clamp to a sensible range so tiny overlaps don't jitter
+      if (visible > 8) {
+        cta.style.setProperty('--footer-offset', (visible + 16) + 'px');
+      } else {
+        cta.style.setProperty('--footer-offset', '0px');
+      }
+    }
+
+    // --- Hero reveal (home page only): show after scrolling past ~90% of viewport ---
+    if (hideOnHero) {
+      var scrolledPastHero = window.scrollY > vh * 0.9;
+      cta.classList.toggle('is-visible', scrolledPastHero);
+    }
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  // Run on load + a tick later (so the cover fade-in doesn't lock us out)
+  update();
+  window.addEventListener('load', update);
+  setTimeout(update, 400);
+
+  // --- Bilingual aria-label: the existing toggles.js swaps [data-en] innerHTML
+  //     but does not touch aria-label. We listen on the lang-toggle button and
+  //     swap our aria-label between ES ("Reservar") and EN ("Book"). ---
+  var ariaEs = 'Reservar';
+  var ariaEn = cta.getAttribute('data-aria-en') || 'Book';
+  function syncAria() {
+    var html = document.documentElement;
+    // The lang attribute is set by toggles.js; default is 'es'
+    cta.setAttribute('aria-label', (html.lang === 'en') ? ariaEn : ariaEs);
+  }
+  syncAria();
+  var langBtn = document.getElementById('lang-toggle');
+  if (langBtn) {
+    langBtn.addEventListener('click', function () { setTimeout(syncAria, 0); });
+  }
+})();
+</script>

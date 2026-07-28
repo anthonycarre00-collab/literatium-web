@@ -19,13 +19,48 @@ import Layout from '../layouts/Layout.astro';
     <div class="hero-cta">
       <a href="https://wa.me/573155382112" target="_blank" rel="noopener" class="btn-primary" data-en="Book on WhatsApp">Reservar por WhatsApp</a>
       <a href="#casa" class="btn-ghost" data-en="Discover the house ↓">Descubre la casa ↓</a>
+      <a href="/faq" class="btn-ghost" data-en="Frequently asked questions">Preguntas frecuentes</a>
     </div>
     <div class="hero-rating"><span class="score">9.5</span><span>/ 10</span><span class="sep"></span><span data-en="151+ reviews">151+ reseñas</span><span class="sep"></span><span class="score">★★★★★</span></div>
+    <div class="hero-trust-signals" aria-label="Trust signals">
+      <span data-en="UNESCO Heritage 1995">Patrimonio UNESCO 1995</span>
+      <span class="ts-sep" aria-hidden="true">·</span>
+      <span data-en="Boutique hotel · 6 rooms">Hotel boutique · 6 habitaciones</span>
+      <span class="ts-sep" aria-hidden="true">·</span>
+      <span data-en="Unique coffee from Huila">Café único de Huila</span>
+    </div>
   </div>
   <div class="hero-curl" id="hero-curl" role="button" tabindex="0" aria-label="Turn the page">
     <svg viewBox="0 0 120 120"><path d="M 120 0 L 120 120 L 0 120 Z" fill="#8B6520" opacity="0.85"/><path d="M 120 0 L 120 120 L 22 120 Q 45 100 65 80 Q 85 60 102 35 Q 112 18 120 0 Z" fill="#0F2419" opacity="0.92"/><path d="M 22 120 Q 45 100 65 80 Q 85 60 102 35 Q 112 18 120 0" stroke="#DDB95E" stroke-width="1.2" fill="none" opacity="0.8"/></svg>
     <span class="hero-curl-label" data-en="turn the page">pasa la página</span>
   </div>
+</section>
+
+<!-- COMPACT TESTIMONIAL STRIP — transitional, no folio number -->
+<section id="cartas-preview" class="bg-parchment">
+  <div class="cartas-preview-eyebrow" data-en="Letters from those who have stayed">Cartas de quienes se han quedado</div>
+  <p class="cartas-preview-title" data-en="A few words, written by hand, from our guests">Algunas palabras, escritas a mano, por quienes han estado aquí</p>
+  <div class="cartas-preview-grid">
+    <article class="cartas-preview-card">
+      <div class="quote-mark">"</div>
+      <p class="quote" data-en="We came for one night and stayed four. The clock loses meaning here.">Llegamos por una noche y nos quedamos cuatro. Aquí el reloj pierde sentido.</p>
+      <div class="sign">— María y Andrés</div>
+      <div class="meta" data-en="Madrid · Spain">Madrid · España</div>
+    </article>
+    <article class="cartas-preview-card">
+      <div class="quote-mark">"</div>
+      <p class="quote" data-en="When the sun fell over the Magdalena, I understood what Gabo meant by Macondo.">Cuando el sol cayó sobre el Magdalena, entendí lo que Gabo llamaba Macondo.</p>
+      <div class="sign">— Thomas</div>
+      <div class="meta" data-en="Berlin · Germany">Berlín · Alemania</div>
+    </article>
+    <article class="cartas-preview-card">
+      <div class="quote-mark">"</div>
+      <p class="quote" data-en="The Huila coffee, in the green ceramic, is the best welcome I have ever received.">El café de Huila, en la cerámica verde, es la mejor bienvenida que he recibido.</p>
+      <div class="sign">— Camille</div>
+      <div class="meta" data-en="Lyon · France">Lyon · Francia</div>
+    </article>
+  </div>
+  <a href="#cartas" class="cartas-preview-link" data-en="Read all letters →">Leer todas las cartas →</a>
 </section>
 
 <!-- FOLIO II — LA CASA -->

@@ -1921,3 +1921,417 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
   color: var(--brass-light);
   border-left-color: var(--brass);
 }
+
+/* ============================================================
+   CONVERSION — Floating CTA + Trust Signals
+   Stage 6 additions (append-only; no existing rule modified).
+   z-index scale: nav=40, floating-cta=50, butterfly=60.
+   ============================================================ */
+
+/* --- Floating "Reservar" / "Book" CTA ---------------------- */
+.floating-cta {
+  position: fixed;
+  bottom: calc(24px + var(--footer-offset, 0px));
+  right: 24px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  height: 56px;
+  width: 56px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, var(--brass-light) 0%, var(--brass) 50%, var(--brass-dark) 100%);
+  color: var(--forest-dark);
+  box-shadow: 0 8px 24px rgba(15,36,25,0.45), 0 0 0 1px rgba(245,225,164,0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+  overflow: hidden;
+  font-family: var(--font-caps);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  transition: width 0.3s ease, box-shadow 0.3s ease, bottom 0.3s ease, opacity 0.4s ease, transform 0.4s ease;
+}
+.floating-cta:hover,
+.floating-cta:focus-visible {
+  width: 160px;
+  box-shadow: 0 12px 32px rgba(15,36,25,0.55), 0 0 0 1px var(--brass-pale), inset 0 1px 0 rgba(255,255,255,0.4);
+  outline: none;
+}
+.floating-cta-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  color: var(--forest-dark);
+}
+.floating-cta-icon svg { width: 24px; height: 24px; display: block; }
+.floating-cta-text {
+  flex-shrink: 0;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s ease 0.05s, transform 0.3s ease 0.05s;
+  letter-spacing: 0.24em;
+}
+.floating-cta-wa {
+  flex-shrink: 0;
+  margin: 0 14px 0 10px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.1s;
+  line-height: 1;
+}
+.floating-cta:hover .floating-cta-text,
+.floating-cta:focus-visible .floating-cta-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+.floating-cta:hover .floating-cta-wa,
+.floating-cta:focus-visible .floating-cta-wa {
+  opacity: 0.9;
+}
+
+/* Home page: hidden over the hero until user scrolls past ~100vh */
+.floating-cta--hide-on-hero {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+.floating-cta--hide-on-hero.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Mobile: always-visible bottom-center pill, no hover expansion */
+@media (max-width: 639px) {
+  .floating-cta {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: auto;
+    height: 48px;
+    border-radius: 24px;
+    padding: 0 20px 0 14px;
+    gap: 8px;
+    bottom: calc(18px + var(--footer-offset, 0px));
+    font-size: 0.68rem;
+  }
+  .floating-cta-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .floating-cta-icon svg { width: 18px; height: 18px; }
+  .floating-cta-text {
+    opacity: 1;
+    transform: translateX(0);
+    position: static;
+  }
+  .floating-cta-wa {
+    opacity: 0.9;
+    margin: 0 0 0 4px;
+    font-size: 0.8rem;
+  }
+  /* No hover expansion on touch */
+  .floating-cta:hover,
+  .floating-cta:focus-visible {
+    width: auto;
+    box-shadow: 0 8px 24px rgba(15,36,25,0.45), 0 0 0 1px rgba(245,225,164,0.45), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+  /* Preserve translateX(-50%) base when revealing on home */
+  .floating-cta--hide-on-hero {
+    transform: translateX(-50%) translateY(20px);
+  }
+  .floating-cta--hide-on-hero.is-visible {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .floating-cta,
+  .floating-cta-text,
+  .floating-cta-wa {
+    transition: opacity 0.2s ease;
+  }
+}
+
+/* --- Hero trust signals (home hero, under .hero-rating) ---- */
+.hero-trust-signals {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0 10px;
+  font-family: var(--font-caps);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--brass-light);
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+.hero-trust-signals .ts-sep {
+  opacity: 0.55;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+}
+/* Gentle fade-in matching the existing hero cascade (rating=1.7s) */
+.hero-trust-signals { animation: hero-fade 0.6s ease 1.9s both; }
+
+/* --- Compact testimonial strip (#cartas-preview) ----------- */
+#cartas-preview {
+  position: relative;
+  padding: 60px 2rem 50px 110px;
+  text-align: center;
+}
+#cartas-preview .cartas-preview-eyebrow {
+  font-family: var(--font-caps);
+  font-size: 0.65rem;
+  letter-spacing: 0.34em;
+  color: var(--brass-dark);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+#cartas-preview .cartas-preview-eyebrow::before,
+#cartas-preview .cartas-preview-eyebrow::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 28px;
+  background: var(--brass);
+}
+#cartas-preview .cartas-preview-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  color: var(--forest);
+  line-height: 1.25;
+  margin-bottom: 36px;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cartas-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  max-width: 1100px;
+  margin: 0 auto 28px;
+}
+.cartas-preview-card {
+  position: relative;
+  background: linear-gradient(155deg, var(--parchment-warm) 0%, var(--parchment-dark) 100%);
+  border: 1px solid var(--brass);
+  outline: 1px solid var(--brass-dark);
+  outline-offset: 4px;
+  padding: 26px 24px 22px;
+  text-align: left;
+  box-shadow: 0 10px 24px rgba(44,36,22,0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+@media (hover: hover) {
+  .cartas-preview-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgba(44,36,22,0.18);
+  }
+}
+.cartas-preview-card .quote-mark {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 2.4rem;
+  line-height: 0.6;
+  color: var(--brass);
+  opacity: 0.32;
+  margin-bottom: 4px;
+}
+.cartas-preview-card .quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.04rem;
+  line-height: 1.55;
+  color: var(--espresso);
+  margin-bottom: 14px;
+}
+.cartas-preview-card .sign {
+  font-family: var(--font-script);
+  font-size: 1.4rem;
+  color: var(--burgundy);
+  line-height: 1;
+}
+.cartas-preview-card .meta {
+  font-family: var(--font-caps);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  color: var(--brass-dark);
+  opacity: 0.7;
+  margin-top: 3px;
+}
+.cartas-preview-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-family: var(--font-caps);
+  font-size: 0.6rem;
+  letter-spacing: 0.26em;
+  color: var(--brass-dark);
+  border-bottom: 1px solid var(--brass);
+  padding-bottom: 4px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.cartas-preview-link:hover {
+  color: var(--burgundy);
+  border-color: var(--burgundy);
+}
+@media (max-width: 760px) {
+  #cartas-preview { padding: 50px 1.5rem 40px; }
+  .cartas-preview-grid { grid-template-columns: 1fr; gap: 18px; }
+}
+
+/* --- Booking strip (top of /book, under breadcrumbs) ------ */
+.booking-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0 32px;
+  margin: 24px 0 36px;
+  padding: 20px 24px;
+  background: var(--parchment-warm);
+  border-top: 1px solid var(--brass);
+  border-bottom: 1px solid var(--brass);
+  outline: 1px solid var(--brass-dark);
+  outline-offset: 4px;
+  box-shadow: 0 6px 18px rgba(15,36,25,0.18);
+}
+.booking-strip-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--espresso);
+}
+.booking-strip-item .bs-icon {
+  font-size: 1.1rem;
+  color: var(--brass-dark);
+  line-height: 1;
+}
+.booking-strip-item .bs-label {
+  font-family: var(--font-caps);
+  font-size: 0.55rem;
+  letter-spacing: 0.24em;
+  color: var(--brass-dark);
+  opacity: 0.75;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2px;
+}
+.booking-strip-item .bs-value {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--burgundy);
+  line-height: 1.1;
+}
+.booking-strip-item.is-link .bs-value { color: var(--brass-dark); }
+.booking-strip-item.is-link:hover .bs-value { color: var(--burgundy); }
+.booking-strip-sep {
+  width: 1px;
+  height: 36px;
+  background: var(--brass);
+  opacity: 0.45;
+}
+@media (max-width: 640px) {
+  .booking-strip {
+    flex-direction: column;
+    gap: 18px 0;
+    padding: 22px 18px;
+  }
+  .booking-strip-sep { display: none; }
+  .booking-strip-item { text-align: center; }
+}
+
+/* --- "Why book direct" benefit cards (/book) -------------- */
+.why-direct {
+  margin: 0 0 50px;
+}
+.why-direct-eyebrow {
+  font-family: var(--font-caps);
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  color: var(--brass-light);
+  margin-bottom: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.why-direct-eyebrow::before,
+.why-direct-eyebrow::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 32px;
+  background: var(--brass);
+  opacity: 0.6;
+}
+.why-direct-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  color: var(--parchment);
+  text-align: center;
+  margin-bottom: 30px;
+  line-height: 1.25;
+}
+.why-direct-title em { color: var(--brass-light); font-style: italic; }
+.why-direct-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.why-direct-card {
+  background: rgba(247,240,220,0.05);
+  border: 1px solid rgba(221,185,94,0.32);
+  padding: 24px 22px;
+  transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
+}
+@media (hover: hover) {
+  .why-direct-card:hover {
+    border-color: var(--brass);
+    background: rgba(247,240,220,0.08);
+    transform: translateY(-3px);
+  }
+}
+.why-direct-card .wd-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--brass-light);
+  margin-bottom: 12px;
+}
+.why-direct-card .wd-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.18rem;
+  color: var(--brass-light);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.why-direct-card .wd-desc {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--parchment);
+  opacity: 0.82;
+}
+
