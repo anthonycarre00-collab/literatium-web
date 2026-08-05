@@ -35,9 +35,48 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
     <h2 class="chapter-title" style="text-align:center; font-size: clamp(1.6rem, 3vw, 2.4rem);" data-en="Served in the colonial dining room or in the garden, <em>beside the murals</em>">Servido en el comedor colonial o en el jardín, <em>junto a los murales</em></h2>
   </div>
   <div class="breakfast-row reveal delay-1">
-    <div class="breakfast-plate"><div class="breakfast-plate-num" data-en="PLATE I">PLATE I</div><img src="/assets/breakfast-coffee.webp" alt="Café" data-en-alt="Coffee" loading="lazy" decoding="async"><h3 data-en="The morning coffee">El café de la mañana</h3><p data-en="A good story tastes of coffee — the green ceramic cup that welcomes you like the first line of a book.">"Una buena historia sabe a café" — la taza de Cerámica Verde que te recibe como la primera línea de un libro.</p></div>
+    <div class="breakfast-plate"><div class="breakfast-plate-num" data-en="PLATE I">PLATE I</div><img src="/assets/breakfast-coffee.webp" alt="Café de Huila en taza de cerámica verde" data-en-alt="Huila coffee in a green ceramic cup" loading="lazy" decoding="async"><h3 data-en="The morning coffee">El café de la mañana</h3><p data-en="Unique coffee from the family farm in Huila, served in the green ceramic cup — the first line of every day at Literatium.">Café único de la finca familiar en Huila, servido en la taza de cerámica verde — la primera línea de cada día en Literatium.</p></div>
     <div class="breakfast-plate"><div class="breakfast-plate-num" data-en="PLATE II">PLATE II</div><img src="/assets/breakfast-1.webp" alt="Desayuno" data-en-alt="Breakfast" loading="lazy" decoding="async"><h3 data-en="The Caribbean plate">El plato caribeño</h3><p data-en="Scrambled eggs, fried plantain, cream and fruit — the Caribbean breakfast in its most honest form.">Huevos revueltos, plátano frito, crema y frutas — el desayuno caribeño en su forma más honesta.</p></div>
     <div class="breakfast-plate"><div class="breakfast-plate-num" data-en="PLATE III">PLATE III</div><img src="/assets/breakfast-3.webp" alt="Mesa" data-en-alt="The set table" loading="lazy" decoding="async"><h3 data-en="The set table">La mesa puesta</h3><p data-en="Eggs, tropical fruit, Huila coffee and orange juice — the table every morning, waiting for you like a blank page.">Huevos, fruta del trópico, café de Huila y jugo de naranja — la mesa cada mañana, esperándote como una página en blanco.</p></div>
   </div>
 </Folio>
+
+<style is:global>
+  /* Subtle coffee styling — scoped to the Café folio (#cafe) only.
+     A faint coffee-bean dot pattern in the background + warm espresso tint.
+     Does NOT affect any other page. */
+  #cafe {
+    background-image:
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(107,81,56,0.04), transparent 70%),
+      radial-gradient(ellipse 50% 35% at 80% 20%, rgba(184,134,47,0.05), transparent 70%);
+  }
+  #cafe::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.025;
+    background-image:
+      radial-gradient(circle at 15% 20%, var(--espresso) 1.5px, transparent 2px),
+      radial-gradient(circle at 45% 35%, var(--espresso) 1.5px, transparent 2px),
+      radial-gradient(circle at 75% 15%, var(--espresso) 1.5px, transparent 2px),
+      radial-gradient(circle at 25% 55%, var(--espresso) 1.5px, transparent 2px),
+      radial-gradient(circle at 55% 70%, var(--espresso) 1.5px, transparent 2px),
+      radial-gradient(circle at 85% 50%, var(--espresso) 1.5px, transparent 2px),
+      radial-gradient(circle at 10% 85%, var(--espresso) 1.5px, transparent 2px),
+      radial-gradient(circle at 40% 90%, var(--espresso) 1.5px, transparent 2px),
+      radial-gradient(circle at 70% 80%, var(--espresso) 1.5px, transparent 2px),
+      radial-gradient(circle at 90% 95%, var(--espresso) 1.5px, transparent 2px);
+    background-size: 180px 180px;
+  }
+  /* Coffee bean accent next to the section title */
+  #cafe .fleuron::before {
+    content: '☕';
+    font-size: 0.8rem;
+    margin-right: 6px;
+    opacity: 0.5;
+    vertical-align: middle;
+  }
+</style>
 </Layout>
