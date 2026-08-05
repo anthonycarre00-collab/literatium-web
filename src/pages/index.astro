@@ -135,14 +135,41 @@ const hotelSchema = {
         <div class="stat-card"><div class="value">5′</div><div class="label" data-en="Minutes from the historic centre">Minutos del centro histórico</div></div>
       </div>
     </div>
-    <div class="spaces-mosaic reveal">
-      <figure class="space-plate"><div class="space-plate-num" data-en="PLATE I">PLATE I</div><img src="/assets/real-lobby-arches.webp" alt="Arcos coloniales de hierro forjado" data-en-alt="Colonial arches of wrought iron" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="Whispering arches">Arcos que susurran</h4><p data-en="The first step — calm welcomes you among iron and wood.">El primer paso — la calma te recibe entre hierro y madera.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num" data-en="PLATE II">PLATE II</div><img src="/assets/space-moody-entrance.webp" alt="Lámpara colgante iluminando la entrada" data-en-alt="Hanging lamp lighting the entrance" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="Suspended light">Luz suspendida</h4><p data-en="The lamp hangs still over the silence of the afternoon.">La lámpara cuelga quieta sobre el silencio de la tarde.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num" data-en="PLATE III">PLATE III</div><img src="/assets/space-recepcion.webp" alt="Butacas de mimbre junto a una pared de libros" data-en-alt="Wicker armchairs beside a wall of books" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="Wicker and books">Mimbre y libros</h4><p data-en="Armchairs that invite you to stay — a whole wall of stories waiting to be read.">Butacas que invitan a quedarse — toda una pared de historias que esperan ser leídas.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num" data-en="PLATE IV">PLATE IV</div><img src="/assets/space-corredor.webp" alt="Corredor cubierto con helechos colgantes" data-en-alt="Covered corridor with hanging ferns" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="Ferns and brick">Helechos y ladrillo</h4><p data-en="Ferns hanging from the ceiling, swaying with the river breeze.">Helechos que cuelgan del techo y se mecen con la brisa del río.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num" data-en="PLATE V">PLATE V</div><img src="/assets/guest-chillin.webp" alt="Huésped leyendo en un rincón" data-en-alt="Guest reading in a corner" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="The corner of rest">El rincón del descanso</h4><p data-en="The corner where one sits with a book and forgets the time.">El rincón donde uno se sienta con un libro y olvida la hora.</p></figcaption></figure>
-      <figure class="space-plate"><div class="space-plate-num" data-en="PLATE VI">PLATE VI</div><img src="/assets/space-zona-verde.webp" alt="Jardín tropical con faroles" data-en-alt="Tropical garden with lanterns" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="The secret garden">El jardín secreto</h4><p data-en="Tropical and hushed — at dusk, the crickets are the only conversation.">Tropical y callado — al anochecer, los grillos son la única conversación.</p></figcaption></figure>
+    <!-- Pull-quote break — a literary breath between the text and the images -->
+    <div class="reveal" style="margin: 60px auto 50px; max-width: 680px; text-align: center; padding: 24px 30px; border-left: 2px solid var(--brass); border-right: 2px solid var(--brass); background: rgba(184,134,47,0.04);">
+      <p style="font-family: var(--font-display); font-style: italic; font-size: clamp(1.15rem, 2.2vw, 1.5rem); line-height: 1.5; color: var(--burgundy); margin: 0;" data-en="Every room has books; every corner invites you to read. The garden became a retreat. The library, a meeting point.">Cada habitación tiene libros; cada rincón invita a leer. El jardín se volvió refugio. La biblioteca, punto de encuentro.</p>
+      <div style="margin-top: 12px; font-family: var(--font-caps); font-size: 0.58rem; letter-spacing: 0.28em; color: var(--brass-dark); opacity: 0.7;" data-en="— from the story of the house">— de la historia de la casa</div>
     </div>
+
+    <!-- Spaces carousel — horizontal scroll-snap, one card at a time on mobile, 2-3 on desktop -->
+    <div class="reveal spaces-carousel-wrap">
+      <div class="spaces-carousel-eyebrow" data-en="Six corners of the house · scroll →">Seis rincones de la casa · desliza →</div>
+      <div class="spaces-carousel" id="spaces-carousel">
+        <figure class="space-plate"><img src="/assets/real-lobby-arches.webp" alt="Arcos coloniales de hierro forjado" data-en-alt="Colonial arches of wrought iron" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="Whispering arches">Arcos que susurran</h4><p data-en="The first step — calm welcomes you among iron and wood.">El primer paso — la calma te recibe entre hierro y madera.</p></figcaption></figure>
+        <figure class="space-plate"><img src="/assets/space-moody-entrance.webp" alt="Lámpara colgante iluminando la entrada" data-en-alt="Hanging lamp lighting the entrance" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="Suspended light">Luz suspendida</h4><p data-en="The lamp hangs still over the silence of the afternoon.">La lámpara cuelga quieta sobre el silencio de la tarde.</p></figcaption></figure>
+        <figure class="space-plate"><img src="/assets/space-recepcion.webp" alt="Butacas de mimbre junto a una pared de libros" data-en-alt="Wicker armchairs beside a wall of books" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="Wicker and books">Mimbre y libros</h4><p data-en="Armchairs that invite you to stay — a whole wall of stories waiting to be read.">Butacas que invitan a quedarse — toda una pared de historias que esperan ser leídas.</p></figcaption></figure>
+        <figure class="space-plate"><img src="/assets/space-corredor.webp" alt="Corredor cubierto con helechos colgantes" data-en-alt="Covered corridor with hanging ferns" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="Ferns and brick">Helechos y ladrillo</h4><p data-en="Ferns hanging from the ceiling, swaying with the river breeze.">Helechos que cuelgan del techo y se mecen con la brisa del río.</p></figcaption></figure>
+        <figure class="space-plate"><img src="/assets/guest-chillin.webp" alt="Huésped leyendo en un rincón" data-en-alt="Guest reading in a corner" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="The corner of rest">El rincón del descanso</h4><p data-en="The corner where one sits with a book and forgets the time.">El rincón donde uno se sienta con un libro y olvida la hora.</p></figcaption></figure>
+        <figure class="space-plate"><img src="/assets/space-zona-verde.webp" alt="Jardín tropical con faroles" data-en-alt="Tropical garden with lanterns" loading="lazy" decoding="async"><figcaption class="space-caption"><h4 data-en="The secret garden">El jardín secreto</h4><p data-en="Tropical and hushed — at dusk, the crickets are the only conversation.">Tropical y callado — al anochecer, los grillos son la única conversación.</p></figcaption></figure>
+      </div>
+      <!-- Prev/Next arrow buttons (desktop only, hidden on touch where native swipe works) -->
+      <button class="spaces-carousel-btn spaces-carousel-prev" id="spaces-prev" aria-label="Previous image" data-en-alt="Previous image"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M15 6 L9 12 L15 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="spaces-carousel-btn spaces-carousel-next" id="spaces-next" aria-label="Next image" data-en-alt="Next image"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M9 6 L15 12 L9 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <script is:inline>
+    (function() {
+      var carousel = document.getElementById('spaces-carousel');
+      if (!carousel) return;
+      var prev = document.getElementById('spaces-prev');
+      var next = document.getElementById('spaces-next');
+      if (prev) prev.addEventListener('click', function() {
+        carousel.scrollBy({ left: -carousel.clientWidth * 0.8, behavior: 'smooth' });
+      });
+      if (next) next.addEventListener('click', function() {
+        carousel.scrollBy({ left: carousel.clientWidth * 0.8, behavior: 'smooth' });
+      });
+    })();
+    </script>
     <article class="martica-card reveal">
       <div class="martica-card-img" role="img" aria-label="Retrato de Martica"></div>
       <div class="martica-card-body" style="position: relative;">
