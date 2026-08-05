@@ -2152,7 +2152,10 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
 /* Gentle fade-in matching the existing hero cascade (rating=1.7s) */
 .hero-trust-signals { animation: hero-fade 0.6s ease 1.9s both; }
 
-/* --- Compact testimonial strip (#cartas-preview) ----------- */
+/* --- Compact testimonial strip (#cartas-preview) -----------
+   Uses the same .carta styling as Chapter Six (torn-paper edges, wax seal,
+   parchment texture, brass quote mark, script sign, burgundy stamp).
+   The .carta-preview class scales the carta down for the compact 3-col grid. */
 #cartas-preview {
   position: relative;
   padding: 60px 2rem 50px 110px;
@@ -2194,54 +2197,31 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
   gap: 22px;
   max-width: 1100px;
   margin: 0 auto 28px;
+  perspective: 1600px;
 }
-.cartas-preview-card {
-  position: relative;
-  background: linear-gradient(155deg, var(--parchment-warm) 0%, var(--parchment-dark) 100%);
-  border: 1px solid var(--brass);
-  outline: 1px solid var(--brass-dark);
-  outline-offset: 4px;
-  padding: 26px 24px 22px;
-  text-align: left;
-  box-shadow: 0 10px 24px rgba(44,36,22,0.12);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+/* .carta-preview — inherits all .carta torn-paper/seal/texture styling,
+   scaled down for the compact preview grid. */
+.carta-preview {
+  padding: 36px 22px 30px;
+  transform: rotate(var(--rot, -1deg)) scale(0.92);
+  transform-origin: 50% 4%;
 }
+.carta-preview:nth-child(1) { --rot: -1.5deg; }
+.carta-preview:nth-child(2) { --rot: 1deg; }
+.carta-preview:nth-child(3) { --rot: -0.5deg; }
+.carta-preview .quote-mark { font-size: 2.6rem; margin-bottom: 2px; max-width: 80%; }
+.carta-preview p {
+  font-size: 0.92rem; line-height: 1.65; padding-right: 44px;
+}
+.carta-preview .sign { font-size: 1.5rem; margin-top: 14px; padding-right: 48px; }
+.carta-preview .meta { width: 54px; height: 54px; font-size: 0.44rem; }
+.carta-preview::after { width: 44px; height: 44px; bottom: 16px; right: 16px; font-size: 1.3rem; }
+.carta-preview[data-seal]::after { font-size: 1.6rem; }
 @media (hover: hover) {
-  .cartas-preview-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 36px rgba(44,36,22,0.18);
+  .carta-preview:hover {
+    transform: rotate(0deg) scale(1);
+    box-shadow: inset 0 0 0 1px rgba(139,101,32,0.18), 0 18px 40px rgba(44,36,22,0.22), 0 40px 80px -22px rgba(44,36,22,0.28);
   }
-}
-.cartas-preview-card .quote-mark {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 2.4rem;
-  line-height: 0.6;
-  color: var(--brass);
-  opacity: 0.32;
-  margin-bottom: 4px;
-}
-.cartas-preview-card .quote {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.04rem;
-  line-height: 1.55;
-  color: var(--espresso);
-  margin-bottom: 14px;
-}
-.cartas-preview-card .sign {
-  font-family: var(--font-script);
-  font-size: 1.4rem;
-  color: var(--burgundy);
-  line-height: 1;
-}
-.cartas-preview-card .meta {
-  font-family: var(--font-caps);
-  font-size: 0.55rem;
-  letter-spacing: 0.22em;
-  color: var(--brass-dark);
-  opacity: 0.7;
-  margin-top: 3px;
 }
 .cartas-preview-link {
   display: inline-block;
@@ -2262,7 +2242,8 @@ html.motion-off .cartas-grid .carta { opacity: 1 !important; filter: none !impor
 }
 @media (max-width: 760px) {
   #cartas-preview { padding: 50px 1.5rem 40px; }
-  .cartas-preview-grid { grid-template-columns: 1fr; gap: 18px; }
+  .cartas-preview-grid { grid-template-columns: 1fr; gap: 30px; }
+  .carta-preview { transform: rotate(var(--rot, -1deg)) scale(1); }
 }
 
 /* --- Booking strip (top of /book, under breadcrumbs) ------ */
