@@ -318,7 +318,14 @@ const optionsJson = JSON.stringify(STEP_OPTIONS);
     else if (step === 4) content = renderPaceStep(lang);
 
     container.innerHTML = content;
-    container.className = 'reveal delay-1 itinerary-step-enter';
+    // NOTE: Do NOT use the 'reveal' class here — it relies on IntersectionObserver
+    // which only fires once per element. Re-adding 'reveal' on re-render wipes the
+    // 'in-view' class and the element stays at opacity:0 forever (blank screen bug).
+    // Use a standalone animation class instead. Force reflow so the animation
+    // re-triggers on every render (even when re-rendering the same step on lang toggle).
+    container.className = '';
+    void container.offsetWidth; // force reflow
+    container.className = 'itinerary-step-enter';
 
     // Attach event listeners to options
     attachOptionListeners();
@@ -749,11 +756,13 @@ const optionsJson = JSON.stringify(STEP_OPTIONS);
   }
 
   // ====== LANG TOGGLE RE-RENDER ======
-  // Listen for lang changes and re-render current step
+  // Listen for lang changes and re-render current step.
+  // Use a slightly longer delay (150ms) to ensure toggles.js has finished swapping
+  // the html.lang attribute before we read currentLang().
   var langToggle = document.getElementById('lang-toggle');
   if (langToggle) {
     langToggle.addEventListener('click', function() {
-      setTimeout(renderStep, 50); // wait for toggles.js to swap lang
+      setTimeout(renderStep, 150);
     });
   }
 
