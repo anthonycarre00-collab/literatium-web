@@ -12,14 +12,14 @@ const rooms = [
 ];
 
 const amenities = [
-  { icon: '❄️', label: 'Aire acondicionado', labelEn: 'Air conditioning' },
-  { icon: '🚿', label: 'Baño privado', labelEn: 'Private bathroom' },
-  { icon: '📺', label: 'TV pantalla plana', labelEn: 'Flat-screen TV' },
-  { icon: '🥃', label: 'Minibar', labelEn: 'Mini-bar' },
-  { icon: '☕', label: 'Cafetera y tetera', labelEn: 'Tea/coffee maker' },
-  { icon: '📶', label: 'WiFi gratis', labelEn: 'Free WiFi' },
-  { icon: '👔', label: 'Batas y artículos de aseo', labelEn: 'Bathrobes & toiletries' },
-  { icon: '🍽️', label: 'Desayuno momposino', labelEn: 'Momposino breakfast' },
+  { icon: '/assets/icons/icon-air-conditioning.png', label: 'Aire acondicionado', labelEn: 'Air conditioning' },
+  { icon: '/assets/icons/icon-bathroom.png', label: 'Baño privado', labelEn: 'Private bathroom' },
+  { icon: '/assets/icons/icon-tv.png', label: 'TV pantalla plana', labelEn: 'Flat-screen TV' },
+  { icon: '/assets/icons/icon-minibar.png', label: 'Minibar', labelEn: 'Mini-bar' },
+  { icon: '/assets/icons/icon-coffee-tea.png', label: 'Cafetera y tetera', labelEn: 'Tea/coffee maker' },
+  { icon: '/assets/icons/icon-wifi.png', label: 'WiFi gratis', labelEn: 'Free WiFi' },
+  { icon: '/assets/icons/icon-robes.png', label: 'Batas y artículos de aseo', labelEn: 'Bathrobes & toiletries' },
+  { icon: '/assets/icons/icon-breakfast.png', label: 'Desayuno momposino', labelEn: 'Momposino breakfast' },
 ];
 ---
 <Layout
@@ -60,7 +60,7 @@ const amenities = [
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 30px; max-width: 900px; margin-left: auto; margin-right: auto;">
       {amenities.map((a) => (
         <div style="background: rgba(247,240,220,0.06); border: 1px solid rgba(221,185,94,0.25); padding: 16px; text-align: center;">
-          <div style="font-size: 1.4rem; margin-bottom: 6px;">{a.icon}</div>
+          <img src={a.icon} alt={a.label} loading="lazy" decoding="async" style="width: 48px; height: 48px; margin: 0 auto 6px; display: block; opacity: 0.85; filter: invert(1) sepia(0.3) hue-rotate(180deg) saturate(0.8);">
           <div style="font-family: var(--font-caps); font-size: 0.58rem; letter-spacing: 0.18em; color: var(--brass-light);" data-en={a.labelEn}>{a.label}</div>
         </div>
       ))}
